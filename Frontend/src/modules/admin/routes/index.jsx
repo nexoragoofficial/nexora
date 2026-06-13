@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from '../components/layout/AdminLayout';
 import ProtectedRoute from '../../../components/auth/ProtectedRoute';
 import PublicRoute from '../../../components/auth/PublicRoute';
-import Login from '../pages/Login';
+import Login from '../pages/login';
 
 // Lazy loaded pages
 const Dashboard = lazy(() => import('../pages/Dashboard'));
