@@ -903,7 +903,8 @@ const BillingPage = () => {
 
             <div className="space-y-6">
               {customItems.map((item, idx) => {
-                re                  <div key={idx} className="bg-white p-8 rounded-[40px] border border-gray-100 shadow-sm relative animate-in slide-in-from-bottom-4 duration-500">
+                return (
+                  <div key={idx} className="bg-white p-8 rounded-[40px] border border-gray-100 shadow-sm relative animate-in slide-in-from-bottom-4 duration-500">
                     <button
                       onClick={() => removeCustomItem(idx)}
                       className="absolute top-6 right-6 w-12 h-12 bg-gray-50 text-rose-500 rounded-2xl border border-gray-100 flex items-center justify-center hover:bg-rose-50 transition-all shadow-inner z-10"
@@ -930,7 +931,8 @@ const BillingPage = () => {
                           onChange={e => updateCustomItem(idx, 'hsnCode', e.target.value)}
                           className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-6 py-4 text-base font-black text-gray-900 outline-none focus:border-blue-500/50 transition-all placeholder:text-gray-200 uppercase"
                         />
-                      </div>  </                      <div className="grid grid-cols-2 gap-6">
+                      </div>
+                      <div className="grid grid-cols-2 gap-6 md:col-span-2">
                         <div className="flex flex-col gap-3">
                           <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Unit Valuation (₹)</label>
                           <input
@@ -947,25 +949,27 @@ const BillingPage = () => {
                           <input
                             type="number"
                             value={item.quantity}
+                            onChange={e => updateCustomItem(idx, 'quantity', Number(e.target.value))}
+                            className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-6 py-4 text-base font-black text-gray-900 outline-none focus:border-blue-500/50 transition-all"
+                          />
                         </div>
                       </div>
                     </div>
 
-                      <div className="flex items-center justify-between pt-6 border-t border-gray-100 mt-4 md:col-span-2">
-                        <div className="flex items-center gap-4">
-                          <input
-                            type="checkbox"
-                            id={`gst-${idx}`}
-                            checked={item.gstApplicable}
-                            onChange={e => updateCustomItem(idx, 'gstApplicable', e.target.checked)}
-                            className="w-6 h-6 rounded-lg bg-gray-100 border-gray-200 text-blue-600 focus:ring-blue-500/20"
-                          />
-                          <label htmlFor={`gst-${idx}`} className="text-xs font-black text-gray-400 uppercase tracking-widest cursor-pointer">Incorporate 18% GST Protocol</label>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Total Valuation</p>
-                          <span className="text-3xl font-black text-gray-900 tracking-tighter">₹{item.total.toFixed(2)}</span>
-                        </div>
+                    <div className="flex items-center justify-between pt-6 border-t border-gray-100 mt-4">
+                      <div className="flex items-center gap-4">
+                        <input
+                          type="checkbox"
+                          id={`gst-${idx}`}
+                          checked={item.gstApplicable}
+                          onChange={e => updateCustomItem(idx, 'gstApplicable', e.target.checked)}
+                          className="w-6 h-6 rounded-lg bg-gray-100 border-gray-200 text-blue-600 focus:ring-blue-500/20"
+                        />
+                        <label htmlFor={`gst-${idx}`} className="text-xs font-black text-gray-400 uppercase tracking-widest cursor-pointer">Incorporate 18% GST Protocol</label>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Total Valuation</p>
+                        <span className="text-3xl font-black text-gray-900 tracking-tighter">₹{item.total.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
