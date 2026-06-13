@@ -985,7 +985,8 @@ const BillingPage = () => {
               )}
             </div>
           </div>
-          {currentStep === 4 && (
+        )}
+        {currentStep === 4 && (
           <div className="animate-in fade-in slide-in-from-right-8 duration-500">
             <div className="bg-white p-16 rounded-[48px] border border-gray-100 flex flex-col items-center text-center shadow-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-[80px]" />
@@ -1053,7 +1054,6 @@ const BillingPage = () => {
                     </div>
                   </div>
                 </div>
-                </div>
                 {(selectedParts.length > 0 || customItems.length > 0) && (
                   <div className="animate-in slide-in-from-bottom-4 duration-700 delay-200">
                     <h4 className="font-black text-gray-900 uppercase tracking-widest text-xs flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
@@ -1114,7 +1114,8 @@ const BillingPage = () => {
                       </div>
                     </div>
                   </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-gray-100">
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-gray-100">
                   {booking.visitingCharges > 0 && (
                     <div className="bg-gray-50 p-6 rounded-3xl border border-gray-100">
                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
@@ -1132,7 +1133,6 @@ const BillingPage = () => {
                       <p className="text-2xl font-black text-gray-900 tracking-tighter">₹{Number(transportCharges).toFixed(2)}</p>
                     </div>
                   )}
-                </div>
                 </div>
 
                 {/* Wallet Limit Warning */}
