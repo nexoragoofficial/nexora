@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 import Logo from '../../../../components/common/Logo';
 import { configService } from '../../../../services/configService';
 import api from '../../../../services/api';
@@ -45,30 +45,17 @@ const Footer = () => {
     return acc;
   }, {});
 
-  const footerSections = [
+  const supportLinks = [
+    ...(groupedLinks['USER BOTTOM'] || []),
     {
-      title: 'Company',
-      links: groupedLinks['COMPANY'] || []
+      label: 'Nexora@gmail.com',
+      path: 'mailto:Nexora@gmail.com',
+      icon: FiMail
     },
     {
-      title: 'Quick Links',
-      links: groupedLinks['QUICK LINKS'] || []
-    },
-    {
-      title: 'Support & Services',
-      links: [
-        ...(groupedLinks['USER BOTTOM'] || []),
-        {
-          label: settings?.supportEmail || settings?.companyEmail || 'support@homestr.in',
-          path: `mailto:${settings?.supportEmail || settings?.companyEmail || 'support@homestr.in'}`,
-          icon: FiMail
-        },
-        {
-          label: settings?.supportPhone || settings?.companyPhone || '+91 7014641102',
-          path: `tel:${(settings?.supportPhone || settings?.companyPhone || '+91 7014641102').replace(/\s/g, '')}`,
-          icon: FiPhone
-        }
-      ]
+      label: '+917014641102',
+      path: 'tel:+917014641102',
+      icon: FiPhone
     }
   ];
 
@@ -79,7 +66,7 @@ const Footer = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl -ml-32 -mb-32 transition-colors group-hover:bg-orange-500/10" />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           {/* Brand Column */}
           <div className="space-y-6">
             <Link to="/user" className="inline-block transform hover:scale-105 transition-transform duration-300">
@@ -88,25 +75,14 @@ const Footer = () => {
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
               Nexora Go is your one-stop destination for all home services. From electrical repairs to premium salon services, we bring the experts to your doorstep.
             </p>
-            <div className="flex items-center gap-4">
-              {[FiFacebook, FiTwitter, FiInstagram, FiLinkedin].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#347989] hover:border-[#347989] hover:shadow-lg transition-all duration-300"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Navigation Sections */}
-          {footerSections.filter(section => section.links && section.links.length > 0).map((section) => (
-            <div key={section.title} className="space-y-6">
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">{section.title}</h3>
+          {/* Support & Services Column */}
+          {supportLinks.length > 0 && (
+            <div className="space-y-6">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Support &amp; Services</h3>
               <ul className="space-y-4">
-                {section.links.map((link) => (
+                {supportLinks.map((link) => (
                   <li key={link.label}>
                     {link.path.startsWith('http') || link.path.startsWith('mailto') || link.path.startsWith('tel') ? (
                       <a
@@ -129,7 +105,7 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-          ))}
+          )}
         </div>
 
         {/* Divider */}

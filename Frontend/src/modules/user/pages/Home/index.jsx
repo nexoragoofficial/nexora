@@ -555,10 +555,7 @@ const Home = () => {
           />
         )}
 
-        {/* Offer Banner Slider - shown after hero, only when banners exist */}
-        {!isSearchOpen && offerBanners.length > 0 && (
-          <OfferBannerSlider banners={offerBanners} />
-        )}
+
 
 
 

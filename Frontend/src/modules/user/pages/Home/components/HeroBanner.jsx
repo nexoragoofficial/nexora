@@ -15,14 +15,14 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
       <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] bg-gray-50/50 rounded-full blur-3xl -z-0" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-6 lg:pt-10 pb-4 lg:pb-6">
-        <div className={`grid grid-cols-1 ${heroImage ? 'lg:grid-cols-2' : ''} gap-6 lg:gap-12 items-center`}>
+        <div className="grid grid-cols-1 gap-6 lg:gap-12 items-center">
           
           {/* Left Content */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`flex flex-col gap-2 lg:gap-6 text-center ${heroImage ? 'lg:text-left items-center lg:items-start' : 'items-center'}`}
+            className="flex flex-col gap-2 lg:gap-6 text-center items-center"
           >
             <div className="space-y-1 lg:space-y-4">
               <h1 
@@ -68,28 +68,6 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
             </div>
           </motion.div>
 
-          {/* Right Content - Dynamic Hero Image (only shown if admin uploaded one) */}
-          {heroImage && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center lg:justify-end relative order-first lg:order-last mb-2 lg:mb-0"
-            >
-              <div className="relative w-full max-w-[220px] lg:max-w-[600px]">
-                <img 
-                  src={heroImage} 
-                  alt="Hero Illustration" 
-                  className="w-full h-auto"
-                  style={{
-                    maskImage: 'radial-gradient(circle at center, black 65%, transparent 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, black 65%, transparent 100%)',
-                    filter: 'drop-shadow(0 20px 20px rgba(0,0,0,0.08))'
-                  }}
-                />
-              </div>
-            </motion.div>
-          )}
         </div>
       </div>
       
