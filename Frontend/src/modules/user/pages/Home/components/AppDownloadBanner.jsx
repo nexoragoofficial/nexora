@@ -1,6 +1,4 @@
 import React from 'react';
-import { FaGooglePlay, FaApple } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 import mobileImage from '../../../../../assets/mobile.png';
 
 const AppDownloadBanner = ({ appData }) => {
@@ -29,7 +27,6 @@ const AppDownloadBanner = ({ appData }) => {
               href={playStoreUrl} 
               className="flex items-center gap-2 lg:gap-3 bg-black text-white px-6 py-3 lg:px-7 lg:py-3.5 rounded-xl lg:rounded-2xl hover:scale-105 transition-transform w-full sm:w-auto justify-center"
             >
-              <FaGooglePlay className="text-xl lg:text-2xl" />
               <div className="text-left">
                 <div className="text-[8px] lg:text-[9px] uppercase font-bold leading-none">Get it on</div>
                 <div className="text-[14px] lg:text-[15px] font-black">Google Play</div>
@@ -39,7 +36,6 @@ const AppDownloadBanner = ({ appData }) => {
               href={appStoreUrl} 
               className="flex items-center gap-2 lg:gap-3 bg-black text-white px-6 py-3 lg:px-7 lg:py-3.5 rounded-xl lg:rounded-2xl hover:scale-105 transition-transform w-full sm:w-auto justify-center"
             >
-              <FaApple className="text-xl lg:text-2xl" />
               <div className="text-left">
                 <div className="text-[8px] lg:text-[9px] uppercase font-bold leading-none">Download on the</div>
                 <div className="text-[14px] lg:text-[15px] font-black">App Store</div>
@@ -48,25 +44,13 @@ const AppDownloadBanner = ({ appData }) => {
           </div>
         </div>
 
-        {/* Device & QR */}
-        <div className="relative flex flex-col sm:flex-row items-center gap-8 lg:gap-10">
-          <div className="relative w-[220px] lg:w-[260px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.12)] hidden lg:block">
-            <img 
-              src={imageUrl} 
-              alt="App Phone" 
-              className="w-full h-auto rounded-[2.5rem] lg:rounded-[3rem]"
-            />
-          </div>
-          
-          <div className="flex flex-col items-center gap-3 bg-white p-4 lg:p-5 rounded-[24px] lg:rounded-[28px] shadow-xl border border-gray-100">
-            <div className="w-24 h-24 lg:w-28 lg:h-28 bg-gray-50 rounded-xl lg:rounded-2xl flex items-center justify-center border-2 border-gray-50">
-              {/* QR Code Placeholder */}
-              <img src={qrCodeUrl} alt="QR Code" className="w-16 h-16 lg:w-20 lg:h-20" />
-            </div>
-            <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
-              Scan to Download
-            </div>
-          </div>
+        {/* Device Image */}
+        <div className="relative w-[220px] lg:w-[260px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.12)] hidden lg:block">
+          <img 
+            src={imageUrl} 
+            alt="App Phone" 
+            className="w-full h-auto rounded-[2.5rem] lg:rounded-[3rem]"
+          />
         </div>
 
       </div>
