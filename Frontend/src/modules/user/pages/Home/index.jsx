@@ -548,11 +548,16 @@ const Home = () => {
         </motion.div>
 
         {!isSearchOpen && (
-          <HeroBanner 
-            banners={offerBanners} 
-            onSearchClick={() => navigate('/user/services')} 
-            heroData={homeContent?.heroSection}
-          />
+          <>
+            <HeroBanner 
+              banners={offerBanners} 
+              onSearchClick={() => navigate('/user/services')} 
+              heroData={homeContent?.heroSection}
+            />
+            <div className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-2">
+              <OfferBannerSlider banners={offerBanners} />
+            </div>
+          </>
         )}
 
 

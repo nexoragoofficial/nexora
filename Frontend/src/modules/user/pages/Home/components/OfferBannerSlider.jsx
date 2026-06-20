@@ -39,13 +39,13 @@ const OfferBannerSlider = ({ banners }) => {
         {banners.map((banner) => (
           <SwiperSlide key={banner._id}>
             <div 
-              className="relative aspect-[21/9] md:aspect-[3/1] lg:aspect-[4/1] cursor-pointer active:scale-[0.98] transition-transform duration-200"
+              className="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[21/9] bg-white rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer active:scale-[0.98] transition-transform duration-200 flex items-center justify-center"
               onClick={() => handleBannerClick(banner)}
             >
               <img 
                 src={banner.imageUrl} 
                 alt={banner.title} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 loading="lazy"
               />
               {/* Optional: Add a subtle overlay or text if needed */}
