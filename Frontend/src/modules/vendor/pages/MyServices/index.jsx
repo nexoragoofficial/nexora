@@ -197,7 +197,7 @@ const MyServices = () => {
           </div>
         ) : (
           categories.map(cat => (
-            <div key={cat._id} className="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden transition-all hover:shadow-md">
+            <div key={cat.id || cat._id} className="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden transition-all hover:shadow-md">
               {/* Category Header with Inline Add */}
               <div className="bg-gray-50/50 px-8 py-6 border-b border-gray-100">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
