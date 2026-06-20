@@ -549,14 +549,14 @@ const Home = () => {
 
         {!isSearchOpen && (
           <>
+            <div className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-4 mb-2">
+              <OfferBannerSlider banners={offerBanners} />
+            </div>
             <HeroBanner 
               banners={offerBanners} 
               onSearchClick={() => navigate('/user/services')} 
               heroData={homeContent?.heroSection}
             />
-            <div className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-2">
-              <OfferBannerSlider banners={offerBanners} />
-            </div>
           </>
         )}
 
