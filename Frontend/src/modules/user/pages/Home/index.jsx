@@ -549,14 +549,14 @@ const Home = () => {
 
         {!isSearchOpen && (
           <>
-            <div className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-4 mb-2">
-              <OfferBannerSlider banners={offerBanners} />
-            </div>
             <HeroBanner 
               banners={offerBanners} 
               onSearchClick={() => navigate('/user/services')} 
               heroData={homeContent?.heroSection}
             />
+            <div className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-4 mb-2">
+              <OfferBannerSlider banners={offerBanners} />
+            </div>
           </>
         )}
 
@@ -611,6 +611,23 @@ const Home = () => {
             )}
           </div>
         )}
+
+        {/* Stats Bar + App Download Banner (Side by Side like reference) */}
+        <div className="max-w-[1400px] mx-auto px-5 w-full mt-6 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Stats Bar */}
+            <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl" />}>
+              <StatsBar statsData={homeContent?.stats} />
+            </Suspense>
+
+            {/* App Download */}
+            {!isSearchOpen && homeContent?.isAppDownloadVisible !== false && (
+              <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl" />}>
+                <AppDownloadBanner appData={homeContent?.appDownload} inline />
+              </Suspense>
+            )}
+          </div>
+        </div>
 
 
 
@@ -746,12 +763,6 @@ const Home = () => {
 
               {/* Footer Space */}
               <div className="h-10" />
-
-              {!isSearchOpen && homeContent?.isAppDownloadVisible !== false && (
-                <Suspense fallback={<div className="h-32 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
-                  <AppDownloadBanner appData={homeContent?.appDownload} />
-                </Suspense>
-              )}
         </main>
       </motion.div>
 

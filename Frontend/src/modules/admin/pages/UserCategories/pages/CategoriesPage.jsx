@@ -259,8 +259,10 @@ const CategoriesPage = () => {
       toast.success(editingId ? "Category updated successfully" : "Category created successfully");
       reset();
     } catch (error) {
-      console.error('Upsert category error:', error);
-      toast.error(error.message || 'Failed to save category. Please try again.');
+      console.error('Upsert category error:', error.response?.data || error);
+      const backendMessage = error.response?.data?.message;
+      const validationErrors = error.response?.data?.errors ? JSON.stringify(error.response.data.errors) : '';
+      toast.error(backendMessage ? `${backendMessage} ${validationErrors}` : (error.message || 'Failed to save category. Please try again.'));
     } finally {
       setLoading(false);
     }

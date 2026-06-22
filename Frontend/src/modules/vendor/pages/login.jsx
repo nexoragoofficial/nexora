@@ -16,7 +16,7 @@ const phoneSchema = z.object({
 const VendorLogin = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState('phone'); // 'phone' or 'otp'
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('8765432109');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [otpToken, setOtpToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
