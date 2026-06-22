@@ -1,14 +1,65 @@
 import React from 'react';
 import mobileImage from '../../../../../assets/mobile.png';
 
-const AppDownloadBanner = ({ appData }) => {
+const AppDownloadBanner = ({ appData, inline = false }) => {
   const title = appData?.title || 'Download the Nexora GO App';
-  const subtitle = appData?.subtitle || 'Better experience, exclusive offers & faster everything. Scan to download or use the stores.';
+  const subtitle = appData?.subtitle || 'Better experience, exclusive offers & faster everything.';
   const playStoreUrl = appData?.playStoreUrl || '#';
   const appStoreUrl = appData?.appStoreUrl || '#';
   const qrCodeUrl = appData?.qrCodeUrl || '/qr-code.png';
   const imageUrl = appData?.imageUrl || mobileImage;
 
+  // Inline mode: fits in a grid cell alongside StatsBar
+  if (inline) {
+    return (
+      <div className="bg-white rounded-[24px] lg:rounded-[28px] p-6 lg:p-8 relative overflow-hidden flex flex-col sm:flex-row items-center gap-5 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] h-full">
+        {/* Content */}
+        <div className="relative z-10 flex-1 text-center sm:text-left">
+          <h2 className="text-lg lg:text-xl font-[900] text-gray-900 leading-tight mb-2">
+            {title}
+          </h2>
+          <p className="text-gray-500 font-medium text-xs lg:text-sm leading-relaxed mb-4 max-w-sm">
+            {subtitle}
+          </p>
+          
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+            <a 
+              href={playStoreUrl} 
+              className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform"
+            >
+              <div className="text-left">
+                <div className="text-[7px] uppercase font-bold leading-none">Get it on</div>
+                <div className="text-[12px] font-black">Google Play</div>
+              </div>
+            </a>
+            <a 
+              href={appStoreUrl} 
+              className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform"
+            >
+              <div className="text-left">
+                <div className="text-[7px] uppercase font-bold leading-none">Download on the</div>
+                <div className="text-[12px] font-black">App Store</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        {/* Device Image + QR */}
+        <div className="flex items-center gap-4">
+          <div className="relative w-[100px] lg:w-[120px] hidden sm:block">
+            <img 
+              src={imageUrl} 
+              alt="App Phone" 
+              className="w-full h-auto rounded-[1.5rem]"
+              style={{ filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.1))' }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Full-width mode (original)
   return (
     <div className="px-5 max-w-[1400px] mx-auto w-full mt-6 lg:mt-10 mb-10 lg:mb-16">
       <div className="bg-white rounded-[32px] lg:rounded-[40px] p-6 lg:p-10 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 border border-black/[0.03] shadow-[0_32px_80px_-20px_rgba(0,0,0,0.08)]">
