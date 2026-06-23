@@ -27,7 +27,7 @@ import { useCity } from '../../../../context/CityContext';
 import { toast } from 'react-hot-toast';
 
 // Assets
-import productHeroImg from '../../../../assets/mobile.png';
+import productHeroImg from '../../../../assets/images/productbanner.png';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -193,10 +193,10 @@ const ProductsPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <h1 className="text-5xl lg:text-7xl font-[1000] text-gray-900 leading-tight tracking-tight mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-tight mb-4">
                   Our <span className="text-emerald-600">Products</span>
                 </h1>
-                <p className="text-gray-500 font-medium text-lg lg:text-xl leading-relaxed max-w-xl mb-6 mx-auto lg:mx-0">
+                <p className="text-gray-500 font-medium text-xs sm:text-sm lg:text-xl leading-relaxed max-w-xl mb-6 mx-auto lg:mx-0">
                   Shop high-quality products from trusted local vendors. Fresh, fast, and delivered to your door.
                 </p>
                 
@@ -208,7 +208,7 @@ const ProductsPage = () => {
                     placeholder="Search products..." 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 bg-white border-none rounded-2xl text-sm font-bold shadow-xl shadow-emerald-900/5 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                    className="w-full pl-12 pr-4 py-4 bg-white border-none rounded-2xl text-sm font-bold shadow-xl shadow-emerald-900/5 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
                   />
                 </div>
               </motion.div>
@@ -222,7 +222,7 @@ const ProductsPage = () => {
               <img 
                 src={productHeroImg} 
                 alt="Products" 
-                className="h-[350px] w-auto drop-shadow-2xl"
+                className="h-[400px] w-auto object-contain -ml-16"
               />
             </motion.div>
           </div>
@@ -230,7 +230,7 @@ const ProductsPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-[1400px] mx-auto px-6 -mt-12 relative z-20 pb-16">
+      <div className="max-w-[1400px] mx-auto px-6 mt-6 sm:-mt-12 relative z-20 pb-16">
         <div className="bg-white rounded-[32px] p-4 lg:p-8 shadow-2xl shadow-emerald-900/5 border border-white">
           
           {/* Tabs */}

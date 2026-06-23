@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Category = require('../../models/Category');
 const { validationResult } = require('express-validator');
 const { SERVICE_STATUS } = require('../../utils/constants');
@@ -43,6 +44,7 @@ const getAllCategories = async (req, res) => {
         vendorId: cat.vendorId,
         cityIds: cat.cityIds || [],
         group: cat.group || 'None',
+        offeringType: cat.offeringType || 'SERVICE',
         metaTitle: cat.metaTitle,
         metaDescription: cat.metaDescription,
         createdAt: cat.createdAt,
@@ -91,6 +93,7 @@ const getCategoryById = async (req, res) => {
         status: category.status,
         isPopular: category.isPopular,
         group: category.group || 'None',
+        offeringType: category.offeringType || 'SERVICE',
         metaTitle: category.metaTitle,
         metaDescription: category.metaDescription,
         createdAt: category.createdAt,
@@ -137,7 +140,8 @@ const createCategory = async (req, res) => {
       metaTitle,
       metaDescription,
       cityIds,
-      group
+      group,
+      offeringType
     } = req.body;
 
     console.log('Creating category with payload:', req.body);
@@ -158,9 +162,13 @@ const createCategory = async (req, res) => {
 
     const existingCategory = await Category.findOne(duplicateQuery);
 
-    let isDuplicate = false;
-    if (existingCategory) {
-      // If found, check city overlap
+    if (existingCategory && existingCategory.status === 'deleted') {
+      // If it was soft-deleted, we can hard-delete it so the new one can be created
+      await Category.deleteOne({ _id: existingCategory._id });
+      console.log('Hard deleted previously soft-deleted category to allow recreation:', existingCategory.title);
+    } else if (existingCategory) {
+      // Otherwise, perform the usual duplicate check
+      let isDuplicate = false;
       const existingCities = existingCategory.cityIds.map(id => id.toString());
       const newCities = (cityIds || []).map(id => id.toString());
 
@@ -175,14 +183,14 @@ const createCategory = async (req, res) => {
         // Also duplicate if existing is Global (Global covers all cities)
         if (existingCities.length === 0) isDuplicate = true;
       }
-    }
 
-    if (isDuplicate && existingCategory) {
-      console.log('Category with this title/slug already exists:', existingCategory.title, existingCategory.slug);
-      return res.status(400).json({
-        success: false,
-        message: 'Category with this title or slug already exists'
-      });
+      if (isDuplicate) {
+        console.log('Category with this title/slug already exists:', existingCategory.title, existingCategory.slug);
+        return res.status(400).json({
+          success: false,
+          message: 'Category with this title or slug already exists'
+        });
+      }
     }
 
     const category = await Category.create({
@@ -201,6 +209,7 @@ const createCategory = async (req, res) => {
       metaDescription: metaDescription?.trim() || null,
       cityIds: cityIds || [],
       group: group || 'None',
+      offeringType: offeringType || 'SERVICE',
       createdBy: req.user.id
     });
 
@@ -220,6 +229,7 @@ const createCategory = async (req, res) => {
         imageUrl: category.imageUrl,
         status: category.status,
         isPopular: category.isPopular,
+        offeringType: category.offeringType || 'SERVICE',
         createdAt: category.createdAt,
         updatedAt: category.updatedAt
       }
@@ -274,7 +284,8 @@ const updateCategory = async (req, res) => {
       metaTitle,
       metaDescription,
       cityIds: updateCityIds,
-      group
+      group,
+      offeringType
     } = req.body;
 
     const category = await Category.findById(id);
@@ -291,13 +302,17 @@ const updateCategory = async (req, res) => {
       const slugToCheck = slug?.trim().toLowerCase() || (title ? title.trim().toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-') : category.slug);
 
       const duplicateQuery = {
-        _id: { $ne: id },
+        _id: { $ne: new mongoose.Types.ObjectId(id) },
         slug: slugToCheck
       };
 
       const existingCategory = await Category.findOne(duplicateQuery);
 
-      if (existingCategory) {
+      if (existingCategory && existingCategory.status === 'deleted') {
+        // If it was soft-deleted, we can hard-delete it to avoid duplicate checks
+        await Category.deleteOne({ _id: existingCategory._id });
+        console.log('Hard deleted previously soft-deleted category on update duplicate check:', existingCategory.title);
+      } else if (existingCategory) {
         let isDuplicate = false;
         const existingCities = existingCategory.cityIds.map(id => id.toString());
         // For update, if updateCityIds provided use it, else use existing category.cityIds
@@ -335,6 +350,7 @@ const updateCategory = async (req, res) => {
     if (metaTitle !== undefined) category.metaTitle = metaTitle?.trim() || null;
     if (metaDescription !== undefined) category.metaDescription = metaDescription?.trim() || null;
     if (group !== undefined) category.group = group;
+    if (offeringType !== undefined) category.offeringType = offeringType;
 
     if (updateCityIds !== undefined) {
       category.cityIds = updateCityIds;
@@ -359,6 +375,7 @@ const updateCategory = async (req, res) => {
         imageUrl: category.imageUrl,
         status: category.status,
         isPopular: category.isPopular,
+        offeringType: category.offeringType || 'SERVICE',
         createdAt: category.createdAt,
         updatedAt: category.updatedAt
       }

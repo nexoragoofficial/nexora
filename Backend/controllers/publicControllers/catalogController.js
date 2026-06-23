@@ -14,7 +14,7 @@ const HomeContent = require('../../models/HomeContent');
  */
 const getPublicCategories = async (req, res) => {
   try {
-    const { cityId } = req.query;
+    const { cityId, offeringType } = req.query;
     const City = require('../../models/City');
     const Vendor = require('../../models/Vendor');
     const { findNearbyVendors } = require('../../services/locationService');
@@ -24,6 +24,9 @@ const getPublicCategories = async (req, res) => {
 
     // Build query
     const query = { status: 'active' };
+    if (offeringType) {
+      query.offeringType = offeringType;
+    }
     if (cityId) {
       query.$or = [
         { 
