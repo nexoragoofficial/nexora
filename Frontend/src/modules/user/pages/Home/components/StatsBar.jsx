@@ -7,6 +7,7 @@ const StatsBar = ({ statsData }) => {
     FiShoppingBag: FiShoppingBag,
     FiTruck: FiTruck,
     FiCheckCircle: FiCheckCircle
+    FiCheckCircle: FiCheckCircle
   };
 
   const defaultStats = [
@@ -14,14 +15,16 @@ const StatsBar = ({ statsData }) => {
     { icon: FiShoppingBag, label: 'Orders Delivered', value: '25K+' },
     { icon: FiTruck, label: 'Service Partners', value: '500+' },
     { icon: FiCheckCircle, label: 'On-Time Delivery', value: '99%' },
+    { icon: FiCheckCircle, label: 'On-Time Delivery', value: '99%' },
   ];
 
-  const stats = (statsData && statsData.length > 0) 
+  const stats = (statsData && statsData.length > 0)
     ? statsData.map(s => ({
-        label: s.label,
-        value: s.value,
+      label: s.label,
+      value: s.value,
+      icon: iconMap[s.icon] || FiCheckCircle
         icon: iconMap[s.icon] || FiCheckCircle
-      }))
+    }))
     : defaultStats;
 
   return (

@@ -549,11 +549,14 @@ const Home = () => {
 
         {!isSearchOpen && (
           <>
-            <HeroBanner 
-              banners={offerBanners} 
-              onSearchClick={() => navigate('/user/services')} 
+            <HeroBanner
+              banners={offerBanners}
+              onSearchClick={() => navigate('/user/services')}
               heroData={homeContent?.heroSection}
             />
+            <div className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-4 mb-2">
+              <OfferBannerSlider banners={offerBanners} />
+            </div>
           </>
         )}
 
@@ -586,10 +589,10 @@ const Home = () => {
             {/* Services Section */}
             {serviceCategories.length > 0 && (
               <motion.section variants={itemVariants} id="services">
-                <ServiceQuickLinks 
+                <ServiceQuickLinks
                   title="Our Services"
-                  categories={serviceCategories} 
-                  onCategoryClick={handleCategoryClick} 
+                  categories={serviceCategories}
+                  onCategoryClick={handleCategoryClick}
                   onSeeAllClick={() => navigate('/user/services')}
                 />
               </motion.section>
@@ -605,16 +608,33 @@ const Home = () => {
             {/* Products Section */}
             {productCategories.length > 0 && (
               <motion.section variants={itemVariants} id="products">
-                <ServiceQuickLinks 
+                <ServiceQuickLinks
                   title="Our Products"
-                  categories={productCategories} 
-                  onCategoryClick={handleCategoryClick} 
+                  categories={productCategories}
+                  onCategoryClick={handleCategoryClick}
                   onSeeAllClick={() => navigate('/user/products')}
                 />
               </motion.section>
             )}
           </div>
         )}
+
+        {/* Stats Bar + App Download Banner (Side by Side like reference) */}
+        <div className="max-w-[1400px] mx-auto px-5 w-full mt-6 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Stats Bar */}
+            <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl" />}>
+              <StatsBar statsData={homeContent?.stats} />
+            </Suspense>
+
+            {/* App Download */}
+            {!isSearchOpen && homeContent?.isAppDownloadVisible !== false && (
+              <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl" />}>
+                <AppDownloadBanner appData={homeContent?.appDownload} inline />
+              </Suspense>
+            )}
+          </div>
+        </div>
 
         {/* Stats Bar + App Download Banner (Side by Side like reference) */}
         <div className="max-w-[1400px] mx-auto px-5 w-full mt-6 mb-8">
@@ -659,107 +679,107 @@ const Home = () => {
         )}
 
         <main className="pt-4 lg:pt-6 space-y-4 lg:space-y-6 max-w-[1400px] mx-auto w-full">
-              {/* All Categories Section (Optional/Secondary) */}
-              {/* Categories Section removed as redundant with QuickLinks */}
+          {/* All Categories Section (Optional/Secondary) */}
+          {/* Categories Section removed as redundant with QuickLinks */}
 
 
 
-              {/* Curated Services */}
-              {homeContent?.isCuratedVisible !== false && (
-                <motion.div variants={itemVariants}>
-                  <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
-                    <CuratedServices
-                      services={(homeContent?.curated || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(item => ({
-                        id: item.id || item._id,
-                        title: item.title,
-                        gif: toAssetUrl(item.gifUrl),
-                        slug: item.slug,
-                        targetCategoryId: item.targetCategoryId
-                      }))}
-                      onServiceClick={handleServiceClick}
-                    />
-                  </Suspense>
-                </motion.div>
-              )}
+          {/* Curated Services */}
+          {homeContent?.isCuratedVisible !== false && (
+            <motion.div variants={itemVariants}>
+              <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
+                <CuratedServices
+                  services={(homeContent?.curated || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(item => ({
+                    id: item.id || item._id,
+                    title: item.title,
+                    gif: toAssetUrl(item.gifUrl),
+                    slug: item.slug,
+                    targetCategoryId: item.targetCategoryId
+                  }))}
+                  onServiceClick={handleServiceClick}
+                />
+              </Suspense>
+            </motion.div>
+          )}
 
-              {/* New & Noteworthy */}
-              {homeContent?.isNoteworthyVisible !== false && (
-                <motion.div variants={itemVariants}>
-                  <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
-                    <NewAndNoteworthy
-                      services={(homeContent?.noteworthy || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(item => ({
-                        id: item.id || item._id,
-                        title: item.title,
-                        image: toAssetUrl(item.imageUrl),
-                        slug: item.slug,
-                        targetCategoryId: item.targetCategoryId
-                      }))}
-                      onServiceClick={handleServiceClick}
-                    />
-                  </Suspense>
-                </motion.div>
-              )}
+          {/* New & Noteworthy */}
+          {homeContent?.isNoteworthyVisible !== false && (
+            <motion.div variants={itemVariants}>
+              <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
+                <NewAndNoteworthy
+                  services={(homeContent?.noteworthy || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(item => ({
+                    id: item.id || item._id,
+                    title: item.title,
+                    image: toAssetUrl(item.imageUrl),
+                    slug: item.slug,
+                    targetCategoryId: item.targetCategoryId
+                  }))}
+                  onServiceClick={handleServiceClick}
+                />
+              </Suspense>
+            </motion.div>
+          )}
 
-              {/* Most Booked */}
-              {homeContent?.isBookedVisible !== false && (
-                <motion.div variants={itemVariants}>
-                  <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
-                    <MostBookedServices
-                      services={(homeContent?.booked || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(item => ({
-                        id: item.id || item._id,
-                        title: item.title,
-                        rating: item.rating,
-                        reviews: item.reviews,
-                        price: item.price,
-                        originalPrice: item.originalPrice,
-                        discount: item.discount,
-                        image: toAssetUrl(item.imageUrl),
-                        targetCategoryId: item.targetCategoryId,
-                        slug: item.slug
-                      }))}
-                      onServiceClick={handleServiceClick}
-                      onAddClick={handleAddClick}
-                    />
-                  </Suspense>
-                </motion.div>
-              )}
+          {/* Most Booked */}
+          {homeContent?.isBookedVisible !== false && (
+            <motion.div variants={itemVariants}>
+              <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
+                <MostBookedServices
+                  services={(homeContent?.booked || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(item => ({
+                    id: item.id || item._id,
+                    title: item.title,
+                    rating: item.rating,
+                    reviews: item.reviews,
+                    price: item.price,
+                    originalPrice: item.originalPrice,
+                    discount: item.discount,
+                    image: toAssetUrl(item.imageUrl),
+                    targetCategoryId: item.targetCategoryId,
+                    slug: item.slug
+                  }))}
+                  onServiceClick={handleServiceClick}
+                  onAddClick={handleAddClick}
+                />
+              </Suspense>
+            </motion.div>
+          )}
 
 
 
-              {/* Dynamic Sections */}
-              {homeContent?.isCategorySectionsVisible !== false && (homeContent?.categorySections || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map((section, sIdx) => (
-                <motion.div key={section._id || sIdx} variants={itemVariants}>
-                  <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
-                    <ServiceSectionWithRating
-                      title={section.title}
-                      subtitle={section.subtitle}
-                      services={section.cards?.map((card, cIdx) => {
-                        const processedImage = toAssetUrl(card.imageUrl);
-                        return {
-                          id: card._id || cIdx,
-                          title: card.title,
-                          rating: card.rating || "4.8",
-                          reviews: card.reviews || "10k+",
-                          price: card.price,
-                          originalPrice: card.originalPrice,
-                          discount: card.discount,
-                          image: processedImage,
-                          targetCategoryId: card.targetCategoryId,
-                          slug: card.slug
-                        };
-                      }) || []}
-                      onSeeAllClick={() => {
-                        if (section.seeAllTargetCategoryId) {
-                          const cat = categories.find(c => (c.id === section.seeAllTargetCategoryId || c._id === section.seeAllTargetCategoryId));
-                          if (cat) handleCategoryClick(cat);
-                        }
-                      }}
-                      onServiceClick={(service) => handleServiceClick(service)}
-                      onAddClick={handleAddClick}
-                    />
-                  </Suspense>
-                </motion.div>
-              ))}
+          {/* Dynamic Sections */}
+          {homeContent?.isCategorySectionsVisible !== false && (homeContent?.categorySections || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map((section, sIdx) => (
+            <motion.div key={section._id || sIdx} variants={itemVariants}>
+              <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
+                <ServiceSectionWithRating
+                  title={section.title}
+                  subtitle={section.subtitle}
+                  services={section.cards?.map((card, cIdx) => {
+                    const processedImage = toAssetUrl(card.imageUrl);
+                    return {
+                      id: card._id || cIdx,
+                      title: card.title,
+                      rating: card.rating || "4.8",
+                      reviews: card.reviews || "10k+",
+                      price: card.price,
+                      originalPrice: card.originalPrice,
+                      discount: card.discount,
+                      image: processedImage,
+                      targetCategoryId: card.targetCategoryId,
+                      slug: card.slug
+                    };
+                  }) || []}
+                  onSeeAllClick={() => {
+                    if (section.seeAllTargetCategoryId) {
+                      const cat = categories.find(c => (c.id === section.seeAllTargetCategoryId || c._id === section.seeAllTargetCategoryId));
+                      if (cat) handleCategoryClick(cat);
+                    }
+                  }}
+                  onServiceClick={(service) => handleServiceClick(service)}
+                  onAddClick={handleAddClick}
+                />
+              </Suspense>
+            </motion.div>
+          ))}
 
 
 
