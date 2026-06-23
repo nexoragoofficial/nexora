@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Pagination, Mousewheel } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -21,14 +21,29 @@ const OfferBannerSlider = ({ banners }) => {
   };
 
   return (
-    <div className="mb-4 w-full px-0">
+    <div className="mb-6 w-full px-1">
+      <div className="mb-4 px-1">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
+          Offers For You
+        </h2>
+      </div>
+
       <Swiper
-        modules={[Autoplay, Pagination]}
-        spaceBetween={0}
-        slidesPerView={1}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
+        modules={[Pagination, Mousewheel]}
+        spaceBetween={12}
+        slidesPerView={1.15}
+        breakpoints={{
+          640: {
+            slidesPerView: 1.8,
+            spaceBetween: 16
+          },
+          1024: {
+            slidesPerView: 2.4,
+            spaceBetween: 20
+          }
+        }}
+        mousewheel={{
+          forceToAxis: true,
         }}
         pagination={{
           clickable: true,
@@ -39,16 +54,15 @@ const OfferBannerSlider = ({ banners }) => {
         {banners.map((banner) => (
           <SwiperSlide key={banner._id}>
             <div 
-              className="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[21/9] bg-white rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer active:scale-[0.98] transition-transform duration-200 flex items-center justify-center"
+              className="relative w-full aspect-[2/1] bg-transparent rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer active:scale-[0.98] transition-transform duration-200 flex items-center justify-center"
               onClick={() => handleBannerClick(banner)}
             >
               <img 
                 src={banner.imageUrl} 
                 alt={banner.title} 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-fill rounded-2xl sm:rounded-3xl"
                 loading="lazy"
               />
-              {/* Optional: Add a subtle overlay or text if needed */}
             </div>
           </SwiperSlide>
         ))}

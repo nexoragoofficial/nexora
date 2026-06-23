@@ -26,7 +26,14 @@ const getPublicCategories = async (req, res) => {
     const query = { status: 'active' };
     if (cityId) {
       query.$or = [
-        { vendorId: null, cityIds: cityId },
+        { 
+          vendorId: null, 
+          $or: [
+            { cityIds: cityId }, 
+            { cityIds: { $size: 0 } }, 
+            { cityIds: { $exists: false } }
+          ] 
+        },
         { vendorId: { $ne: null } }
       ];
     }
@@ -601,8 +608,8 @@ const getPublicHomeData = async (req, res) => {
     const nearbyCategories = await Promise.all(allCategories.map(async (cat) => {
       // 1. If it's a platform category (no vendorId)
       if (!cat.vendorId) {
-        // If it doesn't belong to the current city, skip it early
-        if (cityId && cat.cityIds && !cat.cityIds.some(id => id.toString() === cityId)) {
+        // If it has specific cities assigned, and doesn't belong to the current city, skip it
+        if (cityId && cat.cityIds && cat.cityIds.length > 0 && !cat.cityIds.some(id => id.toString() === cityId)) {
           return null;
         }
         return cat;

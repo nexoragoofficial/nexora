@@ -100,7 +100,7 @@ const ServiceQuickLinks = ({ categories = [], onCategoryClick, onSeeAllClick, ti
     <section className="max-w-[1400px] mx-auto px-5 relative z-20 mt-10 mb-12">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 px-1">
-        <h2 className="text-xl sm:text-2xl font-[900] text-gray-900 tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
           {title}
         </h2>
         {hasMore && (
@@ -137,7 +137,7 @@ const ServiceQuickLinks = ({ categories = [], onCategoryClick, onSeeAllClick, ti
 
         <div 
           ref={scrollRef}
-          className="flex gap-4 sm:gap-5 overflow-x-auto pb-4 scrollbar-hide"
+          className="flex gap-4 sm:gap-5 overflow-x-auto pt-4 pb-4 px-1 scrollbar-hide"
           style={{ 
             scrollbarWidth: 'none', 
             msOverflowStyle: 'none',
@@ -155,34 +155,34 @@ const ServiceQuickLinks = ({ categories = [], onCategoryClick, onSeeAllClick, ti
                 whileHover={{ y: -6, boxShadow: '0 16px 40px rgba(0,0,0,0.1)' }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => onCategoryClick?.(category)}
-                className="flex-shrink-0 flex flex-col items-center bg-white rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-gray-100/80 cursor-pointer transition-all duration-300 hover:border-blue-200/60 group"
-                style={{ minWidth: '140px', maxWidth: '160px' }}
+                className="flex-shrink-0 flex flex-col items-center bg-white rounded-2xl p-3 sm:p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-gray-100/80 cursor-pointer transition-all duration-300 hover:border-blue-200/60 group"
+                style={{ minWidth: '115px', maxWidth: '125px' }}
               >
                 {/* Icon Container */}
                 <div 
-                  className="w-14 h-14 sm:w-16 sm:h-16 mb-3 sm:mb-4 flex items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                  className="w-11 h-11 sm:w-12 sm:h-12 mb-2 sm:mb-2.5 flex items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
                   style={{ backgroundColor: meta.bg }}
                 >
                   {category.icon ? (
                     <img 
                       src={category.icon} 
                       alt={category.title} 
-                      className="w-8 h-8 sm:w-9 sm:h-9 object-contain"
+                      className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
                     />
                   ) : (
-                    <div className="text-2xl sm:text-3xl" style={{ color: meta.color }}>
+                    <div className="text-xl sm:text-2xl" style={{ color: meta.color }}>
                       {meta.icon}
                     </div>
                   )}
                 </div>
                 
                 {/* Title */}
-                <span className="text-[13px] sm:text-sm font-bold text-gray-900 text-center leading-tight mb-1">
+                <span className="text-[12px] sm:text-[13px] font-bold text-gray-900 text-center leading-tight mb-1">
                   {category.title}
                 </span>
                 
                 {/* Description */}
-                <span className="text-[10px] sm:text-[11px] font-medium text-gray-400 text-center leading-tight line-clamp-2">
+                <span className="text-[9px] sm:text-[10px] font-medium text-gray-400 text-center leading-tight line-clamp-2">
                   {category.description || 'Service at your doorstep'}
                 </span>
               </motion.div>
@@ -198,17 +198,17 @@ const ServiceQuickLinks = ({ categories = [], onCategoryClick, onSeeAllClick, ti
               whileHover={{ y: -6, boxShadow: '0 16px 40px rgba(0,0,0,0.1)' }}
               whileTap={{ scale: 0.96 }}
               onClick={onSeeAllClick}
-              className="flex-shrink-0 flex flex-col items-center bg-white rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-gray-100/80 cursor-pointer transition-all duration-300 hover:border-blue-200/60 group"
-              style={{ minWidth: '140px', maxWidth: '160px' }}
+              className="flex-shrink-0 flex flex-col items-center bg-white rounded-2xl p-3 sm:p-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-gray-100/80 cursor-pointer transition-all duration-300 hover:border-blue-200/60 group"
+              style={{ minWidth: '115px', maxWidth: '125px' }}
             >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 mb-3 sm:mb-4 flex items-center justify-center rounded-2xl bg-blue-50 transition-transform duration-300 group-hover:scale-110">
-                <HiDotsHorizontal className="text-2xl sm:text-3xl text-blue-500" />
+              <div className="w-11 h-11 sm:w-12 sm:h-12 mb-2 sm:mb-2.5 flex items-center justify-center rounded-xl bg-blue-50 transition-transform duration-300 group-hover:scale-110">
+                <HiDotsHorizontal className="text-xl sm:text-2xl text-blue-500" />
               </div>
-              <span className="text-[13px] sm:text-sm font-bold text-gray-900 text-center leading-tight mb-1">
+              <span className="text-[12px] sm:text-[13px] font-bold text-gray-900 text-center leading-tight mb-1">
                 More
               </span>
-              <span className="text-[10px] sm:text-[11px] font-medium text-gray-400 text-center leading-tight">
-                Many more services
+              <span className="text-[9px] sm:text-[10px] font-medium text-gray-400 text-center leading-tight">
+                Many more
               </span>
             </motion.div>
           )}

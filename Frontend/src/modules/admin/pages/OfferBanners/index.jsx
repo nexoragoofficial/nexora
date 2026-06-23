@@ -17,6 +17,7 @@ const OfferBanners = () => {
     image: null
   });
   const [preview, setPreview] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     loadBanners();
@@ -52,6 +53,7 @@ const OfferBanners = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setSubmitting(true);
       let response;
       if (editingBanner) {
         response = await adminBannerService.updateBanner(editingBanner._id, formData);
@@ -67,6 +69,8 @@ const OfferBanners = () => {
     } catch (error) {
       console.error('Error saving banner:', error);
       toast.error(error.response?.data?.message || 'Failed to save banner');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -113,6 +117,7 @@ const OfferBanners = () => {
     setEditingBanner(null);
     setFormData({ title: '', link: '', priority: 0, image: null });
     setPreview(null);
+    setSubmitting(false);
   };
 
   const toggleActive = async (banner) => {
@@ -267,14 +272,17 @@ const OfferBanners = () => {
             <button
               type="button"
               onClick={closeModal}
-              className="flex-1 px-4 py-2 border rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition-colors"
+              disabled={submitting}
+              className="flex-1 px-4 py-2 border rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-primary-600 text-white rounded-xl font-bold hover:bg-primary-700 transition-colors"
+              disabled={submitting}
+              className="flex-1 px-4 py-2 bg-primary-600 text-white rounded-xl font-bold hover:bg-primary-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
+              {submitting && <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>}
               {editingBanner ? 'Update Banner' : 'Create Banner'}
             </button>
           </div>

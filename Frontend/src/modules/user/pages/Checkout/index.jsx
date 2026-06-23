@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import { FiArrowLeft, FiShoppingCart, FiTrash2, FiMinus, FiPlus, FiPhone, FiHome, FiClock, FiEdit2, FiCheckCircle, FiInfo } from 'react-icons/fi';
+import { FiArrowLeft, FiShoppingCart, FiTrash2, FiMinus, FiPlus, FiPhone, FiHome, FiClock, FiEdit2, FiCheckCircle, FiInfo, FiX, FiMapPin } from 'react-icons/fi';
 import { MdStar } from 'react-icons/md';
 import { toast } from 'react-hot-toast';
 import { themeColors } from '../../../../theme';
@@ -51,6 +51,7 @@ const Checkout = () => {
   const [bookingRequest, setBookingRequest] = useState(null);
   const [searchingVendors, setSearchingVendors] = useState(false);
   const [showVendorModal, setShowVendorModal] = useState(false);
+  const [showNoVendorsModal, setShowNoVendorsModal] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('online'); // 'online' | 'pay_at_home'
 
   const [loading, setLoading] = useState(true);
@@ -597,7 +598,11 @@ const Checkout = () => {
 
       if (!bookingResponse.success) {
         toast.dismiss();
-        toast.error(bookingResponse.message || 'Failed to search for vendors');
+        if (bookingResponse.noVendorsOnline || bookingResponse.message === 'NO vendor online') {
+          setShowNoVendorsModal(true);
+        } else {
+          toast.error(bookingResponse.message || 'Failed to search for vendors');
+        }
         setCurrentStep('details');
         setSearchingVendors(false);
         setShowVendorModal(false);
@@ -665,7 +670,12 @@ const Checkout = () => {
     } catch (error) {
       toast.dismiss();
       console.error('Search vendors error:', error);
-      toast.error('Failed to search for vendors. Please try again.');
+      const errorMsg = error?.response?.data?.message || error?.message || '';
+      if (errorMsg.includes('NO vendor online') || error?.response?.data?.noVendorsOnline) {
+        setShowNoVendorsModal(true);
+      } else {
+        toast.error('Failed to search for vendors. Please try again.');
+      }
       setCurrentStep('details');
       setSearchingVendors(false);
       setShowVendorModal(false);
@@ -1108,330 +1118,15 @@ const Checkout = () => {
     return selectedTime === time;
   };
 
-  if (loading) {
+  const renderBookingActions = (isDesktop = false) => {
     return (
-      <div className="min-h-screen bg-white pb-32 flex items-center justify-center">
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4" style={{ borderColor: themeColors.button }}></div>
-          <p className="text-gray-500">Loading checkout details...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (cartItems.length === 0 && currentStep === 'details' && !searchingVendors && !showVendorModal) {
-    return (
-      <div className="min-h-screen bg-white pb-32">
-        <header className="bg-white">
-          <div className="px-4 pt-4 pb-3">
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleBack}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <FiArrowLeft className="w-6 h-6 text-black" />
-              </button>
-              <h1 className="text-xl font-bold text-black">Your cart</h1>
-            </div>
-          </div>
-          <div className="border-b border-gray-200"></div>
-        </header>
-        <main className="px-4 py-4">
-          <div className="flex flex-col items-center justify-center py-20">
-            <FiShoppingCart className="w-16 h-16 text-gray-300 mb-4" />
-            <p className="text-gray-500 text-lg font-medium">Your cart is empty</p>
-            <p className="text-gray-400 text-sm mt-2">Add services to get started</p>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-white pb-80">
-      {/* Header */}
-      <header className="bg-white">
-        <div className="px-4 pt-4 pb-3">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleBack}
-              className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-            >
-              <FiArrowLeft className="w-6 h-6 text-black" />
-            </button>
-            <h1 className="text-xl font-bold text-black">
-              {category ? `${category} Checkout` : 'Your cart'}
-            </h1>
-          </div>
-        </div>
-        <div className="border-b border-gray-200"></div>
-      </header>
-
-      <main className="px-4 py-4">
-        {/* Savings Banner */}
-        {savings > 0 && (
-          <div className="bg-green-50 border border-green-100 rounded-2xl p-4 mb-6 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-green-200">
-                <MdStar className="text-white w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-green-600 uppercase tracking-wider">Smart Choice!</p>
-                <p className="text-sm font-black text-slate-900">
-                  You're saving ₹{savings.toLocaleString('en-IN')}
-                </p>
-              </div>
-            </div>
-            <div className="bg-white px-3 py-1 rounded-full shadow-sm border border-green-100">
-              <span className="text-[10px] font-black text-green-600">BEST PRICE</span>
-            </div>
-          </div>
-        )}
-
-        {/* Cart Items */}
-        <div className="space-y-4 mb-4">
-          {cartItems.map((item) => {
-            const brandName = item.brand || item.sectionTitle;
-            const categoryName = item.categoryTitle || item.category;
-
-            return (
-              <div key={item._id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm relative overflow-hidden">
-                {/* Brand Header */}
-                {(brandName || categoryName) && (
-                  <div className="flex items-center gap-2 mb-3 pb-3 border-b border-gray-50">
-                    {item.sectionIcon ? (
-                      <img src={toAssetUrl(item.sectionIcon)} className="w-5 h-5 rounded-md object-cover border border-gray-100" alt="" />
-                    ) : (
-                      <div className="w-5 h-5 rounded-md bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500">
-                        {(brandName || "B").charAt(0)}
-                      </div>
-                    )}
-                    <div className="flex flex-col leading-none">
-                      {brandName && <span className="text-xs font-bold text-gray-900">{brandName}</span>}
-                      {categoryName && <span className="text-[10px] font-medium text-gray-500 uppercase tracking-wide mt-0.5">{categoryName}</span>}
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1 pr-4">
-                    <h3 className="text-base font-bold text-gray-900 mb-1 leading-snug">{item.title}</h3>
-                    {item.description && (
-                      <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
-                    )}
-                    {item.duration && (
-                      <div className="flex items-center gap-1 mt-2 text-xs text-gray-500">
-                        <FiClock className="w-3 h-3" />
-                        {item.duration}
-                      </div>
-                    )}
-                  </div>
-                  {!item.isPlan && (
-                    <div className="flex flex-col items-end gap-2">
-                      <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-lg p-0.5">
-                        <button
-                          onClick={() => handleQuantityChange(item._id, -1)}
-                          className="p-1.5 hover:bg-white rounded-md transition-all shadow-sm"
-                        >
-                          <FiMinus className="w-3.5 h-3.5 text-gray-600" />
-                        </button>
-                        <span className="w-6 text-center text-sm font-bold text-gray-900">{item.serviceCount || 1}</span>
-                        <button
-                          onClick={() => handleQuantityChange(item._id, 1)}
-                          className="p-1.5 hover:bg-white rounded-md transition-all shadow-sm"
-                        >
-                          <FiPlus className="w-3.5 h-3.5 text-gray-900" />
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  {!item.isPlan && (
-                    <button
-                      onClick={() => handleRemoveItem(item._id)}
-                      className="absolute top-3 right-3 p-1.5 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
-                    >
-                      <FiTrash2 className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-base font-bold text-black">
-                    {calculateItemPrice(item) === 0 ? (
-                      <span className="text-green-600">Free</span>
-                    ) : (
-                      `₹${(item.price || 0).toLocaleString('en-IN')}`
-                    )}
-                  </span>
-                  {calculateItemPrice(item) === 0 && (
-                    <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full border border-green-200">
-                      WITH PLAN
-                    </span>
-                  )}
-                  {calculateItemPrice(item) > 0 && (() => {
-                    const unitPrice = item.unitPrice || (item.price / (item.serviceCount || 1));
-                    const unitOriginalPrice = item.originalPrice || unitPrice;
-                    const currentTotal = item.price;
-                    const originalTotal = unitOriginalPrice * (item.serviceCount || 1);
-                    if (originalTotal > currentTotal) {
-                      return (
-                        <span className="text-sm text-gray-400 line-through">
-                          ₹{originalTotal.toLocaleString('en-IN')}
-                        </span>
-                      );
-                    }
-                    return null;
-                  })()}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* ... */}
-
-
-        <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <FiPhone className="w-5 h-5 text-gray-600" />
-              <div>
-                <p className="text-sm font-medium text-black">{contactDetails.name || JSON.parse(localStorage.getItem('userData'))?.name || 'Verified Customer'}</p>
-                <p className="text-xs text-gray-600">{contactDetails.phone || userPhone || 'Loading...'}</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setShowContactModal(true)}
-              className="text-sm font-medium hover:underline"
-              style={{ color: themeColors.button }}
-            >
-              Change
-            </button>
-          </div>
-        </div>
-
-        {/* Payment Summary */}
-        <div className="bg-white border-2 border-slate-100 rounded-2xl p-5 mb-6 shadow-sm overflow-hidden relative">
-          {/* Decorative Background for Header */}
-          <div className="absolute top-0 left-0 right-0 h-1" style={{ background: themeColors.gradient }}></div>
-
-          <h3 className="text-lg font-bold text-slate-900 mb-5 flex items-center gap-2">
-            <FiShoppingCart className="w-5 h-5" style={{ color: themeColors.button }} />
-            Payment Summary
-          </h3>
-
-          <div className="space-y-3">
-            {/* Original Price (before plan) */}
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600">Item Total</span>
-              <span className="text-sm font-medium text-slate-900">
-                ₹{totalOriginalPrice.toLocaleString('en-IN')}
-              </span>
-            </div>
-
-            {/* Discount Line */}
-            {displaySavings > 0 && (
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-green-600">Discount</span>
-                <span className="text-sm font-medium text-green-600">-₹{displaySavings.toLocaleString('en-IN')}</span>
-              </div>
-            )}
-
-            {/* Upgrade Credit (for plan upgrades) */}
-            {upgradePreview && upgradePreview.credit > 0 && (
-              <div className="flex justify-between items-center text-green-600">
-                <span className="text-sm font-medium">Plan Credit</span>
-                <span className="text-sm font-bold">-₹{upgradePreview.credit.toLocaleString('en-IN')}</span>
-              </div>
-            )}
-
-            {/* Taxes */}
-            {displayTax > 0 && (
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-500">GST ({gstPercentage}%)</span>
-                <span className="text-sm font-medium text-slate-700">₹{displayTax.toLocaleString('en-IN')}</span>
-              </div>
-            )}
-
-            {/* Convenience Fee removed */}
-
-            {/* Divider */}
-            <div className="border-t border-slate-200 pt-4 mt-2">
-              <div className="flex justify-between items-center">
-                <span className="text-base font-bold text-slate-900">Total Payable</span>
-                <div className="flex flex-col items-end">
-                  {totalAmount === 0 ? (
-                    <>
-                      <span className="text-sm font-medium text-slate-400 line-through">
-                        ₹{Math.round(totalOriginalPrice + displayTax + displayFee).toLocaleString('en-IN')}
-                      </span>
-                      <span className="text-xl font-black text-green-600">FREE</span>
-                    </>
-                  ) : (
-                    <span className="text-xl font-black text-slate-900">
-                      ₹{totalAmount.toLocaleString('en-IN')}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Important Note regarding Base Price */}
-        <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6 flex items-start gap-4 shadow-sm">
-          <div className="bg-blue-100 p-2 rounded-full shrink-0 mt-0.5">
-            <FiInfo className="w-5 h-5 text-blue-600" />
-          </div>
-          <div>
-            <h4 className="text-sm font-bold text-blue-900 mb-1">Note</h4>
-            <p className="text-sm text-blue-800 leading-relaxed font-medium">
-              This is a base booking cost. Additional service cost is decided by the vendor after service bill preparation.
-            </p>
-          </div>
-        </div>
-
-        {/* Free Plan Benefit Card */}
-        {totalAmount === 0 && (
-          <div className="bg-gradient-to-br from-green-50 to-emerald-100/50 border border-green-200 rounded-2xl p-5 mb-6 relative overflow-hidden">
-            <div className="flex items-start gap-4 z-10 relative">
-              <div className="bg-green-500 rounded-full p-2 shadow-lg shadow-green-200 shrink-0">
-                <FiCheckCircle className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-green-800 mb-1">Covered by {planBenefits.name}</h3>
-                <p className="text-sm text-green-700 leading-relaxed font-medium opacity-90">
-                  You save <span className="font-bold">₹{Math.round(totalOriginalPrice + displayTax + displayFee).toLocaleString('en-IN')}</span> on this booking!
-                  Your plan covers all costs.
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Cancellation Policy */}
-        <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
-          <h3 className="text-base font-bold text-black mb-2">Cancellation policy</h3>
-          <p className="text-sm text-gray-700 mb-2">
-            Free cancellations if done more than 12 hrs before the service or if a professional isn't assigned. A fee will be charged otherwise.
-          </p>
-          <button
-            onClick={() => navigate('/user/cancellation-policy')}
-            className="text-sm font-medium hover:underline"
-            style={{ color: themeColors.button }}
-          >
-            Read full policy
-          </button>
-        </div>
-
-
-      </main>
-
-      {/* Bottom Action Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
-
+      <div className={isDesktop 
+        ? "bg-white border-2 border-slate-100 rounded-2xl shadow-sm overflow-hidden relative p-5"
+        : "px-4 py-3"
+      }>
         {/* Booking Type Toggle */}
-        <div className="px-4 pt-3 pb-0">
-          <div className="flex bg-gray-100 p-1 rounded-xl mb-1">
+        <div className={isDesktop ? "mb-4" : "mb-1"}>
+          <div className="flex bg-gray-100 p-1 rounded-xl">
             <button
               onClick={() => setBookingType('instant')}
               className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${bookingType === 'instant' ? 'bg-white shadow-sm text-black' : 'text-gray-500'}`}
@@ -1446,14 +1141,14 @@ const Checkout = () => {
             </button>
           </div>
           {bookingType === 'instant' && (
-            <p className="text-xs text-center text-green-600 font-medium mt-1 mb-1">
+            <p className="text-xs text-center text-green-600 font-medium mt-2">
               <span className="font-bold">⚡ Priority Service:</span> Vendor arrives in ~45 mins
             </p>
           )}
         </div>
 
         {/* Address and Slot Display */}
-        <div className="px-4 pt-2 pb-2 border-b border-gray-100">
+        <div className={isDesktop ? "py-4 border-y border-gray-100 my-4" : "py-2 border-b border-gray-100 mb-2"}>
           {(houseNumber || addressDetails) ? (
             <div className="space-y-2.5">
               {/* Address */}
@@ -1523,7 +1218,7 @@ const Checkout = () => {
           )}
         </div>
 
-        <div className="p-4">
+        <div className={isDesktop ? "pt-2" : "pt-1"}>
           <button
             onClick={plan ? handlePlanPayment :
               (houseNumber || addressDetails) ?
@@ -1542,6 +1237,338 @@ const Checkout = () => {
                       (houseNumber || addressDetails) ? 'Select Time Slot' : 'Add address to proceed')}
           </button>
         </div>
+      </div>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white pb-32 flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4" style={{ borderColor: themeColors.button }}></div>
+          <p className="text-gray-500">Loading checkout details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (cartItems.length === 0 && currentStep === 'details' && !searchingVendors && !showVendorModal) {
+    return (
+      <div className="min-h-screen bg-white pb-32">
+        <header className="bg-white">
+          <div className="px-4 pt-4 pb-3">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleBack}
+                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <FiArrowLeft className="w-6 h-6 text-black" />
+              </button>
+              <h1 className="text-xl font-bold text-black">Your cart</h1>
+            </div>
+          </div>
+          <div className="border-b border-gray-200"></div>
+        </header>
+        <main className="px-4 py-4">
+          <div className="flex flex-col items-center justify-center py-20">
+            <FiShoppingCart className="w-16 h-16 text-gray-300 mb-4" />
+            <p className="text-gray-500 text-lg font-medium">Your cart is empty</p>
+            <p className="text-gray-400 text-sm mt-2">Add services to get started</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white pb-80 lg:pb-12">
+      {/* Header */}
+      <header className="bg-white">
+        <div className="px-4 pt-4 pb-3">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleBack}
+              className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <FiArrowLeft className="w-6 h-6 text-black" />
+            </button>
+            <h1 className="text-xl font-bold text-black">
+              {category ? `${category} Checkout` : 'Your cart'}
+            </h1>
+          </div>
+        </div>
+        <div className="border-b border-gray-200"></div>
+      </header>
+
+      <main className="max-w-[1400px] mx-auto px-4 py-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* Left Column: Cart Items, Contact Details & Note */}
+          <div className="lg:col-span-8 space-y-4">
+            {/* Savings Banner */}
+            {savings > 0 && (
+              <div className="bg-green-50 border border-green-100 rounded-2xl p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-505 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-green-200" style={{ backgroundColor: '#22c55e' }}>
+                    <MdStar className="text-white w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-green-600 uppercase tracking-wider">Smart Choice!</p>
+                    <p className="text-sm font-black text-slate-900">
+                      You're saving ₹{savings.toLocaleString('en-IN')}
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-white px-3 py-1 rounded-full shadow-sm border border-green-100">
+                  <span className="text-[10px] font-black text-green-600">BEST PRICE</span>
+                </div>
+              </div>
+            )}
+
+            {/* Cart Items */}
+            <div className="space-y-4">
+              {cartItems.map((item) => {
+                const brandName = item.brand || item.sectionTitle;
+                const categoryName = item.categoryTitle || item.category;
+
+                return (
+                  <div key={item._id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm relative overflow-hidden">
+                    {/* Brand Header */}
+                    {(brandName || categoryName) && (
+                      <div className="flex items-center gap-2 mb-3 pb-3 border-b border-gray-50">
+                        {item.sectionIcon ? (
+                          <img src={toAssetUrl(item.sectionIcon)} className="w-5 h-5 rounded-md object-cover border border-gray-100" alt="" />
+                        ) : (
+                          <div className="w-5 h-5 rounded-md bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500">
+                            {(brandName || "B").charAt(0)}
+                          </div>
+                        )}
+                        <div className="flex flex-col leading-none">
+                          {brandName && <span className="text-xs font-bold text-gray-900">{brandName}</span>}
+                          {categoryName && <span className="text-[10px] font-medium text-gray-500 uppercase tracking-wide mt-0.5">{categoryName}</span>}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1 pr-4">
+                        <h3 className="text-base font-bold text-gray-900 mb-1 leading-snug">{item.title}</h3>
+                        {item.description && (
+                          <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
+                        )}
+                        {item.duration && (
+                          <div className="flex items-center gap-1 mt-2 text-xs text-gray-500">
+                            <FiClock className="w-3 h-3" />
+                            {item.duration}
+                          </div>
+                        )}
+                      </div>
+                      {!item.isPlan && (
+                        <div className="flex flex-col items-end gap-2">
+                          <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-lg p-0.5">
+                            <button
+                              onClick={() => handleQuantityChange(item._id, -1)}
+                              className="p-1.5 hover:bg-white rounded-md transition-all shadow-sm"
+                            >
+                              <FiMinus className="w-3.5 h-3.5 text-gray-600" />
+                            </button>
+                            <span className="w-6 text-center text-sm font-bold text-gray-900">{item.serviceCount || 1}</span>
+                            <button
+                              onClick={() => handleQuantityChange(item._id, 1)}
+                              className="p-1.5 hover:bg-white rounded-md transition-all shadow-sm"
+                            >
+                              <FiPlus className="w-3.5 h-3.5 text-gray-900" />
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                      {!item.isPlan && (
+                        <button
+                          onClick={() => handleRemoveItem(item._id)}
+                          className="absolute top-3 right-3 p-1.5 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
+                        >
+                          <FiTrash2 className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-base font-bold text-black">
+                        {calculateItemPrice(item) === 0 ? (
+                          <span className="text-green-600">Free</span>
+                        ) : (
+                          `₹${(item.price || 0).toLocaleString('en-IN')}`
+                        )}
+                      </span>
+                      {calculateItemPrice(item) === 0 && (
+                        <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full border border-green-200">
+                          WITH PLAN
+                        </span>
+                      )}
+                      {calculateItemPrice(item) > 0 && (() => {
+                        const unitPrice = item.unitPrice || (item.price / (item.serviceCount || 1));
+                        const unitOriginalPrice = item.originalPrice || unitPrice;
+                        const currentTotal = item.price;
+                        const originalTotal = unitOriginalPrice * (item.serviceCount || 1);
+                        if (originalTotal > currentTotal) {
+                          return (
+                            <span className="text-sm text-gray-400 line-through">
+                              ₹{originalTotal.toLocaleString('en-IN')}
+                            </span>
+                          );
+                        }
+                        return null;
+                      })()}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Contact Details */}
+            <div className="bg-white border border-gray-200 rounded-xl p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <FiPhone className="w-5 h-5 text-gray-600" />
+                  <div>
+                    <p className="text-sm font-medium text-black">{contactDetails.name || JSON.parse(localStorage.getItem('userData'))?.name || 'Verified Customer'}</p>
+                    <p className="text-xs text-gray-600">{contactDetails.phone || userPhone || 'Loading...'}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowContactModal(true)}
+                  className="text-sm font-medium hover:underline"
+                  style={{ color: themeColors.button }}
+                >
+                  Change
+                </button>
+              </div>
+            </div>
+
+            {/* Important Note */}
+            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-4 shadow-sm">
+              <div className="bg-blue-100 p-2 rounded-full shrink-0 mt-0.5">
+                <FiInfo className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <h4 className="text-sm font-bold text-blue-900 mb-1">Note</h4>
+                <p className="text-sm text-blue-800 leading-relaxed font-medium">
+                  This is a base booking cost. Additional service cost is decided by the vendor after service bill preparation.
+                </p>
+              </div>
+            </div>
+
+            {/* Cancellation Policy */}
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <h3 className="text-base font-bold text-black mb-2">Cancellation policy</h3>
+              <p className="text-sm text-gray-700 mb-2">
+                Free cancellations if done more than 12 hrs before the service or if a professional isn't assigned. A fee will be charged otherwise.
+              </p>
+              <button
+                onClick={() => navigate('/user/cancellation-policy')}
+                className="text-sm font-medium hover:underline"
+                style={{ color: themeColors.button }}
+              >
+                Read full policy
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Payment Summary & Plan Benefits */}
+          <div className="lg:col-span-4 space-y-4">
+            {/* Payment Summary */}
+            <div className="bg-white border-2 border-slate-100 rounded-2xl p-5 shadow-sm overflow-hidden relative">
+              {/* Decorative Background for Header */}
+              <div className="absolute top-0 left-0 right-0 h-1" style={{ background: themeColors.gradient }}></div>
+
+              <h3 className="text-lg font-bold text-slate-900 mb-5 flex items-center gap-2">
+                <FiShoppingCart className="w-5 h-5" style={{ color: themeColors.button }} />
+                Payment Summary
+              </h3>
+
+              <div className="space-y-3">
+                {/* Original Price */}
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-slate-600">Item Total</span>
+                  <span className="text-sm font-medium text-slate-900">
+                    ₹{totalOriginalPrice.toLocaleString('en-IN')}
+                  </span>
+                </div>
+
+                {/* Discount */}
+                {displaySavings > 0 && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium text-green-600">Discount</span>
+                    <span className="text-sm font-medium text-green-600">-₹{displaySavings.toLocaleString('en-IN')}</span>
+                  </div>
+                )}
+
+                {/* Plan Upgrade Credit */}
+                {upgradePreview && upgradePreview.credit > 0 && (
+                  <div className="flex justify-between items-center text-green-600">
+                    <span className="text-sm font-medium">Plan Credit</span>
+                    <span className="text-sm font-bold">-₹{upgradePreview.credit.toLocaleString('en-IN')}</span>
+                  </div>
+                )}
+
+                {/* Taxes */}
+                {displayTax > 0 && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-slate-500">GST ({gstPercentage}%)</span>
+                    <span className="text-sm font-medium text-slate-700">₹{displayTax.toLocaleString('en-IN')}</span>
+                  </div>
+                )}
+
+                {/* Divider */}
+                <div className="border-t border-slate-200 pt-4 mt-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-base font-bold text-slate-900">Total Payable</span>
+                    <div className="flex flex-col items-end">
+                      {totalAmount === 0 ? (
+                        <>
+                          <span className="text-sm font-medium text-slate-400 line-through">
+                            ₹{Math.round(totalOriginalPrice + displayTax + displayFee).toLocaleString('en-IN')}
+                          </span>
+                          <span className="text-xl font-black text-green-600">FREE</span>
+                        </>
+                      ) : (
+                        <span className="text-xl font-black text-slate-900">
+                          ₹{totalAmount.toLocaleString('en-IN')}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Free Plan Benefit Card */}
+            {totalAmount === 0 && (
+              <div className="bg-gradient-to-br from-green-50 to-emerald-100/50 border border-green-200 rounded-2xl p-5 relative overflow-hidden">
+                <div className="flex items-start gap-4 z-10 relative">
+                  <div className="bg-green-500 rounded-full p-2 shadow-lg shadow-green-200 shrink-0">
+                    <FiCheckCircle className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-green-800 mb-1">Covered by {planBenefits.name}</h3>
+                    <p className="text-sm text-green-700 leading-relaxed font-medium opacity-90">
+                      You save <span className="font-bold">₹{Math.round(totalOriginalPrice + displayTax + displayFee).toLocaleString('en-IN')}</span> on this booking!
+                      Your plan covers all costs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Desktop Booking Actions Card */}
+            <div className="hidden lg:block mt-4">
+              {renderBookingActions(true)}
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Bottom Action Button (Mobile Only) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 lg:hidden">
+        {renderBookingActions(false)}
       </div>
 
       {/* Live Booking Status Card (Visible when minimized) */}
@@ -1626,6 +1653,65 @@ const Checkout = () => {
                   Save Changes
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Attractive No Vendors Available Modal */}
+      {showNoVendorsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setShowNoVendorsModal(false)}
+          />
+          
+          {/* Modal Content */}
+          <div className="bg-white w-full max-w-sm rounded-[24px] p-6 shadow-2xl relative z-10 border border-gray-100 flex flex-col items-center text-center animate-scale-in">
+            {/* Close Button */}
+            <button 
+              onClick={() => setShowNoVendorsModal(false)}
+              className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <FiX className="w-5 h-5 text-gray-400" />
+            </button>
+
+            {/* Illustration/Icon */}
+            <div className="w-16 h-16 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center mb-4 mt-2 shrink-0 animate-bounce">
+              <FiMapPin className="w-8 h-8 text-orange-500" />
+            </div>
+
+            {/* Heading */}
+            <h3 className="text-xl font-bold text-gray-900 mb-2">No Professionals Online</h3>
+            
+            {/* Description */}
+            <p className="text-sm text-gray-500 leading-relaxed mb-6 px-1">
+              Currently, there are no active service partners available in your location. Please try booking as a scheduled slot or try again later.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="w-full space-y-2">
+              <button
+                onClick={() => {
+                  setShowNoVendorsModal(false);
+                  setBookingType('scheduled');
+                  setShowTimeSlotModal(true);
+                }}
+                className="w-full py-3 rounded-xl font-bold text-white shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2"
+                style={{ 
+                  backgroundColor: themeColors.button,
+                  boxShadow: `0 8px 16px ${themeColors.button}30`
+                }}
+              >
+                <span>📅</span> Select a Time Slot
+              </button>
+              <button
+                onClick={() => setShowNoVendorsModal(false)}
+                className="w-full py-3 rounded-xl font-bold text-gray-500 hover:bg-gray-50 active:scale-95 transition-all"
+              >
+                Okay, got it
+              </button>
             </div>
           </div>
         </div>

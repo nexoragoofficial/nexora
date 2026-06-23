@@ -48,28 +48,23 @@ const TimeSlotModal = ({
   if (!isOpen && !isClosing) return null;
 
   return (
-    <>
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-50 transition-opacity ${isClosing ? 'opacity-0' : 'opacity-100'
-          }`}
+        className={`fixed inset-0 bg-black/50 transition-opacity ${isClosing ? 'opacity-0' : 'opacity-100'}`}
         onClick={handleClose}
       />
 
       {/* Modal Container */}
-      <div className="fixed bottom-0 left-0 right-0 z-50">
-        {/* Modal */}
-        <div
-          className={`bg-white rounded-t-3xl ${isClosing ? 'animate-slide-down' : 'animate-slide-up'
-            }`}
-          style={{
-            maxHeight: '90vh',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden'
-          }}
-          onClick={(e) => e.stopPropagation()}
-        >
+      <div
+        className={`bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl w-full sm:max-w-2xl h-[85vh] sm:h-auto sm:max-h-[90vh] relative z-10 ${isClosing ? 'animate-slide-down' : 'animate-slide-up'}`}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden'
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
           {/* Header */}
           <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 z-10 shrink-0">
             <div className="flex items-center justify-between">
@@ -219,9 +214,8 @@ const TimeSlotModal = ({
               Proceed to checkout
             </button>
           </div>
-        </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -57,10 +57,10 @@ const BottomNav = React.memo(() => {
                 layout
                 initial={false}
                 animate={{
-                  width: isActive ? 'auto' : '44px',
+                  width: isActive ? 'auto' : '48px',
                   backgroundColor: isActive ? '#0D463C' : 'transparent',
                 }}
-                className="flex items-center gap-2 px-3 h-11 rounded-full overflow-hidden"
+                className="flex items-center gap-2 px-4 h-12 rounded-full overflow-hidden"
               >
                 <div className="relative">
                   <Icon

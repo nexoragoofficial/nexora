@@ -121,7 +121,7 @@ const UserRoutes = () => {
     <ThemeManager theme="user">
       <ErrorBoundary>
         {/* Main content area - leaves space for bottom nav when needed */}
-        <div className={shouldShowBottomNav ? "pb-24" : ""}>
+        <div className={shouldShowBottomNav && !['/user', '/user/'].includes(location.pathname) ? "pb-24" : ""}>
           <Suspense fallback={<LoadingFallback />}>
             <PageTransition>
               <Routes>

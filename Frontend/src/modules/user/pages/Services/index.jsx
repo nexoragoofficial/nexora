@@ -194,10 +194,10 @@ const ServicesPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <h1 className="text-5xl lg:text-7xl font-[1000] text-gray-900 leading-tight tracking-tight mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-tight mb-4">
                   Our <span className="text-blue-600">Services</span>
                 </h1>
-                <p className="text-gray-500 font-medium text-lg lg:text-xl leading-relaxed max-w-xl mb-6 mx-auto lg:mx-0">
+                <p className="text-gray-500 font-medium text-xs sm:text-sm lg:text-xl leading-relaxed max-w-xl mb-6 mx-auto lg:mx-0">
                   Professional services delivered right at your doorstep. Fast, reliable, and verified experts for all your needs.
                 </p>
                 
@@ -231,7 +231,7 @@ const ServicesPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-[1400px] mx-auto px-6 -mt-12 relative z-20 pb-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 mt-4 sm:-mt-12 relative z-20 pb-16">
         <div className="bg-white rounded-[32px] p-4 lg:p-8 shadow-2xl shadow-blue-900/5 border border-white">
           
           {/* Tabs */}
@@ -240,7 +240,7 @@ const ServicesPage = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-[14px] whitespace-nowrap transition-all duration-300 font-black text-[10px] uppercase tracking-wider ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-[14px] whitespace-nowrap transition-all duration-300 font-bold text-[10px] uppercase tracking-wider ${
                   activeTab === tab.id 
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/30' 
                   : 'text-gray-500 hover:bg-white'
@@ -255,9 +255,9 @@ const ServicesPage = () => {
           {/* Grid */}
           <AnimatePresence mode="wait">
             {loading ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[...Array(12)].map((_, i) => (
-                  <div key={i} className="h-48 bg-slate-50 rounded-[20px] animate-pulse" />
+                  <div key={i} className="h-64 bg-slate-50 rounded-[20px] animate-pulse" />
                 ))}
               </div>
             ) : filteredItems.length > 0 ? (
@@ -265,17 +265,17 @@ const ServicesPage = () => {
                 key={activeTab}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
               >
                 {filteredItems.map((svc) => (
                   <motion.div
                     key={svc.id || svc._id}
                     whileHover={{ y: -5, shadow: "0 20px 40px -12px rgba(0, 0, 0, 0.1)" }}
                     onClick={() => navigate(`/user/service/${svc.id || svc._id}`)}
-                    className="group bg-white rounded-[24px] border border-gray-100 hover:border-blue-100 cursor-pointer transition-all duration-500 flex flex-col overflow-hidden shadow-sm hover:shadow-xl"
+                    className="group bg-white rounded-[24px] border border-gray-100 hover:border-blue-100 cursor-pointer transition-all duration-500 flex flex-row sm:flex-col overflow-hidden shadow-sm hover:shadow-xl"
                   >
-                    {/* Top: Image */}
-                    <div className="relative aspect-square overflow-hidden bg-slate-50">
+                    {/* Left/Top: Image */}
+                    <div className="relative w-28 xs:w-32 sm:w-full sm:aspect-[4/3] self-stretch overflow-hidden bg-slate-50 flex-shrink-0">
                       <img 
                         src={toAssetUrl(svc.icon || svc.vendorPhoto || '')} 
                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
@@ -284,29 +284,29 @@ const ServicesPage = () => {
                           e.target.src = 'https://ui-avatars.com/api/?name=' + svc.title + '&background=f0f9ff&color=2563eb&bold=true';
                         }}
                       />
-                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg shadow-sm flex items-center gap-1">
-                        <FiStar className="fill-current w-2.5 h-2.5 text-orange-400" />
-                        <span className="text-[10px] font-black text-gray-900">4.8</span>
+                      <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-md px-1.5 py-0.5 rounded-md shadow-sm flex items-center gap-1">
+                        <FiStar className="fill-current w-2 h-2 text-orange-400" />
+                        <span className="text-[9px] font-bold text-gray-900">4.8</span>
                       </div>
                     </div>
                     
-                    {/* Bottom: Content */}
-                    <div className="p-4 flex flex-col flex-1">
-                      <div className="mb-2">
-                        <h3 className="text-sm font-black text-gray-900 leading-tight mb-1 uppercase truncate group-hover:text-blue-600 transition-colors">
+                    {/* Right/Bottom: Content */}
+                    <div className="p-3 sm:p-4 flex flex-col flex-1 min-w-0 justify-between self-stretch">
+                      <div className="mb-1 sm:mb-2">
+                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 leading-tight mb-0.5 sm:mb-1 uppercase truncate group-hover:text-blue-600 transition-colors">
                           {svc.title}
                         </h3>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
                           {categories.find(c => c._id === svc.categoryId || c.id === svc.categoryId)?.title || 'Service'}
                         </p>
                       </div>
 
-                      <p className="text-gray-500 text-[11px] leading-relaxed line-clamp-2 mb-4">
+                      <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed line-clamp-2 mb-2 sm:mb-4">
                         {svc.description || 'Professional service delivered right at your doorstep with fast & secure delivery.'}
                       </p>
 
-                      <div className="mt-auto flex items-center justify-between gap-2">
-                        <span className="text-lg font-black text-blue-600">₹{svc.basePrice}</span>
+                      <div className="flex items-center justify-between gap-2 mt-auto">
+                        <span className="text-base sm:text-lg font-bold text-blue-600">₹{svc.basePrice}</span>
                         
                         <button 
                           onClick={(e) => {
@@ -314,7 +314,7 @@ const ServicesPage = () => {
                             handleAddToCart(svc);
                           }}
                           disabled={addingToCart === (svc.id || svc._id)}
-                          className="h-9 px-4 bg-blue-600 text-white rounded-xl font-black text-[9px] uppercase tracking-widest shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all flex items-center gap-2"
+                          className="h-8 sm:h-9 px-3 sm:px-4 bg-blue-600 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all flex items-center gap-1.5"
                         >
                           {addingToCart === (svc.id || svc._id) ? '...' : (
                             <><FiPlusSquare className="w-3 h-3" /> Add</>
@@ -328,7 +328,7 @@ const ServicesPage = () => {
             ) : (
               <div className="py-20 text-center">
                 <FiTool className="w-16 h-16 text-gray-200 mx-auto mb-4" />
-                <h3 className="text-xl font-black text-gray-900 uppercase">No Services Found</h3>
+                <h3 className="text-xl font-bold text-gray-900 uppercase">No Services Found</h3>
                 <p className="text-gray-500 font-medium">Try another category or search term.</p>
               </div>
             )}
@@ -337,20 +337,20 @@ const ServicesPage = () => {
       </div>
 
       {/* Trust Badges */}
-      <div className="max-w-[1400px] mx-auto px-6 pb-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
           {[
             { icon: <FiShield />, label: "100% SECURE", sub: "Payments" },
             { icon: <FiHeadphones />, label: "24/7 SUPPORT", sub: "Happy customers" },
             { icon: <FiAward />, label: "VERIFIED", sub: "Trusted Experts" },
             { icon: <FiRotateCcw />, label: "EASY RETURNS", sub: "Hassle-free" },
           ].map((badge, idx) => (
-            <div key={idx} className="bg-white p-6 rounded-[24px] border border-gray-100 flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-4">
+            <div key={idx} className="bg-white p-4 sm:p-6 rounded-[18px] sm:rounded-[24px] border border-gray-100 flex flex-col items-center text-center">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-blue-50 rounded-xl sm:rounded-2xl flex items-center justify-center text-blue-600 mb-2 sm:mb-4">
                 {badge.icon}
               </div>
-              <h4 className="text-sm font-black text-gray-900 uppercase tracking-wider">{badge.label}</h4>
-              <p className="text-[10px] text-gray-400 font-bold uppercase mt-1">{badge.sub}</p>
+              <h4 className="text-[10px] sm:text-sm font-bold text-gray-900 uppercase tracking-wider">{badge.label}</h4>
+              <p className="text-[8px] sm:text-[10px] text-gray-400 font-bold uppercase mt-0.5 sm:mt-1">{badge.sub}</p>
             </div>
           ))}
         </div>

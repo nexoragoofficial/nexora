@@ -504,7 +504,7 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen pb-20 relative bg-transparent">
+    <div className="min-h-screen relative bg-transparent">
       {/* Refined Brand Mesh Gradient Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0"
@@ -554,9 +554,6 @@ const Home = () => {
               onSearchClick={() => navigate('/user/services')} 
               heroData={homeContent?.heroSection}
             />
-            <div className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-4 mb-2">
-              <OfferBannerSlider banners={offerBanners} />
-            </div>
           </>
         )}
 
@@ -596,6 +593,13 @@ const Home = () => {
                   onSeeAllClick={() => navigate('/user/services')}
                 />
               </motion.section>
+            )}
+
+            {/* Offer Banner Slider (Moved here to show after scrolling) */}
+            {!isSearchOpen && (
+              <div className="max-w-[1400px] mx-auto px-5 w-full mt-4 mb-10">
+                <OfferBannerSlider banners={offerBanners} />
+              </div>
             )}
 
             {/* Products Section */}
@@ -654,7 +658,7 @@ const Home = () => {
           </motion.section>
         )}
 
-        <main className="pt-4 lg:pt-6 space-y-4 lg:space-y-6 pb-20 lg:pb-24 max-w-[1400px] mx-auto w-full">
+        <main className="pt-4 lg:pt-6 space-y-4 lg:space-y-6 max-w-[1400px] mx-auto w-full">
               {/* All Categories Section (Optional/Secondary) */}
               {/* Categories Section removed as redundant with QuickLinks */}
 
@@ -761,8 +765,6 @@ const Home = () => {
 
 
 
-              {/* Footer Space */}
-              <div className="h-10" />
         </main>
       </motion.div>
 

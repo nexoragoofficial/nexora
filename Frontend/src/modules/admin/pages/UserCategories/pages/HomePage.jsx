@@ -712,7 +712,7 @@ const HomePage = () => {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Hero Image</label>
+                <label className="block text-sm font-bold text-gray-700 mb-1">Hero Image <span className="text-xs font-normal text-gray-400">(Recommended size: 1920x600 px)</span></label>
                 <div className="space-y-3">
                   <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
                     {heroForm.imageUrl && (

@@ -13,7 +13,9 @@ const serviceSchema = z.object({
   basePrice: z.number().min(0, "Price must be non-negative"),
   gstPercentage: z.number().min(0).max(100).default(18),
   discountPrice: z.number().optional(),
-  categoryId: z.string().min(1, "Category is required")
+  categoryId: z.string().min(1, "Category is required"),
+  iconUrl: z.string().nullable().optional(),
+  description: z.string().optional()
 });
 
 import { useOutletContext } from "react-router-dom";
@@ -208,8 +210,11 @@ const ServicesPage = () => {
     basePrice: "",
     gstPercentage: 18,
     discountPrice: "",
-    categoryId: ""
+    categoryId: "",
+    iconUrl: "",
+    description: ""
   });
+  const [uploadingIcon, setUploadingIcon] = useState(false);
   const [saving, setSaving] = useState(false);
 
   // Form Actions
@@ -229,7 +234,9 @@ const ServicesPage = () => {
       basePrice: "",
       gstPercentage: 18,
       discountPrice: "",
-      categoryId: defaultCat
+      categoryId: defaultCat,
+      iconUrl: "",
+      description: ""
     });
     setIsModalOpen(false);
   };
@@ -241,7 +248,9 @@ const ServicesPage = () => {
       basePrice: service.basePrice,
       gstPercentage: service.gstPercentage || 18,
       discountPrice: service.discountPrice || "",
-      categoryId: service.categoryId?._id || service.categoryId || ""
+      categoryId: service.categoryId?._id || service.categoryId || "",
+      iconUrl: service.iconUrl || "",
+      description: service.description || ""
     });
     setIsModalOpen(true);
   };
@@ -255,7 +264,9 @@ const ServicesPage = () => {
       basePrice: Number(form.basePrice),
       gstPercentage: Number(form.gstPercentage),
       discountPrice: form.discountPrice ? Number(form.discountPrice) : undefined,
-      categoryId: form.categoryId
+      categoryId: form.categoryId,
+      iconUrl: form.iconUrl || null,
+      description: form.description || ""
     };
 
     const result = serviceSchema.safeParse(data);
@@ -607,6 +618,58 @@ const ServicesPage = () => {
               onChange={e => setForm({ ...form, discountPrice: e.target.value })}
               placeholder="Leave empty if none"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-1">Service Icon / Image</label>
+            <div className="space-y-3">
+              <input
+                type="file"
+                accept="image/*"
+                disabled={uploadingIcon}
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setUploadingIcon(true);
+                    try {
+                      const folder = `Homster/services/icons`;
+                      const response = await serviceService.uploadImage(file, folder);
+                      if (response.success && response.imageUrl) {
+                        setForm((p) => ({ ...p, iconUrl: response.imageUrl }));
+                        toast.success("Image uploaded successfully");
+                      } else {
+                        toast.error("Upload failed");
+                      }
+                    } catch (error) {
+                      console.error('Service icon upload error:', error);
+                      toast.error("Failed to upload image");
+                    } finally {
+                      setUploadingIcon(false);
+                    }
+                  }
+                }}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all bg-white file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              {uploadingIcon && (
+                <div className="flex items-center gap-2 text-blue-600">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                  <span className="text-xs font-medium">Uploading...</span>
+                </div>
+              )}
+              {form.iconUrl && !uploadingIcon && (
+                <img src={toAssetUrl(form.iconUrl)} alt="Icon Preview" className="h-16 w-16 object-contain rounded border border-gray-200" />
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-1">Description</label>
+            <textarea
+              value={form.description}
+              onChange={e => setForm({ ...form, description: e.target.value })}
+              placeholder="Enter service description..."
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 h-20 outline-none resize-none"
             />
           </div>
 

@@ -3,11 +3,19 @@ import { motion } from 'framer-motion';
 import { FiCheckCircle, FiClock, FiTruck, FiArrowRight, FiGrid } from 'react-icons/fi';
 
 const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
+  const toAssetUrl = (url) => {
+    if (!url) return '';
+    const clean = url.replace('/api/upload', '/upload');
+    if (clean.startsWith('http')) return clean;
+    const base = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000').replace(/\/api$/, '');
+    return `${base}${clean.startsWith('/') ? '' : '/'}${clean}`;
+  };
+
   const title = heroData?.title || 'Everything You Need, Delivered to You.';
   const subtitle = heroData?.subtitle || 'One super app for all your daily needs.\nFast, reliable & secure delivery at your doorstep.';
   const primaryBtnText = heroData?.primaryBtnText || 'Get Started';
   const secondaryBtnText = heroData?.secondaryBtnText || 'Explore Services';
-  const heroImage = '/home page .jpeg';
+  const heroImage = heroData?.imageUrl ? toAssetUrl(heroData.imageUrl) : '/home page .jpeg';
 
   // Split title for styling - make "Delivered to You." in blue
   const renderTitle = () => {
@@ -21,12 +29,14 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden min-h-[450px] lg:min-h-[600px] flex items-center" style={{
-      backgroundImage: `url('${heroImage}')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center right',
-      backgroundRepeat: 'no-repeat'
-    }}>
+    <div className="relative w-full overflow-hidden min-h-[480px] lg:min-h-[600px] flex items-center bg-slate-50">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-no-repeat bg-[position:35%_center] md:bg-right"
+        style={{ backgroundImage: `url('${heroImage}')` }}
+      />
+      {/* Legibility Overlay Gradient */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/95 via-white/85 to-white/50 md:hidden" />
       {/* Subtle Cityscape Silhouette Effect */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'%3E%3Crect x='50' y='80' width='40' height='120' fill='%232563eb'/%3E%3Crect x='100' y='40' width='30' height='160' fill='%232563eb'/%3E%3Crect x='140' y='60' width='50' height='140' fill='%232563eb'/%3E%3Crect x='200' y='90' width='35' height='110' fill='%232563eb'/%3E%3Crect x='250' y='50' width='45' height='150' fill='%232563eb'/%3E%3C/svg%3E")`,
@@ -46,7 +56,7 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
             className="flex flex-col gap-4 lg:gap-6 lg:col-span-6"
           >
             <div className="space-y-3 lg:space-y-5">
-              <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] xl:text-6xl font-[900] text-gray-900 leading-[1.1] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] xl:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
                 {renderTitle()}
               </h1>
               <p className="text-sm lg:text-lg text-gray-500 font-medium max-w-md leading-relaxed whitespace-pre-line">
@@ -57,10 +67,10 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
             {/* Buttons */}
             <div className="flex flex-wrap gap-4 mt-2 lg:mt-4">
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(37, 99, 235, 0.3)' }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={onSearchClick}
-                className="px-7 py-3 lg:px-9 lg:py-3.5 text-white border-none rounded-full font-bold shadow-lg shadow-blue-500/25 flex items-center gap-2.5 text-sm lg:text-base transition-all duration-300"
+                className="px-7 py-3 lg:px-9 lg:py-3.5 text-white border-none rounded-full font-bold flex items-center gap-2.5 text-sm lg:text-base transition-all duration-300"
                 style={{ background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)' }}
               >
                 {primaryBtnText}
