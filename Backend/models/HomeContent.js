@@ -271,13 +271,16 @@ const homeContentSchema = new mongoose.Schema({
     subtitle: { type: String, default: 'One super app for all your daily needs. Fast, reliable & secure delivery at your doorstep.' },
     primaryBtnText: { type: String, default: 'Get Started' },
     secondaryBtnText: { type: String, default: 'Explore Services' },
-    imageUrl: { type: String, default: '' }
+    imageUrl: { type: String, default: '' },
+    mobileImageUrl: { type: String, default: '' }
   },
 
   // Site Identity
   siteIdentity: {
     brandName: { type: String, default: 'NEXORA GO' },
-    slogan: { type: String, default: 'Everything you need, one place' }
+    slogan: { type: String, default: 'Everything you need, one place' },
+    logoUrl: { type: String, default: '' },
+    brandLogoUrl: { type: String, default: '' }
   },
 
   // Stats Bar

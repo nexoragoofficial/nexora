@@ -58,7 +58,7 @@ const BottomNav = React.memo(() => {
                 initial={false}
                 animate={{
                   width: isActive ? 'auto' : '48px',
-                  backgroundColor: isActive ? '#0D463C' : 'transparent',
+                  backgroundColor: isActive ? themeColors.primary : 'transparent',
                 }}
                 className="flex items-center gap-2 px-4 h-12 rounded-full overflow-hidden"
               >
@@ -90,7 +90,8 @@ const BottomNav = React.memo(() => {
                   {activeTab === item.id && (
                     <motion.div
                       layoutId="active-dot"
-                      className="absolute -bottom-1 w-1 h-1 bg-teal-600 rounded-full"
+                      className="absolute -bottom-1 w-1 h-1 rounded-full"
+                      style={{ backgroundColor: themeColors.primary }}
                     />
                   )}
                 </AnimatePresence>

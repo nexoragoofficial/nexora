@@ -85,15 +85,16 @@ const Header = ({
   };
 
   return (
-    <header
-      className="sticky top-0 z-40 w-full bg-white"
-      style={{
-        borderBottom: '2px solid rgba(156, 163, 175, 0.3)',
-        borderBottomLeftRadius: '20px',
-        borderBottomRightRadius: '20px',
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)',
-      }}
-    >
+    <>
+      <header
+        className="fixed top-0 left-0 right-0 z-40 w-full bg-white"
+        style={{
+          borderBottom: '2px solid rgba(156, 163, 175, 0.3)',
+          borderBottomLeftRadius: '20px',
+          borderBottomRightRadius: '20px',
+          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)',
+        }}
+      >
       <div className="px-4 py-3 flex items-center justify-between">
         {/* Left: Back button or Logo */}
         <div className="flex items-center gap-3">
@@ -285,6 +286,9 @@ const Header = ({
         </div>
       </div>
     </header>
+      {/* Spacer to push down page content under fixed navbar */}
+      <div className="h-[76px] w-full shrink-0"></div>
+    </>
   );
 };
 

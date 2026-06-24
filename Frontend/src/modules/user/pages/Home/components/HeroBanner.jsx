@@ -1,13 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiCheckCircle, FiClock, FiTruck, FiArrowRight, FiGrid } from 'react-icons/fi';
+import { toAssetUrl } from '../../../../admin/pages/UserCategories/utils';
 
 const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
   const title = heroData?.title || 'Everything You Need, Delivered to You.';
   const subtitle = heroData?.subtitle || 'One super app for all your daily needs.\nFast, reliable & secure delivery at your doorstep.';
   const primaryBtnText = heroData?.primaryBtnText || 'Get Started';
   const secondaryBtnText = heroData?.secondaryBtnText || 'Explore Services';
-  const heroImage = '/home page .jpeg';
+  // Desktop image: from API, fallback to static file
+  const desktopImage = heroData?.imageUrl ? toAssetUrl(heroData.imageUrl) : '/home page .jpeg';
+  // Mobile image: from API, fallback to desktop image
+  const mobileImage = heroData?.mobileImageUrl ? toAssetUrl(heroData.mobileImageUrl) : desktopImage;
 
   // Split title for styling - make "Delivered to You." in blue
   const renderTitle = () => {
@@ -22,14 +26,21 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
 
   return (
     <div className="relative w-full overflow-visible lg:overflow-hidden min-h-[450px] lg:min-h-[600px] flex items-center">
-      {/* Background Image Layer - shows on all screens */}
+      {/* Background Image Layer */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Hero background" 
-          className="w-full h-full object-cover object-[70%_center] lg:object-right" 
+        {/* Mobile: uses mobileImage */}
+        <img
+          src={mobileImage}
+          alt="Hero background mobile"
+          className="lg:hidden w-full h-full object-cover object-[70%_center]"
         />
-        {/* Mobile gradient overlay: strong on left so text is readable, fades to transparent on right */}
+        {/* Desktop: uses desktopImage */}
+        <img
+          src={desktopImage}
+          alt="Hero background desktop"
+          className="hidden lg:block w-full h-full object-cover object-right"
+        />
+        {/* Mobile gradient overlay */}
         <div className="absolute inset-0 lg:hidden"
           style={{
             background: 'linear-gradient(to right, rgba(230,242,255,1) 0%, rgba(230,242,255,0.92) 45%, rgba(230,242,255,0.55) 65%, rgba(230,242,255,0.05) 100%)'
@@ -45,11 +56,11 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
         backgroundSize: 'auto 200px'
       }} />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 pt-6 lg:pt-16 pb-6 lg:pb-12 w-full">
-        {/* Mobile Layout: Text at top overlaps bg image, buttons+badges pinned to bottom */}
-        <div className="flex lg:hidden flex-col justify-between min-h-[420px] py-5 gap-4">
-          {/* TOP: Text content - left ~60% so scooter visible on right */}
-          <div className="flex flex-col gap-2 max-w-[60%]">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 pt-6 lg:pt-16 pb-6 lg:pb-12 w-full self-stretch">
+        {/* Mobile Layout */}
+        <div className="flex lg:hidden flex-col h-full min-h-[400px] py-5">
+          {/* TOP: Text content - left ~40% so background content is visible on right */}
+          <div className="flex flex-col gap-2 max-w-[40%] pt-5">
             <h1 className="text-[1.4rem] sm:text-2xl font-[900] text-gray-900 leading-[1.15] tracking-tight">
               {renderTitle()}
             </h1>
@@ -58,30 +69,37 @@ const HeroBanner = ({ banners = [], onSearchClick, heroData }) => {
             </p>
           </div>
 
-          {/* BOTTOM: Buttons + Badges */}
-          <div className="flex flex-col gap-2.5 w-full">
-            {/* Stacked Buttons */}
+          {/* Buttons Column directly under text */}
+          <div className="flex flex-col gap-2 w-[45%] mt-3">
+            {/* Get Started Button */}
             <motion.button
               whileTap={{ scale: 0.98 }}
               onClick={onSearchClick}
-              className="w-full py-3 text-white border-none rounded-full font-bold shadow-lg shadow-blue-500/20 flex items-center justify-center gap-1.5 text-sm transition-all duration-300"
+              className="w-full py-2 text-white border-none rounded-full font-bold shadow-lg shadow-blue-500/20 flex items-center justify-center gap-1 text-[10px] transition-all duration-300"
               style={{ background: '#2563eb' }}
             >
               {primaryBtnText}
-              <FiArrowRight className="w-4 h-4" />
+              <FiArrowRight className="w-3 h-3" />
             </motion.button>
 
+            {/* Explore Services Button */}
             <motion.button
               whileTap={{ scale: 0.98 }}
               onClick={onSearchClick}
-              className="w-full py-3 bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-200 rounded-full font-bold flex items-center justify-center gap-1.5 text-sm transition-all duration-300"
+              className="w-full py-2 bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-200 rounded-full font-bold flex items-center justify-center gap-1 text-[10px] transition-all duration-300"
             >
               {secondaryBtnText}
-              <FiGrid className="w-4 h-4" />
+              <FiGrid className="w-3 h-3" />
             </motion.button>
+          </div>
 
+          {/* SPACER - scooter image shows here */}
+          <div className="flex-1" />
+
+          {/* BOTTOM: Badges pinned to bottom */}
+          <div className="flex flex-col gap-2 w-full">
             {/* White Card Badges - overlaps into next section */}
-            <div className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 mt-3 relative z-20 mb-[-44px]">
+            <div className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 mt-3 relative z-20 mb-[-44px] translate-y-5">
               <div className="grid grid-cols-3 gap-2">
                 <div className="flex flex-col items-center text-center gap-1.5">
                   <div className="w-8 h-8 bg-blue-500 rounded-xl flex items-center justify-center text-white shadow-sm">

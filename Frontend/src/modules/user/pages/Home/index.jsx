@@ -527,26 +527,20 @@ const Home = () => {
         />
       </div>
 
+      <Header
+        location={address}
+        onLocationClick={handleLocationClick}
+        navLinks={homeContent?.navLinks}
+        siteIdentity={homeContent?.siteIdentity}
+        homeContent={homeContent}
+      />
+
       <motion.div
         className="relative z-10"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <motion.div
-          variants={itemVariants}
-          className="backdrop-blur-xl sticky top-0 z-50 border-b border-black/[0.03] transition-all duration-300"
-          style={{ backgroundColor: 'rgba(255, 255, 255, 0.4)' }}
-        >
-          <Header
-            location={address}
-            onLocationClick={handleLocationClick}
-            navLinks={homeContent?.navLinks}
-            siteIdentity={homeContent?.siteIdentity}
-            homeContent={homeContent}
-          />
-        </motion.div>
-
         {!isSearchOpen && (
           <>
             <HeroBanner

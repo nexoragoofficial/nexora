@@ -191,7 +191,7 @@ const HomePage = () => {
   const [navLinkForm, setNavLinkForm] = useState({ label: "", path: "" });
   const [editingNavLinkId, setEditingNavLinkId] = useState(null);
 
-  const [identityForm, setIdentityForm] = useState({ brandName: "", slogan: "" });
+  const [identityForm, setIdentityForm] = useState({ brandName: "", slogan: "", logoUrl: "", brandLogoUrl: "" });
 
   const [howItWorksForm, setHowItWorksForm] = useState({ title: "", subtitle: "" });
   const [isHowItWorksModalOpen, setIsHowItWorksModalOpen] = useState(false);
@@ -214,6 +214,8 @@ const HomePage = () => {
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadingHeroImage, setUploadingHeroImage] = useState(false);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [uploadingBrandLogo, setUploadingBrandLogo] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
 
   const categories = useMemo(() => {
@@ -280,7 +282,7 @@ const HomePage = () => {
             stats: addIds(hc.stats || []),
             appDownload: hc.appDownload || { title: "", subtitle: "", playStoreUrl: "", appStoreUrl: "", qrCodeUrl: "", imageUrl: "" },
             navLinks: addIds(hc.navLinks || []),
-            siteIdentity: hc.siteIdentity || { brandName: "NEXORA GO", slogan: "Everything you need, one place" },
+            siteIdentity: hc.siteIdentity || { brandName: "NEXORA GO", slogan: "Everything you need, one place", logoUrl: "", brandLogoUrl: "" },
             isHowItWorksVisible: hc.isHowItWorksVisible ?? true,
             howItWorks: hc.howItWorks || { title: "", subtitle: "", items: [] },
             isAboutUsVisible: hc.isAboutUsVisible ?? true,
@@ -626,24 +628,127 @@ const HomePage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-1">Brand Name</label>
-              <input
-                type="text"
-                value={identityForm.brandName || home?.siteIdentity?.brandName || ""}
-                onChange={(e) => setIdentityForm({ ...identityForm, brandName: e.target.value })}
-                placeholder="NEXORA GO"
-                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-              />
+              <label className="block text-sm font-bold text-gray-700 mb-1">
+                Circular Logo <span className="text-xs font-normal text-gray-400">(Shows inside header circle)</span>
+              </label>
+              <div className="space-y-3">
+                <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                  {(identityForm.logoUrl || home?.siteIdentity?.logoUrl) && (
+                    <div className="relative group">
+                      <img 
+                        src={toAssetUrl(identityForm.logoUrl || home?.siteIdentity?.logoUrl)} 
+                        alt="Circular Logo" 
+                        className="w-16 h-16 object-cover rounded-full border border-gray-200 shadow-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setIdentityForm(p => ({ ...p, logoUrl: '' }))}
+                        className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hover:bg-red-700 shadow-sm"
+                        title="Remove Logo"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      disabled={uploadingLogo}
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setUploadingLogo(true);
+                          try {
+                            const folder = `Nexora/Identity`;
+                            const response = await serviceService.uploadImage(file, folder);
+                            if (response.success && response.imageUrl) {
+                              setIdentityForm(p => ({ ...p, logoUrl: response.imageUrl }));
+                              toast.success("Circular logo uploaded!");
+                            } else {
+                              toast.error("Upload failed");
+                            }
+                          } catch (error) {
+                            console.error('Logo upload error:', error);
+                            toast.error("Failed to upload image");
+                          } finally {
+                            setUploadingLogo(false);
+                          }
+                        }
+                      }}
+                      className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                    />
+                    {uploadingLogo && (
+                      <div className="flex items-center gap-2 mt-2 text-blue-600">
+                        <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-600 border-t-transparent"></div>
+                        <span className="text-[10px] font-bold">Uploading...</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-1">Brand Slogan</label>
-              <input
-                type="text"
-                value={identityForm.slogan || home?.siteIdentity?.slogan || ""}
-                onChange={(e) => setIdentityForm({ ...identityForm, slogan: e.target.value })}
-                placeholder="Everything you need, one place"
-                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-              />
+              <label className="block text-sm font-bold text-gray-700 mb-1">
+                Square Brand Logo <span className="text-xs font-normal text-gray-400">(Shows as brand name logo)</span>
+              </label>
+              <div className="space-y-3">
+                <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                  {(identityForm.brandLogoUrl || home?.siteIdentity?.brandLogoUrl) && (
+                    <div className="relative group">
+                      <img 
+                        src={toAssetUrl(identityForm.brandLogoUrl || home?.siteIdentity?.brandLogoUrl)} 
+                        alt="Brand Logo" 
+                        className="h-16 w-auto object-contain border border-gray-200 shadow-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setIdentityForm(p => ({ ...p, brandLogoUrl: '' }))}
+                        className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hover:bg-red-700 shadow-sm"
+                        title="Remove Logo"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      disabled={uploadingBrandLogo}
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setUploadingBrandLogo(true);
+                          try {
+                            const folder = `Nexora/Identity`;
+                            const response = await serviceService.uploadImage(file, folder);
+                            if (response.success && response.imageUrl) {
+                              setIdentityForm(p => ({ ...p, brandLogoUrl: response.imageUrl }));
+                              toast.success("Brand logo uploaded!");
+                            } else {
+                              toast.error("Upload failed");
+                            }
+                          } catch (error) {
+                            console.error('Brand logo upload error:', error);
+                            toast.error("Failed to upload image");
+                          } finally {
+                            setUploadingBrandLogo(false);
+                          }
+                        }
+                      }}
+                      className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                    />
+                    {uploadingBrandLogo && (
+                      <div className="flex items-center gap-2 mt-2 text-blue-600">
+                        <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-600 border-t-transparent"></div>
+                        <span className="text-[10px] font-bold">Uploading...</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -716,11 +821,24 @@ const HomePage = () => {
                 <div className="space-y-3">
                   <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
                     {heroForm.imageUrl && (
-                      <img 
-                        src={toAssetUrl(heroForm.imageUrl)} 
-                        alt="Hero Preview" 
-                        className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm"
-                      />
+                      <div className="relative group">
+                        <img 
+                          src={toAssetUrl(heroForm.imageUrl)} 
+                          alt="Hero Preview" 
+                          className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setHeroForm(p => ({ ...p, imageUrl: '' }));
+                            patchHome({ heroSection: { ...heroForm, imageUrl: '' } });
+                          }}
+                          className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hover:bg-red-700 shadow-sm"
+                          title="Remove Image"
+                        >
+                          ×
+                        </button>
+                      </div>
                     )}
                     <div className="flex-1">
                       <input
@@ -757,28 +875,6 @@ const HomePage = () => {
                         </div>
                       )}
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={heroForm.imageUrl || home?.heroSection?.imageUrl || ""}
-                      onChange={(e) => setHeroForm({ ...heroForm, imageUrl: e.target.value })}
-                      placeholder="Or enter image URL manually..."
-                      className="flex-1 px-4 py-2 text-xs border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                    {(heroForm.imageUrl || home?.heroSection?.imageUrl) && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setHeroForm(p => ({ ...p, imageUrl: '' }));
-                          patchHome({ heroSection: { ...heroForm, imageUrl: '' } });
-                        }}
-                        className="flex-shrink-0 px-3 py-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-xl text-xs font-bold transition-colors"
-                        title="Remove hero image"
-                      >
-                        ✕ Remove
-                      </button>
-                    )}
                   </div>
                 </div>
               </div>
