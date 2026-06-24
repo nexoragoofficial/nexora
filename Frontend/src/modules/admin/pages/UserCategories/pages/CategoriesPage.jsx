@@ -93,6 +93,7 @@ const CategoriesPage = () => {
         homeBadge: "",
         hasSaleBadge: false,
         showOnHome: true,
+        offeringType: "SERVICE",
       });
       return;
     }

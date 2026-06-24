@@ -106,8 +106,10 @@ const UserRoutes = () => {
   // useAppNotifications('user');
 
   // Pages where BottomNav should be shown
-  const bottomNavPages = ['/user', '/user/', '/user/my-bookings', '/user/shop', '/user/cart', '/user/account'];
-  const shouldShowBottomNav = bottomNavPages.includes(location.pathname);
+  const bottomNavPages = ['/user', '/user/', '/user/my-bookings', '/user/shop', '/user/cart', '/user/account', '/user/services', '/user/products'];
+  const shouldShowBottomNav = bottomNavPages.includes(location.pathname) || 
+                              location.pathname.startsWith('/user/product/') || 
+                              location.pathname.startsWith('/user/service/');
 
   // Check if we hide the live booking card (e.g. if we are on the specific booking details or track page)
   const isBookingDetailsPage = location.pathname.match(/^\/user\/booking\/[a-zA-Z0-9]+(\/track)?$/);

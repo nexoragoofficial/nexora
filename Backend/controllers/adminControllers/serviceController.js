@@ -102,6 +102,10 @@ const createService = async (req, res) => {
       });
     }
 
+    // Lookup category to get offeringType
+    const category = await Category.findById(categoryId);
+    const offeringType = category ? (category.offeringType || 'SERVICE') : 'SERVICE';
+
     // Try to create service
     // If slug collision happens within same brand, mongoose throws duplicate key error
     const service = await Service.create({
@@ -112,7 +116,8 @@ const createService = async (req, res) => {
       gstPercentage: gstPercentage || 18,
       description,
       status: status || SERVICE_STATUS.ACTIVE,
-      iconUrl
+      iconUrl,
+      offeringType
     });
 
     res.status(201).json({
@@ -167,7 +172,13 @@ const updateService = async (req, res) => {
 
     // Update fields
     if (updates.title) service.title = updates.title;
-    if (updates.categoryId) service.categoryId = updates.categoryId;
+    if (updates.categoryId) {
+      service.categoryId = updates.categoryId;
+      const category = await Category.findById(updates.categoryId);
+      if (category) {
+        service.offeringType = category.offeringType || 'SERVICE';
+      }
+    }
     if (updates.basePrice !== undefined) service.basePrice = updates.basePrice;
     if (updates.gstPercentage !== undefined) service.gstPercentage = updates.gstPercentage;
     if (updates.description !== undefined) service.description = updates.description;

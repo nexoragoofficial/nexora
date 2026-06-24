@@ -562,7 +562,7 @@ const Home = () => {
 
 
         {/* Top-level Info Sections (Requested at Top) */}
-        <div className="space-y-4 lg:space-y-6 mt-4 lg:mt-6">
+        <div className="space-y-4 lg:space-y-6 mt-14 lg:mt-6">
           {homeContent?.isHowItWorksVisible !== false && homeContent?.howItWorks?.items?.length > 0 && (
             <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
               <div id="how-it-works">

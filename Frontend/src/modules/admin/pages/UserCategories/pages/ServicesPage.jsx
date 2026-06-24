@@ -23,6 +23,7 @@ import { useOutletContext } from "react-router-dom";
 const ServicesPage = () => {
   const { catalog, setCatalog } = useOutletContext();
   const [fetching, setFetching] = useState(false);
+  const [activeMode, setActiveMode] = useState("SERVICE"); // SERVICE or PRODUCT
   const servicesData = catalog.services || []; // Brands
   const categories = catalog.categories || [];
 
@@ -34,12 +35,21 @@ const ServicesPage = () => {
     // If no data, return empty
     if (!servicesData || servicesData.length === 0) return [];
 
-    // If filter is "all", show everything
-    if (selectedCategoryFilter === "all") return servicesData;
+    // Filter brands that belong to at least one category of the activeMode
+    const brandsInMode = servicesData.filter(brand => {
+      const brandCatIds = brand.categoryIds || (brand.categoryId ? [brand.categoryId] : []);
+      return brandCatIds.some(cid => {
+        const cat = categories.find(c => String(c.id) === String(cid));
+        return cat ? cat.offeringType === activeMode : (activeMode === 'SERVICE');
+      });
+    });
+
+    // If filter is "all", show everything in this mode
+    if (selectedCategoryFilter === "all") return brandsInMode;
 
     const filterId = String(selectedCategoryFilter);
 
-    return servicesData.filter(s => {
+    return brandsInMode.filter(s => {
       // 1. Check legacy categoryId
       let directId = s.categoryId?.$oid || s.categoryId;
       if (directId && typeof directId === 'object') {
@@ -60,7 +70,7 @@ const ServicesPage = () => {
 
       return false;
     });
-  }, [servicesData, selectedCategoryFilter]);
+  }, [servicesData, selectedCategoryFilter, activeMode, categories]);
 
   // Selected Brand State
   const [activeBrandId, setActiveBrandId] = useState(null);
@@ -139,7 +149,8 @@ const ServicesPage = () => {
           mappedCategories = categoriesRes.categories.map(cat => ({
             id: (cat.id || cat._id?.$oid || cat._id)?.toString() || "",
             title: cat.title,
-            slug: cat.slug
+            slug: cat.slug,
+            offeringType: cat.offeringType || "SERVICE"
           }));
         }
 
@@ -325,9 +336,16 @@ const ServicesPage = () => {
     }
   };
 
-  // Filtered Services List based on search AND Selected Category
+  // Filtered Services List based on search AND Selected Category AND activeMode
   const displayedServices = useMemo(() => {
     let result = brandServices;
+
+    // Filter by activeMode (PRODUCT vs SERVICE)
+    result = result.filter(s => {
+      const sCatId = s.categoryId?._id || s.categoryId;
+      const cat = categories.find(c => String(c.id) === String(sCatId));
+      return cat ? cat.offeringType === activeMode : (activeMode === 'SERVICE');
+    });
 
     // Filter by Category if selected
     if (selectedCategoryFilter !== "all" && selectedCategoryFilter) {
@@ -341,10 +359,49 @@ const ServicesPage = () => {
     if (!searchTerm) return result;
     const lower = searchTerm.toLowerCase();
     return result.filter(s => s.title.toLowerCase().includes(lower));
-  }, [brandServices, searchTerm, selectedCategoryFilter]);
+  }, [brandServices, searchTerm, selectedCategoryFilter, activeMode, categories]);
+
+  const isProductMode = activeMode === 'PRODUCT';
+  const entityLabel = isProductMode ? "Product" : "Service";
+  const imageLabel = isProductMode ? "Product Image" : "Service Icon / Image";
+  const titleLabel = isProductMode ? "Product Title" : "Service Title";
+  const priceLabel = isProductMode ? "Price" : "Base Price";
+
+  // Filter category options based on activeMode
+  const modeCategories = categories.filter(c => c.offeringType === activeMode);
 
   return (
     <div className="space-y-6">
+      {/* Mode Selector Tab Control */}
+      <div className="flex bg-gray-100 p-1.5 rounded-2xl mb-2 max-w-md shadow-inner">
+        <button
+          onClick={() => {
+            setActiveMode('SERVICE');
+            setSelectedCategoryFilter('all');
+          }}
+          className={`flex-1 py-2.5 px-6 rounded-xl font-bold text-sm transition-all duration-300 ${
+            activeMode === 'SERVICE'
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-200'
+              : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'
+          }`}
+        >
+          Manage Services
+        </button>
+        <button
+          onClick={() => {
+            setActiveMode('PRODUCT');
+            setSelectedCategoryFilter('all');
+          }}
+          className={`flex-1 py-2.5 px-6 rounded-xl font-bold text-sm transition-all duration-300 ${
+            activeMode === 'PRODUCT'
+              ? 'bg-purple-600 text-white shadow-md shadow-purple-200'
+              : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'
+          }`}
+        >
+          Manage Products
+        </button>
+      </div>
+
       <CardShell icon={FiPackage}>
         {/* Top: Category Filter Only */}
         <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
@@ -356,8 +413,8 @@ const ServicesPage = () => {
                 onChange={(e) => setSelectedCategoryFilter(e.target.value)}
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm font-medium text-gray-700 shadow-sm appearance-none cursor-pointer"
               >
-                <option value="all">All Categories</option>
-                {categories.map((cat) => (
+                <option value="all">All {isProductMode ? 'Product' : 'Service'} Categories</option>
+                {modeCategories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.title}
                   </option>
@@ -404,22 +461,22 @@ const ServicesPage = () => {
                       </div>
                       <div className="text-xs text-gray-400 truncate" title={
                         selectedCategoryFilter !== "all"
-                          ? categories.find(c => String(c.id) === String(selectedCategoryFilter))?.title
+                          ? modeCategories.find(c => String(c.id) === String(selectedCategoryFilter))?.title
                           : (brand.categoryIds && brand.categoryIds.length > 0
                             ? brand.categoryIds.map(cid => {
                               const cIdStr = cid?._id || cid; // Handle populated ID if any
-                              return categories.find(c => String(c.id) === String(cIdStr))?.title;
+                              return modeCategories.find(c => String(c.id) === String(cIdStr))?.title;
                             }).filter(Boolean).join(', ')
                             : 'Uncategorized')
                       }>
                         {selectedCategoryFilter !== "all"
-                          ? categories.find(c => String(c.id) === String(selectedCategoryFilter))?.title
+                          ? modeCategories.find(c => String(c.id) === String(selectedCategoryFilter))?.title
                           : (brand.categoryIds && brand.categoryIds.length > 0
                             ? brand.categoryIds.map(cid => {
                               const cIdStr = cid?._id || cid;
-                              return categories.find(c => String(c.id) === String(cIdStr))?.title;
+                              return modeCategories.find(c => String(c.id) === String(cIdStr))?.title;
                             }).filter(Boolean).join(', ')
-                            : ((categories.find(c => String(c.id) === String(brand.categoryId))?.title) || 'Uncategorized')
+                            : ((modeCategories.find(c => String(c.id) === String(brand.categoryId))?.title) || 'Uncategorized')
                           )
                         }
                       </div>
@@ -441,7 +498,7 @@ const ServicesPage = () => {
                     {activeBrand.iconUrl && <img src={toAssetUrl(activeBrand.iconUrl)} className="w-6 h-6 object-contain" />}
                     {activeBrand.title}
                   </h3>
-                  <p className="text-sm text-gray-500">Manage individual services for this brand</p>
+                  <p className="text-sm text-gray-500">Manage individual {entityLabel.toLowerCase()}s for this brand</p>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -449,7 +506,7 @@ const ServicesPage = () => {
                     <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
-                      placeholder="Search services..."
+                      placeholder={`Search ${entityLabel.toLowerCase()}s...`}
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
                       className="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 w-48"
@@ -463,7 +520,7 @@ const ServicesPage = () => {
                     className="px-4 py-2 bg-primary-600 text-white rounded-lg font-semibold shadow-md hover:bg-primary-700 transition-all flex items-center gap-2"
                   >
                     <FiPlus className="w-4 h-4" />
-                    Add Service
+                    Add {entityLabel}
                   </button>
                 </div>
               </div>
@@ -475,9 +532,9 @@ const ServicesPage = () => {
               ) : displayedServices.length === 0 ? (
                 <div className="text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
                   <FiPackage className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                  <p className="text-gray-500 font-bold">No services found for {activeBrand.title}</p>
+                  <p className="text-gray-500 font-bold">No {entityLabel.toLowerCase()}s found for {activeBrand.title}</p>
                   <button onClick={() => setIsModalOpen(true)} className="mt-2 text-primary-600 hover:underline text-sm font-semibold">
-                    Add the first service
+                    Add the first {entityLabel.toLowerCase()}
                   </button>
                 </div>
               ) : (
@@ -503,7 +560,7 @@ const ServicesPage = () => {
 
                         <div className="space-y-1 mt-2">
                           <div className="flex justify-between items-baseline">
-                            <span className="text-xs text-gray-500">Base Price</span>
+                            <span className="text-xs text-gray-500">{priceLabel}</span>
                             <span className="font-semibold text-gray-900">₹{service.basePrice}</span>
                           </div>
                           {service.discountPrice && (
@@ -530,7 +587,7 @@ const ServicesPage = () => {
             </CardShell>
           ) : (
             <div className="h-full flex flex-col items-center justify-center p-12 bg-gray-50 rounded-xl border border-gray-200 text-center text-gray-500">
-              <p>Select a brand from the left to manage its services.</p>
+              <p>Select a brand from the left to manage its {entityLabel.toLowerCase()}s.</p>
             </div>
           )}
         </div>
@@ -539,7 +596,7 @@ const ServicesPage = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={resetForm}
-        title={editingId ? "Edit Service" : "Add Service"}
+        title={editingId ? `Edit ${entityLabel}` : `Add ${entityLabel}`}
       >
         <form onSubmit={handleSave} className="space-y-4">
           <div>
@@ -556,7 +613,7 @@ const ServicesPage = () => {
                 if (activeBrand?.categoryId) uniqueIds.add(activeBrand.categoryId);
 
                 const validOptions = Array.from(uniqueIds).map(catId => {
-                  const category = categories.find(c => String(c.id) === String(catId));
+                  const category = modeCategories.find(c => String(c.id) === String(catId));
                   if (!category) return null;
                   return { id: catId, title: category.title };
                 }).filter(Boolean);
@@ -573,11 +630,11 @@ const ServicesPage = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Service Title</label>
+            <label className="block text-sm font-bold text-gray-700 mb-1">{titleLabel}</label>
             <input
               value={form.title}
               onChange={e => setForm({ ...form, title: e.target.value })}
-              placeholder="e.g. Full AC Service"
+              placeholder={isProductMode ? "e.g. AC Filter Product" : "e.g. Full AC Service"}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
               required
             />
@@ -585,7 +642,7 @@ const ServicesPage = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-1">Base Price (₹)</label>
+              <label className="block text-sm font-bold text-gray-700 mb-1">{priceLabel} (₹)</label>
               <input
                 type="number"
                 value={form.basePrice}
@@ -622,7 +679,7 @@ const ServicesPage = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Service Icon / Image</label>
+            <label className="block text-sm font-bold text-gray-700 mb-1">{imageLabel}</label>
             <div className="space-y-3">
               <input
                 type="file"
@@ -633,7 +690,7 @@ const ServicesPage = () => {
                   if (file) {
                     setUploadingIcon(true);
                     try {
-                      const folder = `Homster/services/icons`;
+                      const folder = isProductMode ? `Homster/products/images` : `Homster/services/icons`;
                       const response = await serviceService.uploadImage(file, folder);
                       if (response.success && response.imageUrl) {
                         setForm((p) => ({ ...p, iconUrl: response.imageUrl }));
@@ -642,7 +699,7 @@ const ServicesPage = () => {
                         toast.error("Upload failed");
                       }
                     } catch (error) {
-                      console.error('Service icon upload error:', error);
+                      console.error('Upload error:', error);
                       toast.error("Failed to upload image");
                     } finally {
                       setUploadingIcon(false);
@@ -658,7 +715,7 @@ const ServicesPage = () => {
                 </div>
               )}
               {form.iconUrl && !uploadingIcon && (
-                <img src={toAssetUrl(form.iconUrl)} alt="Icon Preview" className="h-16 w-16 object-contain rounded border border-gray-200" />
+                <img src={toAssetUrl(form.iconUrl)} alt="Preview" className="h-16 w-16 object-contain rounded border border-gray-200" />
               )}
             </div>
           </div>
@@ -668,7 +725,7 @@ const ServicesPage = () => {
             <textarea
               value={form.description}
               onChange={e => setForm({ ...form, description: e.target.value })}
-              placeholder="Enter service description..."
+              placeholder={isProductMode ? "Enter product description..." : "Enter service description..."}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 h-20 outline-none resize-none"
             />
           </div>
@@ -686,7 +743,7 @@ const ServicesPage = () => {
               disabled={saving}
               className="px-6 py-2 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition-colors shadow-sm disabled:opacity-50"
             >
-              {saving ? "Saving..." : "Save Service"}
+              {saving ? "Saving..." : `Save ${entityLabel}`}
             </button>
           </div>
         </form>

@@ -255,7 +255,7 @@ const ServicesPage = () => {
           {/* Grid */}
           <AnimatePresence mode="wait">
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 {[...Array(12)].map((_, i) => (
                   <div key={i} className="h-64 bg-slate-50 rounded-[20px] animate-pulse" />
                 ))}
@@ -265,17 +265,17 @@ const ServicesPage = () => {
                 key={activeTab}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
               >
                 {filteredItems.map((svc) => (
                   <motion.div
                     key={svc.id || svc._id}
                     whileHover={{ y: -5, shadow: "0 20px 40px -12px rgba(0, 0, 0, 0.1)" }}
                     onClick={() => navigate(`/user/service/${svc.id || svc._id}`)}
-                    className="group bg-white rounded-[24px] border border-gray-100 hover:border-blue-100 cursor-pointer transition-all duration-500 flex flex-row sm:flex-col overflow-hidden shadow-sm hover:shadow-xl"
+                    className="group bg-white rounded-[24px] border border-gray-100 hover:border-blue-100 cursor-pointer transition-all duration-500 flex flex-col overflow-hidden shadow-sm hover:shadow-xl"
                   >
                     {/* Left/Top: Image */}
-                    <div className="relative w-28 xs:w-32 sm:w-full sm:aspect-[4/3] self-stretch overflow-hidden bg-slate-50 flex-shrink-0">
+                    <div className="relative w-full aspect-[16/11] sm:aspect-[4/3] self-stretch overflow-hidden bg-slate-50 flex-shrink-0">
                       <img 
                         src={toAssetUrl(svc.icon || svc.vendorPhoto || '')} 
                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
@@ -291,8 +291,8 @@ const ServicesPage = () => {
                     </div>
                     
                     {/* Right/Bottom: Content */}
-                    <div className="p-3 sm:p-4 flex flex-col flex-1 min-w-0 justify-between self-stretch">
-                      <div className="mb-1 sm:mb-2">
+                    <div className="p-2.5 sm:p-4 flex flex-col flex-1 min-w-0 justify-between self-stretch">
+                      <div className="mb-0.5 sm:mb-2">
                         <h3 className="text-xs sm:text-sm font-bold text-gray-900 leading-tight mb-0.5 sm:mb-1 uppercase truncate group-hover:text-blue-600 transition-colors">
                           {svc.title}
                         </h3>
@@ -301,12 +301,12 @@ const ServicesPage = () => {
                         </p>
                       </div>
 
-                      <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed line-clamp-2 mb-2 sm:mb-4">
+                      <p className="text-gray-500 text-[9px] sm:text-[11px] leading-relaxed line-clamp-2 mb-1.5 sm:mb-4">
                         {svc.description || 'Professional service delivered right at your doorstep with fast & secure delivery.'}
                       </p>
 
                       <div className="flex items-center justify-between gap-2 mt-auto">
-                        <span className="text-base sm:text-lg font-bold text-blue-600">₹{svc.basePrice}</span>
+                        <span className="text-sm sm:text-lg font-bold text-blue-600">₹{svc.basePrice}</span>
                         
                         <button 
                           onClick={(e) => {
@@ -314,10 +314,10 @@ const ServicesPage = () => {
                             handleAddToCart(svc);
                           }}
                           disabled={addingToCart === (svc.id || svc._id)}
-                          className="h-8 sm:h-9 px-3 sm:px-4 bg-blue-600 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all flex items-center gap-1.5"
+                          className="h-7 sm:h-9 px-2 sm:px-4 bg-blue-600 text-white rounded-lg sm:rounded-xl font-bold text-[8px] sm:text-[9px] uppercase tracking-widest shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all flex items-center gap-1"
                         >
                           {addingToCart === (svc.id || svc._id) ? '...' : (
-                            <><FiPlusSquare className="w-3 h-3" /> Add</>
+                            <><FiPlusSquare className="w-3 h-3 hidden xs:block" /> Add</>
                           )}
                         </button>
                       </div>

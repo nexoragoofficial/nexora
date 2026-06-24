@@ -163,6 +163,7 @@ export const ensureIds = (catalog) => {
       imageUrl: c.imageUrl || "",
       status: c.status || "active",
       isPopular: Boolean(c.isPopular),
+      offeringType: c.offeringType || "SERVICE",
     })),
     services: (catalog.services || []).map((s) => ({
       id: s.id || `usvc-${Date.now()}-${Math.random().toString(16).slice(2)}`,
@@ -170,9 +171,9 @@ export const ensureIds = (catalog) => {
       slug: s.slug || slugify(s.title),
       iconUrl: s.iconUrl || "",
       badge: s.badge || "",
-      categoryId: s.categoryId || "",
+      categoryId: String(s.categoryId || "").startsWith("ucat-") ? "" : (s.categoryId || ""),
       // Preserve additional fields
-      categoryIds: s.categoryIds || [],
+      categoryIds: (s.categoryIds || []).filter(id => !String(id).startsWith("ucat-")),
       categoryTitles: s.categoryTitles || [],
       cityIds: s.cityIds || [],
       status: s.status || "active",
