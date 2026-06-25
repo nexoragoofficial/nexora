@@ -142,7 +142,7 @@ import { useOutletContext } from "react-router-dom";
 const HomePage = () => {
   const { catalog, setCatalog } = useOutletContext();
   const [isBannerModalOpen, setIsBannerModalOpen] = useState(false);
-  const [bannerForm, setBannerForm] = useState({ imageUrl: "", text: "", targetCategoryId: "", slug: "", targetServiceId: "", scrollToSection: "" });
+  const [bannerForm, setBannerForm] = useState({ imageUrl: "", mobileImageUrl: "", text: "", targetCategoryId: "", slug: "", targetServiceId: "", scrollToSection: "" });
   const [editingBannerId, setEditingBannerId] = useState(null);
 
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
@@ -181,7 +181,7 @@ const HomePage = () => {
   const [editingCardId, setEditingCardId] = useState(null);
 
   // New Nexora Go Sections
-  const [heroForm, setHeroForm] = useState({ title: "", subtitle: "", primaryBtnText: "", secondaryBtnText: "", imageUrl: "" });
+  const [heroForm, setHeroForm] = useState({ title: "", subtitle: "", primaryBtnText: "", secondaryBtnText: "", imageUrl: "", mobileImageUrl: "" });
   const [appDownloadForm, setAppDownloadForm] = useState({ title: "", subtitle: "", playStoreUrl: "", appStoreUrl: "", qrCodeUrl: "", imageUrl: "" });
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
   const [statsForm, setStatsForm] = useState({ label: "", value: "", icon: "FiActivity" });
@@ -213,7 +213,10 @@ const HomePage = () => {
   // Uploading state for all modals
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadingMobile, setUploadingMobile] = useState(false);
+  const [uploadProgressMobile, setUploadProgressMobile] = useState(0);
   const [uploadingHeroImage, setUploadingHeroImage] = useState(false);
+  const [uploadingMobileHeroImage, setUploadingMobileHeroImage] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [uploadingBrandLogo, setUploadingBrandLogo] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
@@ -278,7 +281,7 @@ const HomePage = () => {
             isStatsVisible: hc.isStatsVisible ?? true,
             isAppDownloadVisible: hc.isAppDownloadVisible ?? true,
             isOrderTrackingVisible: hc.isOrderTrackingVisible ?? true,
-            heroSection: hc.heroSection || { title: "", subtitle: "", primaryBtnText: "", secondaryBtnText: "", imageUrl: "" },
+            heroSection: hc.heroSection || { title: "", subtitle: "", primaryBtnText: "", secondaryBtnText: "", imageUrl: "", mobileImageUrl: "" },
             stats: addIds(hc.stats || []),
             appDownload: hc.appDownload || { title: "", subtitle: "", playStoreUrl: "", appStoreUrl: "", qrCodeUrl: "", imageUrl: "" },
             navLinks: addIds(hc.navLinks || []),
@@ -436,7 +439,7 @@ const HomePage = () => {
   // Banner handlers
   const resetBannerForm = () => {
     setEditingBannerId(null);
-    setBannerForm({ imageUrl: "", text: "", targetCategoryId: "", slug: "", targetServiceId: "", scrollToSection: "" });
+    setBannerForm({ imageUrl: "", mobileImageUrl: "", text: "", targetCategoryId: "", slug: "", targetServiceId: "", scrollToSection: "" });
     setIsBannerModalOpen(false);
   };
 
@@ -816,64 +819,129 @@ const HomePage = () => {
                   />
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Hero Image <span className="text-xs font-normal text-gray-400">(Recommended size: 1920x600 px)</span></label>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
-                    {heroForm.imageUrl && (
-                      <div className="relative group">
-                        <img 
-                          src={toAssetUrl(heroForm.imageUrl)} 
-                          alt="Hero Preview" 
-                          className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setHeroForm(p => ({ ...p, imageUrl: '' }));
-                            patchHome({ heroSection: { ...heroForm, imageUrl: '' } });
-                          }}
-                          className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hover:bg-red-700 shadow-sm"
-                          title="Remove Image"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    )}
-                    <div className="flex-1">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        disabled={uploadingHeroImage}
-                        onChange={async (e) => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            setUploadingHeroImage(true);
-                            try {
-                              const folder = `Nexora/Hero`;
-                              const response = await serviceService.uploadImage(file, folder);
-                              if (response.success && response.imageUrl) {
-                                setHeroForm(p => ({ ...p, imageUrl: response.imageUrl }));
-                                toast.success("Hero image uploaded!");
-                              } else {
-                                toast.error("Upload failed");
-                              }
-                            } catch (error) {
-                              console.error('Hero upload error:', error);
-                              toast.error("Failed to upload image");
-                            } finally {
-                              setUploadingHeroImage(false);
-                            }
-                          }
-                        }}
-                        className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
-                      />
-                      {uploadingHeroImage && (
-                        <div className="flex items-center gap-2 mt-2 text-blue-600">
-                          <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-600 border-t-transparent"></div>
-                          <span className="text-[10px] font-bold">Uploading...</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">Desktop Hero Image <span className="text-xs font-normal text-gray-400">(Recommended size: 1920x600 px)</span></label>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                      {heroForm.imageUrl && (
+                        <div className="relative group">
+                          <img 
+                            src={toAssetUrl(heroForm.imageUrl)} 
+                            alt="Hero Desktop Preview" 
+                            className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setHeroForm(p => ({ ...p, imageUrl: '' }));
+                              patchHome({ heroSection: { ...heroForm, imageUrl: '' } });
+                            }}
+                            className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hover:bg-red-700 shadow-sm"
+                            title="Remove Image"
+                          >
+                            ×
+                          </button>
                         </div>
                       )}
+                      <div className="flex-1">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          disabled={uploadingHeroImage}
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              setUploadingHeroImage(true);
+                              try {
+                                const folder = `Nexora/Hero`;
+                                const response = await serviceService.uploadImage(file, folder);
+                                if (response.success && response.imageUrl) {
+                                  setHeroForm(p => ({ ...p, imageUrl: response.imageUrl }));
+                                  toast.success("Desktop hero image uploaded!");
+                                } else {
+                                  toast.error("Upload failed");
+                                }
+                              } catch (error) {
+                                console.error('Hero upload error:', error);
+                                toast.error("Failed to upload image");
+                              } finally {
+                                setUploadingHeroImage(false);
+                              }
+                            }
+                          }}
+                          className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                        />
+                        {uploadingHeroImage && (
+                          <div className="flex items-center gap-2 mt-2 text-blue-600">
+                            <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-600 border-t-transparent"></div>
+                            <span className="text-[10px] font-bold">Uploading...</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">Mobile Hero Image <span className="text-xs font-normal text-gray-400">(Recommended size: 600x600 px or 9:16)</span></label>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                      {heroForm.mobileImageUrl && (
+                        <div className="relative group">
+                          <img 
+                            src={toAssetUrl(heroForm.mobileImageUrl)} 
+                            alt="Hero Mobile Preview" 
+                            className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setHeroForm(p => ({ ...p, mobileImageUrl: '' }));
+                              patchHome({ heroSection: { ...heroForm, mobileImageUrl: '' } });
+                            }}
+                            className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hover:bg-red-700 shadow-sm"
+                            title="Remove Image"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      )}
+                      <div className="flex-1">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          disabled={uploadingMobileHeroImage}
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              setUploadingMobileHeroImage(true);
+                              try {
+                                const folder = `Nexora/Hero/Mobile`;
+                                const response = await serviceService.uploadImage(file, folder);
+                                if (response.success && response.imageUrl) {
+                                  setHeroForm(p => ({ ...p, mobileImageUrl: response.imageUrl }));
+                                  toast.success("Mobile hero image uploaded!");
+                                } else {
+                                  toast.error("Upload failed");
+                                }
+                              } catch (error) {
+                                console.error('Mobile Hero upload error:', error);
+                                toast.error("Failed to upload image");
+                              } finally {
+                                setUploadingMobileHeroImage(false);
+                              }
+                            }
+                          }}
+                          className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                        />
+                        {uploadingMobileHeroImage && (
+                          <div className="flex items-center gap-2 mt-2 text-blue-600">
+                            <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-600 border-t-transparent"></div>
+                            <span className="text-[10px] font-bold">Uploading...</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1517,7 +1585,7 @@ const HomePage = () => {
             <button
               type="button"
               onClick={() => {
-                setBannerForm({ imageUrl: "", text: "", targetCategoryId: "", scrollToSection: "" });
+                setBannerForm({ imageUrl: "", mobileImageUrl: "", text: "", targetCategoryId: "", scrollToSection: "" });
                 setIsBannerModalOpen(true);
               }}
               className="px-4 py-2 rounded-xl text-white transition-all flex items-center gap-2 text-sm font-semibold shadow-md hover:shadow-lg relative z-10"
@@ -1543,7 +1611,7 @@ const HomePage = () => {
                 <thead>
                   <tr className="border-b-2 border-gray-200">
                     <th className="text-left py-2 px-3 text-sm font-bold text-gray-700 w-12">#</th>
-                    <th className="text-left py-2 px-3 text-sm font-bold text-gray-700 w-24">Image</th>
+                    <th className="text-left py-2 px-3 text-sm font-bold text-gray-700 w-36">Banners (Desktop/Mobile)</th>
                     <th className="text-left py-2 px-3 text-sm font-bold text-gray-700">Text</th>
                     <th className="text-left py-2 px-3 text-sm font-bold text-gray-700">Redirect</th>
                     <th className="text-left py-2 px-3 text-sm font-bold text-gray-700">Scroll To</th>
@@ -1555,13 +1623,28 @@ const HomePage = () => {
                     <tr key={b.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                       <td className="py-2.5 px-3 text-sm font-semibold text-gray-600">{idx + 1}</td>
                       <td className="py-2.5 px-3">
-                        {b.imageUrl ? (
-                          <img src={b.imageUrl} alt="Banner" className="h-14 w-14 object-cover rounded-lg border border-gray-200" />
-                        ) : (
-                          <div className="h-14 w-14 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
-                            <span className="text-[10px] text-gray-400">No img</span>
+                        <div className="flex gap-2">
+                          <div className="flex flex-col items-center">
+                            <span className="text-[8px] text-gray-400 font-bold uppercase">Desktop</span>
+                            {b.imageUrl ? (
+                              <img src={b.imageUrl} alt="Desktop" className="h-10 w-10 object-cover rounded-lg border border-gray-200" />
+                            ) : (
+                              <div className="h-10 w-10 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
+                                <span className="text-[9px] text-gray-400">No img</span>
+                              </div>
+                            )}
                           </div>
-                        )}
+                          <div className="flex flex-col items-center">
+                            <span className="text-[8px] text-gray-400 font-bold uppercase">Mobile</span>
+                            {b.mobileImageUrl ? (
+                              <img src={b.mobileImageUrl} alt="Mobile" className="h-10 w-10 object-cover rounded-lg border border-gray-200" />
+                            ) : (
+                              <div className="h-10 w-10 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
+                                <span className="text-[9px] text-gray-400">No img</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </td>
                       <td className="py-2.5 px-3">
                         <div className="text-sm text-gray-900">{b.text || "—"}</div>
@@ -2280,67 +2363,133 @@ const HomePage = () => {
         title={editingBannerId ? "Edit Banner" : "Add Banner"}
       >
         <div className="space-y-4">
-          <div>
-            <label className="block text-base font-bold text-gray-900 mb-2">Image</label>
-            <div className="space-y-3">
-              <input
-                type="file"
-                accept="image/*"
-                disabled={uploading}
-                onChange={async (e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    setUploading(true);
-                    setUploadProgress(0);
-                    try {
-                      const response = await serviceService.uploadImage(file, 'banners', (progress) => {
-                        setUploadProgress(progress);
-                      });
-                      if (response.success) {
-                        setBannerForm((p) => ({ ...p, imageUrl: response.imageUrl }));
-                        toast.success("Image uploaded!");
-                      }
-                    } catch (error) {
-                      console.error('Banner upload error:', error);
-                      const msg = error.response?.data?.message || error.message || "Failed to upload image";
-                      toast.error(msg);
-                    } finally {
-                      setUploading(false);
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-base font-bold text-gray-900 mb-2">Desktop Image (21:9)</label>
+              <div className="space-y-3">
+                <input
+                  type="file"
+                  accept="image/*"
+                  disabled={uploading}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setUploading(true);
                       setUploadProgress(0);
+                      try {
+                        const response = await serviceService.uploadImage(file, 'banners', (progress) => {
+                          setUploadProgress(progress);
+                        });
+                        if (response.success) {
+                          setBannerForm((p) => ({ ...p, imageUrl: response.imageUrl }));
+                          toast.success("Desktop image uploaded!");
+                        }
+                      } catch (error) {
+                        console.error('Banner upload error:', error);
+                        const msg = error.response?.data?.message || error.message || "Failed to upload image";
+                        toast.error(msg);
+                      } finally {
+                        setUploading(false);
+                        setUploadProgress(0);
+                      }
                     }
-                  }
-                }}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              />
-              {uploading && (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-blue-600 text-sm font-medium">
-                    <div className="flex items-center gap-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-                      Uploading...
+                  }}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 disabled:opacity-50 disabled:cursor-not-allowed text-xs"
+                />
+                {uploading && (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-blue-600 text-sm font-medium">
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                        Uploading...
+                      </div>
+                      <span>{uploadProgress}%</span>
                     </div>
-                    <span>{uploadProgress}%</span>
+                    <div className="w-full bg-blue-100 rounded-full h-1.5 overflow-hidden">
+                      <div
+                        className="bg-blue-600 h-full transition-all duration-300 ease-out"
+                        style={{ width: `${uploadProgress}%` }}
+                      ></div>
+                    </div>
                   </div>
-                  <div className="w-full bg-blue-100 rounded-full h-1.5 overflow-hidden">
-                    <div
-                      className="bg-blue-600 h-full transition-all duration-300 ease-out"
-                      style={{ width: `${uploadProgress}%` }}
-                    ></div>
+                )}
+                {bannerForm.imageUrl && !uploading && (
+                  <div className="relative inline-block group">
+                    <img src={bannerForm.imageUrl} alt="Preview" className="h-24 w-auto object-cover rounded-lg border border-gray-200 shadow-sm" />
+                    <button
+                      onClick={() => setBannerForm(p => ({ ...p, imageUrl: "" }))}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Remove image"
+                    >
+                      <FiTrash2 className="w-3 h-3" />
+                    </button>
                   </div>
-                </div>
-              )}
-              {bannerForm.imageUrl && !uploading && (
-                <div className="relative inline-block group">
-                  <img src={bannerForm.imageUrl} alt="Preview" className="h-24 w-auto object-cover rounded-lg border border-gray-200 shadow-sm" />
-                  <button
-                    onClick={() => setBannerForm(p => ({ ...p, imageUrl: "" }))}
-                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                    title="Remove image"
-                  >
-                    <FiTrash2 className="w-3 h-3" />
-                  </button>
-                </div>
-              )}
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-base font-bold text-gray-900 mb-2">Mobile Image (16:9 / 1:1)</label>
+              <div className="space-y-3">
+                <input
+                  type="file"
+                  accept="image/*"
+                  disabled={uploadingMobile}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setUploadingMobile(true);
+                      setUploadProgressMobile(0);
+                      try {
+                        const response = await serviceService.uploadImage(file, 'banners/mobile', (progress) => {
+                          setUploadProgressMobile(progress);
+                        });
+                        if (response.success) {
+                          setBannerForm((p) => ({ ...p, mobileImageUrl: response.imageUrl }));
+                          toast.success("Mobile image uploaded!");
+                        }
+                      } catch (error) {
+                        console.error('Banner mobile upload error:', error);
+                        const msg = error.response?.data?.message || error.message || "Failed to upload image";
+                        toast.error(msg);
+                      } finally {
+                        setUploadingMobile(false);
+                        setUploadProgressMobile(0);
+                      }
+                    }
+                  }}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 disabled:opacity-50 disabled:cursor-not-allowed text-xs"
+                />
+                {uploadingMobile && (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-blue-600 text-sm font-medium">
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                        Uploading...
+                      </div>
+                      <span>{uploadProgressMobile}%</span>
+                    </div>
+                    <div className="w-full bg-blue-100 rounded-full h-1.5 overflow-hidden">
+                      <div
+                        className="bg-blue-600 h-full transition-all duration-300 ease-out"
+                        style={{ width: `${uploadProgressMobile}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
+                {bannerForm.mobileImageUrl && !uploadingMobile && (
+                  <div className="relative inline-block group">
+                    <img src={bannerForm.mobileImageUrl} alt="Mobile Preview" className="h-24 w-auto object-cover rounded-lg border border-gray-200 shadow-sm" />
+                    <button
+                      onClick={() => setBannerForm(p => ({ ...p, mobileImageUrl: "" }))}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Remove image"
+                    >
+                      <FiTrash2 className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div>
@@ -2372,14 +2521,14 @@ const HomePage = () => {
           <div className="flex gap-3 pt-4">
             <button
               onClick={saveBanner}
-              disabled={uploading || isSyncing}
-              className={`flex-1 py-3.5 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg ${(uploading || isSyncing) ? 'opacity-50 cursor-not-allowed bg-gray-400' : ''}`}
-              style={{ backgroundColor: (uploading || isSyncing) ? '#cbd5e1' : '#2874F0' }}
+              disabled={uploading || uploadingMobile || isSyncing}
+              className={`flex-1 py-3.5 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg ${(uploading || uploadingMobile || isSyncing) ? 'opacity-50 cursor-not-allowed bg-gray-400' : ''}`}
+              style={{ backgroundColor: (uploading || uploadingMobile || isSyncing) ? '#cbd5e1' : '#2874F0' }}
             >
-              {(uploading || isSyncing) ? (
+              {(uploading || uploadingMobile || isSyncing) ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
               ) : <FiSave className="w-5 h-5" />}
-              {uploading ? "Uploading..." : isSyncing ? "Saving..." : (editingBannerId ? "Update Banner" : "Add Banner")}
+              {(uploading || uploadingMobile) ? "Uploading..." : isSyncing ? "Saving..." : (editingBannerId ? "Update Banner" : "Add Banner")}
             </button>
             <button
               onClick={resetBannerForm}

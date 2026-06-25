@@ -70,6 +70,7 @@ export const ensureIds = (catalog) => {
         ? catalog.home.banners.map((b) => ({
           id: b.id || `hbnr-${Date.now()}-${Math.random().toString(16).slice(2)}`,
           imageUrl: b.imageUrl || "",
+          mobileImageUrl: b.mobileImageUrl || "",
           text: b.text || "",
           targetCategoryId: b.targetCategoryId || getTargetCategoryIdFromRoute(b.routePath),
           slug: b.slug || "",

@@ -19,6 +19,10 @@ const homeContentSchema = new mongoose.Schema({
       type: String,
       default: ''
     },
+    mobileImageUrl: {
+      type: String,
+      default: ''
+    },
     text: {
       type: String,
       default: ''
