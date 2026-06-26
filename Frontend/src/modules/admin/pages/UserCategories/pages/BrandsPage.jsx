@@ -270,7 +270,8 @@ const BrandsPage = () => {
       reset();
     } catch (error) {
       console.error('Upsert brand error:', error);
-      toast.error(error.message || 'Failed to save brand.');
+      const serverMsg = error.response?.data?.message;
+      toast.error(serverMsg || error.message || 'Failed to save brand.');
     } finally {
       setLoading(false);
       isSubmitting.current = false;
@@ -292,7 +293,8 @@ const BrandsPage = () => {
       }
     } catch (error) {
       console.error('Delete brand error:', error);
-      toast.error(error.message || 'Failed to delete brand.');
+      const serverMsg = error.response?.data?.message;
+      toast.error(serverMsg || error.message || 'Failed to delete brand.');
     } finally {
       setLoading(false);
     }

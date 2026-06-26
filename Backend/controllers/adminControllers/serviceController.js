@@ -1,5 +1,6 @@
 const Service = require('../../models/UserService');
 const Brand = require('../../models/Brand');
+const Category = require('../../models/Category');
 const { validationResult } = require('express-validator');
 const { SERVICE_STATUS } = require('../../utils/constants');
 
