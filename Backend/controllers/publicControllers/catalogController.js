@@ -379,13 +379,14 @@ const getPublicServices = async (req, res) => {
         path: 'vendorId',
         select: 'name businessName profilePhoto isOnline availability'
       })
-      .populate('brandId', 'title iconUrl')
+      .populate('brandId', 'title iconUrl status')
       .populate('categoryId', 'title status')
       .sort({ createdAt: 1 })
       .lean();
 
     const finalServices = services.filter(svc => {
       if (svc.categoryId && svc.categoryId.status === 'inactive') return false;
+      if (svc.brandId && (svc.brandId.status === 'deleted' || svc.brandId.status === 'inactive')) return false;
       return true;
     });
 

@@ -219,6 +219,7 @@ const HomePage = () => {
   const [uploadingMobileHeroImage, setUploadingMobileHeroImage] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [uploadingBrandLogo, setUploadingBrandLogo] = useState(false);
+  const [uploadingAboutUsImage, setUploadingAboutUsImage] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
 
   const categories = useMemo(() => {
@@ -1057,13 +1058,63 @@ const HomePage = () => {
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Image URL</label>
-                <input
-                  type="text"
-                  value={aboutUsForm.imageUrl}
-                  onChange={(e) => setAboutUsForm({ ...aboutUsForm, imageUrl: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-                />
+                <label className="block text-sm font-bold text-gray-700 mb-1">Image</label>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                    {aboutUsForm.imageUrl && (
+                      <div className="relative group">
+                        <img 
+                          src={toAssetUrl(aboutUsForm.imageUrl)} 
+                          alt="About Us Image" 
+                          className="w-16 h-16 object-cover rounded-xl border border-gray-200 shadow-sm"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setAboutUsForm(p => ({ ...p, imageUrl: '' }))}
+                          className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hover:bg-red-700 shadow-sm"
+                          title="Remove Image"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        disabled={uploadingAboutUsImage}
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            setUploadingAboutUsImage(true);
+                            try {
+                              const folder = `Nexora/AboutUs`;
+                              const response = await serviceService.uploadImage(file, folder);
+                              if (response.success && response.imageUrl) {
+                                setAboutUsForm(p => ({ ...p, imageUrl: response.imageUrl }));
+                                toast.success("About Us image uploaded!");
+                              } else {
+                                toast.error("Upload failed");
+                              }
+                            } catch (error) {
+                              console.error('About Us image upload error:', error);
+                              toast.error("Failed to upload image");
+                            } finally {
+                              setUploadingAboutUsImage(false);
+                            }
+                          }
+                        }}
+                        className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                      />
+                      {uploadingAboutUsImage && (
+                        <div className="flex items-center gap-2 mt-2 text-blue-600">
+                          <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-600 border-t-transparent"></div>
+                          <span className="text-[10px] font-bold">Uploading...</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="pt-2">
                 <div className="flex items-center justify-between mb-2">
