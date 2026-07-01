@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fi';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const VendorSidebar = () => {
+const VendorSidebar = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -76,7 +76,7 @@ const VendorSidebar = () => {
   });
 
   return (
-    <aside className="w-20 lg:w-[278px] h-screen bg-slate-800 border-r border-slate-700/50 flex flex-col shrink-0 fixed top-0 left-0 transition-all duration-300 overflow-hidden z-50 shadow-2xl">
+    <aside className={`w-[278px] h-screen bg-slate-800 border-r border-slate-700/50 flex flex-col shrink-0 fixed top-0 transition-all duration-300 overflow-hidden z-50 shadow-2xl ${isOpen ? 'left-0' : '-left-[278px] lg:left-0'}`}>
       {/* Header Section */}
       <div className="px-4 py-6 border-b border-slate-700 bg-slate-900">
         <div className="flex items-center justify-between gap-3 px-2">
@@ -89,7 +89,7 @@ const VendorSidebar = () => {
             >
               <FiUser className="text-white text-xl" />
             </div>
-            <div className="flex-1 min-w-0 hidden lg:block">
+            <div className="flex-1 min-w-0">
               <h2 className="font-bold text-white text-sm tracking-tight truncate">
                 Verified Partner
               </h2>
@@ -109,6 +109,7 @@ const VendorSidebar = () => {
               key={item.id}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
+                setIsOpen?.(false);
                 if (item.id === 'logout') {
                   navigate('/vendor/login');
                 } else {
@@ -126,7 +127,7 @@ const VendorSidebar = () => {
               `}
             >
               <item.icon className={`text-lg flex-shrink-0 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-white' : 'text-gray-500'}`} />
-              <span className={`font-bold flex-1 text-[13px] hidden lg:block whitespace-nowrap ${isActive ? 'text-white' : ''}`}>
+              <span className={`font-bold flex-1 text-[13px] whitespace-nowrap ${isActive ? 'text-white' : ''}`}>
                 {item.label}
               </span>
               {Number(item.badge) > 0 && (

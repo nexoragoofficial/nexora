@@ -71,9 +71,9 @@ const ProductOrders = memo(() => {
   );
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* Header - White Style */}
-      <div className="bg-white p-5 rounded-2xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+    <div className="space-y-5 pb-12">
+      {/* Header - White Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-5 rounded-2xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
             Product Orders
@@ -88,14 +88,14 @@ const ProductOrders = memo(() => {
       </div>
 
       {/* Stats & Filters Row */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex items-center gap-1 bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm overflow-x-auto scrollbar-hide">
           {['all', 'confirmed', 'packed', 'shipped', 'delivered'].map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={`
-                px-6 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap
+                px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap
                 ${filter === f 
                   ? 'bg-[#2874F0] text-white shadow-lg shadow-blue-200' 
                   : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
@@ -114,7 +114,7 @@ const ProductOrders = memo(() => {
             placeholder="Search order ID or customer..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-gray-200 rounded-2xl py-3 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm"
+            className="w-full bg-white border border-gray-200 rounded-2xl py-2 pl-10 pr-4 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm"
           />
         </div>
       </div>

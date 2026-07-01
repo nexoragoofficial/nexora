@@ -140,9 +140,9 @@ const Notifications = () => {
   };
 
   return (
-    <div className="space-y-6 pb-12">
-      {/* Header - Admin Style */}
-      <div className="bg-white p-5 rounded-3xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+    <div className="space-y-5 pb-12">
+      {/* Header - Admin Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-5 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
             Alert Hub
@@ -181,7 +181,7 @@ const Notifications = () => {
               key={option.id}
               onClick={() => setFilter(option.id)}
               className={`
-                px-6 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap
+                px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap
                 ${filter === option.id
                   ? 'bg-[#2874F0] text-white shadow-lg shadow-blue-200' 
                   : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
@@ -194,12 +194,20 @@ const Notifications = () => {
         </div>
 
         {notifications.length > 0 && (
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3.5">
+            {notifications.some(n => !n.read) && (
+              <button
+                onClick={handleMarkAllRead}
+                className="md:hidden px-3 py-1.5 text-[9px] font-bold text-gray-600 bg-gray-50 border border-gray-100 rounded-lg uppercase tracking-widest hover:bg-gray-100 transition-all"
+              >
+                Clear All
+              </button>
+            )}
             <button
               onClick={handleClearAll}
-              className="px-4 py-2 text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-100 rounded-xl uppercase tracking-widest hover:bg-rose-100 transition-all flex items-center gap-2"
+              className="px-3 py-1.5 text-[9px] font-bold text-rose-600 bg-rose-50 border border-rose-100 rounded-lg uppercase tracking-widest hover:bg-rose-100 transition-all flex items-center gap-1.5"
             >
-              <FiTrash2 className="w-4 h-4" />
+              <FiTrash2 className="w-3.5 h-3.5" />
               Wipe Ledger
             </button>
           </div>
@@ -217,36 +225,36 @@ const Notifications = () => {
             <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">No pending alerts in the current matrix.</p>
           </div>
         ) : (
-          <div className="space-y-4 pb-12">
+          <div className="space-y-3.5 pb-12">
             {filteredNotifications.map((notif) => (
               <div
                 key={notif.id}
-                className={`bg-white rounded-[28px] p-6 border transition-all relative group hover:shadow-md ${
+                className={`bg-white rounded-2xl p-4 border transition-all relative group hover:shadow-md ${
                   !notif.read ? 'border-blue-200 bg-blue-50/10 shadow-sm' : 'border-gray-100'
                 }`}
               >
                 {!notif.read && (
-                  <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-600 rounded-l-[28px]" />
+                  <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-600 rounded-l-2xl" />
                 )}
                 
-                <div className="flex items-start gap-5">
+                <div className="flex items-start gap-3.5">
                   <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0 shadow-sm"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 shadow-sm"
                     style={{ backgroundColor: `${getNotificationColor(notif.type)}10` }}
                   >
                     {getNotificationIcon(notif.type)}
                   </div>
                   <div className="flex-1 pr-12 min-w-0">
-                    <div className="flex items-start justify-between mb-1">
-                      <h4 className={`font-bold text-gray-800 text-lg tracking-tight truncate ${!notif.read ? 'text-blue-700' : 'opacity-70'}`}>
+                    <div className="flex items-start justify-between mb-0.5">
+                      <h4 className={`font-bold text-gray-800 text-sm tracking-tight truncate ${!notif.read ? 'text-blue-700' : 'opacity-70'}`}>
                         {notif.title}
                       </h4>
                     </div>
-                    <p className="text-sm text-gray-500 font-medium leading-relaxed">
+                    <p className="text-xs text-gray-500 font-medium leading-relaxed">
                       {notif.message}
                     </p>
-                    <div className="flex items-center gap-4 mt-4">
-                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <div className="flex items-center gap-3.5 mt-2.5">
+                       <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">
                         {notif.time || (notif.createdAt && new Date(notif.createdAt).toLocaleString())}
                       </p>
                       
@@ -261,10 +269,10 @@ const Notifications = () => {
                               navigate('/vendor/wallet');
                             }
                           }}
-                          className="text-[10px] font-black text-blue-600 flex items-center gap-1.5 uppercase tracking-widest hover:underline"
+                          className="text-[8px] font-black text-blue-600 flex items-center gap-1 uppercase tracking-widest hover:underline"
                         >
                           Execute Review
-                          <FiCheck className="w-3 h-3" />
+                          <FiCheck className="w-2.5 h-2.5" />
                         </button>
                       )}
                     </div>
@@ -272,16 +280,16 @@ const Notifications = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute top-4 right-4 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                   {!notif.read && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleMarkAsRead(notif.id);
                       }}
-                      className="p-2.5 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-100 transition-all border border-blue-100"
+                      className="p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-all border border-blue-100"
                     >
-                      <FiCheck className="w-4 h-4" />
+                      <FiCheck className="w-3.5 h-3.5" />
                     </button>
                   )}
                   <button

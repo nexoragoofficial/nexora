@@ -147,8 +147,8 @@ const Profile = () => {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Header - White Style */}
-      <div className="bg-white p-6 rounded-3xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+      {/* Header - White Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-6 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-3xl font-black text-gray-900 tracking-tight leading-none">
             Identity Hub
@@ -166,50 +166,49 @@ const Profile = () => {
         </motion.button>
       </div>
 
-      {/* Profile Master Card (Lighter Blue Gradient) */}
+      {/* Profile Master Card (Horizontal & Extremely Compact - Light themed) */}
       <div 
-        className="rounded-[40px] p-10 shadow-xl shadow-blue-500/10 mb-8 relative overflow-hidden group"
-        style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)' }}
+        className="rounded-2xl p-4 border border-blue-100/70 shadow-sm mb-4 relative overflow-hidden group"
+        style={{ background: 'linear-gradient(135deg, #F0F5FF 0%, #E0EBFF 100%)' }}
       >
         {/* Decorative Elements */}
-        <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-1000" />
-        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl" />
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-100/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-1000" />
 
-        <div className="relative z-10 flex flex-col items-center text-center">
+        <div className="relative z-10 flex items-center gap-4">
           {/* Master Avatar */}
-          <div className="relative mb-6">
-            <div className="w-28 h-28 rounded-[36px] bg-white/20 border-4 border-white/30 overflow-hidden backdrop-blur-xl flex items-center justify-center shadow-2xl">
+          <div className="relative shrink-0">
+            <div className="w-16 h-16 rounded-xl bg-white/50 border border-blue-200/50 overflow-hidden flex items-center justify-center shadow-sm">
               {profile.photo ? (
                 <img src={profile.photo} alt={profile.name} className="w-full h-full object-cover" />
               ) : (
-                <div className="w-full h-full bg-blue-400/30 flex items-center justify-center">
-                  <FiUser className="w-12 h-12 text-white/50" />
+                <div className="w-full h-full bg-blue-100/30 flex items-center justify-center">
+                   <FiUser className="w-8 h-8 text-blue-500/50" />
                 </div>
               )}
             </div>
             <motion.button 
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/vendor/profile/details')}
-              className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-2xl shadow-xl flex items-center justify-center border border-blue-50 text-blue-600"
+              className="absolute -bottom-1 -right-1 w-6 h-6 bg-white rounded-md shadow flex items-center justify-center border border-blue-100 text-blue-600"
             >
-              <FiEdit2 className="w-4 h-4" />
+              <FiEdit2 className="w-2.5 h-2.5" />
             </motion.button>
           </div>
 
-          <div className="w-full">
-            <h2 className="text-3xl font-black text-white truncate mb-1 tracking-tight">{profile.name}</h2>
-            <p className="text-[10px] font-bold text-blue-50 uppercase tracking-widest mb-6">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg font-black text-gray-950 truncate tracking-tight leading-none">{profile.name}</h2>
+            <p className="text-[8px] font-bold text-blue-600/70 uppercase tracking-widest mt-1">
               {profile.businessName || 'Verified Elite Partner'}
             </p>
             
-            <div className="flex items-center justify-center gap-6">
-              <div className="px-6 py-3 bg-white/15 rounded-2xl backdrop-blur-md border border-white/10 flex items-center gap-3">
-                <FiStar className="w-4 h-4 text-amber-300 fill-amber-300" />
-                <span className="text-xs font-bold text-white tracking-wide">{profile.rating.toFixed(1)} Rating</span>
+            <div className="flex items-center gap-2 mt-2">
+              <div className="px-2 py-0.5 bg-white/70 rounded-md border border-blue-100 flex items-center gap-1">
+                <FiStar className="w-3 h-3 text-amber-500 fill-amber-500" />
+                <span className="text-[8px] font-black text-gray-800 tracking-wide">{profile.rating.toFixed(1)} Rating</span>
               </div>
-              <div className="px-6 py-3 bg-white/15 rounded-2xl backdrop-blur-md border border-white/10 flex items-center gap-3">
-                <FiBriefcase className="w-4 h-4 text-white/80" />
-                <span className="text-xs font-bold text-white tracking-wide">{profile.totalJobs} Deployments</span>
+              <div className="px-2 py-0.5 bg-white/70 rounded-md border border-blue-100 flex items-center gap-1">
+                <FiBriefcase className="w-3 h-3 text-blue-500" />
+                <span className="text-[8px] font-black text-gray-800 tracking-wide">{profile.totalJobs} Deployments</span>
               </div>
             </div>
           </div>
@@ -217,7 +216,7 @@ const Profile = () => {
       </div>
 
       {/* Dynamic Action Grid */}
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-3.5">
         {[
           { label: 'Financials', icon: FaWallet, path: '/vendor/wallet' },
           { label: 'Operations', icon: FiBriefcase, path: '/vendor/jobs' },
@@ -227,21 +226,21 @@ const Profile = () => {
             key={idx}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate(item.path)}
-            className="bg-white rounded-[32px] p-6 border border-gray-100 flex flex-col items-center text-center group hover:shadow-md transition-all shadow-sm"
+            className="bg-white rounded-2xl p-4 border border-gray-100 flex flex-col items-center text-center group hover:shadow-md transition-all shadow-sm"
           >
-            <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-4 group-hover:bg-blue-50 transition-all border border-gray-100">
-              <item.icon className="w-6 h-6 text-gray-400 group-hover:text-blue-600 transition-colors" />
+            <div className="w-11 h-11 rounded-xl bg-gray-50 flex items-center justify-center mb-2 group-hover:bg-blue-50 transition-all border border-gray-100 shrink-0">
+              <item.icon className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
             </div>
-            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest group-hover:text-gray-900 transition-colors">{item.label}</span>
+            <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest group-hover:text-gray-900 transition-colors">{item.label}</span>
           </motion.button>
         ))}
       </div>
 
       {/* Management Ecosystem */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between px-2 mb-4">
-          <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Partner Ecosystem</h3>
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+      <div className="space-y-3">
+        <div className="flex items-center justify-between px-1 mb-2">
+          <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Partner Ecosystem</h3>
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
         </div>
         
         {menuItems.map((item) => {
@@ -251,33 +250,33 @@ const Profile = () => {
               key={item.id}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate(item.path)}
-              className={`w-full flex items-center justify-between p-6 rounded-[28px] border transition-all duration-300 shadow-sm ${
+              className={`w-full flex items-center justify-between p-3 rounded-2xl border transition-all duration-300 shadow-sm ${
                 item.highlight 
-                ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-200' 
+                ? 'bg-blue-50/80 border-blue-100 text-blue-900 hover:shadow-md' 
                 : 'bg-white border-gray-100 text-gray-800 hover:shadow-md'
               }`}
             >
-              <div className="flex items-center gap-6">
-                <div className={`w-14 h-14 rounded-[20px] flex items-center justify-center shrink-0 border transition-all ${
-                  item.highlight ? 'bg-white/20 border-white/10' : 'bg-gray-50 border-gray-100'
+              <div className="flex items-center gap-4">
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+                  item.highlight ? 'bg-blue-600 border-blue-600' : 'bg-gray-50 border-gray-100'
                 }`}>
                   {item.customIcon ? (
-                    <span className={`text-lg font-black ${item.highlight ? 'text-white' : 'text-gray-400'}`}>{item.customIcon}</span>
+                    <span className={`text-base font-black ${item.highlight ? 'text-white' : 'text-gray-400'}`}>{item.customIcon}</span>
                   ) : (
-                    <IconComponent className={`w-6 h-6 ${item.highlight ? 'text-white' : 'text-gray-400'}`} />
+                    <IconComponent className={`w-5 h-5 ${item.highlight ? 'text-white' : 'text-gray-400'}`} />
                   )}
                 </div>
                 <div className="text-left">
-                  <span className="text-base font-bold tracking-tight block uppercase">{item.label}</span>
-                  <span className={`text-[10px] font-bold uppercase tracking-widest ${item.highlight ? 'text-white/60' : 'text-gray-400'}`}>
+                  <span className={`text-sm font-bold tracking-tight block uppercase ${item.highlight ? 'text-blue-950' : 'text-gray-800'}`}>{item.label}</span>
+                  <span className={`text-[8px] font-bold uppercase tracking-widest ${item.highlight ? 'text-blue-600/70' : 'text-gray-400'}`}>
                     Access Module
                   </span>
                 </div>
               </div>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-                item.highlight ? 'bg-white/10' : 'bg-gray-50'
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                item.highlight ? 'bg-blue-100/50' : 'bg-gray-50'
               }`}>
-                <FiChevronRight className={`w-5 h-5 ${item.highlight ? 'text-white' : 'text-gray-400'}`} />
+                <FiChevronRight className={`w-4 h-4 ${item.highlight ? 'text-blue-600' : 'text-gray-400'}`} />
               </div>
             </motion.button>
           );

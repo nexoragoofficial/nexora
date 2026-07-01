@@ -132,8 +132,8 @@ const ActiveJobs = memo(() => {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Header - Admin Style */}
-      <div className="bg-white p-5 rounded-2xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+      {/* Header - Admin Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-5 rounded-2xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
             Service Bookings
@@ -155,7 +155,7 @@ const ActiveJobs = memo(() => {
           placeholder="Search bookings, customers, or locations..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-white border border-gray-200 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all shadow-sm"
+          className="w-full bg-white border border-gray-200 rounded-2xl py-3 pl-12 pr-4 text-xs font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all shadow-sm"
         />
       </div>
 
@@ -172,7 +172,7 @@ const ActiveJobs = memo(() => {
             key={tab.id}
             onClick={() => setFilter(tab.id)}
             className={`
-              flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 whitespace-nowrap
+              flex items-center gap-2 px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 whitespace-nowrap
               ${filter === tab.id
                 ? "bg-[#2874F0] text-white shadow-lg shadow-blue-200 translate-y-[-1px]"
                 : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
@@ -210,20 +210,20 @@ const ActiveJobs = memo(() => {
             return (
               <div 
                 key={job.id} 
-                className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all group cursor-pointer flex flex-col justify-between h-full relative overflow-hidden"
+                className="bg-white border border-gray-100 rounded-2xl p-3.5 shadow-sm hover:shadow-md transition-all group cursor-pointer flex flex-col relative overflow-hidden h-fit"
                 onClick={() => navigate(`/vendor/booking/${job.id}`)}
               >
                 {/* Status Indicator Bar */}
                 <div className={`absolute top-0 left-0 w-full h-1 ${isPending ? 'bg-orange-400' : isCompleted ? 'bg-green-400' : 'bg-blue-500'}`} />
                 
                 <div>
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                      <FiBriefcase className="w-6 h-6" />
+                  <div className="flex items-start justify-between mb-2.5">
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                      <FiBriefcase className="w-4.5 h-4.5" />
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-black text-gray-800">₹{job.price}</p>
-                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg mt-1 inline-block ${
+                      <p className="text-sm font-black text-gray-800 tracking-tight leading-none text-right">₹{job.price}</p>
+                      <span className={`text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md mt-1 inline-block ${
                         isPending ? 'bg-orange-50 text-orange-600 border border-orange-100' : 
                         isCompleted ? 'bg-green-50 text-green-600 border border-green-100' : 
                         'bg-blue-50 text-blue-600 border border-blue-100'
@@ -233,51 +233,51 @@ const ActiveJobs = memo(() => {
                     </div>
                   </div>
 
-                  <h3 className="text-base font-bold text-gray-800 uppercase truncate mb-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xs font-bold text-gray-900 uppercase truncate mb-1 group-hover:text-blue-600 transition-colors tracking-tight">
                     {job.serviceType}
                   </h3>
                   
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-gray-500">
-                      <FiUser className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-semibold">{job.user.name}</span>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-gray-500">
+                      <FiUser className="w-3 h-3 shrink-0 text-gray-400" />
+                      <span className="text-[10px] font-semibold">{job.user.name}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-500">
-                      <FiMapPin className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-medium truncate">{job.location.address}</span>
+                    <div className="flex items-center gap-1.5 text-gray-500">
+                      <FiMapPin className="w-3 h-3 shrink-0 text-gray-400" />
+                      <span className="text-[10px] font-medium truncate">{job.location.address}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-500">
-                      <FiClock className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-bold text-gray-600 uppercase">{job.timeSlot.date} • {job.timeSlot.time}</span>
+                    <div className="flex items-center gap-1.5 text-gray-500">
+                      <FiClock className="w-3 h-3 shrink-0 text-gray-400" />
+                      <span className="text-[10px] font-black text-gray-600 uppercase">{job.timeSlot.date} • {job.timeSlot.time}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-100 flex flex-col gap-3">
+                <div className="mt-3 pt-3 border-t border-gray-100 flex flex-col gap-1.5">
                   {isPending ? (
                     <div className="flex gap-2">
                       <button
                         onClick={(e) => { e.stopPropagation(); handleAcceptJob(job.id); }}
-                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 rounded-xl shadow-lg shadow-emerald-100 transition-all active:scale-95"
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-lg shadow transition-all active:scale-95"
                       >
                         Accept
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleRejectJob(job.id); }}
-                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold py-3 rounded-xl transition-all active:scale-95"
+                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold py-2 rounded-lg transition-all active:scale-95"
                       >
                         Reject
                       </button>
                     </div>
                   ) : (
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-wider">
                           {job.assignedTo ? `Assigned: ${job.assignedTo.name}` : 'Ready for Assignment'}
                         </p>
                       </div>
-                      <FiChevronRight className="text-gray-300 group-hover:text-blue-500 transition-colors" />
+                      <FiChevronRight className="text-gray-300 group-hover:text-blue-500 transition-colors w-4 h-4" />
                     </div>
                   )}
                 </div>

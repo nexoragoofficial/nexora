@@ -191,6 +191,15 @@ app.use('/api/vendors/catalog', require('./routes/vendor-routes/catalog.routes')
 app.use('/api/vendors/training', require('./routes/vendor-routes/training.routes'));
 app.use('/api/vendors/support', require('./routes/vendor-routes/support.routes'));
 
+// Worker routes
+app.use('/api/workers/auth', require('./routes/worker-routes/auth.routes'));
+app.use('/api/workers', require('./routes/worker-routes/profile.routes'));
+app.use('/api/workers', require('./routes/worker-routes/dashboard.routes'));
+app.use('/api/workers', require('./routes/worker-routes/job.routes'));
+app.use('/api/workers/wallet', require('./routes/worker-routes/wallet.routes'));
+app.use('/api/workers/fcm-tokens', require('./routes/worker-routes/fcmToken.routes'));
+
+
 
 // Admin routes
 app.use('/api/admin/auth', require('./routes/admin-routes/adminAuth.routes'));

@@ -73,8 +73,8 @@ const Earnings = () => {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Header - White Style */}
-      <div className="bg-white p-5 rounded-3xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+      {/* Header - White Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-5 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
             Revenue Analytics
@@ -96,46 +96,46 @@ const Earnings = () => {
       )}
 
       {/* Top Totals Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-[24px] p-5 border border-gray-100 shadow-sm">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 bg-blue-50 rounded-xl text-blue-600">
-              <FiCalendar className="w-4 h-4" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="p-1.5 bg-blue-50 rounded-lg text-blue-600">
+              <FiCalendar className="w-3.5 h-3.5" />
             </div>
-            <p className="text-[9px] font-black uppercase tracking-widest text-gray-400">Today</p>
+            <p className="text-[8px] font-black uppercase tracking-wider text-gray-400">Today</p>
           </div>
-          <p className="text-2xl font-black text-gray-800">₹{totals.today.toLocaleString()}</p>
+          <p className="text-xl font-black text-gray-800 tracking-tight">₹{totals.today.toLocaleString()}</p>
         </div>
 
-        <div className="bg-white rounded-[24px] p-5 border border-gray-100 shadow-sm">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 bg-blue-50 rounded-xl text-blue-600">
-              <FiTrendingUp className="w-4 h-4" />
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="p-1.5 bg-blue-50 rounded-lg text-blue-600">
+              <FiTrendingUp className="w-3.5 h-3.5" />
             </div>
-            <p className="text-[9px] font-black uppercase tracking-widest text-gray-400">This Week</p>
+            <p className="text-[8px] font-black uppercase tracking-wider text-gray-400">This Week</p>
           </div>
-          <p className="text-2xl font-black text-gray-800">₹{totals.week.toLocaleString()}</p>
+          <p className="text-xl font-black text-gray-800 tracking-tight">₹{totals.week.toLocaleString()}</p>
         </div>
 
-        <div className="bg-white rounded-[24px] p-5 border border-gray-100 shadow-sm">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 bg-blue-50 rounded-xl text-blue-600">
-              <FiPieChart className="w-4 h-4" />
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="p-1.5 bg-blue-50 rounded-lg text-blue-600">
+              <FiPieChart className="w-3.5 h-3.5" />
             </div>
-            <p className="text-[9px] font-black uppercase tracking-widest text-gray-400">This Month</p>
+            <p className="text-[8px] font-black uppercase tracking-wider text-gray-400">This Month</p>
           </div>
-          <p className="text-2xl font-black text-gray-800">₹{totals.month.toLocaleString()}</p>
+          <p className="text-xl font-black text-gray-800 tracking-tight">₹{totals.month.toLocaleString()}</p>
         </div>
 
-        <div className="bg-[#2874F0] rounded-[24px] p-5 shadow-xl shadow-blue-100 relative overflow-hidden group">
+        <div className="bg-[#2874F0] rounded-2xl p-4 shadow-lg shadow-blue-100 relative overflow-hidden group flex flex-col justify-between">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)]" />
-          <div className="flex items-center gap-3 mb-3 relative z-10">
-            <div className="p-2 bg-white/20 rounded-xl backdrop-blur-sm">
-              <FaWallet className="w-4 h-4 text-white" />
+          <div className="flex items-center gap-2 mb-2 relative z-10">
+            <div className="p-1.5 bg-white/20 rounded-lg backdrop-blur-sm">
+              <FaWallet className="w-3.5 h-3.5 text-white" />
             </div>
-            <p className="text-[9px] font-black uppercase tracking-widest text-white/80">All Time</p>
+            <p className="text-[8px] font-black uppercase tracking-wider text-white/80">All Time</p>
           </div>
-          <p className="text-2xl font-black text-white relative z-10">₹{totals.total.toLocaleString()}</p>
+          <p className="text-xl font-black text-white relative z-10 tracking-tight">₹{totals.total.toLocaleString()}</p>
         </div>
       </div>
 

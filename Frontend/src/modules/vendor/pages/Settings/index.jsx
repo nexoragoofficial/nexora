@@ -96,9 +96,9 @@ const Settings = () => {
   };
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* Header - White Style */}
-      <div className="bg-white p-6 rounded-3xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+    <div className="space-y-5 pb-12">
+      {/* Header - White Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-6 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-3xl font-black text-gray-900 tracking-tight leading-none">
             System Configuration
@@ -112,49 +112,49 @@ const Settings = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Notification Settings */}
-        <div className="bg-white rounded-[32px] p-8 border border-gray-100 shadow-sm">
-          <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Alerts & Signals</h3>
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+          <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Alerts & Signals</h3>
 
-          <div className="space-y-8">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
                   <FiBell className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-800 tracking-tight uppercase text-sm">Push Notifications</p>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Real-time deployment alerts</p>
+                  <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Push Notifications</p>
+                  <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Real-time deployment alerts</p>
                 </div>
               </div>
               <button
                 onClick={() => handleToggle('notifications')}
-                className={`relative w-14 h-7 rounded-full transition-all duration-300 p-1 ${settings.notifications ? 'bg-blue-600 shadow-lg shadow-blue-200' : 'bg-gray-200'}`}
+                className={`relative w-11 h-6 rounded-full transition-all duration-300 p-0.5 shrink-0 ${settings.notifications ? 'bg-blue-600 shadow shadow-blue-200' : 'bg-gray-200'}`}
               >
                 <motion.span
-                  animate={{ x: settings.notifications ? 28 : 0 }}
+                  animate={{ x: settings.notifications ? 20 : 0 }}
                   className="block w-5 h-5 bg-white rounded-full shadow-sm"
                 />
               </button>
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0">
                   <FiVolume2 className="w-5 h-5 text-indigo-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-800 tracking-tight uppercase text-sm">Auditory Feedback</p>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Operational sound signals</p>
+                  <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Auditory Feedback</p>
+                  <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Operational sound signals</p>
                 </div>
               </div>
               <button
                 onClick={() => handleToggle('soundAlerts')}
-                className={`relative w-14 h-7 rounded-full transition-all duration-300 p-1 ${settings.soundAlerts ? 'bg-blue-600 shadow-lg shadow-blue-200' : 'bg-gray-200'}`}
+                className={`relative w-11 h-6 rounded-full transition-all duration-300 p-0.5 shrink-0 ${settings.soundAlerts ? 'bg-blue-600 shadow shadow-blue-200' : 'bg-gray-200'}`}
               >
                 <motion.span
-                  animate={{ x: settings.soundAlerts ? 28 : 0 }}
+                  animate={{ x: settings.soundAlerts ? 20 : 0 }}
                   className="block w-5 h-5 bg-white rounded-full shadow-sm"
                 />
               </button>
@@ -163,34 +163,34 @@ const Settings = () => {
         </div>
 
         {/* Quick Links */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <button
             onClick={() => navigate('/vendor/address-management')}
-            className="w-full bg-white rounded-[24px] p-6 border border-gray-100 flex items-center justify-between group hover:shadow-md transition-all shadow-sm"
+            className="w-full bg-white rounded-2xl p-4 border border-gray-100 flex items-center justify-between group hover:shadow-md transition-all shadow-sm"
           >
-            <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors shrink-0">
                 <FiMapPin className="w-5 h-5 text-gray-400 group-hover:text-blue-600" />
               </div>
               <div className="text-left">
-                <p className="font-bold text-gray-800 tracking-tight uppercase text-sm">Operational Base</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Manage business location</p>
+                <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Operational Base</p>
+                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Manage business location</p>
               </div>
             </div>
-            <FiChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
+            <FiChevronRight className="w-4 h-4 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
           </button>
 
           <button
             onClick={() => navigate('/vendor/support')}
-            className="w-full bg-white rounded-[24px] p-6 border border-gray-100 flex items-center justify-between group hover:shadow-md transition-all shadow-sm"
+            className="w-full bg-white rounded-2xl p-4 border border-gray-100 flex items-center justify-between group hover:shadow-md transition-all shadow-sm"
           >
-            <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-indigo-50 transition-colors shrink-0">
                 <FiInfo className="w-5 h-5 text-gray-400 group-hover:text-indigo-600" />
               </div>
               <div className="text-left">
-                <p className="font-bold text-gray-800 tracking-tight uppercase text-sm">Deployment Support</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Direct uplink to helpdesk</p>
+                <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Deployment Support</p>
+                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Direct uplink to helpdesk</p>
               </div>
             </div>
             <FiChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />

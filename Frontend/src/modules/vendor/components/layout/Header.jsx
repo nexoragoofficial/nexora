@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Logo from '../../../../components/common/Logo';
 import api from '../../../../services/api';
+import { toast } from 'react-hot-toast';
 
 const Header = memo(({
   title,
@@ -12,10 +13,58 @@ const Header = memo(({
   showBack = true,
   showSearch = false,
   showNotifications = false,
-  notificationCount = 0
+  notificationCount = 0,
+  onMenuClick
 }) => {
   const navigate = useNavigate();
   const [count, setCount] = useState(notificationCount);
+  const [isOnline, setIsOnline] = useState(() => {
+    try {
+      const data = localStorage.getItem('vendorData');
+      return data ? JSON.parse(data).isOnline : false;
+    } catch {
+      return false;
+    }
+  });
+  const [isToggling, setIsToggling] = useState(false);
+
+  useEffect(() => {
+    const handleStatusSync = (e) => {
+      if (e.detail && typeof e.detail.isOnline === 'boolean') {
+        setIsOnline(e.detail.isOnline);
+      }
+    };
+    window.addEventListener('vendorStatusChanged', handleStatusSync);
+    return () => window.removeEventListener('vendorStatusChanged', handleStatusSync);
+  }, []);
+
+  const handleToggleOnline = async () => {
+    try {
+      setIsToggling(true);
+      const newStatus = !isOnline;
+      const { vendorDashboardService } = await import('../../services/dashboardService');
+      const response = await vendorDashboardService.updateStatus(newStatus);
+      if (response.success) {
+        setIsOnline(newStatus);
+        
+        // Update localStorage
+        const data = localStorage.getItem('vendorData');
+        if (data) {
+          const parsed = JSON.parse(data);
+          parsed.isOnline = newStatus;
+          localStorage.setItem('vendorData', JSON.stringify(parsed));
+        }
+
+        toast.success(`You are now ${newStatus ? 'Online' : 'Offline'}`);
+        window.dispatchEvent(new CustomEvent('vendorStatusChanged', { detail: { isOnline: newStatus } }));
+      }
+    } catch (error) {
+      console.error('Failed to toggle status:', error);
+      toast.error('Failed to update status');
+    } finally {
+      setIsToggling(false);
+    }
+  };
 
   // Sync prop changes
   useEffect(() => {
@@ -70,6 +119,16 @@ const Header = memo(({
       <div className="flex items-center justify-between px-4 lg:px-6 py-5">
         {/* Left: Back button & Page Title */}
         <div className="flex items-center gap-4">
+          {!showBack && (
+            <button
+              onClick={onMenuClick}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-500 active:scale-95 lg:hidden"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          )}
           {showBack && (
             <button
               onClick={handleBack}
@@ -82,7 +141,7 @@ const Header = memo(({
             <h1 className="text-xl lg:text-2xl font-bold text-gray-800 leading-tight">
               {title || 'Vendor Hub'}
             </h1>
-            <p className="text-[10px] sm:text-xs text-gray-500 font-medium">
+            <p className="text-[10px] sm:text-xs text-gray-500 font-medium hidden sm:block">
               Manage your business operations and performance
             </p>
           </div>
@@ -90,6 +149,19 @@ const Header = memo(({
 
         {/* Right: Notifications */}
         <div className="flex items-center gap-4">
+          {/* Online Toggle Switch (Mobile Only) */}
+          <div className="flex items-center gap-2 lg:hidden px-1">
+            <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Online</span>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={handleToggleOnline}
+              disabled={isToggling}
+              className={`w-9 h-5 rounded-full relative transition-all duration-500 ${isOnline ? 'bg-emerald-100' : 'bg-gray-200'}`}
+            >
+              <div className={`absolute top-0.5 w-4 h-4 rounded transition-all duration-500 ${isOnline ? 'right-0.5 bg-emerald-500 shadow-sm' : 'left-0.5 bg-gray-400'}`} />
+            </motion.button>
+          </div>
+
           {showSearch && (
             <button
               className="p-2.5 hover:bg-gray-100 rounded-xl transition-colors text-gray-600"

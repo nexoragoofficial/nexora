@@ -180,10 +180,7 @@ const VendorLogin = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-4"
-      style={{
-        background: 'linear-gradient(135deg, #00a6a6 0%, #008a8a 50%, #006b6b 100%)'
-      }}
+      className="min-h-screen flex items-center justify-center px-4 bg-gray-50"
     >
       <div className="w-full max-w-md">
         {/* White Card */}
@@ -193,8 +190,8 @@ const VendorLogin = () => {
             <div
               className="w-16 h-16 rounded-xl flex items-center justify-center"
               style={{
-                background: `linear-gradient(135deg, ${themeColors.button} 0%, #008a8a 100%)`,
-                boxShadow: `0 4px 12px rgba(0, 166, 166, 0.3)`
+                background: `linear-gradient(135deg, ${themeColors.button} 0%, #1e40af 100%)`,
+                boxShadow: `0 4px 12px rgba(30, 58, 138, 0.3)`
               }}
             >
               {step === 'phone' ? (
@@ -238,7 +235,7 @@ const VendorLogin = () => {
                     className="w-full pl-24 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent text-gray-900 font-medium tracking-wider"
                     onFocus={(e) => {
                       e.target.style.borderColor = themeColors.button;
-                      e.target.style.boxShadow = `0 0 0 3px rgba(0, 166, 166, 0.1)`;
+                      e.target.style.boxShadow = `0 0 0 3px rgba(30, 58, 138, 0.1)`;
                     }}
                     onBlur={(e) => {
                       e.target.style.borderColor = '#d1d5db';
@@ -254,18 +251,18 @@ const VendorLogin = () => {
                 disabled={isLoading || !phoneNumber || phoneNumber.length < 10}
                 className="w-full py-3 rounded-xl text-white font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 style={{
-                  background: `linear-gradient(135deg, ${themeColors.button} 0%, #008a8a 100%)`,
-                  boxShadow: '0 4px 12px rgba(0, 166, 166, 0.3)'
+                  background: `linear-gradient(135deg, ${themeColors.button} 0%, #1e40af 100%)`,
+                  boxShadow: '0 4px 12px rgba(30, 58, 138, 0.3)'
                 }}
                 onMouseEnter={(e) => {
                   if (!e.currentTarget.disabled) {
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 166, 166, 0.4)';
+                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(30, 58, 138, 0.4)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 166, 166, 0.3)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(30, 58, 138, 0.3)';
                 }}
               >
                 {isLoading ? 'Sending...' : 'Initiate Login'}
@@ -344,23 +341,23 @@ const VendorLogin = () => {
                   </button>
                 </div>
 
-                <button
+                 <button
                   type="submit"
                   disabled={isLoading || otp.join('').length !== 6}
                   className="w-full py-3 rounded-xl text-white font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   style={{
-                    background: `linear-gradient(135deg, ${themeColors.button} 0%, #008a8a 100%)`,
-                    boxShadow: '0 4px 12px rgba(0, 166, 166, 0.3)'
+                    background: `linear-gradient(135deg, ${themeColors.button} 0%, #1e40af 100%)`,
+                    boxShadow: '0 4px 12px rgba(30, 58, 138, 0.3)'
                   }}
                   onMouseEnter={(e) => {
                     if (!e.currentTarget.disabled) {
                       e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 166, 166, 0.4)';
+                      e.currentTarget.style.boxShadow = '0 6px 16px rgba(30, 58, 138, 0.4)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 166, 166, 0.3)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(30, 58, 138, 0.3)';
                   }}
                 >
                   {isLoading ? 'Verifying...' : 'Authorize Portal'}

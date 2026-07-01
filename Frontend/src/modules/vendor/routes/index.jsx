@@ -121,6 +121,7 @@ const VendorRoutes = () => {
         </div>
       </VendorLayout>
       <CashLimitModal />
+      <GlobalBookingAlert />
     </ErrorBoundary>
   );
 };

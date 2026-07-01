@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import VendorSidebar from './VendorSidebar';
+import VendorBottomNav from './VendorBottomNav';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 
@@ -84,20 +85,32 @@ const VendorLayout = ({ children }) => {
 
   const hasPermission = checkPermission();
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="h-screen bg-gray-50 flex text-gray-900 overflow-hidden">
-      <VendorSidebar />
-      <div className="flex-1 flex flex-col ml-20 lg:ml-[278px] min-w-0 max-w-full transition-all duration-300 relative">
+      <VendorSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+      
+      {/* Mobile Sidebar Backdrop */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <div className="flex-1 flex flex-col ml-0 lg:ml-[278px] min-w-0 max-w-full transition-all duration-300 relative pb-16 lg:pb-0">
         {!isDetailPage && (
           <Header 
             title={currentTitle} 
             showBack={false} 
             showNotifications={true} 
+            onMenuClick={() => setSidebarOpen(true)}
           />
         )}
         
         <main className={`flex-1 overflow-y-auto overflow-x-hidden scrollbar-admin w-full min-w-0 ${!isDetailPage ? 'pt-24' : ''}`}>
-          <div className={`min-w-0 w-full ${location.pathname.includes('/vendor/booking/') ? '' : 'p-4 lg:p-6'}`}>
+          <div className={`min-w-0 w-full ${location.pathname.includes('/vendor/booking/') ? '' : 'p-3 lg:p-6'}`}>
             {hasPermission ? children : (
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm">
                 <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center mb-6">
@@ -121,6 +134,7 @@ const VendorLayout = ({ children }) => {
           </div>
         </main>
       </div>
+      <VendorBottomNav onMenuClick={() => setSidebarOpen(true)} />
     </div>
   );
 };

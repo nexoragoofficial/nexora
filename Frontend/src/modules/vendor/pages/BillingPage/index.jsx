@@ -9,6 +9,8 @@ import vendorWalletService from '../../../../services/vendorWalletService';
 import { getBookingById } from '../../services/bookingService';
 import { publicCatalogService } from '../../../../services/catalogService';
 import { OtpVerificationModal, ScanAndPayModal } from '../../components/common';
+import LogoLoader from '../../../../components/common/LogoLoader';
+import { motion } from 'framer-motion';
 
 const BillingPage = () => {
   const { id } = useParams();

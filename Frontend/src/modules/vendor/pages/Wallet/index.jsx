@@ -123,8 +123,8 @@ const Wallet = () => {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Header - White Style */}
-      <div className="bg-white p-5 rounded-3xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+      {/* Header - White Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-5 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
             Financial Ledger
@@ -138,44 +138,43 @@ const Wallet = () => {
         </div>
       </div>
 
-      {/* Available Earnings Card (Light Blue Gradient) */}
+      {/* Available Earnings Card (Light Blue Gradient - Compact) */}
       <div
-        className="rounded-3xl p-6 shadow-xl shadow-blue-500/10 relative overflow-hidden group"
+        className="rounded-2xl p-4 border border-blue-100/70 shadow-sm relative overflow-hidden group"
         style={{ 
-          background: `linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)` 
+          background: `linear-gradient(135deg, #F0F5FF 0%, #E0EBFF 100%)` 
         }}
       >
         {/* Decorative Elements */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-1000" />
-        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl" />
+        <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-100/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-1000" />
 
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-md border border-white/20">
-              <FiArrowUp className="w-4 h-4 text-white" />
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center border border-blue-200/50">
+              <FiArrowUp className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <p className="text-[9px] font-black text-blue-50 uppercase tracking-widest">Net Available Assets</p>
-              <p className="text-[8px] font-bold text-white/60 uppercase tracking-widest mt-0.5">Real-time sync active</p>
+              <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Net Available Assets</p>
+              <p className="text-[8px] font-bold text-gray-500/80 uppercase tracking-widest mt-0.5">Real-time sync active</p>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="flex flex-col gap-4">
             <div className="flex flex-col">
-              <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-black text-white tracking-tighter">₹{wallet.balance?.toFixed(2)}</span>
-                <span className="text-[10px] font-bold text-blue-100 uppercase tracking-widest mb-1">Available for payout</span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-3xl font-black text-gray-950 tracking-tighter">₹{wallet.balance?.toFixed(2)}</span>
+                <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mb-1">Available for payout</span>
               </div>
-              <div className="flex items-center gap-2 mt-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[9px] font-black text-blue-100 uppercase tracking-[0.15em]">Weekly Payout Cycle</span>
+              <div className="flex items-center gap-1.5 mt-1.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[8px] font-black text-blue-600/70 uppercase tracking-[0.15em]">Weekly Payout Cycle</span>
               </div>
             </div>
 
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/vendor/wallet/withdraw')}
-              className="bg-white text-blue-600 px-8 py-3 rounded-xl font-black text-[11px] uppercase tracking-widest shadow-xl shadow-blue-900/20 hover:bg-blue-50 transition-all active:scale-90"
+              className="w-full bg-blue-600 text-white py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest shadow hover:bg-blue-700 transition-all active:scale-95"
             >
               Withdraw
             </motion.button>
@@ -183,49 +182,51 @@ const Wallet = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-3.5">
         {/* Active Dues */}
-        <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm relative overflow-hidden group">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center border border-rose-100">
-              <FiArrowDown className="w-5 h-5 text-rose-500" />
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm relative overflow-hidden group flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2.5 mb-3.5">
+              <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center border border-rose-100 shrink-0">
+                <FiArrowDown className="w-4 h-4 text-rose-500" />
+              </div>
+              <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Active Dues</p>
             </div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Active Dues</p>
+            
+            <div className="flex flex-col mb-3.5">
+              <span className="text-xl font-black text-gray-900 tracking-tighter">₹{wallet.amountDue || 0}</span>
+              <span className="text-[8px] font-bold text-gray-400 uppercase mt-0.5">Current Liability</span>
+            </div>
           </div>
-          
-          <div className="flex flex-col">
-            <div className="flex items-baseline gap-2 mb-6">
-              <span className="text-3xl font-black text-gray-900 tracking-tighter">₹{wallet.amountDue || 0}</span>
-              <span className="text-[10px] font-bold text-gray-400 uppercase">Current Liability</span>
-            </div>
 
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/vendor/wallet/settle')}
-              className="w-full py-4 bg-red-600 text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-lg shadow-red-500/20 hover:bg-red-700 transition-all active:scale-95"
-            >
-              Clear Dues
-            </motion.button>
-          </div>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/vendor/wallet/settle')}
+            className="w-full py-2 bg-red-600 text-white rounded-lg font-black text-[9px] uppercase tracking-wider shadow hover:bg-red-700 transition-all active:scale-95"
+          >
+            Clear Dues
+          </motion.button>
         </div>
 
         {/* Total Settled */}
-        <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm group">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center border border-emerald-100">
-              <FiCheckCircle className="w-5 h-5 text-emerald-500" />
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm group flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2.5 mb-3.5">
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center border border-emerald-100 shrink-0">
+                <FiCheckCircle className="w-4 h-4 text-emerald-500" />
+              </div>
+              <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Total Settled</p>
             </div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Settled</p>
           </div>
           
           <div className="flex flex-col">
-            <div className="flex items-baseline gap-2 mb-6">
-              <span className="text-3xl font-black text-gray-900 tracking-tighter">₹{wallet.totalSettled || 0}</span>
+            <div className="flex items-baseline gap-2 mb-2">
+              <span className="text-xl font-black text-gray-900 tracking-tighter">₹{wallet.totalSettled || 0}</span>
             </div>
 
-            <div className="flex items-center gap-2 mt-auto">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Verified Portfolio</span>
+            <div className="flex items-center gap-1.5 mt-auto">
+              <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[8px] font-black text-gray-500 uppercase tracking-widest">Verified Portfolio</span>
             </div>
           </div>
         </div>

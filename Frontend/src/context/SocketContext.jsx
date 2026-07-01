@@ -328,6 +328,9 @@ export const SocketProvider = ({ children }) => {
           const stats = JSON.parse(localStorage.getItem('vendorStats') || '{}');
           stats.pendingAlerts = (stats.pendingAlerts || 0) + 1;
           localStorage.setItem('vendorStats', JSON.stringify(stats));
+
+          // Instantly trigger global booking alert modal
+          window.dispatchEvent(new CustomEvent('showDashboardBookingAlert', { detail: newJob }));
         }
 
         // Show interactive toast notification with buttons

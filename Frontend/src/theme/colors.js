@@ -38,10 +38,10 @@ const vendorTheme = {
   backgroundGradient: 'var(--bg-gradient)',
   gradient: brand.gradient,
   headerGradient: '#000000',
-  accentGradient: 'linear-gradient(135deg, #1A3C43 0%, #102A30 100%)',
-  button: '#0D9488',
-  primary: '#0D9488',
-  icon: '#0D9488',
+  accentGradient: 'linear-gradient(135deg, #1e3a8a 0%, #172554 100%)',
+  button: '#1e3a8a',
+  primary: '#1e3a8a',
+  icon: '#1e3a8a',
   brand: brand
 };
 
@@ -49,10 +49,10 @@ const vendorTheme = {
 const workerTheme = {
   backgroundGradient: 'var(--bg-gradient)',
   gradient: brand.gradient,
-  headerGradient: brand.premiumTeal,
-  button: brand.premiumTeal,
-  primary: brand.premiumTeal,
-  icon: brand.premiumTeal,
+  headerGradient: '#1e3a8a',
+  button: '#1e3a8a',
+  primary: '#1e3a8a',
+  icon: '#1e3a8a',
   brand: brand
 };
 

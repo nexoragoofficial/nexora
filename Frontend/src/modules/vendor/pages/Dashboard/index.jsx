@@ -256,16 +256,24 @@ const Dashboard = memo(() => {
       }
     };
 
+    const handleStatusSync = (e) => {
+      if (e.detail && typeof e.detail.isOnline === 'boolean') {
+        setIsOnline(e.detail.isOnline);
+      }
+    };
+
     window.addEventListener('vendorJobsUpdated', handleUpdate);
     window.addEventListener('vendorStatsUpdated', handleUpdate);
     window.addEventListener('showDashboardBookingAlert', handleShowAlert);
     window.addEventListener('removeVendorBooking', handleRemoveBooking);
+    window.addEventListener('vendorStatusChanged', handleStatusSync);
 
     return () => {
       window.removeEventListener('vendorJobsUpdated', handleUpdate);
       window.removeEventListener('vendorStatsUpdated', handleUpdate);
       window.removeEventListener('showDashboardBookingAlert', handleShowAlert);
       window.removeEventListener('removeVendorBooking', handleRemoveBooking);
+      window.removeEventListener('vendorStatusChanged', handleStatusSync);
     };
   }, [loadDashboardData]);
 

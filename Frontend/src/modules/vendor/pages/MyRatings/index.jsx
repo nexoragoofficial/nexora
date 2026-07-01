@@ -75,9 +75,9 @@ const MyRatings = () => {
   }
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* Header - White Style */}
-      <div className="bg-white p-5 rounded-2xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+    <div className="space-y-5 pb-12">
+      {/* Header - White Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-5 rounded-2xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
             Reputation Hub
@@ -93,27 +93,27 @@ const MyRatings = () => {
 
       {/* Overall Rating Stats */}
       {stats && (
-        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm relative overflow-hidden group">
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-[80px] -mr-32 -mt-32" />
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative z-10">
-            <div className="md:col-span-2 flex flex-col items-center justify-center md:border-r border-gray-100">
-              <h2 className="text-5xl font-black text-gray-900 mb-2 tracking-tighter">
+          <div className="flex flex-col md:grid md:grid-cols-5 gap-4 relative z-10">
+            <div className="md:col-span-2 flex flex-col items-center justify-center md:border-r border-gray-100 py-1">
+              <h2 className="text-3xl font-black text-gray-900 mb-1 tracking-tighter">
                 {stats.averageRating?.toFixed(1) || '0.0'}
               </h2>
-              <div className="flex gap-1.5 mb-3">
+              <div className="flex gap-1 mb-1.5">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <FiStar
                     key={s}
-                    className={`w-4 h-4 ${s <= Math.round(stats.averageRating) ? 'text-amber-400 fill-amber-400' : 'text-gray-200'}`}
+                    className={`w-3.5 h-3.5 ${s <= Math.round(stats.averageRating) ? 'text-amber-400 fill-amber-400' : 'text-gray-200'}`}
                   />
                 ))}
               </div>
-              <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+              <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">
                 {stats.totalReviews} Operational Audits
               </p>
             </div>
-            <div className="md:col-span-3 space-y-3 py-2">
+            <div className="md:col-span-3 space-y-1.5 py-1">
               <RatingBar star={5} count={stats.star5} total={stats.totalReviews} />
               <RatingBar star={4} count={stats.star4} total={stats.totalReviews} />
               <RatingBar star={3} count={stats.star3} total={stats.totalReviews} />
@@ -125,49 +125,49 @@ const MyRatings = () => {
       )}
 
       {/* Reviews List */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         <div className="flex items-center justify-between px-1">
-          <h3 className="text-base font-bold text-gray-800 uppercase tracking-widest">Customer Feedback</h3>
-          <button className="w-10 h-10 bg-white rounded-xl border border-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 transition-colors shadow-sm">
-            <FiFilter className="w-4 h-4" />
+          <h3 className="text-xs font-bold text-gray-800 uppercase tracking-widest">Customer Feedback</h3>
+          <button className="w-8 h-8 bg-white rounded-lg border border-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 transition-colors shadow-sm">
+            <FiFilter className="w-3.5 h-3.5" />
           </button>
         </div>
 
         {ratings.length > 0 ? (
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-4">
             {ratings.map((rating, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex flex-col md:flex-row justify-between items-start gap-4">
-                  <div className="flex gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center overflow-hidden border border-gray-100 shrink-0 shadow-inner">
+              <div key={idx} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-3">
+                  <div className="flex gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center overflow-hidden border border-gray-100 shrink-0 shadow-inner">
                       {rating.userId?.profilePhoto ? (
                         <img src={rating.userId.profilePhoto} alt={rating.userId.name} className="w-full h-full object-cover" />
                       ) : (
-                        <FiUser className="w-6 h-6 text-gray-300" />
+                        <FiUser className="w-5 h-5 text-gray-300" />
                       )}
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-800 text-base tracking-tight uppercase">{rating.userId?.name || 'Authorized Client'}</h4>
-                      <div className="flex items-center gap-2 mt-1">
+                      <h4 className="font-bold text-gray-800 text-xs tracking-tight uppercase">{rating.userId?.name || 'Authorized Client'}</h4>
+                      <div className="flex items-center gap-1.5 mt-0.5">
                         <div className="flex gap-0.5">
                           {[1, 2, 3, 4, 5].map((s) => (
                             <FiStar
                               key={s}
-                              className={`w-3 h-3 ${s <= rating.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-100'}`}
+                              className={`w-2.5 h-2.5 ${s <= rating.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-100'}`}
                             />
                           ))}
                         </div>
-                        <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{formatDate(rating.reviewedAt)}</span>
+                        <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{formatDate(rating.reviewedAt)}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100">
-                    <span className="text-[9px] font-bold text-blue-600 uppercase tracking-widest">{rating.serviceId?.title || rating.serviceName}</span>
+                  <div className="bg-blue-50 px-2 py-1 rounded-md border border-blue-100">
+                    <span className="text-[8px] font-bold text-blue-600 uppercase tracking-widest">{rating.serviceId?.title || rating.serviceName}</span>
                   </div>
                 </div>
 
                 {rating.review && (
-                  <p className="text-gray-600 text-[13px] leading-relaxed font-medium mt-4 pl-4 border-l-2 border-blue-600/20 italic">
+                  <p className="text-gray-600 text-xs leading-relaxed font-medium mt-3 pl-3 border-l-2 border-blue-600/20 italic">
                     "{rating.review}"
                   </p>
                 )}

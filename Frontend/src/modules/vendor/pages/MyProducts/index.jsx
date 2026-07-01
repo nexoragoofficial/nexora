@@ -146,9 +146,9 @@ const MyProducts = () => {
   };
 
   return (
-    <div className="space-y-8 pb-20">
-      {/* Header - White Style */}
-      <div className="bg-white p-6 rounded-3xl shadow-sm flex flex-col md:flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
+    <div className="space-y-5 pb-20">
+      {/* Header - White Style - Hidden on Mobile */}
+      <div className="hidden md:flex bg-white p-6 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
           <h2 className="text-3xl font-black text-gray-900 tracking-tight leading-none uppercase">
             Product Inventory
@@ -168,31 +168,42 @@ const MyProducts = () => {
         </div>
       </div>
 
+      {/* Mobile Add Category Button */}
+      <div className="flex md:hidden px-1 pb-1">
+        <button 
+          onClick={() => navigate('/vendor/add-custom-content?type=PRODUCT')}
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#2874F0] text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all"
+        >
+          <FiPlus className="w-4 h-4" />
+          New Category
+        </button>
+      </div>
+
       {/* Main Content */}
-      <div className="space-y-8">
+      <div className="space-y-6">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 gap-4">
             <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Syncing Inventory...</p>
           </div>
         ) : categories.length === 0 ? (
-          <div className="bg-white rounded-3xl p-20 text-center border border-dashed border-gray-200">
-             <FiBox className="w-16 h-16 text-gray-100 mx-auto mb-4" />
-             <h3 className="text-xl font-black text-gray-800 uppercase">Empty Catalog</h3>
-             <p className="text-sm text-gray-400 mt-2">Create a category to start adding products</p>
+          <div className="bg-white rounded-2xl p-12 text-center border border-dashed border-gray-200">
+             <FiBox className="w-12 h-12 text-gray-200 mx-auto mb-4 animate-bounce" />
+             <h3 className="text-sm font-bold text-gray-800 uppercase">Empty Catalog</h3>
+             <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Create a category to start adding products</p>
           </div>
         ) : (
           categories.map(cat => (
-            <div key={cat._id} className="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden transition-all hover:shadow-md">
+            <div key={cat._id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all hover:shadow-md">
               {/* Category Header with Inline Add */}
-              <div className="bg-gray-50/50 px-8 py-6 border-b border-gray-100">
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center overflow-hidden shadow-sm">
+              <div className="bg-gray-50/50 px-4 py-4 border-b border-gray-100">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-white border border-gray-100 flex items-center justify-center overflow-hidden shadow-sm shrink-0">
                       {cat.imageUrl ? (
                         <img src={cat.imageUrl} className="w-full h-full object-cover" alt="" />
                       ) : (
-                        <FiPackage className="text-gray-400 w-6 h-6" />
+                        <FiPackage className="text-gray-400 w-5 h-5" />
                       )}
                     </div>
                     <div>
@@ -202,20 +213,20 @@ const MyProducts = () => {
                             type="text"
                             value={editTitle}
                             onChange={(e) => setEditTitle(e.target.value)}
-                            className="px-3 py-1 bg-white border border-blue-500/30 rounded-lg text-sm font-bold text-gray-800 focus:outline-none"
+                            className="px-2.5 py-1 bg-white border border-blue-500/30 rounded-lg text-xs font-bold text-gray-800 focus:outline-none"
                             autoFocus
                             onKeyDown={(e) => e.key === 'Enter' && handleUpdateCategory(cat.id)}
                           />
                           <button 
                             onClick={() => handleUpdateCategory(cat.id)}
-                            className="text-[10px] font-black text-blue-600 uppercase"
+                            className="text-[9px] font-black text-blue-600 uppercase"
                           >
                             Save
                           </button>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2">
-                          <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight">{cat.title}</h3>
+                        <div className="flex items-center gap-1.5">
+                          <h3 className="text-sm font-bold text-gray-900 uppercase tracking-tight">{cat.title}</h3>
                           {cat.vendorId && (
                             <>
                               <button 
@@ -225,20 +236,20 @@ const MyProducts = () => {
                                 }}
                                 className="p-1.5 text-gray-300 hover:text-blue-500 transition-all"
                               >
-                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="12" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                               </button>
                               <button 
                                 onClick={() => handleDeleteCategory(cat.id)}
                                 className="p-1.5 text-gray-300 hover:text-red-500 transition-all"
                                 title="Delete Category"
                               >
-                                <FiTrash2 size={14} />
+                                <FiTrash2 size={12} />
                               </button>
                             </>
                           )}
                         </div>
                       )}
-                      <p className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-0.5">
+                      <p className="text-[8px] font-bold text-blue-500 uppercase tracking-widest mt-0.5">
                         {groupedProducts[cat.id]?.length || 0} Products Active
                       </p>
                     </div>
@@ -247,28 +258,28 @@ const MyProducts = () => {
                   {/* Quick Add Form */}
                   <form 
                     onSubmit={(e) => handleQuickAdd(e, cat._id)}
-                    className="flex flex-wrap items-center gap-3 bg-white p-2 rounded-[20px] border border-gray-100 shadow-sm"
+                    className="flex flex-wrap items-center gap-2 bg-white p-1.5 rounded-xl border border-gray-100 shadow-sm"
                   >
                     <input 
                       type="text"
                       placeholder="Item Name (e.g. Maggie)"
                       value={quickAdd.categoryId === cat._id ? quickAdd.title : ''}
                       onChange={(e) => setQuickAdd({ ...quickAdd, title: e.target.value, categoryId: cat._id })}
-                      className="px-4 py-2 bg-gray-50 border border-transparent rounded-xl text-xs font-bold text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none min-w-[180px] transition-all"
+                      className="px-3 py-1.5 bg-gray-50 border border-transparent rounded-lg text-[10px] font-bold text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none min-w-[130px] transition-all"
                     />
                     <input 
                       type="number"
                       placeholder="Price"
                       value={quickAdd.categoryId === cat._id ? quickAdd.basePrice : ''}
                       onChange={(e) => setQuickAdd({ ...quickAdd, basePrice: e.target.value, categoryId: cat._id })}
-                      className="w-24 px-4 py-2 bg-gray-50 border border-transparent rounded-xl text-xs font-bold text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none transition-all"
+                      className="w-16 px-3 py-1.5 bg-gray-50 border border-transparent rounded-lg text-[10px] font-bold text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none transition-all"
                     />
                     <button 
                       type="submit"
                       disabled={isAdding && quickAdd.categoryId === cat._id}
-                      className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95 disabled:opacity-50"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow active:scale-95 disabled:opacity-50"
                     >
-                      {isAdding && quickAdd.categoryId === cat._id ? '...' : <><FiPlus className="w-3.5 h-3.5" /> Quick Add</>}
+                      {isAdding && quickAdd.categoryId === cat._id ? '...' : <><FiPlus className="w-3 h-3" /> Quick Add</>}
                     </button>
                   </form>
                 </div>
@@ -279,51 +290,51 @@ const MyProducts = () => {
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-gray-50">
-                      <th className="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">Product Specification</th>
-                      <th className="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">Market Value</th>
-                      <th className="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right">Operations</th>
+                      <th className="px-4 py-3 text-[9px] font-black text-gray-400 uppercase tracking-wider">Product Specification</th>
+                      <th className="px-4 py-3 text-[9px] font-black text-gray-400 uppercase tracking-wider">Market Value</th>
+                      <th className="px-4 py-3 text-[9px] font-black text-gray-400 uppercase tracking-wider text-right">Operations</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50 px-2">
+                  <tbody className="divide-y divide-gray-50 px-1">
                     {!groupedProducts[cat._id] || groupedProducts[cat._id].length === 0 ? (
                       <tr>
-                        <td colSpan="3" className="px-8 py-12 text-center">
-                          <div className="flex flex-col items-center gap-2">
-                            <p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">No items found in this category</p>
-                            <p className="text-[9px] font-bold text-gray-400 uppercase">Use the form above to add items instantly</p>
+                        <td colSpan="3" className="px-4 py-8 text-center">
+                          <div className="flex flex-col items-center gap-1.5">
+                            <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest">No items found in this category</p>
+                            <p className="text-[8px] font-bold text-gray-400 uppercase">Use the form above to add items instantly</p>
                           </div>
                         </td>
                       </tr>
                     ) : (
                       groupedProducts[cat._id].map(item => (
                         <tr key={item.id} className="hover:bg-gray-50/50 transition-colors group">
-                          <td className="px-8 py-5">
-                            <div className="flex items-center gap-4">
-                              <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 overflow-hidden shrink-0 shadow-sm">
+                          <td className="px-4 py-3">
+                            <div className="flex items-center gap-2.5">
+                              <div className="w-9 h-9 rounded-lg bg-gray-50 border border-gray-100 overflow-hidden shrink-0 shadow-sm flex items-center justify-center">
                                 <img src={item.iconUrl || 'https://via.placeholder.com/150'} className="w-full h-full object-cover" alt="" />
                               </div>
                               <div className="min-w-0">
-                                <p className="text-sm font-black text-gray-800 uppercase truncate tracking-tight">{item.title}</p>
-                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">ID: {item.id.slice(-6).toUpperCase()}</p>
+                                <p className="text-xs font-bold text-gray-800 uppercase truncate tracking-tight">{item.title}</p>
+                                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-wider mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">ID: {item.id.slice(-6).toUpperCase()}</p>
                               </div>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
-                            <span className="text-lg font-black text-emerald-600">₹{item.basePrice.toLocaleString()}</span>
+                          <td className="px-4 py-3">
+                            <span className="text-xs font-black text-emerald-600">₹{item.basePrice.toLocaleString()}</span>
                           </td>
-                          <td className="px-8 py-5 text-right">
-                            <div className="flex items-center justify-end gap-3">
+                          <td className="px-4 py-3 text-right">
+                            <div className="flex items-center justify-end gap-2">
                                <button 
                                  onClick={() => navigate(`/vendor/product/edit/${item.id}`)}
-                                 className="px-4 py-2 bg-blue-50 text-blue-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all border border-blue-100 shadow-sm active:scale-95"
+                                 className="px-2.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all border border-blue-100 shadow-sm active:scale-95"
                                >
                                  Manage
                                </button>
                                <button 
                                  onClick={() => setShowConfirm(item.id)}
-                                 className="p-2.5 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all active:scale-90"
+                                 className="p-1.5 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90"
                                >
-                                 <FiTrash2 className="w-4 h-4" />
+                                 <FiTrash2 className="w-3.5 h-3.5" />
                                </button>
                             </div>
                           </td>
