@@ -17,11 +17,11 @@ const lazyLoad = (importFunc) => {
         default: () => (
           <div className="flex items-center justify-center min-h-screen bg-white">
             <div className="text-center p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-2">Failed to load page</h2>
+              <h2 className="text-xl font-normal text-gray-800 mb-2">Failed to load page</h2>
               <p className="text-gray-600 mb-4">Please refresh the page or try again later.</p>
               <button
                 onClick={() => window.location.reload()}
-                className="px-6 py-3 rounded-xl text-white font-semibold transition-all duration-300 hover:opacity-90"
+                className="px-6 py-3 rounded-xl text-white font-medium transition-all duration-300 hover:opacity-90"
                 style={{ backgroundColor: '#347989' }}
               >
                 Refresh Page

@@ -53,7 +53,7 @@ const CountdownTimer = ({ durationSeconds, createdAt, expiresAt, onExpire }) => 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
   return (
-    <div className={`text-[10px] font-mono font-black flex items-center gap-1.5 ${timeLeft < 30 ? 'text-red-500 animate-pulse' : 'text-amber-400'}`}>
+    <div className={`text-[10px] font-mono font-medium flex items-center gap-1.5 ${timeLeft < 30 ? 'text-red-500 animate-pulse' : 'text-amber-400'}`}>
       <FiClock className="w-3 h-3" />
       <span className="tracking-widest">{String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}</span>
     </div>
@@ -71,7 +71,7 @@ const PendingJobCard = ({ booking, onAccept, onReject, onClick, loadingAction, s
       {/* Urgency header */}
       {showTimer && (
         <div className="px-6 py-3 bg-gray-50/50 border-b border-gray-50 flex justify-between items-center">
-          <span className={`text-[9px] font-black uppercase tracking-[0.2em] flex items-center gap-2 ${booking.bookingType === 'instant' ? 'text-blue-600' : 'text-gray-400'}`}>
+          <span className={`text-[9px] font-medium capitalize tracking-[0.2em] flex items-center gap-2 ${booking.bookingType === 'instant' ? 'text-blue-600' : 'text-gray-400'}`}>
             <span className={`w-1.5 h-1.5 rounded-full ${booking.bookingType === 'instant' ? 'bg-blue-600 animate-ping' : 'bg-gray-300'}`} />
             {booking.bookingType === 'instant' ? '⚡ CRITICAL INSTANT' : 'NEW SIGNAL'}
           </span>
@@ -90,19 +90,19 @@ const PendingJobCard = ({ booking, onAccept, onReject, onClick, loadingAction, s
         <div className="flex items-start justify-between mb-5 gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-[8px] font-black px-2 py-1 rounded-lg bg-blue-50 text-blue-600 border border-blue-100 uppercase tracking-[0.2em]">
+              <span className="text-[8px] font-medium px-2 py-1 rounded-lg bg-blue-50 text-blue-600 border border-blue-100 capitalize tracking-[0.2em]">
                 {booking.serviceCategory || 'OPERATIONAL'}
               </span>
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
+              <span className="text-[9px] font-medium text-gray-400 capitalize tracking-widest">
                 {booking.customerName || 'AUTHORIZED CLIENT'}
               </span>
             </div>
             
-            <h3 className="font-black text-gray-900 text-lg leading-tight mb-2 line-clamp-1 uppercase tracking-tight">
+            <h3 className="font-medium text-gray-900 text-lg leading-tight mb-2 line-clamp-1 capitalize tracking-tight">
               {booking.serviceName || 'SYSTEM REQUEST'}
             </h3>
 
-            <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+            <div className="flex items-center gap-2 text-[10px] font-normal text-gray-400 capitalize tracking-widest">
               <FiMapPin className="w-3.5 h-3.5 text-blue-500" />
               <span className="truncate">{booking.location?.address || 'COORDINATES N/A'}</span>
             </div>
@@ -120,16 +120,16 @@ const PendingJobCard = ({ booking, onAccept, onReject, onClick, loadingAction, s
               <FiClock className="w-5 h-5 text-blue-600" />
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Deployment Time</span>
-              <span className="text-xs font-black text-gray-900 uppercase tracking-[0.1em]">
+              <span className="text-[10px] font-medium text-gray-400 capitalize tracking-widest leading-none mb-1">Deployment Time</span>
+              <span className="text-xs font-medium text-gray-900 capitalize tracking-[0.1em]">
                 {booking.timeSlot?.time || 'ASAP'}
               </span>
             </div>
           </div>
           
           <div className="text-right">
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1 block">Expected Yield</span>
-            <div className="text-2xl font-black text-blue-600 tracking-tighter">
+            <span className="text-[10px] font-medium text-gray-400 capitalize tracking-widest leading-none mb-1 block">Expected Yield</span>
+            <div className="text-2xl font-medium text-blue-600 tracking-tighter">
               ₹{booking.price || 0}
             </div>
           </div>
@@ -139,14 +139,14 @@ const PendingJobCard = ({ booking, onAccept, onReject, onClick, loadingAction, s
           <button
             disabled={!!loadingAction}
             onClick={(e) => onAccept(e, booking)}
-            className="flex-[2] bg-blue-600 text-white py-4.5 px-6 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-20"
+            className="flex-[2] bg-blue-600 text-white py-4.5 px-6 rounded-2xl text-[10px] font-medium capitalize tracking-[0.3em] shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-20"
           >
             {loadingAction === 'accept' ? 'AUTHORIZING...' : (booking.offeringType === 'PRODUCT' ? 'ACCEPT ORDER' : 'ACCEPT MISSION')}
           </button>
           <button
             disabled={!!loadingAction}
             onClick={(e) => onReject(e, booking)}
-            className="flex-1 bg-gray-50 text-gray-400 py-4.5 px-6 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-gray-100 hover:text-gray-600 transition-all active:scale-95 disabled:opacity-20 border border-gray-100"
+            className="flex-1 bg-gray-50 text-gray-400 py-4.5 px-6 rounded-2xl text-[10px] font-medium capitalize tracking-[0.2em] hover:bg-gray-100 hover:text-gray-600 transition-all active:scale-95 disabled:opacity-20 border border-gray-100"
           >
             {loadingAction === 'reject' ? '...' : 'SKIP'}
           </button>

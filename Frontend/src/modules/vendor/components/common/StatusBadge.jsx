@@ -74,7 +74,7 @@ const StatusBadge = ({ status, size = 'md' }) => {
 
   return (
     <span
-      className={`font-black uppercase tracking-widest rounded-lg border border-white/5 transition-all ${sizeClasses[size]}`}
+      className={`font-medium capitalize tracking-widest rounded-lg border border-white/5 transition-all ${sizeClasses[size]}`}
       style={{
         background: config.bgColor,
         color: config.color,

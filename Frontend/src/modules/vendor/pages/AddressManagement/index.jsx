@@ -177,7 +177,7 @@ const AddressManagement = () => {
           >
             <FiArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-xl font-black text-gray-900 tracking-tight">Deployment Base</h1>
+          <h1 className="text-xl font-medium text-gray-900 tracking-tight">Deployment Base</h1>
         </div>
         <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center shadow-inner">
           <FiMapPin className="w-6 h-6 text-blue-500" />
@@ -193,8 +193,8 @@ const AddressManagement = () => {
               <FiMapPin className="w-6 h-6 text-blue-500" />
             </div>
             <div>
-              <h3 className="text-gray-900 font-black text-sm uppercase tracking-widest mb-1">Geospatial Configuration</h3>
-              <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest leading-relaxed">
+              <h3 className="text-gray-900 font-medium text-sm capitalize tracking-widest mb-1">Geospatial Configuration</h3>
+              <p className="text-[10px] font-medium text-gray-500 capitalize tracking-widest leading-relaxed">
                 Calibrate your operational base coordinates. Precise positioning ensures optimal job matching and dispatch accuracy.
               </p>
             </div>
@@ -216,7 +216,7 @@ const AddressManagement = () => {
 
           {/* Address Autocomplete */}
           <div className="space-y-3">
-            <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] ml-2">
+            <label className="text-[10px] font-medium text-gray-500 capitalize tracking-[0.3em] ml-2">
               Primary Access Coordinates (Street/Area)
             </label>
             {isLoaded ? (
@@ -235,7 +235,7 @@ const AddressManagement = () => {
                     placeholder="ENTER OPERATIONAL VECTOR..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-gray-50 border border-gray-100 rounded-[28px] pl-16 pr-8 py-5 text-sm text-gray-700 focus:outline-none focus:border-blue-500 focus:bg-white transition-all uppercase tracking-widest placeholder:text-gray-200"
+                    className="w-full bg-gray-50 border border-gray-100 rounded-[28px] pl-16 pr-8 py-5 text-sm text-gray-700 focus:outline-none focus:border-blue-500 focus:bg-white transition-all capitalize tracking-widest placeholder:text-gray-200"
                   />
                 </div>
               </Autocomplete>
@@ -253,7 +253,7 @@ const AddressManagement = () => {
 
           {/* House Number */}
           <div className="space-y-3">
-            <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] ml-2">
+            <label className="text-[10px] font-medium text-gray-500 capitalize tracking-[0.3em] ml-2">
               Facility Identifier (Shop/Building)
             </label>
             <div className="relative">
@@ -263,14 +263,14 @@ const AddressManagement = () => {
                 placeholder="e.g. FACILITY 101, HUB B"
                 value={houseNumber}
                 onChange={(e) => setHouseNumber(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-100 rounded-[28px] pl-16 pr-8 py-5 text-sm text-gray-700 focus:outline-none focus:border-blue-500 focus:bg-white transition-all uppercase tracking-widest placeholder:text-gray-200"
+                className="w-full bg-gray-50 border border-gray-100 rounded-[28px] pl-16 pr-8 py-5 text-sm text-gray-700 focus:outline-none focus:border-blue-500 focus:bg-white transition-all capitalize tracking-widest placeholder:text-gray-200"
               />
             </div>
           </div>
 
           {/* Coordinates Display */}
           {selectedLocation && (
-            <p className="text-[9px] font-black text-gray-700 uppercase tracking-widest text-center">
+            <p className="text-[9px] font-medium text-gray-700 capitalize tracking-widest text-center">
               Global Position: {selectedLocation.lat?.toFixed(6)} / {selectedLocation.lng?.toFixed(6)}
             </p>
           )}
@@ -279,7 +279,7 @@ const AddressManagement = () => {
           <button
             onClick={handleSave}
             disabled={!searchQuery || !selectedLocation || loading}
-            className="w-full py-6 rounded-[28px] bg-blue-600 text-white text-[12px] font-black uppercase tracking-[0.4em] shadow-xl shadow-blue-500/20 active:scale-95 disabled:opacity-20 transition-all flex items-center justify-center gap-4"
+            className="w-full py-6 rounded-[28px] bg-blue-600 text-white text-[12px] font-medium capitalize tracking-[0.4em] shadow-xl shadow-blue-500/20 active:scale-95 disabled:opacity-20 transition-all flex items-center justify-center gap-4"
           >
             <FiSave className="w-5 h-5" />
             {loading ? 'AUTHORIZING...' : 'AUTHORIZE LOCATION'}

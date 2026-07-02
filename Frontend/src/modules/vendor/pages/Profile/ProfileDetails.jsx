@@ -158,13 +158,13 @@ const ProfileDetails = () => {
         {/* Header Section with Master Edit Trigger */}
         <div className="flex items-center justify-between mb-8 px-2">
           <div>
-            <h3 className="text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.25em]">Master Profile</h3>
-            <p className="text-[8px] font-black text-teal-600 uppercase tracking-widest mt-0.5">Verified Data Architecture</p>
+            <h3 className="text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.25em]">Master Profile</h3>
+            <p className="text-[8px] font-medium text-teal-600 capitalize tracking-widest mt-0.5">Verified Data Architecture</p>
           </div>
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/vendor/profile/edit')}
-            className="px-6 py-2.5 rounded-full bg-black text-white text-[10px] font-[1000] uppercase tracking-widest shadow-xl shadow-black/10 flex items-center gap-2"
+            className="px-6 py-2.5 rounded-full bg-black text-white text-[10px] font-[1000] capitalize tracking-widest shadow-xl shadow-black/10 flex items-center gap-2"
           >
             <FiEdit2 className="w-3.5 h-3.5" />
             Update
@@ -215,7 +215,7 @@ const ProfileDetails = () => {
             }
           ].map((cluster, cIdx) => (
             <div key={cIdx} className="bg-white/70 backdrop-blur-md rounded-[36px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-white/60">
-              <h4 className="text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-6 opacity-60 px-1">{cluster.group}</h4>
+              <h4 className="text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-6 opacity-60 px-1">{cluster.group}</h4>
               <div className="space-y-6">
                 {cluster.items.map((item, iIdx) => (
                   <div key={iIdx} className="flex items-start gap-5 group">
@@ -223,7 +223,7 @@ const ProfileDetails = () => {
                       <item.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1 min-w-0 pt-1">
-                      <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1 opacity-50">{item.label}</p>
+                      <p className="text-[9px] font-medium text-gray-400 capitalize tracking-widest mb-1 opacity-50">{item.label}</p>
                       <p className="text-gray-900 font-[1000] text-sm tracking-tight leading-relaxed">{item.value || 'NOT_ASSIGNED'}</p>
                     </div>
                   </div>
@@ -234,22 +234,22 @@ const ProfileDetails = () => {
 
           {/* Professional Competencies */}
           <div className="bg-white/70 backdrop-blur-md rounded-[36px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-white/60">
-            <h4 className="text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-6 opacity-60 px-1">Active Specializations</h4>
+            <h4 className="text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-6 opacity-60 px-1">Active Specializations</h4>
             <div className="flex items-start gap-5">
               <div className="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100/50 text-teal-600">
                 <FiBriefcase className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0 pt-1">
-                <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 opacity-50">Operational Categories</p>
+                <p className="text-[9px] font-medium text-gray-400 capitalize tracking-widest mb-3 opacity-50">Operational Categories</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.serviceCategory && (Array.isArray(profile.serviceCategory) ? profile.serviceCategory : profile.serviceCategory.split(', ')).filter(Boolean).length > 0 ? (
                     (Array.isArray(profile.serviceCategory) ? profile.serviceCategory : profile.serviceCategory.split(', ')).filter(Boolean).map((cat, i) => (
-                      <span key={i} className="inline-flex items-center px-4 py-2 rounded-xl bg-teal-600 text-white text-[10px] font-[1000] uppercase tracking-widest shadow-lg shadow-teal-900/10">
+                      <span key={i} className="inline-flex items-center px-4 py-2 rounded-xl bg-teal-600 text-white text-[10px] font-[1000] capitalize tracking-widest shadow-lg shadow-teal-900/10">
                         {cat}
                       </span>
                     ))
                   ) : (
-                    <span className="text-gray-300 text-[10px] font-black uppercase tracking-widest italic">Provision Pending</span>
+                    <span className="text-gray-300 text-[10px] font-medium capitalize tracking-widest italic">Provision Pending</span>
                   )}
                 </div>
               </div>

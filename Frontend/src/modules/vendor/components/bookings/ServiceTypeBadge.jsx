@@ -28,7 +28,7 @@ const ServiceTypeBadge = ({ serviceType, size = 'md' }) => {
 
   return (
     <span
-      className={`font-semibold rounded-lg flex items-center gap-1.5 ${sizeClasses[size]}`}
+      className={`font-medium rounded-lg flex items-center gap-1.5 ${sizeClasses[size]}`}
       style={{
         background: hexToRgba(themeColors.button, 0.15),
         color: themeColors.button,

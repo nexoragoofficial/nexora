@@ -15,7 +15,7 @@ const PriceDisplay = ({ amount, currency = '₹', size = 'md', showDecimals = fa
   };
 
   return (
-    <span className={`font-bold ${sizeClasses[size]}`}>
+    <span className={`font-normal ${sizeClasses[size]}`}>
       {currency} {formattedAmount}
     </span>
   );

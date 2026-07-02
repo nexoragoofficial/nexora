@@ -222,7 +222,7 @@ const VendorSignup = () => {
         if (response.success) {
           toast.success(
             <div className="flex flex-col">
-              <span className="font-bold">Application Submitted!</span>
+              <span className="font-normal">Application Submitted!</span>
               <span className="text-xs">Please complete the training module.</span>
             </div>,
             { icon: <FiCheckCircle className="text-[#D68F35]" />, duration: 5000 }
@@ -388,7 +388,7 @@ const VendorSignup = () => {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl font-bold text-gray-900 text-center mb-2">
+          <h1 className="text-3xl font-normal text-gray-900 text-center mb-2">
             {step === 'details' ? 'Vendor Enrollment' : 'Verify Security'}
           </h1>
           <p className="text-gray-600 text-center mb-10">
@@ -403,11 +403,11 @@ const VendorSignup = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                 {/* Basic Details */}
                 <div className="space-y-6">
-                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest border-b pb-2">Professional Identity</h3>
+                  <h3 className="text-sm font-normal text-gray-400 capitalize tracking-widest border-b pb-2">Professional Identity</h3>
 
                   {/* Name */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Legal Name</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Legal Name</label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
                         <FiUser className="w-5 h-5 text-gray-400" />
@@ -435,7 +435,7 @@ const VendorSignup = () => {
 
                   {/* Email */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
                         <FiMail className="w-5 h-5 text-gray-400" />
@@ -463,9 +463,9 @@ const VendorSignup = () => {
                   {/* Phone */}
                   {!verificationToken && (
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Mobile Number</label>
                       <div className="relative">
-                        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-bold border-r pr-3">
+                        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-normal border-r pr-3">
                           +91
                         </div>
                         <input
@@ -490,7 +490,7 @@ const VendorSignup = () => {
 
                   {/* Aadhar */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Aadhar Number</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Aadhar Number</label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
                         <FiFileText className="w-5 h-5 text-gray-400" />
@@ -516,7 +516,7 @@ const VendorSignup = () => {
 
                   {/* PAN */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">PAN Card Number</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">PAN Card Number</label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
                         <FiFileText className="w-5 h-5 text-gray-400" />
@@ -543,12 +543,12 @@ const VendorSignup = () => {
 
                 {/* Documents */}
                 <div className="space-y-6">
-                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest border-b pb-2">Verification Documents</h3>
+                  <h3 className="text-sm font-normal text-gray-400 capitalize tracking-widest border-b pb-2">Verification Documents</h3>
 
                   <div className="grid grid-cols-1 gap-6">
                     {/* Aadhar Front */}
                     <div className="space-y-2">
-                      <p className="text-xs font-bold text-gray-600">Aadhar Front</p>
+                      <p className="text-xs font-normal text-gray-600">Aadhar Front</p>
                       {documentPreview.aadhar ? (
                         <div className="relative group overflow-hidden rounded-2xl border-2 border-gray-100">
                           <img src={documentPreview.aadhar} className="w-full h-32 object-cover" />
@@ -561,7 +561,7 @@ const VendorSignup = () => {
                       ) : (
                         <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-2xl hover:border-teal-500 transition-all cursor-pointer bg-gray-50 group">
                           <FiUpload className="w-8 h-8 text-gray-300 group-hover:text-teal-500 transition-colors mb-2" />
-                          <span className="text-xs font-semibold text-gray-400 group-hover:text-teal-600">Upload Front</span>
+                          <span className="text-xs font-medium text-gray-400 group-hover:text-teal-600">Upload Front</span>
                           <input type="file" className="hidden" accept="image/*,application/pdf" onChange={(e) => handleDocumentUpload(e, 'aadhar')} disabled={uploadingDocs.aadhar} />
                         </label>
                       )}
@@ -569,7 +569,7 @@ const VendorSignup = () => {
 
                     {/* Aadhar Back */}
                     <div className="space-y-2">
-                      <p className="text-xs font-bold text-gray-600">Aadhar Back</p>
+                      <p className="text-xs font-normal text-gray-600">Aadhar Back</p>
                       {documentPreview.aadharBack ? (
                         <div className="relative group overflow-hidden rounded-2xl border-2 border-gray-100">
                           <img src={documentPreview.aadharBack} className="w-full h-32 object-cover" />
@@ -582,7 +582,7 @@ const VendorSignup = () => {
                       ) : (
                         <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-2xl hover:border-teal-500 transition-all cursor-pointer bg-gray-50 group">
                           <FiUpload className="w-8 h-8 text-gray-300 group-hover:text-teal-500 transition-colors mb-2" />
-                          <span className="text-xs font-semibold text-gray-400 group-hover:text-teal-600">Upload Back</span>
+                          <span className="text-xs font-medium text-gray-400 group-hover:text-teal-600">Upload Back</span>
                           <input type="file" className="hidden" accept="image/*,application/pdf" onChange={(e) => handleDocumentUpload(e, 'aadharBack')} disabled={uploadingDocs.aadharBack} />
                         </label>
                       )}
@@ -590,7 +590,7 @@ const VendorSignup = () => {
 
                     {/* PAN */}
                     <div className="space-y-2">
-                      <p className="text-xs font-bold text-gray-600">PAN Card</p>
+                      <p className="text-xs font-normal text-gray-600">PAN Card</p>
                       {documentPreview.pan ? (
                         <div className="relative group overflow-hidden rounded-2xl border-2 border-gray-100">
                           <img src={documentPreview.pan} className="w-full h-32 object-cover" />
@@ -603,7 +603,7 @@ const VendorSignup = () => {
                       ) : (
                         <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-2xl hover:border-teal-500 transition-all cursor-pointer bg-gray-50 group">
                           <FiUpload className="w-8 h-8 text-gray-300 group-hover:text-teal-500 transition-colors mb-2" />
-                          <span className="text-xs font-semibold text-gray-400 group-hover:text-teal-600">Upload PAN</span>
+                          <span className="text-xs font-medium text-gray-400 group-hover:text-teal-600">Upload PAN</span>
                           <input type="file" className="hidden" accept="image/*,application/pdf" onChange={(e) => handleDocumentUpload(e, 'pan')} disabled={uploadingDocs.pan} />
                         </label>
                       )}
@@ -615,7 +615,7 @@ const VendorSignup = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 rounded-2xl text-white font-bold text-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                className="w-full py-4 rounded-2xl text-white font-normal text-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 style={{
                   background: `linear-gradient(135deg, ${themeColors.button} 0%, #008a8a 100%)`,
                   boxShadow: '0 6px 20px rgba(0, 166, 166, 0.3)'
@@ -639,13 +639,13 @@ const VendorSignup = () => {
             <div className="space-y-8">
               <button
                 onClick={() => setStep('details')}
-                className="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-gray-800 transition-colors"
+                className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors"
               >
                 <FiChevronLeft className="mr-1" /> Edit details
               </button>
 
               <div className="text-center">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Security Verification</h3>
+                <h3 className="text-xl font-normal text-gray-900 mb-2">Security Verification</h3>
                 <p className="text-gray-600">Enter the 6-digit code sent to your phone</p>
               </div>
 
@@ -661,7 +661,7 @@ const VendorSignup = () => {
                       value={digit}
                       onChange={(e) => handleOtpChange(index, e.target.value)}
                       onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                      className="w-12 h-14 text-center text-xl font-bold border-2 border-gray-200 rounded-xl focus:outline-none transition-all"
+                      className="w-12 h-14 text-center text-xl font-normal border-2 border-gray-200 rounded-xl focus:outline-none transition-all"
                       style={{
                         borderColor: digit ? themeColors.button : '#e5e7eb',
                         boxShadow: digit ? `0 0 0 3px rgba(0, 166, 166, 0.1)` : 'none'
@@ -689,7 +689,7 @@ const VendorSignup = () => {
                       } catch (e) { toast.error('Failed to re-send'); }
                     }}
                     disabled={resendTimer > 0}
-                    className="text-sm font-bold transition-all"
+                    className="text-sm font-normal transition-all"
                     style={{ color: resendTimer > 0 ? '#d1d5db' : themeColors.button }}
                   >
                     {resendTimer > 0
@@ -701,7 +701,7 @@ const VendorSignup = () => {
                 <button
                   type="submit"
                   disabled={isLoading || otp.join('').length !== 6}
-                  className="w-full py-4 rounded-2xl text-white font-bold text-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  className="w-full py-4 rounded-2xl text-white font-normal text-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                   style={{
                     background: `linear-gradient(135deg, ${themeColors.button} 0%, #008a8a 100%)`,
                     boxShadow: '0 6px 20px rgba(0, 166, 166, 0.3)'
@@ -720,7 +720,7 @@ const VendorSignup = () => {
           <span className="text-sm">Already a network partner?</span>{' '}
           <Link 
             to="/vendor/login" 
-            className="text-sm font-bold border-b-2 border-white ml-1 hover:text-white transition-all pb-0.5"
+            className="text-sm font-normal border-b-2 border-white ml-1 hover:text-white transition-all pb-0.5"
           >
             Sign In
           </Link>

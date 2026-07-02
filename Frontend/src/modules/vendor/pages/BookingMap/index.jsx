@@ -555,7 +555,7 @@ const BookingMap = () => {
               <FiWifiOff className="w-5 h-5" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-sm">No Internet Connection</h3>
+              <h3 className="font-normal text-sm">No Internet Connection</h3>
               <p className="text-xs text-red-100">Check your network settings.</p>
             </div>
           </motion.div>
@@ -574,14 +574,14 @@ const BookingMap = () => {
             <div className="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center mb-4">
               <FiAlertTriangle className="w-8 h-8 text-orange-500" />
             </div>
-            <h3 className="text-lg font-black text-gray-800 mb-2">Route Not Found</h3>
+            <h3 className="text-lg font-medium text-gray-800 mb-2">Route Not Found</h3>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
               We couldn't calculate a driving path to this location. The destination might be unreachable by road or off the map.
             </p>
             <div className="flex gap-3 w-full">
               <button
                 onClick={() => window.location.reload()}
-                className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
+                className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-normal rounded-xl flex items-center justify-center gap-2 transition-colors"
               >
                 <FiRefreshCw className="w-4 h-4" /> Retry
               </button>
@@ -590,7 +590,7 @@ const BookingMap = () => {
                   const dest = coords ? `${coords.lat},${coords.lng}` : encodeURIComponent(booking?.address?.addressLine1 || '');
                   window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}`, '_blank');
                 }}
-                className="flex-1 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
+                className="flex-1 py-3 bg-teal-600 hover:bg-teal-700 text-white font-normal rounded-xl flex items-center justify-center gap-2 transition-colors"
               >
                 Open Maps
               </button>
@@ -614,8 +614,8 @@ const BookingMap = () => {
                   <FiMapPin className="w-4 h-4 text-teal-600" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Remaining</p>
-                  <p className="text-sm font-black text-gray-800">{distance}</p>
+                  <p className="text-[10px] font-normal text-gray-400 capitalize tracking-wider">Remaining</p>
+                  <p className="text-sm font-medium text-gray-800">{distance}</p>
                 </div>
               </div>
 
@@ -626,8 +626,8 @@ const BookingMap = () => {
                   <FiClock className="w-4 h-4 text-orange-500" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">ETA</p>
-                  <p className="text-sm font-black text-gray-800">{duration}</p>
+                  <p className="text-[10px] font-normal text-gray-400 capitalize tracking-wider">ETA</p>
+                  <p className="text-sm font-medium text-gray-800">{duration}</p>
                 </div>
               </div>
             </div>
@@ -708,7 +708,7 @@ const BookingMap = () => {
         {SHOW_SIMULATION_BUTTON && (
           <button
             onClick={isSimulating ? stopSimulation : startSimulation}
-            className={`absolute top-56 right-4 px-4 py-3 rounded-full shadow-2xl transition-all active:scale-90 z-50 text-xs font-bold ${isSimulating ? 'bg-red-500 text-white' : 'bg-purple-600 text-white'}`}
+            className={`absolute top-56 right-4 px-4 py-3 rounded-full shadow-2xl transition-all active:scale-90 z-50 text-xs font-normal ${isSimulating ? 'bg-red-500 text-white' : 'bg-purple-600 text-white'}`}
             style={{ boxShadow: '0 8px 30px rgba(0,0,0,0.2)' }}
           >
             {isSimulating ? '⏹ Stop' : '🚀 Simulate'}
@@ -727,12 +727,12 @@ const BookingMap = () => {
               <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
               {duration ? `Trip time: ${duration}` : 'Calculating path...'}
             </p>
-            <h2 className="text-2xl font-black text-gray-900 tracking-tight">Job Location</h2>
+            <h2 className="text-2xl font-medium text-gray-900 tracking-tight">Job Location</h2>
           </div>
           {distance && (
             <div className="text-right">
-              <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">Distance</p>
-              <p className="text-xl font-bold text-gray-800">{distance}</p>
+              <p className="text-xs text-gray-400 font-normal capitalize tracking-wider">Distance</p>
+              <p className="text-xl font-normal text-gray-800">{distance}</p>
             </div>
           )}
         </div>
@@ -743,7 +743,7 @@ const BookingMap = () => {
             <FiMapPin className="w-5 h-5" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-gray-900 mb-0.5 truncate">Address</h3>
+            <h3 className="font-normal text-gray-900 mb-0.5 truncate">Address</h3>
             <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
               {(() => {
                 const addr = booking?.address;
@@ -760,14 +760,14 @@ const BookingMap = () => {
           {booking?.status === 'journey_started' && (
             <button
               onClick={() => setIsVisitModalOpen(true)}
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30 transition-all active:scale-95"
+              className="px-6 bg-orange-500 hover:bg-orange-600 text-white font-normal py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30 transition-all active:scale-95"
             >
               <FiCheckCircle className="w-5 h-5" /> Reached
             </button>
           )}
 
           {(booking?.userId?.phone || booking?.customerPhone) && (
-            <a href={`tel:${booking.userId?.phone || booking.customerPhone}`} className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-teal-600/30 transition-all active:scale-95">
+            <a href={`tel:${booking.userId?.phone || booking.customerPhone}`} className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-normal py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-teal-600/30 transition-all active:scale-95">
               <FiPhone className="w-5 h-5" /> Call
             </a>
           )}

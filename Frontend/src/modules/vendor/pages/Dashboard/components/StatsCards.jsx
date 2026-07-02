@@ -62,10 +62,10 @@ const StatsCards = memo(({ stats }) => {
                 <IconComponent className="w-6 h-6" />
               </div>
               <div className="mt-6">
-                <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.3em] mb-2">
+                <p className="text-[10px] font-medium text-gray-600 capitalize tracking-[0.3em] mb-2">
                   {card.title}
                 </p>
-                <p className="text-3xl font-black text-white tracking-tighter">
+                <p className="text-3xl font-medium text-white tracking-tighter">
                   {card.value}
                 </p>
               </div>

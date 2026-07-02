@@ -178,7 +178,7 @@ const WithdrawalRequest = () => {
           >
             <FiArrowRight className="w-5 h-5 rotate-180" />
           </motion.button>
-          <h1 className="text-xl font-black text-gray-900 tracking-tight">Redeem Assets</h1>
+          <h1 className="text-xl font-medium text-gray-900 tracking-tight">Redeem Assets</h1>
         </div>
         <div className="w-10 h-10 bg-gray-50 rounded-xl shadow-sm border border-gray-100 flex items-center justify-center">
           <FiActivity className="w-5 h-5 text-blue-600" />
@@ -198,10 +198,10 @@ const WithdrawalRequest = () => {
 
               <div className="relative z-10 flex items-center justify-between">
                 <div className="flex-1">
-                  <p className="text-[9px] font-black text-blue-50 uppercase tracking-[0.2em] mb-1 opacity-80">Redeemable Liquidity</p>
+                  <p className="text-[9px] font-medium text-blue-50 capitalize tracking-[0.2em] mb-1 opacity-80">Redeemable Liquidity</p>
                   <div className="flex items-baseline gap-1.5">
-                    <span className="text-lg font-black text-blue-100">₹</span>
-                    <h2 className="text-3xl font-black text-white tracking-tighter leading-none">{wallet.available.toLocaleString()}</h2>
+                    <span className="text-lg font-medium text-blue-100">₹</span>
+                    <h2 className="text-3xl font-medium text-white tracking-tighter leading-none">{wallet.available.toLocaleString()}</h2>
                   </div>
                 </div>
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
@@ -211,39 +211,39 @@ const WithdrawalRequest = () => {
 
               <div className="relative z-10 mt-4 pt-4 border-t border-white/10 flex items-center gap-2.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <p className="text-[8px] font-black text-blue-50 uppercase tracking-widest opacity-80">Assets Verified & Transferrable</p>
+                <p className="text-[8px] font-medium text-blue-50 capitalize tracking-widest opacity-80">Assets Verified & Transferrable</p>
               </div>
             </div>
 
             {/* Amount Input Section */}
             <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-[9px] font-black text-gray-400 uppercase tracking-[0.3em]">Settlement Value</h3>
+                <h3 className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.3em]">Settlement Value</h3>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={handleMaxAmount}
-                  className="text-[8px] font-black text-blue-600 px-4 py-1.5 rounded-lg bg-blue-50 active:scale-95 transition-all uppercase tracking-widest border border-blue-100"
+                  className="text-[8px] font-medium text-blue-600 px-4 py-1.5 rounded-lg bg-blue-50 active:scale-95 transition-all capitalize tracking-widest border border-blue-100"
                 >
                   Maximum
                 </motion.button>
               </div>
 
               <div className="relative mb-6">
-                <div className="absolute top-1/2 left-0 -translate-y-1/2 text-gray-200 font-black text-3xl">₹</div>
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 text-gray-200 font-medium text-3xl">₹</div>
                 <input
                   type="text"
                   value={amount}
                   onChange={(e) => handleAmountChange(e.target.value)}
                   placeholder="0"
                   className={`w-full pl-10 pr-2 py-2 bg-transparent border-b-2 border-dashed ${error ? 'border-red-500 text-red-500' : 'border-gray-100 focus:border-blue-500'
-                    } text-5xl font-black text-right focus:outline-none transition-all text-gray-900 placeholder:text-gray-200 tracking-tighter`}
+                    } text-5xl font-medium text-right focus:outline-none transition-all text-gray-900 placeholder:text-gray-200 tracking-tighter`}
                 />
               </div>
 
               {error && (
                 <div className="bg-red-50 rounded-xl p-4 flex items-center gap-3 mb-6 border border-red-100">
                   <FiAlertCircle className="w-5 h-5 text-red-500 shrink-0" />
-                  <p className="text-red-500 text-[9px] font-black uppercase tracking-widest leading-relaxed">
+                  <p className="text-red-500 text-[9px] font-medium capitalize tracking-widest leading-relaxed">
                     {error}
                   </p>
                 </div>
@@ -251,19 +251,19 @@ const WithdrawalRequest = () => {
 
               {amount && !error && (
                 <div className="bg-gray-50 rounded-xl p-6 space-y-4 border border-gray-100">
-                  <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
+                  <div className="flex justify-between items-center text-[9px] font-medium capitalize tracking-[0.2em] text-gray-400">
                     <span>Infrastructure Fee ({commissionRate + platformFeeRate}%)</span>
                     <span className="text-gray-800">₹{(commissionAmount + platformFeeAmount).toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
+                  <div className="flex justify-between items-center text-[9px] font-medium capitalize tracking-[0.2em] text-gray-400">
                     <span>Statutory TDS (1%)</span>
                     <span className="text-gray-800">₹{tdsAmount.toLocaleString()}</span>
                   </div>
                   <div className="pt-4 border-t border-gray-200 flex justify-between items-center">
-                    <span className="text-[10px] font-black text-gray-900 uppercase tracking-[0.2em]">Net Deployment Credit</span>
+                    <span className="text-[10px] font-medium text-gray-900 capitalize tracking-[0.2em]">Net Deployment Credit</span>
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs font-black text-blue-600">₹</span>
-                      <span className="text-3xl font-black text-blue-600 tracking-tighter">{netAmount.toLocaleString()}</span>
+                      <span className="text-xs font-medium text-blue-600">₹</span>
+                      <span className="text-3xl font-medium text-blue-600 tracking-tighter">{netAmount.toLocaleString()}</span>
                     </div>
                   </div>
                 </div>
@@ -280,15 +280,15 @@ const WithdrawalRequest = () => {
                     <FiCreditCard className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-[10px] font-black text-gray-900 uppercase tracking-[0.2em]">Destination Path</h3>
-                    <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mt-1">Authorized Institution</p>
+                    <h3 className="text-[10px] font-medium text-gray-900 capitalize tracking-[0.2em]">Destination Path</h3>
+                    <p className="text-[8px] font-medium text-gray-400 capitalize tracking-widest mt-1">Authorized Institution</p>
                   </div>
                 </div>
                 {isBankSaved && !showBankForm && (
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowBankForm(true)}
-                    className="text-[9px] font-black text-blue-600 uppercase tracking-widest flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 transition-all hover:bg-blue-100 border border-blue-100"
+                    className="text-[9px] font-medium text-blue-600 capitalize tracking-widest flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 transition-all hover:bg-blue-100 border border-blue-100"
                   >
                     <FiEdit2 className="w-3.5 h-3.5" /> Update
                   </motion.button>
@@ -299,49 +299,49 @@ const WithdrawalRequest = () => {
                 <div className="space-y-5">
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-[8px] font-black text-gray-400 uppercase tracking-[0.3em] ml-2">Account Proprietor</label>
+                      <label className="text-[8px] font-medium text-gray-400 capitalize tracking-[0.3em] ml-2">Account Proprietor</label>
                       <input
                         type="text"
                         name="accountHolderName"
                         value={bankAccount.accountHolderName}
                         onChange={handleBankInputChange}
-                        className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-[11px] font-black text-gray-800 uppercase tracking-widest transition-all placeholder:text-gray-300"
+                        className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-[11px] font-medium text-gray-800 capitalize tracking-widest transition-all placeholder:text-gray-300"
                         placeholder="ENTER FULL LEGAL NAME"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <label className="text-[8px] font-black text-gray-400 uppercase tracking-[0.3em] ml-2">Institution</label>
+                        <label className="text-[8px] font-medium text-gray-400 capitalize tracking-[0.3em] ml-2">Institution</label>
                         <input
                           type="text"
                           name="bankName"
                           value={bankAccount.bankName}
                           onChange={handleBankInputChange}
-                          className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-[11px] font-black text-gray-800 uppercase tracking-widest transition-all placeholder:text-gray-300"
+                          className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-[11px] font-medium text-gray-800 capitalize tracking-widest transition-all placeholder:text-gray-300"
                           placeholder="BANK NAME"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[8px] font-black text-gray-400 uppercase tracking-[0.3em] ml-2">Protocol Code</label>
+                        <label className="text-[8px] font-medium text-gray-400 capitalize tracking-[0.3em] ml-2">Protocol Code</label>
                         <input
                           type="text"
                           name="ifscCode"
                           value={bankAccount.ifscCode}
                           onChange={handleBankInputChange}
-                          className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-[11px] font-black text-gray-800 uppercase tracking-widest transition-all placeholder:text-gray-300"
+                          className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-[11px] font-medium text-gray-800 capitalize tracking-widest transition-all placeholder:text-gray-300"
                           placeholder="IFSC CODE"
                           maxLength={11}
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[8px] font-black text-gray-400 uppercase tracking-[0.3em] ml-2">Identification Number</label>
+                      <label className="text-[8px] font-medium text-gray-400 capitalize tracking-[0.3em] ml-2">Identification Number</label>
                       <input
                         type="tel"
                         name="accountNumber"
                         value={bankAccount.accountNumber}
                         onChange={handleBankInputChange}
-                        className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-base font-black text-gray-800 tracking-[0.3em] transition-all placeholder:text-gray-200"
+                        className="w-full px-5 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-blue-500 outline-none text-base font-medium text-gray-800 tracking-[0.3em] transition-all placeholder:text-gray-200"
                         placeholder="0000 0000 0000"
                         inputMode="numeric"
                       />
@@ -350,7 +350,7 @@ const WithdrawalRequest = () => {
                   <motion.button
                     whileTap={{ scale: 0.98 }}
                     onClick={saveBankDetails}
-                    className="w-full py-4.5 bg-blue-600 text-white rounded-xl font-black text-[10px] uppercase tracking-[0.3em] shadow-lg shadow-blue-600/20 active:scale-95 transition-all"
+                    className="w-full py-4.5 bg-blue-600 text-white rounded-xl font-medium text-[10px] capitalize tracking-[0.3em] shadow-lg shadow-blue-600/20 active:scale-95 transition-all"
                   >
                     Authenticate Protocol
                   </motion.button>
@@ -362,20 +362,20 @@ const WithdrawalRequest = () => {
                 >
                   <div className="flex justify-between items-start">
                     <div>
-                      <p className="text-[8px] text-gray-400 font-black uppercase tracking-[0.3em] mb-1.5">Primary Asset Destination</p>
-                      <p className="font-black text-gray-900 text-sm uppercase tracking-[0.2em]">{bankAccount.bankName}</p>
+                      <p className="text-[8px] text-gray-400 font-medium capitalize tracking-[0.3em] mb-1.5">Primary Asset Destination</p>
+                      <p className="font-medium text-gray-900 text-sm capitalize tracking-[0.2em]">{bankAccount.bankName}</p>
                     </div>
                     <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100 shadow-sm">
                       <FiCheckCircle className="w-5 h-5" />
                     </div>
                   </div>
                   <div>
-                    <p className="text-[8px] text-gray-400 font-black uppercase tracking-[0.3em] mb-2">Verified Settlement Path</p>
+                    <p className="text-[8px] text-gray-400 font-medium capitalize tracking-[0.3em] mb-2">Verified Settlement Path</p>
                     <div className="flex items-center gap-3">
                       <div className="flex gap-1.5">
                         {[1, 2, 3, 4].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-gray-200" />)}
                       </div>
-                      <p className="font-black text-gray-900 text-xl tracking-[0.3em]">
+                      <p className="font-medium text-gray-900 text-xl tracking-[0.3em]">
                         {bankAccount.accountNumber?.slice(-4)}
                       </p>
                     </div>
@@ -389,7 +389,7 @@ const WithdrawalRequest = () => {
               whileTap={{ scale: 0.95 }}
               onClick={handleSubmit}
               disabled={!amount || !!error || !isBankSaved || loading}
-              className="w-full py-6 rounded-2xl font-black text-white text-[10px] uppercase tracking-[0.35em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 bg-blue-600 shadow-xl shadow-blue-900/40 group relative overflow-hidden"
+              className="w-full py-6 rounded-2xl font-medium text-white text-[10px] capitalize tracking-[0.35em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 bg-blue-600 shadow-xl shadow-blue-900/40 group relative overflow-hidden"
             >
               {loading ? (
                 <div className="w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin" />
@@ -405,7 +405,7 @@ const WithdrawalRequest = () => {
 
         <div className="mt-12 flex flex-col items-center gap-3 px-10">
           <FiClock className="w-4 h-4 text-gray-300" />
-          <p className="text-center text-[8px] text-gray-400 font-black uppercase tracking-[0.2em] leading-relaxed">
+          <p className="text-center text-[8px] text-gray-400 font-medium capitalize tracking-[0.2em] leading-relaxed">
             Secure processing timeline: 24-48 business hours.<br />
             Digital receipt will be issued post-verification.
           </p>

@@ -158,7 +158,7 @@ const VendorLogin = () => {
 
           toast.success(
             <div className="flex flex-col">
-              <span className="font-bold">Welcome Back!</span>
+              <span className="font-normal">Welcome Back!</span>
               <span className="text-xs">Successfully logged into your vendor account.</span>
             </div>,
             { icon: <FiCheckCircle className="text-green-500" /> }
@@ -203,7 +203,7 @@ const VendorLogin = () => {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl font-bold text-gray-900 text-center mb-2">
+          <h1 className="text-3xl font-normal text-gray-900 text-center mb-2">
             {step === 'phone' ? 'Vendor Login' : 'Verify OTP'}
           </h1>
           <p className="text-gray-600 text-center mb-8">
@@ -216,7 +216,7 @@ const VendorLogin = () => {
           {step === 'phone' ? (
             <form onSubmit={handlePhoneSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Mobile Number
                 </label>
                 <div className="relative">
@@ -249,7 +249,7 @@ const VendorLogin = () => {
               <button
                 type="submit"
                 disabled={isLoading || !phoneNumber || phoneNumber.length < 10}
-                className="w-full py-3 rounded-xl text-white font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl text-white font-medium text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 style={{
                   background: `linear-gradient(135deg, ${themeColors.button} 0%, #1e40af 100%)`,
                   boxShadow: '0 4px 12px rgba(30, 58, 138, 0.3)'
@@ -296,7 +296,7 @@ const VendorLogin = () => {
                       value={digit}
                       onChange={(e) => handleOtpChange(index, e.target.value)}
                       onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                      className="w-12 h-14 text-center text-xl font-bold border-2 border-gray-300 rounded-xl focus:outline-none transition-all"
+                      className="w-12 h-14 text-center text-xl font-normal border-2 border-gray-300 rounded-xl focus:outline-none transition-all"
                       style={{
                         borderColor: digit ? themeColors.button : '#d1d5db',
                         boxShadow: digit ? `0 0 0 3px rgba(0, 166, 166, 0.1)` : 'none'
@@ -332,7 +332,7 @@ const VendorLogin = () => {
                       }
                     }}
                     disabled={resendTimer > 0}
-                    className="text-sm font-semibold transition-all"
+                    className="text-sm font-medium transition-all"
                     style={{ color: resendTimer > 0 ? '#d1d5db' : themeColors.button }}
                   >
                     {resendTimer > 0
@@ -344,7 +344,7 @@ const VendorLogin = () => {
                  <button
                   type="submit"
                   disabled={isLoading || otp.join('').length !== 6}
-                  className="w-full py-3 rounded-xl text-white font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-xl text-white font-medium text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   style={{
                     background: `linear-gradient(135deg, ${themeColors.button} 0%, #1e40af 100%)`,
                     boxShadow: '0 4px 12px rgba(30, 58, 138, 0.3)'
@@ -373,7 +373,7 @@ const VendorLogin = () => {
           <span className="text-sm">New to the network?</span>{' '}
           <Link 
             to="/vendor/signup" 
-            className="text-sm font-bold border-b-2 border-white ml-1 hover:text-white transition-all pb-0.5"
+            className="text-sm font-normal border-b-2 border-white ml-1 hover:text-white transition-all pb-0.5"
           >
             Apply Now
           </Link>

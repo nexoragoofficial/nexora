@@ -262,7 +262,7 @@ const AddCustomContent = () => {
             <FiArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none uppercase">
+            <h2 className="text-2xl font-medium text-gray-900 tracking-tight leading-none capitalize">
               {isEditMode ? 'Edit' : 'Add New'} {offeringType === 'PRODUCT' ? 'Product' : 'Service'}
             </h2>
             <p className="text-gray-500 text-[11px] font-medium mt-2">
@@ -278,7 +278,7 @@ const AddCustomContent = () => {
           {!isEditMode && (
           <button
             onClick={() => setActiveTab('category')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-medium capitalize tracking-wider transition-all duration-300 ${
               activeTab === 'category' 
                 ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' 
                 : 'text-gray-400 hover:text-gray-600'
@@ -290,7 +290,7 @@ const AddCustomContent = () => {
           )}
           <button
             onClick={() => setActiveTab('product')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-medium capitalize tracking-wider transition-all duration-300 ${
               activeTab === 'product' 
                 ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' 
                 : 'text-gray-400 hover:text-gray-600'
@@ -311,10 +311,10 @@ const AddCustomContent = () => {
               className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm max-w-2xl mx-auto"
             >
               <div className="mb-8">
-                <h2 className="text-xl font-bold text-gray-800 tracking-tight">Create Category</h2>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Structure your expertise for deployment</p>
+                <h2 className="text-xl font-normal text-gray-800 tracking-tight">Create Category</h2>
+                <p className="text-[10px] font-normal text-gray-400 capitalize tracking-widest mt-1">Structure your expertise for deployment</p>
                 <div className="mt-4 flex gap-2">
-                  <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${offeringType === 'PRODUCT' ? 'bg-purple-50 text-purple-600 border-purple-100' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
+                  <span className={`px-3 py-1 rounded-full text-[9px] font-medium capitalize tracking-widest border ${offeringType === 'PRODUCT' ? 'bg-purple-50 text-purple-600 border-purple-100' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
                     Type: {offeringType}
                   </span>
                 </div>
@@ -322,7 +322,7 @@ const AddCustomContent = () => {
 
               <form onSubmit={handleAddCategory} className="space-y-6">
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">Category Title</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">Category Title</label>
                   <div className="relative">
                     <FiType className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                     <input
@@ -330,24 +330,24 @@ const AddCustomContent = () => {
                       placeholder="e.g. Home Decor, Special Repair"
                       value={categoryForm.title}
                       onChange={(e) => setCategoryForm({ ...categoryForm, title: e.target.value })}
-                      className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none"
+                      className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-normal text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">Description</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">Description</label>
                   <textarea
                     placeholder="Describe what this category covers..."
                     value={categoryForm.description}
                     onChange={(e) => setCategoryForm({ ...categoryForm, description: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none min-h-[100px] resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-normal text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none min-h-[100px] resize-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">Visual Protocol (Image)</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">Visual Protocol (Image)</label>
                   <div className="space-y-4">
                     <div className="relative group">
                       <div className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl border border-dashed border-gray-200 group-hover:border-blue-500/50 transition-all cursor-pointer relative overflow-hidden">
@@ -366,10 +366,10 @@ const AddCustomContent = () => {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[10px] font-black text-gray-700 uppercase tracking-widest">
+                          <p className="text-[10px] font-medium text-gray-700 capitalize tracking-widest">
                             {categoryForm.imageUrl ? 'Update Protocol' : 'Upload Image'}
                           </p>
-                          <p className="text-[9px] font-bold text-gray-400 uppercase mt-0.5 tracking-tight">JPG, PNG UP TO 5MB</p>
+                          <p className="text-[9px] font-normal text-gray-400 capitalize mt-0.5 tracking-tight">JPG, PNG UP TO 5MB</p>
                         </div>
                       </div>
                     </div>
@@ -396,7 +396,7 @@ const AddCustomContent = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 rounded-xl bg-blue-600 text-white font-black uppercase tracking-widest text-[11px] shadow-lg shadow-blue-200 active:scale-95 transition-all flex items-center justify-center gap-3"
+                  className="w-full py-4 rounded-xl bg-blue-600 text-white font-medium capitalize tracking-widest text-[11px] shadow-lg shadow-blue-200 active:scale-95 transition-all flex items-center justify-center gap-3"
                 >
                   {loading ? 'Processing...' : (
                     <>
@@ -416,15 +416,15 @@ const AddCustomContent = () => {
               className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm max-w-2xl mx-auto"
             >
               <div className="mb-8">
-                <h2 className="text-xl font-bold text-gray-800 tracking-tight">{isEditMode ? 'Edit' : 'Create'} {offeringType === 'PRODUCT' ? 'Product' : 'Service'}</h2>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">
+                <h2 className="text-xl font-normal text-gray-800 tracking-tight">{isEditMode ? 'Edit' : 'Create'} {offeringType === 'PRODUCT' ? 'Product' : 'Service'}</h2>
+                <p className="text-[10px] font-normal text-gray-400 capitalize tracking-widest mt-1">
                   {isEditMode ? 'Update details for this item' : 'Add individual bookable items'}
                 </p>
               </div>
 
               <form onSubmit={handleAddProduct} className="space-y-6">
                 <div className="bg-blue-50/50 p-4 rounded-2xl border border-blue-100/50 mb-6">
-                  <label className="block text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2 px-1">Where should this appear to users?</label>
+                  <label className="block text-[10px] font-medium text-blue-600 capitalize tracking-widest mb-2 px-1">Where should this appear to users?</label>
                   <div className="relative">
                     <select
                       value={productForm.categoryId}
@@ -435,11 +435,11 @@ const AddCustomContent = () => {
                           setProductForm({ ...productForm, categoryId: e.target.value });
                         }
                       }}
-                      className="w-full px-4 py-3 bg-white border border-blue-100 rounded-xl text-sm font-bold text-gray-700 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-white border border-blue-100 rounded-xl text-sm font-normal text-gray-700 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none appearance-none cursor-pointer"
                       required
                     >
                       <option value="">Select Platform Section (Where should this show?)...</option>
-                      <option value="NEW_CAT" className="text-blue-600 font-black">+ ADD NEW CATEGORY NAME</option>
+                      <option value="NEW_CAT" className="text-blue-600 font-medium">+ ADD NEW CATEGORY NAME</option>
                       <optgroup label="PLATFORM SECTIONS">
                         <option value="Needs">Daily Needs (Grocery, Milk, etc.)</option>
                         <option value="Delivery">Delivery Services (Parcel, Food Delivery)</option>
@@ -459,11 +459,11 @@ const AddCustomContent = () => {
                     </select>
                     <FiChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-400 pointer-events-none" />
                   </div>
-                  <p className="text-[9px] font-bold text-blue-400 uppercase mt-2 px-1">Selecting a category determines which tab the user finds this item in</p>
+                  <p className="text-[9px] font-normal text-blue-400 capitalize mt-2 px-1">Selecting a category determines which tab the user finds this item in</p>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">{offeringType === 'PRODUCT' ? 'Product' : 'Service'} Title</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">{offeringType === 'PRODUCT' ? 'Product' : 'Service'} Title</label>
                   <div className="relative">
                     <FiType className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                     <input
@@ -471,14 +471,14 @@ const AddCustomContent = () => {
                       placeholder="e.g. Full House Painting"
                       value={productForm.title}
                       onChange={(e) => setProductForm({ ...productForm, title: e.target.value })}
-                      className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none"
+                      className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-normal text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">Base Valuation (₹)</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">Base Valuation (₹)</label>
                   <div className="relative">
                     <FiDollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                     <input
@@ -486,36 +486,36 @@ const AddCustomContent = () => {
                       placeholder="0.00"
                       value={productForm.basePrice}
                       onChange={(e) => setProductForm({ ...productForm, basePrice: e.target.value })}
-                      className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none"
+                      className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-normal text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">Short Description</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">Short Description</label>
                   <textarea
                     placeholder="Brief summary (shows on card)..."
                     value={productForm.description}
                     onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none min-h-[80px] resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-normal text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none min-h-[80px] resize-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">Detailed Narrative</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">Detailed Narrative</label>
                   <textarea
                     placeholder="Deep dive into this offering..."
                     value={productForm.detailedDescription}
                     onChange={(e) => setProductForm({ ...productForm, detailedDescription: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none min-h-[140px] resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-normal text-gray-700 placeholder:text-gray-300 focus:bg-white focus:border-blue-500/50 transition-all outline-none min-h-[140px] resize-none"
                   />
                 </div>
 
                 {/* Features & Benefits */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-3">
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Features</label>
+                    <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest px-1">Features</label>
                     {productForm.features.map((feature, idx) => (
                       <div key={idx} className="flex gap-2">
                         <input
@@ -523,16 +523,16 @@ const AddCustomContent = () => {
                           value={feature}
                           onChange={(e) => handleListChange('features', idx, e.target.value)}
                           placeholder={`Feature ${idx + 1}`}
-                          className="flex-1 px-3 py-2 bg-gray-50 border border-gray-100 rounded-lg text-xs font-bold text-gray-700 outline-none focus:border-blue-500/50"
+                          className="flex-1 px-3 py-2 bg-gray-50 border border-gray-100 rounded-lg text-xs font-normal text-gray-700 outline-none focus:border-blue-500/50"
                         />
                         <button type="button" onClick={() => removeListItem('features', idx)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg">×</button>
                       </div>
                     ))}
-                    <button type="button" onClick={() => addListItem('features')} className="w-full py-2 border border-dashed border-gray-200 rounded-lg text-[9px] font-black uppercase text-gray-400 hover:text-blue-600 hover:border-blue-200">+ Add Feature</button>
+                    <button type="button" onClick={() => addListItem('features')} className="w-full py-2 border border-dashed border-gray-200 rounded-lg text-[9px] font-medium capitalize text-gray-400 hover:text-blue-600 hover:border-blue-200">+ Add Feature</button>
                   </div>
 
                   <div className="space-y-3">
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Benefits</label>
+                    <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest px-1">Benefits</label>
                     {productForm.benefits.map((benefit, idx) => (
                       <div key={idx} className="flex gap-2">
                         <input
@@ -540,17 +540,17 @@ const AddCustomContent = () => {
                           value={benefit}
                           onChange={(e) => handleListChange('benefits', idx, e.target.value)}
                           placeholder={`Benefit ${idx + 1}`}
-                          className="flex-1 px-3 py-2 bg-gray-50 border border-gray-100 rounded-lg text-xs font-bold text-gray-700 outline-none focus:border-blue-500/50"
+                          className="flex-1 px-3 py-2 bg-gray-50 border border-gray-100 rounded-lg text-xs font-normal text-gray-700 outline-none focus:border-blue-500/50"
                         />
                         <button type="button" onClick={() => removeListItem('benefits', idx)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg">×</button>
                       </div>
                     ))}
-                    <button type="button" onClick={() => addListItem('benefits')} className="w-full py-2 border border-dashed border-gray-200 rounded-lg text-[9px] font-black uppercase text-gray-400 hover:text-blue-600 hover:border-blue-200">+ Add Benefit</button>
+                    <button type="button" onClick={() => addListItem('benefits')} className="w-full py-2 border border-dashed border-gray-200 rounded-lg text-[9px] font-medium capitalize text-gray-400 hover:text-blue-600 hover:border-blue-200">+ Add Benefit</button>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-1">Product Gallery</label>
+                  <label className="block text-[10px] font-medium text-gray-400 capitalize tracking-widest mb-2 px-1">Product Gallery</label>
                   <div className="space-y-4">
                     <div className="relative group">
                       <div className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl border border-dashed border-gray-200 group-hover:border-blue-500/50 transition-all cursor-pointer relative overflow-hidden">
@@ -559,8 +559,8 @@ const AddCustomContent = () => {
                           <FiImage className="w-6 h-6 text-gray-400" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[10px] font-black text-gray-700 uppercase tracking-widest">Upload Gallery Images</p>
-                          <p className="text-[9px] font-bold text-gray-400 uppercase mt-0.5">Select multiple files</p>
+                          <p className="text-[10px] font-medium text-gray-700 capitalize tracking-widest">Upload Gallery Images</p>
+                          <p className="text-[9px] font-normal text-gray-400 capitalize mt-0.5">Select multiple files</p>
                         </div>
                       </div>
                     </div>
@@ -581,7 +581,7 @@ const AddCustomContent = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 rounded-xl bg-blue-600 text-white font-black uppercase tracking-widest text-[11px] shadow-lg shadow-blue-200 active:scale-95 transition-all flex items-center justify-center gap-3"
+                  className="w-full py-4 rounded-xl bg-blue-600 text-white font-medium capitalize tracking-widest text-[11px] shadow-lg shadow-blue-200 active:scale-95 transition-all flex items-center justify-center gap-3"
                 >
                   {loading ? 'Processing...' : (
                     <>
@@ -599,12 +599,12 @@ const AddCustomContent = () => {
         <div className="mt-16">
           <div className="flex items-center gap-3 mb-8 px-1">
             <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shadow-sm"></div>
-            <h2 className="text-[10px] font-black uppercase tracking-widest text-gray-400">Live Infrastructure</h2>
+            <h2 className="text-[10px] font-medium capitalize tracking-widest text-gray-400">Live Infrastructure</h2>
           </div>
           
           {myCategories.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-gray-200">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">No active protocols detected</p>
+              <p className="text-[10px] font-medium text-gray-400 capitalize tracking-widest">No active protocols detected</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -612,8 +612,8 @@ const AddCustomContent = () => {
                 <div key={cat._id} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all group">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-base font-black text-gray-800 truncate tracking-tight uppercase">{cat.title}</h4>
-                      <p className="text-[9px] text-gray-400 mt-0.5 line-clamp-1 font-bold uppercase tracking-wider">{cat.description}</p>
+                      <h4 className="text-base font-medium text-gray-800 truncate tracking-tight capitalize">{cat.title}</h4>
+                      <p className="text-[9px] text-gray-400 mt-0.5 line-clamp-1 font-normal capitalize tracking-wider">{cat.description}</p>
                     </div>
                     <div className="flex items-center gap-2 ml-3">
                       {cat.imageUrl && (
@@ -632,8 +632,8 @@ const AddCustomContent = () => {
                   
                   <div className="space-y-3 mt-6 border-t border-gray-50 pt-6">
                     <div className="flex items-center justify-between px-1 mb-2">
-                      <p className="text-[9px] font-black text-blue-500 uppercase tracking-widest">Items</p>
-                      <span className="text-[9px] font-black text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">
+                      <p className="text-[9px] font-medium text-blue-500 capitalize tracking-widest">Items</p>
+                      <span className="text-[9px] font-medium text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">
                         {myServices.filter(s => s.categoryId === cat._id).length} Active
                       </span>
                     </div>
@@ -646,8 +646,8 @@ const AddCustomContent = () => {
                               <img src={toAssetUrl(service.iconUrl)} className="w-8 h-8 rounded-lg object-cover border border-gray-200" alt="" />
                             )}
                             <div>
-                              <p className="text-[11px] font-bold text-gray-800 tracking-tight">{service.title}</p>
-                              <p className="text-[9px] font-bold text-blue-500">₹{service.basePrice.toLocaleString()}</p>
+                              <p className="text-[11px] font-normal text-gray-800 tracking-tight">{service.title}</p>
+                              <p className="text-[9px] font-normal text-blue-500">₹{service.basePrice.toLocaleString()}</p>
                             </div>
                           </div>
                         </div>
@@ -661,7 +661,7 @@ const AddCustomContent = () => {
                         setActiveTab('product');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
-                      className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-xl bg-gray-50 text-[9px] font-black text-gray-400 uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all active:scale-95 border border-gray-100"
+                      className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-xl bg-gray-50 text-[9px] font-medium text-gray-400 capitalize tracking-widest hover:bg-blue-600 hover:text-white transition-all active:scale-95 border border-gray-100"
                     >
                       <FiPlus className="w-3.5 h-3.5" />
                       Add Item

@@ -144,7 +144,7 @@ const Notifications = () => {
       {/* Header - Admin Style - Hidden on Mobile */}
       <div className="hidden md:flex bg-white p-5 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
-          <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
+          <h2 className="text-2xl font-medium text-gray-900 tracking-tight leading-none">
             Alert Hub
           </h2>
           <p className="text-gray-500 text-[11px] font-medium mt-2">
@@ -156,7 +156,7 @@ const Notifications = () => {
             <motion.button 
               whileTap={{ scale: 0.9 }}
               onClick={handleMarkAllRead}
-              className="px-4 py-2 rounded-xl bg-gray-50 border border-gray-100 text-[9px] font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-100 transition-all"
+              className="px-4 py-2 rounded-xl bg-gray-50 border border-gray-100 text-[9px] font-normal capitalize tracking-widest text-gray-600 hover:bg-gray-100 transition-all"
               title="Mark all as read"
             >
               Clear All
@@ -181,7 +181,7 @@ const Notifications = () => {
               key={option.id}
               onClick={() => setFilter(option.id)}
               className={`
-                px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap
+                px-3.5 py-1.5 rounded-lg text-[10px] font-normal capitalize tracking-wider transition-all duration-300 whitespace-nowrap
                 ${filter === option.id
                   ? 'bg-[#2874F0] text-white shadow-lg shadow-blue-200' 
                   : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
@@ -198,14 +198,14 @@ const Notifications = () => {
             {notifications.some(n => !n.read) && (
               <button
                 onClick={handleMarkAllRead}
-                className="md:hidden px-3 py-1.5 text-[9px] font-bold text-gray-600 bg-gray-50 border border-gray-100 rounded-lg uppercase tracking-widest hover:bg-gray-100 transition-all"
+                className="md:hidden px-3 py-1.5 text-[9px] font-normal text-gray-600 bg-gray-50 border border-gray-100 rounded-lg capitalize tracking-widest hover:bg-gray-100 transition-all"
               >
                 Clear All
               </button>
             )}
             <button
               onClick={handleClearAll}
-              className="px-3 py-1.5 text-[9px] font-bold text-rose-600 bg-rose-50 border border-rose-100 rounded-lg uppercase tracking-widest hover:bg-rose-100 transition-all flex items-center gap-1.5"
+              className="px-3 py-1.5 text-[9px] font-normal text-rose-600 bg-rose-50 border border-rose-100 rounded-lg capitalize tracking-widest hover:bg-rose-100 transition-all flex items-center gap-1.5"
             >
               <FiTrash2 className="w-3.5 h-3.5" />
               Wipe Ledger
@@ -221,8 +221,8 @@ const Notifications = () => {
             <div className="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-gray-100">
               <FiBell className="w-10 h-10 text-gray-300" />
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2 uppercase tracking-tight">Sync Complete</h3>
-            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">No pending alerts in the current matrix.</p>
+            <h3 className="text-xl font-normal text-gray-800 mb-2 capitalize tracking-tight">Sync Complete</h3>
+            <p className="text-[10px] text-gray-400 font-normal capitalize tracking-widest">No pending alerts in the current matrix.</p>
           </div>
         ) : (
           <div className="space-y-3.5 pb-12">
@@ -246,7 +246,7 @@ const Notifications = () => {
                   </div>
                   <div className="flex-1 pr-12 min-w-0">
                     <div className="flex items-start justify-between mb-0.5">
-                      <h4 className={`font-bold text-gray-800 text-sm tracking-tight truncate ${!notif.read ? 'text-blue-700' : 'opacity-70'}`}>
+                      <h4 className={`font-normal text-gray-800 text-sm tracking-tight truncate ${!notif.read ? 'text-blue-700' : 'opacity-70'}`}>
                         {notif.title}
                       </h4>
                     </div>
@@ -254,7 +254,7 @@ const Notifications = () => {
                       {notif.message}
                     </p>
                     <div className="flex items-center gap-3.5 mt-2.5">
-                       <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">
+                       <p className="text-[8px] font-normal text-gray-400 capitalize tracking-widest">
                         {notif.time || (notif.createdAt && new Date(notif.createdAt).toLocaleString())}
                       </p>
                       
@@ -269,7 +269,7 @@ const Notifications = () => {
                               navigate('/vendor/wallet');
                             }
                           }}
-                          className="text-[8px] font-black text-blue-600 flex items-center gap-1 uppercase tracking-widest hover:underline"
+                          className="text-[8px] font-medium text-blue-600 flex items-center gap-1 capitalize tracking-widest hover:underline"
                         >
                           Execute Review
                           <FiCheck className="w-2.5 h-2.5" />
@@ -312,20 +312,20 @@ const Notifications = () => {
             <div className="w-20 h-20 bg-rose-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-rose-100">
               <FiTrash2 className="w-10 h-10 text-rose-500" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-3 uppercase tracking-tight">Purge Records?</h3>
+            <h3 className="text-2xl font-normal text-gray-900 mb-3 capitalize tracking-tight">Purge Records?</h3>
             <p className="text-sm text-gray-500 font-medium mb-10 leading-relaxed px-4">
               Permanent de-authorization of all operational alerts. This sequence cannot be aborted.
             </p>
             <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={() => setShowClearConfirm(false)}
-                className="py-4 rounded-2xl bg-gray-50 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:bg-gray-100 transition-all"
+                className="py-4 rounded-2xl bg-gray-50 text-[10px] font-normal capitalize tracking-widest text-gray-500 hover:bg-gray-100 transition-all"
               >
                 Abort
               </button>
               <button
                 onClick={confirmClearAll}
-                className="py-4 rounded-2xl bg-rose-600 text-[10px] font-bold uppercase tracking-widest text-white shadow-xl shadow-rose-100 active:scale-95 transition-all"
+                className="py-4 rounded-2xl bg-rose-600 text-[10px] font-normal capitalize tracking-widest text-white shadow-xl shadow-rose-100 active:scale-95 transition-all"
               >
                 Execute
               </button>

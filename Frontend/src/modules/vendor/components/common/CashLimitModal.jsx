@@ -62,7 +62,7 @@ const CashLimitModal = () => {
           <FiAlertTriangle className="w-8 h-8 text-red-600" />
         </div>
 
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Service Suspended</h2>
+        <h2 className="text-xl font-normal text-gray-900 mb-2">Service Suspended</h2>
 
         <p className="text-gray-600 mb-6 text-sm">
           You have reached your cash collection limit. Please settle your dues with the admin to resume receiving new bookings.
@@ -71,11 +71,11 @@ const CashLimitModal = () => {
         <div className="bg-red-50 border border-red-100 rounded-xl p-3 mb-6">
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-600">Outstanding Dues:</span>
-            <span className="font-bold text-red-700">₹{walletData?.dues}</span>
+            <span className="font-normal text-red-700">₹{walletData?.dues}</span>
           </div>
           <div className="flex justify-between items-center text-sm mt-1">
             <span className="text-gray-600">Limit:</span>
-            <span className="font-bold text-gray-800">₹{walletData?.cashLimit}</span>
+            <span className="font-normal text-gray-800">₹{walletData?.cashLimit}</span>
           </div>
         </div>
 
@@ -84,7 +84,7 @@ const CashLimitModal = () => {
             setShow(false);
             navigate('/vendor/wallet/settle');
           }}
-          className="w-full py-3 bg-red-600 text-white font-bold rounded-xl shadow-lg shadow-red-200 hover:bg-red-700 transition-all active:scale-95"
+          className="w-full py-3 bg-red-600 text-white font-normal rounded-xl shadow-lg shadow-red-200 hover:bg-red-700 transition-all active:scale-95"
         >
           Pay Now / Settle Dues
         </button>

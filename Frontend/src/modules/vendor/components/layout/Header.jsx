@@ -138,7 +138,7 @@ const Header = memo(({
             </button>
           )}
           <div>
-            <h1 className="text-xl lg:text-2xl font-bold text-gray-800 leading-tight">
+            <h1 className="text-xl lg:text-2xl font-normal text-gray-800 leading-tight">
               {title || 'Vendor Hub'}
             </h1>
             <p className="text-[10px] sm:text-xs text-gray-500 font-medium hidden sm:block">
@@ -151,14 +151,14 @@ const Header = memo(({
         <div className="flex items-center gap-4">
           {/* Online Toggle Switch (Mobile Only) */}
           <div className="flex items-center gap-2 lg:hidden px-1">
-            <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Online</span>
+            <span className="text-[10px] font-normal text-gray-500 capitalize tracking-wider">{isOnline ? 'Online' : 'Offline'}</span>
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={handleToggleOnline}
               disabled={isToggling}
-              className={`w-9 h-5 rounded-full relative transition-all duration-500 ${isOnline ? 'bg-emerald-100' : 'bg-gray-200'}`}
+              className={`w-10 h-5.5 rounded-full relative transition-all duration-300 focus:outline-none ${isOnline ? 'bg-emerald-500' : 'bg-gray-300'}`}
             >
-              <div className={`absolute top-0.5 w-4 h-4 rounded transition-all duration-500 ${isOnline ? 'right-0.5 bg-emerald-500 shadow-sm' : 'left-0.5 bg-gray-400'}`} />
+              <div className={`absolute top-0.75 w-4 h-4 rounded-full bg-white shadow-sm transition-all duration-300 ${isOnline ? 'left-5.5' : 'left-0.75'}`} />
             </motion.button>
           </div>
 
@@ -182,7 +182,7 @@ const Header = memo(({
               
               {count > 0 && (
                 <span
-                  className="absolute top-1 right-1 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center min-w-[18px] h-[18px] px-1 border-2 border-white shadow-sm"
+                  className="absolute top-1 right-1 bg-red-500 text-white text-[10px] font-normal rounded-full flex items-center justify-center min-w-[18px] h-[18px] px-1 border-2 border-white shadow-sm"
                 >
                   {count > 99 ? '99+' : count}
                 </span>

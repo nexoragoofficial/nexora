@@ -126,7 +126,7 @@ const Wallet = () => {
       {/* Header - White Style - Hidden on Mobile */}
       <div className="hidden md:flex bg-white p-5 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
-          <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
+          <h2 className="text-2xl font-medium text-gray-900 tracking-tight leading-none">
             Financial Ledger
           </h2>
           <p className="text-gray-500 text-[11px] font-medium mt-2">
@@ -154,27 +154,27 @@ const Wallet = () => {
               <FiArrowUp className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Net Available Assets</p>
-              <p className="text-[8px] font-bold text-gray-500/80 uppercase tracking-widest mt-0.5">Real-time sync active</p>
+              <p className="text-[9px] font-medium text-blue-600 capitalize tracking-widest">Net Available Assets</p>
+              <p className="text-[8px] font-normal text-gray-500/80 capitalize tracking-widest mt-0.5">Real-time sync active</p>
             </div>
           </div>
 
           <div className="flex flex-col gap-4">
             <div className="flex flex-col">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-black text-gray-950 tracking-tighter">₹{wallet.balance?.toFixed(2)}</span>
-                <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mb-1">Available for payout</span>
+                <span className="text-3xl font-medium text-gray-950 tracking-tighter">₹{wallet.balance?.toFixed(2)}</span>
+                <span className="text-[8px] font-normal text-gray-500 capitalize tracking-widest mb-1">Available for payout</span>
               </div>
               <div className="flex items-center gap-1.5 mt-1.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[8px] font-black text-blue-600/70 uppercase tracking-[0.15em]">Weekly Payout Cycle</span>
+                <span className="text-[8px] font-medium text-blue-600/70 capitalize tracking-[0.15em]">Weekly Payout Cycle</span>
               </div>
             </div>
 
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/vendor/wallet/withdraw')}
-              className="w-full bg-blue-600 text-white py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest shadow hover:bg-blue-700 transition-all active:scale-95"
+              className="w-full bg-blue-600 text-white py-2.5 rounded-xl font-medium text-[10px] capitalize tracking-widest shadow hover:bg-blue-700 transition-all active:scale-95"
             >
               Withdraw
             </motion.button>
@@ -190,19 +190,19 @@ const Wallet = () => {
               <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center border border-rose-100 shrink-0">
                 <FiArrowDown className="w-4 h-4 text-rose-500" />
               </div>
-              <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Active Dues</p>
+              <p className="text-[8px] font-medium text-gray-400 capitalize tracking-widest">Active Dues</p>
             </div>
             
             <div className="flex flex-col mb-3.5">
-              <span className="text-xl font-black text-gray-900 tracking-tighter">₹{wallet.amountDue || 0}</span>
-              <span className="text-[8px] font-bold text-gray-400 uppercase mt-0.5">Current Liability</span>
+              <span className="text-xl font-medium text-gray-900 tracking-tighter">₹{wallet.amountDue || 0}</span>
+              <span className="text-[8px] font-normal text-gray-400 capitalize mt-0.5">Current Liability</span>
             </div>
           </div>
 
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/vendor/wallet/settle')}
-            className="w-full py-2 bg-red-600 text-white rounded-lg font-black text-[9px] uppercase tracking-wider shadow hover:bg-red-700 transition-all active:scale-95"
+            className="w-full py-2 bg-red-600 text-white rounded-lg font-medium text-[9px] capitalize tracking-wider shadow hover:bg-red-700 transition-all active:scale-95"
           >
             Clear Dues
           </motion.button>
@@ -215,18 +215,18 @@ const Wallet = () => {
               <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center border border-emerald-100 shrink-0">
                 <FiCheckCircle className="w-4 h-4 text-emerald-500" />
               </div>
-              <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Total Settled</p>
+              <p className="text-[8px] font-medium text-gray-400 capitalize tracking-widest">Total Settled</p>
             </div>
           </div>
           
           <div className="flex flex-col">
             <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-xl font-black text-gray-900 tracking-tighter">₹{wallet.totalSettled || 0}</span>
+              <span className="text-xl font-medium text-gray-900 tracking-tighter">₹{wallet.totalSettled || 0}</span>
             </div>
 
             <div className="flex items-center gap-1.5 mt-auto">
               <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[8px] font-black text-gray-500 uppercase tracking-widest">Verified Portfolio</span>
+              <span className="text-[8px] font-medium text-gray-500 capitalize tracking-widest">Verified Portfolio</span>
             </div>
           </div>
         </div>
@@ -237,9 +237,9 @@ const Wallet = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <FiClock className="text-blue-600 w-5 h-5" />
-            <p className="text-sm font-bold text-gray-800 uppercase tracking-widest">Cash Collection Limit</p>
+            <p className="text-sm font-normal text-gray-800 capitalize tracking-widest">Cash Collection Limit</p>
           </div>
-          <p className="text-base font-black text-blue-600">
+          <p className="text-base font-medium text-blue-600">
             ₹{(wallet.dues || 0).toLocaleString()} <span className="text-gray-300">/</span> ₹{(wallet.cashLimit || 10000).toLocaleString()}
           </p>
         </div>
@@ -254,7 +254,7 @@ const Wallet = () => {
         </div>
         <div className="mt-6 flex items-center gap-3 px-1">
           <FiAlertCircle className="text-gray-400 w-4 h-4 shrink-0" />
-          <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-relaxed">
+          <p className="text-[10px] font-normal text-gray-500 capitalize tracking-widest leading-relaxed">
             Maintain dues below 80% to ensure uninterrupted platform accessibility.
           </p>
         </div>
@@ -263,14 +263,14 @@ const Wallet = () => {
       {/* Transactions Section */}
       <div className="space-y-8">
         <div className="flex items-center justify-between px-2">
-          <h3 className="text-base font-bold text-gray-800 uppercase tracking-widest">Audit Ledger</h3>
+          <h3 className="text-base font-normal text-gray-800 capitalize tracking-widest">Audit Ledger</h3>
           
           <div className="flex gap-3 overflow-x-auto scrollbar-hide">
             {['all', 'cash_collected', 'settlement'].map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`text-[9px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-xl transition-all border ${filter === f 
+                className={`text-[9px] font-normal capitalize tracking-widest px-5 py-2.5 rounded-xl transition-all border ${filter === f 
                   ? 'bg-blue-600 text-white border-blue-500 shadow-lg shadow-blue-200' 
                   : 'bg-white text-gray-500 border-gray-100 hover:bg-gray-50 shadow-sm'
                 }`}
@@ -286,7 +286,7 @@ const Wallet = () => {
             <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner border border-gray-100">
               <span className="text-2xl">🧾</span>
             </div>
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">No activity recorded</p>
+            <p className="text-xs font-normal text-gray-400 capitalize tracking-widest">No activity recorded</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4">
@@ -307,18 +307,18 @@ const Wallet = () => {
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-base font-bold text-gray-900 truncate tracking-tight uppercase">
+                      <p className="text-base font-normal text-gray-900 truncate tracking-tight capitalize">
                         {getTransactionLabel(txn.type)}
                       </p>
-                      <p className={`text-lg font-black tracking-tight ${isNegative ? 'text-red-600' : 'text-blue-600'}`}>
+                      <p className={`text-lg font-medium tracking-tight ${isNegative ? 'text-red-600' : 'text-blue-600'}`}>
                         {isNegative ? '-' : '+'}₹{Math.abs(txn.amount).toLocaleString()}
                       </p>
                     </div>
                     <div className="flex items-center justify-between">
-                      <p className="text-[11px] font-medium text-gray-500 truncate uppercase">
+                      <p className="text-[11px] font-medium text-gray-500 truncate capitalize">
                         {txn.description}
                       </p>
-                      <span className="text-[10px] font-bold text-gray-400 uppercase">
+                      <span className="text-[10px] font-normal text-gray-400 capitalize">
                         {formatDate(txn.createdAt)}
                       </span>
                     </div>
@@ -334,7 +334,7 @@ const Wallet = () => {
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={() => navigate('/vendor/wallet/settlements')}
-        className="w-full mt-12 mb-10 py-5 rounded-[24px] font-bold text-[10px] text-gray-600 bg-white border border-gray-100 shadow-sm flex items-center justify-center gap-3 active:scale-95 transition-all uppercase tracking-widest hover:bg-gray-50 hover:text-blue-600"
+        className="w-full mt-12 mb-10 py-5 rounded-[24px] font-normal text-[10px] text-gray-600 bg-white border border-gray-100 shadow-sm flex items-center justify-center gap-3 active:scale-95 transition-all capitalize tracking-widest hover:bg-gray-50 hover:text-blue-600"
       >
         Detailed Analysis <FiArrowRight className="w-5 h-5" />
       </motion.button>

@@ -22,8 +22,8 @@ const ScanAndPayModal = ({
             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-blue-100 shadow-sm">
               <MdQrCode className="w-8 h-8" />
             </div>
-            <h2 className="text-2xl font-black text-gray-900 tracking-tight mb-2">Digital Receipt</h2>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-6">
+            <h2 className="text-2xl font-medium text-gray-900 tracking-tight mb-2">Digital Receipt</h2>
+            <p className="text-[10px] font-medium text-gray-400 capitalize tracking-[0.3em] mb-6">
               Invoicing <span className="text-blue-600">₹{amount.toFixed(2)}</span>
             </p>
 
@@ -37,14 +37,14 @@ const ScanAndPayModal = ({
                 className="w-full h-auto max-h-[350px] mx-auto mix-blend-multiply object-contain block"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
-                <span className="opacity-0 group-hover:opacity-100 text-[10px] font-black text-gray-900 bg-white/90 px-4 py-2 rounded-2xl shadow-2xl uppercase tracking-widest">Expand Protocol</span>
+                <span className="opacity-0 group-hover:opacity-100 text-[10px] font-medium text-gray-900 bg-white/90 px-4 py-2 rounded-2xl shadow-2xl capitalize tracking-widest">Expand Protocol</span>
               </div>
             </div>
 
             <div className="space-y-4">
               <button
                 onClick={onCheckStatus}
-                className="w-full py-6 bg-blue-600 text-white rounded-[28px] font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-blue-500/30 active:scale-95 transition-all flex items-center justify-center gap-4"
+                className="w-full py-6 bg-blue-600 text-white rounded-[28px] font-medium text-xs capitalize tracking-[0.2em] shadow-xl shadow-blue-500/30 active:scale-95 transition-all flex items-center justify-center gap-4"
               >
                 <FiCheckCircle className="w-5 h-5" />
                 Validate Transaction
@@ -52,7 +52,7 @@ const ScanAndPayModal = ({
               
               <button
                 onClick={onClose}
-                className="w-full py-4 text-gray-400 font-black uppercase tracking-widest text-[10px] hover:text-gray-600 transition-colors"
+                className="w-full py-4 text-gray-400 font-medium capitalize tracking-widest text-[10px] hover:text-gray-600 transition-colors"
               >
                 Abort Operation
               </button>
@@ -77,12 +77,12 @@ const ScanAndPayModal = ({
             </div>
             
             <div className="text-center mb-12">
-              <p className="text-gray-400 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Transaction Payload</p>
-              <p className="text-5xl font-black text-gray-900 tracking-tighter">₹{amount.toFixed(2)}</p>
+              <p className="text-gray-400 text-[10px] font-medium capitalize tracking-[0.4em] mb-4">Transaction Payload</p>
+              <p className="text-5xl font-medium text-gray-900 tracking-tighter">₹{amount.toFixed(2)}</p>
             </div>
 
             <button 
-              className="px-12 py-5 bg-gray-900 text-white rounded-[24px] font-black text-xs uppercase tracking-[0.2em] flex items-center gap-4 active:scale-95 transition-all shadow-2xl"
+              className="px-12 py-5 bg-gray-900 text-white rounded-[24px] font-medium text-xs capitalize tracking-[0.2em] flex items-center gap-4 active:scale-95 transition-all shadow-2xl"
               onClick={() => setIsZoomed(false)}
             >
               Close Asset View

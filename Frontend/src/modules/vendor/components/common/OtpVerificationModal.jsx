@@ -65,14 +65,14 @@ const OtpVerificationModal = ({ isOpen, onClose, onVerify, loading }) => {
             <div className="w-16 h-16 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 flex items-center justify-center shadow-2xl mb-4">
               <FiShield className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-white text-xs font-black uppercase tracking-[0.3em] opacity-80 mb-1">Secure Protocol</h2>
-            <p className="text-white text-xl font-black tracking-tight">Payment Verification</p>
+            <h2 className="text-white text-xs font-medium capitalize tracking-[0.3em] opacity-80 mb-1">Secure Protocol</h2>
+            <p className="text-white text-xl font-medium tracking-tight">Payment Verification</p>
           </div>
 
           {/* Body */}
           <div className="px-10 py-12 bg-white">
             <div className="text-center mb-10">
-              <p className="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed">
+              <p className="text-gray-400 text-[10px] font-medium capitalize tracking-[0.2em] leading-relaxed">
                 Enter the 4-digit verification code transmitted to the user
               </p>
             </div>
@@ -85,7 +85,7 @@ const OtpVerificationModal = ({ isOpen, onClose, onVerify, loading }) => {
                 onChange={handleChange}
                 disabled={loading}
                 placeholder="0000"
-                className="w-full text-center bg-gray-50 border border-gray-100 rounded-[2rem] py-8 text-6xl font-black tracking-[0.4em] text-gray-900 outline-none focus:border-blue-600/30 transition-all placeholder:text-gray-200 shadow-inner"
+                className="w-full text-center bg-gray-50 border border-gray-100 rounded-[2rem] py-8 text-6xl font-medium tracking-[0.4em] text-gray-900 outline-none focus:border-blue-600/30 transition-all placeholder:text-gray-200 shadow-inner"
               />
             </div>
 
@@ -95,10 +95,10 @@ const OtpVerificationModal = ({ isOpen, onClose, onVerify, loading }) => {
                   <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" />
                   <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-100" />
                   <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-200" />
-                  <span className="text-blue-600 font-black text-[10px] uppercase tracking-widest">Validating...</span>
+                  <span className="text-blue-600 font-medium text-[10px] capitalize tracking-widest">Validating...</span>
                 </div>
               ) : (
-                <div className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] flex items-center gap-2">
+                <div className="text-[10px] font-medium text-gray-400 capitalize tracking-[0.3em] flex items-center gap-2">
                   <FiSmartphone className="w-3 h-3 text-blue-600" />
                   Auto-verification Engaged
                 </div>

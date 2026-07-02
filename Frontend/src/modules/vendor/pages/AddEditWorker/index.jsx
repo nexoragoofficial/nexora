@@ -390,7 +390,7 @@ const AddEditWorker = () => {
           <div className="flex bg-white/50 backdrop-blur-md rounded-[24px] p-1.5 mb-10 border border-white shadow-sm">
             <button
               onClick={() => setActiveTab('new')}
-              className={`flex-1 py-3.5 rounded-[20px] text-[10px] font-[1000] uppercase tracking-[0.2em] transition-all duration-500 flex items-center justify-center gap-2 ${activeTab === 'new'
+              className={`flex-1 py-3.5 rounded-[20px] text-[10px] font-[1000] capitalize tracking-[0.2em] transition-all duration-500 flex items-center justify-center gap-2 ${activeTab === 'new'
                 ? 'bg-teal-600 text-white shadow-xl shadow-teal-900/20'
                 : 'text-black hover:text-teal-600'
                 }`}
@@ -400,7 +400,7 @@ const AddEditWorker = () => {
             </button>
             <button
               onClick={() => setActiveTab('link')}
-              className={`flex-1 py-3.5 rounded-[20px] text-[10px] font-[1000] uppercase tracking-[0.2em] transition-all duration-500 flex items-center justify-center gap-2 ${activeTab === 'link'
+              className={`flex-1 py-3.5 rounded-[20px] text-[10px] font-[1000] capitalize tracking-[0.2em] transition-all duration-500 flex items-center justify-center gap-2 ${activeTab === 'link'
                 ? 'bg-teal-600 text-white shadow-xl shadow-teal-900/20'
                 : 'text-black hover:text-teal-600'
                 }`}
@@ -419,7 +419,7 @@ const AddEditWorker = () => {
             </div>
             <div>
               <h3 className="text-xl font-[1000] text-gray-900 tracking-tight mb-3">Sync Existing Worker</h3>
-              <p className="text-[11px] font-black text-gray-400 uppercase tracking-tighter leading-relaxed px-4 opacity-70">
+              <p className="text-[11px] font-medium text-gray-400 capitalize tracking-tighter leading-relaxed px-4 opacity-70">
                 Enter the verified phone number to instantly authorize a registered worker.
               </p>
             </div>
@@ -438,7 +438,7 @@ const AddEditWorker = () => {
             <button
               onClick={handleLinkWorker}
               disabled={loading}
-              className="w-full py-5.5 text-white rounded-[28px] font-[1000] text-[11px] uppercase tracking-[0.25em] bg-black shadow-2xl shadow-black/10 active:scale-95 transition-all flex items-center justify-center gap-3 mt-6"
+              className="w-full py-5.5 text-white rounded-[28px] font-[1000] text-[11px] capitalize tracking-[0.25em] bg-black shadow-2xl shadow-black/10 active:scale-95 transition-all flex items-center justify-center gap-3 mt-6"
             >
               {loading ? 'Searching...' : 'Search & Authorize'}
             </button>
@@ -479,45 +479,45 @@ const AddEditWorker = () => {
                   <FiPlusCircle className="w-5 h-5" />
                 </div>
               </div>
-              <p className="text-teal-600/40 text-[9px] font-[1000] uppercase tracking-[0.3em] mt-7">Worker Snapshot</p>
+              <p className="text-teal-600/40 text-[9px] font-[1000] capitalize tracking-[0.3em] mt-7">Worker Snapshot</p>
             </div>
 
             {/* Basic Info */}
             <div className="bg-white/70 backdrop-blur-md rounded-[40px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-white/60 space-y-8">
-              <h4 className="text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.25em]">Personal Details</h4>
+              <h4 className="text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.25em]">Personal Details</h4>
 
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-[9px] font-[1000] text-gray-400 uppercase tracking-widest ml-1">Full Identity</label>
+                  <label className="text-[9px] font-[1000] text-gray-400 capitalize tracking-widest ml-1">Full Identity</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
                     placeholder="NAME"
-                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:ring-4 focus:ring-teal-500/5 outline-none text-[13px] font-black text-gray-900 uppercase tracking-widest transition-all"
+                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:ring-4 focus:ring-teal-500/5 outline-none text-[13px] font-medium text-gray-900 capitalize tracking-widest transition-all"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[9px] font-[1000] text-gray-400 uppercase tracking-widest ml-1">Phone Line</label>
+                  <label className="text-[9px] font-[1000] text-gray-400 capitalize tracking-widest ml-1">Phone Line</label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
                     placeholder="0000000000"
-                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:ring-4 focus:ring-teal-500/5 outline-none text-[13px] font-black text-gray-900 tracking-[0.25em] transition-all"
+                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:ring-4 focus:ring-teal-500/5 outline-none text-[13px] font-medium text-gray-900 tracking-[0.25em] transition-all"
                     maxLength={10}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[9px] font-[1000] text-gray-400 uppercase tracking-widest ml-1">Email Contact</label>
+                  <label className="text-[9px] font-[1000] text-gray-400 capitalize tracking-widest ml-1">Email Contact</label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     placeholder="OPTIONAL"
-                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:ring-4 focus:ring-teal-500/5 outline-none text-[13px] font-black text-gray-900 uppercase tracking-widest transition-all"
+                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:ring-4 focus:ring-teal-500/5 outline-none text-[13px] font-medium text-gray-900 capitalize tracking-widest transition-all"
                   />
                 </div>
               </div>
@@ -525,11 +525,11 @@ const AddEditWorker = () => {
 
             {/* Address Info */}
             <div className="bg-white/70 backdrop-blur-md rounded-[40px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-white/60 space-y-8">
-              <h4 className="text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.25em]">Operational Node</h4>
+              <h4 className="text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.25em]">Operational Node</h4>
 
               <div className="p-6 bg-teal-50/50 rounded-[32px] border border-teal-100/30 flex items-start gap-4">
                 <FiMapPin className="text-teal-600 w-5 h-5 mt-0.5" />
-                <p className="text-[12px] font-black text-gray-900 leading-relaxed tracking-tight">
+                <p className="text-[12px] font-medium text-gray-900 leading-relaxed tracking-tight">
                   {formData.address?.fullAddress ||
                     (formData.address?.addressLine1 ? `${formData.address.addressLine1}, ${formData.address.city}` : 'ADDRESS NOT ASSIGNED')
                   }
@@ -538,7 +538,7 @@ const AddEditWorker = () => {
 
               <button
                 onClick={() => setIsAddressModalOpen(true)}
-                className="w-full py-4.5 bg-white text-gray-900 rounded-2xl font-[1000] text-[10px] uppercase tracking-widest border border-black/[0.05] hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-4.5 bg-white text-gray-900 rounded-2xl font-[1000] text-[10px] capitalize tracking-widest border border-black/[0.05] hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm"
               >
                 Set Location Coordinates
               </button>
@@ -546,17 +546,17 @@ const AddEditWorker = () => {
 
             {/* Work Profile */}
             <div className="bg-white/70 backdrop-blur-md rounded-[40px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-white/60 space-y-8">
-              <h4 className="text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.25em]">Expertise Profile</h4>
+              <h4 className="text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.25em]">Expertise Profile</h4>
 
               {/* Category Dropdown */}
               <div>
-                <label className="text-[9px] font-[1000] text-gray-400 uppercase tracking-widest mb-3 block ml-1">Specializations</label>
+                <label className="text-[9px] font-[1000] text-gray-400 capitalize tracking-widest mb-3 block ml-1">Specializations</label>
                 <div className="relative">
                   <button
                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                     className="w-full px-6 py-4.5 bg-white rounded-2xl border border-black/[0.03] flex items-center justify-between focus:border-teal-500/30 outline-none shadow-sm"
                   >
-                    <span className={`text-[12px] font-black uppercase tracking-widest truncate ${formData.serviceCategories.length > 0 ? 'text-gray-900' : 'text-gray-300'}`}>
+                    <span className={`text-[12px] font-medium capitalize tracking-widest truncate ${formData.serviceCategories.length > 0 ? 'text-gray-900' : 'text-gray-300'}`}>
                       {formData.serviceCategories.length > 0
                         ? `${formData.serviceCategories.length} Categories Selected`
                         : 'Select Skillsets'}
@@ -575,14 +575,14 @@ const AddEditWorker = () => {
                               onClick={() => toggleCategory(cat.title)}
                               className="w-full text-left px-6 py-4.5 hover:bg-teal-50/50 rounded-2xl transition-all border-b border-black/[0.02] last:border-0 flex items-center justify-between group"
                             >
-                              <span className="text-[11px] font-[1000] text-gray-900 uppercase tracking-widest group-hover:translate-x-1 transition-transform">{cat.title}</span>
+                              <span className="text-[11px] font-[1000] text-gray-900 capitalize tracking-widest group-hover:translate-x-1 transition-transform">{cat.title}</span>
                               {formData.serviceCategories.includes(cat.title) && (
                                 <div className="w-2.5 h-2.5 rounded-full bg-teal-600 shadow-lg shadow-teal-900/20" />
                               )}
                             </button>
                           ))
                         ) : (
-                          <div className="px-6 py-5 text-gray-300 text-[10px] font-black uppercase tracking-widest text-center">No categories found</div>
+                          <div className="px-6 py-5 text-gray-300 text-[10px] font-medium capitalize tracking-widest text-center">No categories found</div>
                         )}
                       </div>
                     </>
@@ -595,7 +595,7 @@ const AddEditWorker = () => {
                     {formData.serviceCategories.map((cat, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center px-4 py-2 bg-teal-50 text-teal-700 rounded-xl text-[9px] font-[1000] uppercase tracking-widest border border-teal-100"
+                        className="inline-flex items-center px-4 py-2 bg-teal-50 text-teal-700 rounded-xl text-[9px] font-[1000] capitalize tracking-widest border border-teal-100"
                       >
                         {cat}
                         <button
@@ -614,15 +614,15 @@ const AddEditWorker = () => {
             {/* Documents */}
             {!isEdit && (
               <div className="bg-white/70 backdrop-blur-md rounded-[40px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-white/60 space-y-8">
-                <h4 className="text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.25em]">Identity Verification</h4>
+                <h4 className="text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.25em]">Identity Verification</h4>
                 <div className="space-y-2">
-                  <label className="text-[9px] font-[1000] text-gray-400 uppercase tracking-widest ml-1">Aadhar Identification</label>
+                  <label className="text-[9px] font-[1000] text-gray-400 capitalize tracking-widest ml-1">Aadhar Identification</label>
                   <input
                     type="text"
                     value={formData.aadhar.number}
                     onChange={(e) => handleInputChange('aadhar.number', e.target.value)}
                     placeholder="0000 0000 0000"
-                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:bg-white outline-none text-[14px] font-black text-gray-900 tracking-[0.4em] transition-all"
+                    className="w-full px-6 py-4.5 bg-white border border-black/[0.03] rounded-2xl focus:border-teal-500/30 focus:bg-white outline-none text-[14px] font-medium text-gray-900 tracking-[0.4em] transition-all"
                     maxLength={12}
                   />
                 </div>
@@ -642,22 +642,22 @@ const AddEditWorker = () => {
                         <div className="w-16 h-16 bg-teal-600 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-teal-900/20">
                           <FiCheck className="w-7 h-7" />
                         </div>
-                        <span className="text-[10px] font-[1000] text-gray-900 uppercase tracking-widest truncate max-w-[200px]">{aadharFile.name}</span>
+                        <span className="text-[10px] font-[1000] text-gray-900 capitalize tracking-widest truncate max-w-[200px]">{aadharFile.name}</span>
                       </div>
                     ) : formData.aadhar.document && formData.aadhar.document !== 'data:image/png;base64,placeholder' ? (
                       <div className="flex flex-col items-center gap-3">
                         <div className="w-16 h-16 bg-white border border-teal-100 text-teal-600 rounded-2xl flex items-center justify-center shadow-sm">
                           <FiUpload className="w-7 h-7" />
                         </div>
-                        <p className="text-[10px] font-[1000] text-teal-600 uppercase tracking-widest">Document Verified</p>
+                        <p className="text-[10px] font-[1000] text-teal-600 capitalize tracking-widest">Document Verified</p>
                       </div>
                     ) : (
                       <>
                         <div className="w-16 h-16 bg-white border border-teal-50 text-teal-200 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-sm">
                           <FiUpload className="w-7 h-7" />
                         </div>
-                        <span className="text-[10px] font-[1000] text-gray-400 uppercase tracking-widest">Upload Digital Identity</span>
-                        <span className="text-[8px] font-black text-teal-300 mt-2 uppercase tracking-[0.2em]">Government Issued ID</span>
+                        <span className="text-[10px] font-[1000] text-gray-400 capitalize tracking-widest">Upload Digital Identity</span>
+                        <span className="text-[8px] font-medium text-teal-300 mt-2 capitalize tracking-[0.2em]">Government Issued ID</span>
                       </>
                     )}
                   </div>
@@ -669,7 +669,7 @@ const AddEditWorker = () => {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="w-full py-6 text-white rounded-[32px] font-[1000] text-[13px] uppercase tracking-[0.35em] shadow-2xl shadow-teal-900/20 active:scale-95 transition-all flex items-center justify-center gap-4 bg-teal-600"
+              className="w-full py-6 text-white rounded-[32px] font-[1000] text-[13px] capitalize tracking-[0.35em] shadow-2xl shadow-teal-900/20 active:scale-95 transition-all flex items-center justify-center gap-4 bg-teal-600"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

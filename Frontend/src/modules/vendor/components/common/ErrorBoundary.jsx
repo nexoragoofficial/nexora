@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component {
               <FiAlertTriangle className="w-12 h-12 text-rose-500" />
             </div>
             
-            <h2 className="text-3xl font-black text-gray-900 tracking-tight mb-3 uppercase leading-tight">
+            <h2 className="text-3xl font-medium text-gray-900 tracking-tight mb-3 capitalize leading-tight">
               Operational Protocol Interrupted
             </h2>
             
@@ -39,7 +39,7 @@ class ErrorBoundary extends React.Component {
             
             <button
               onClick={() => window.location.reload()}
-              className="group flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all active:scale-95"
+              className="group flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl font-medium text-[10px] capitalize tracking-widest shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all active:scale-95"
             >
               <FiRefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-700" />
               Re-initialize Interface
@@ -49,7 +49,7 @@ class ErrorBoundary extends React.Component {
               <div className="mt-12 w-full text-left">
                 <details className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden group">
                   <summary className="flex items-center justify-between cursor-pointer p-4 hover:bg-gray-100 transition-all select-none">
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Diagnostic Intel</span>
+                    <span className="text-[10px] font-medium text-gray-400 capitalize tracking-widest">Diagnostic Intel</span>
                     <FiChevronRight className="w-4 h-4 text-gray-400 group-open:rotate-90 transition-transform" />
                   </summary>
                   <div className="p-4 border-t border-gray-100 bg-white">

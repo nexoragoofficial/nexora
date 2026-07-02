@@ -105,7 +105,7 @@ const AssignWorker = () => {
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-3">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"></div>
-          <p className="text-gray-400 font-black text-[10px] uppercase tracking-widest">Loading workers...</p>
+          <p className="text-gray-400 font-medium text-[10px] capitalize tracking-widest">Loading workers...</p>
         </div>
       </div>
     );
@@ -125,12 +125,12 @@ const AssignWorker = () => {
       <main className="px-4 py-6">
         {/* Booking Summary (Black Theme) */}
         <div className="bg-white rounded-[32px] p-6 mb-6 shadow-sm border border-gray-100">
-          <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Active Booking</p>
-          <h3 className="text-xl font-black text-gray-900 mb-2">{booking.serviceName || booking.serviceId?.title || 'Service'}</h3>
+          <p className="text-[10px] font-medium capitalize tracking-widest text-gray-400 mb-1">Active Booking</p>
+          <h3 className="text-xl font-medium text-gray-900 mb-2">{booking.serviceName || booking.serviceId?.title || 'Service'}</h3>
           <p className="text-xs font-medium text-gray-500 leading-relaxed">{getAddressString(booking.address || booking.location)}</p>
           <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
-            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Total Value</span>
-            <span className="text-lg font-black text-black">
+            <span className="text-[10px] font-medium capitalize tracking-widest text-gray-400">Total Value</span>
+            <span className="text-lg font-medium text-black">
               ₹{booking.finalAmount || booking.price || 0}
             </span>
           </div>
@@ -170,8 +170,8 @@ const AssignWorker = () => {
                 )}
               </div>
               <div className="flex-1">
-                <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Do it Myself</h3>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter mt-1">Assign booking to your personal profile</p>
+                <h3 className="text-sm font-medium text-gray-900 capitalize tracking-widest">Do it Myself</h3>
+                <p className="text-[10px] font-normal text-gray-400 capitalize tracking-tighter mt-1">Assign booking to your personal profile</p>
               </div>
             </div>
           </button>
@@ -180,8 +180,8 @@ const AssignWorker = () => {
         {/* Available Workers (Black Theme) */}
         <div>
           <div className="flex items-center justify-between mb-4 px-1">
-            <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Available Workers</h3>
-            <span className="text-[10px] font-black text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">{workers.length} Online</span>
+            <h3 className="text-sm font-medium text-gray-900 capitalize tracking-widest">Available Workers</h3>
+            <span className="text-[10px] font-medium text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">{workers.length} Online</span>
           </div>
 
           {workers.length === 0 ? (
@@ -189,11 +189,11 @@ const AssignWorker = () => {
               <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-100">
                 <FiUser className="w-8 h-8 text-gray-200" />
               </div>
-              <p className="text-sm font-black text-gray-900 uppercase tracking-widest mb-1">No Available Workers</p>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter mb-6">All workers are currently assigned or offline</p>
+              <p className="text-sm font-medium text-gray-900 capitalize tracking-widest mb-1">No Available Workers</p>
+              <p className="text-[10px] font-normal text-gray-400 capitalize tracking-tighter mb-6">All workers are currently assigned or offline</p>
               <button
                 onClick={() => navigate('/vendor/workers/add')}
-                className="px-6 py-3 rounded-xl font-black text-white text-[10px] uppercase tracking-widest bg-black shadow-lg shadow-gray-200 active:scale-95 transition-all"
+                className="px-6 py-3 rounded-xl font-medium text-white text-[10px] capitalize tracking-widest bg-black shadow-lg shadow-gray-200 active:scale-95 transition-all"
               >
                 Add New Worker
               </button>
@@ -238,13 +238,13 @@ const AssignWorker = () => {
                         )}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">{worker.name}</h3>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter mt-1">{worker.phone}</p>
+                        <h3 className="text-sm font-medium text-gray-900 capitalize tracking-widest">{worker.name}</h3>
+                        <p className="text-[10px] font-normal text-gray-400 capitalize tracking-tighter mt-1">{worker.phone}</p>
                         <div className="flex flex-wrap gap-2 mt-3">
                           {worker.skills?.slice(0, 2).map((skill, index) => (
                             <span
                               key={index}
-                              className="px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-tighter bg-gray-100 text-gray-600 border border-gray-200"
+                              className="px-2 py-0.5 rounded-md text-[8px] font-medium capitalize tracking-tighter bg-gray-100 text-gray-600 border border-gray-200"
                             >
                               {typeof skill === 'string' ? skill : skill.name || skill.title || 'Skill'}
                             </span>
@@ -264,7 +264,7 @@ const AssignWorker = () => {
           <button
             onClick={handleAssign}
             disabled={(!assignToSelf && !selectedWorker) || assigning}
-            className="w-full py-5 rounded-[24px] font-black text-xs uppercase tracking-widest text-white bg-black flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-20 disabled:grayscale shadow-xl shadow-gray-200"
+            className="w-full py-5 rounded-[24px] font-medium text-xs capitalize tracking-widest text-white bg-black flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-20 disabled:grayscale shadow-xl shadow-gray-200"
           >
             {assigning ? (
               <>

@@ -90,10 +90,10 @@ const VendorSidebar = ({ isOpen, setIsOpen }) => {
               <FiUser className="text-white text-xl" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="font-bold text-white text-sm tracking-tight truncate">
+              <h2 className="font-normal text-white text-sm tracking-tight truncate">
                 Verified Partner
               </h2>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest truncate flex items-center gap-1">
+              <p className="text-[10px] font-normal text-gray-400 capitalize tracking-widest truncate flex items-center gap-1">
                 <FiStar className="w-2.5 h-2.5 text-blue-400" /> ID: #V-7742
               </p>
             </div>
@@ -127,11 +127,11 @@ const VendorSidebar = ({ isOpen, setIsOpen }) => {
               `}
             >
               <item.icon className={`text-lg flex-shrink-0 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-white' : 'text-gray-500'}`} />
-              <span className={`font-bold flex-1 text-[13px] whitespace-nowrap ${isActive ? 'text-white' : ''}`}>
+              <span className={`font-normal flex-1 text-[13px] whitespace-nowrap ${isActive ? 'text-white' : ''}`}>
                 {item.label}
               </span>
               {Number(item.badge) > 0 && (
-                <span className="bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm animate-pulse">
+                <span className="bg-red-500 text-white text-[10px] font-medium px-2 py-0.5 rounded-full shadow-sm animate-pulse">
                   {item.badge > 99 ? '99+' : item.badge}
                 </span>
               )}
@@ -143,8 +143,8 @@ const VendorSidebar = ({ isOpen, setIsOpen }) => {
       {/* Footer Branding */}
       <div className="p-6 border-t border-slate-700 bg-slate-900">
         <div className="flex flex-col gap-1 opacity-60">
-          <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Protocol v2.4.0</p>
-          <p className="text-[9px] font-bold text-blue-400 uppercase tracking-wide">Powered by Nexora</p>
+          <p className="text-[10px] font-normal text-gray-500 capitalize tracking-wider">Protocol v2.4.0</p>
+          <p className="text-[9px] font-normal text-blue-400 capitalize tracking-wide">Powered by Nexora</p>
         </div>
       </div>
     </aside>

@@ -607,41 +607,41 @@ export default function BookingDetails() {
           transition={{ duration: 0.5 }}
           className="min-h-screen pb-20 relative bg-gray-50"
         >
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-6">
+      <header className="sticky top-0 z-40 bg-white border-b border-gray-100 px-4 py-3 md:px-6 md:py-4 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-4 md:gap-6">
           <motion.button 
             whileTap={{ scale: 0.9 }}
             onClick={() => navigate(-1)}
-            className="w-10 h-10 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition-colors"
+            className="w-8 h-8 md:w-10 md:h-10 bg-gray-50 rounded-lg md:rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition-colors"
           >
-            <FiX className="w-5 h-5 text-gray-600" />
+            <FiX className="w-4 h-4 md:w-5 md:h-5 text-gray-600" />
           </motion.button>
           <div className="flex flex-col">
-            <h1 className="text-xl font-black text-gray-900 tracking-tight leading-none">Job Intel</h1>
-            <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest mt-1.5">Deployment ID: {id?.slice(-6).toUpperCase()}</span>
+            <h1 className="text-lg md:text-xl font-medium text-gray-900 tracking-tight leading-none">Job Intel</h1>
+            <span className="text-[9px] md:text-[10px] font-medium text-blue-600 capitalize tracking-widest mt-1 md:mt-1.5">Deployment ID: {id?.slice(-6).toUpperCase()}</span>
           </div>
         </div>
-        <div className="w-10 h-10 bg-blue-50 rounded-xl border border-blue-100 flex items-center justify-center">
-          <FiBriefcase className="w-5 h-5 text-blue-600" />
+        <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-50 rounded-lg md:rounded-xl border border-blue-100 flex items-center justify-center">
+          <FiBriefcase className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
         </div>
       </header>
 
-      <main className="px-6 pt-8 pb-20 relative z-10 max-w-7xl mx-auto">
+      <main className="px-4 pt-4 pb-16 md:px-6 md:pt-8 md:pb-20 relative z-10 max-w-7xl mx-auto">
         {/* Service Archetype Card */}
-        <div className="bg-white rounded-3xl p-6 mb-6 border border-gray-100 shadow-sm">
-          <div className="flex items-start justify-between gap-6">
+        <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 mb-4 md:mb-6 border border-gray-100 shadow-sm">
+          <div className="flex items-start justify-between gap-3 md:gap-6">
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Service Specialization</p>
-              <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-tight uppercase">
+              <p className="text-[9px] md:text-[10px] font-medium capitalize tracking-widest text-gray-400 mb-1.5 md:mb-2">Service Specialization</p>
+              <h2 className="text-lg md:text-2xl font-medium text-gray-900 tracking-tight leading-tight capitalize">
                 {booking.serviceType}
               </h2>
             </div>
-            <div className="flex flex-col items-end gap-3 shrink-0">
-              <div className="px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest bg-blue-600 text-white shadow-lg shadow-blue-500/20">
+            <div className="flex flex-col items-end gap-2 md:gap-3 shrink-0">
+              <div className="px-3.5 py-1.5 md:px-5 md:py-2 rounded-lg md:rounded-xl text-[9px] md:text-[10px] font-medium capitalize tracking-widest bg-blue-600 text-white shadow-lg shadow-blue-500/20">
                 {booking.status.replace('_', ' ')}
               </div>
               {booking.assignedTo?.name === 'You (Self)' && (
-                <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 uppercase tracking-widest">
+                <span className="text-[9px] md:text-[10px] font-medium text-blue-600 bg-blue-50 px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg border border-blue-100 capitalize tracking-widest">
                   Internal Ops
                 </span>
               )}
@@ -650,46 +650,46 @@ export default function BookingDetails() {
         </div>
 
         {/* Identity Matrix Card */}
-        <div className="bg-white rounded-3xl p-6 mb-6 border border-gray-100 shadow-sm">
+        <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 mb-4 md:mb-6 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-5">
-              <div className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center">
-                <FiUser className="w-8 h-8 text-gray-300" />
+            <div className="flex items-center gap-4 md:gap-5">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center">
+                <FiUser className="w-6 h-6 md:w-8 md:h-8 text-gray-300" />
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1.5">Target Client</p>
-                <p className="text-xl font-black text-gray-900 leading-tight tracking-tight uppercase">{booking.user?.name || booking.customerName || 'Client'}</p>
-                <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Verified Network</p>
+                <p className="text-[9px] md:text-[10px] font-medium capitalize tracking-widest text-gray-400 mb-1 md:mb-1.5">Target Client</p>
+                <p className="text-base md:text-xl font-medium text-gray-900 leading-tight tracking-tight capitalize">{booking.user?.name || booking.customerName || 'Client'}</p>
+                <p className="text-[9px] md:text-[10px] font-normal text-blue-600 capitalize tracking-widest mt-0.5 md:mt-1">Verified Network</p>
               </div>
             </div>
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={handleCallUser}
-              className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all"
             >
-              <FiPhone className="w-6 h-6 text-white" />
+              <FiPhone className="w-4.5 h-4.5 md:w-6 md:h-6 text-white" />
             </motion.button>
           </div>
         </div>
 
         {/* Geospatial Deployment Base */}
-        <div className="bg-white rounded-3xl p-6 mb-6 border border-gray-100 shadow-sm">
-          <div className="flex items-start gap-5 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
-              <FiMapPin className="w-6 h-6 text-blue-600" />
+        <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 mb-4 md:mb-6 border border-gray-100 shadow-sm">
+          <div className="flex items-start gap-4 md:gap-5 mb-4 md:mb-6">
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
+              <FiMapPin className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
             </div>
             <div className="flex-1 min-w-0 pt-0.5">
-              <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Service Base Coordinates</p>
-              <p className="text-base font-bold text-gray-800 leading-relaxed tracking-tight uppercase">{booking?.location?.address || 'Location not specified'}</p>
-              <div className="flex items-center gap-3 mt-3">
-                <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 uppercase tracking-widest">
+              <p className="text-[9px] md:text-[10px] font-medium capitalize tracking-widest text-gray-400 mb-1.5 md:mb-2">Service Base Coordinates</p>
+              <p className="text-sm md:text-base font-normal text-gray-800 leading-relaxed tracking-tight capitalize">{booking?.location?.address || 'Location not specified'}</p>
+              <div className="flex items-center gap-2.5 mt-2 md:mt-3">
+                <span className="text-[9px] md:text-[10px] font-medium text-blue-600 bg-blue-50 px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg border border-blue-100 capitalize tracking-widest">
                   {booking?.location?.distance || 'N/A'} Proximal
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="w-full h-64 rounded-[32px] overflow-hidden mb-8 border border-white/5 relative group cursor-pointer shadow-2xl" onClick={() => navigate(`/vendor/booking/${booking.id}/map`)}>
+          <div className="w-full h-44 md:h-64 rounded-2xl md:rounded-[32px] overflow-hidden mb-4 md:mb-8 border border-white/5 relative group cursor-pointer shadow-2xl" onClick={() => navigate(`/vendor/booking/${booking.id}/map`)}>
             {(() => {
               const hasCoordinates = booking.location.lat && booking.location.lng && booking.location.lat !== 0 && booking.location.lng !== 0;
               const mapQuery = hasCoordinates ? `${booking.location.lat},${booking.location.lng}` : encodeURIComponent(booking.location.address);
@@ -706,7 +706,7 @@ export default function BookingDetails() {
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                     <motion.span 
                       whileHover={{ scale: 1.05 }}
-                      className="bg-blue-600 text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-[0.2em] shadow-2xl"
+                      className="bg-blue-600 text-white px-5 py-2.5 md:px-8 md:py-4 rounded-xl md:rounded-2xl text-[10px] md:text-xs font-medium capitalize tracking-[0.2em] shadow-2xl"
                     >
                       Maximize Analytics
                     </motion.span>
@@ -716,13 +716,13 @@ export default function BookingDetails() {
             })()}
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-3 md:gap-4">
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate(`/vendor/booking/${booking.id || id}/map`)}
-              className="flex-1 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest border border-gray-200 flex items-center justify-center gap-3 bg-white text-gray-700 hover:bg-gray-50 transition-all shadow-sm"
+              className="flex-1 py-2.5 md:py-4 rounded-xl md:rounded-2xl font-medium text-[9px] md:text-[10px] capitalize tracking-widest border border-gray-200 flex items-center justify-center gap-2 md:gap-3 bg-white text-gray-700 hover:bg-gray-50 transition-all shadow-sm"
             >
-              <FiMapPin className="w-4 h-4 text-blue-600" />
+              <FiMapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-600" />
               Base View
             </motion.button>
             <motion.button
@@ -732,73 +732,73 @@ export default function BookingDetails() {
                 const dest = hasCoords ? `${booking.location.lat},${booking.location.lng}` : encodeURIComponent(booking.location.address);
                 window.location.href = `https://www.google.com/maps/dir/?api=1&destination=${dest}`;
               }}
-              className="flex-1 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest text-white flex items-center justify-center gap-3 bg-blue-600 shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all"
+              className="flex-1 py-2.5 md:py-4 rounded-xl md:rounded-2xl font-medium text-[9px] md:text-[10px] capitalize tracking-widest text-white flex items-center justify-center gap-2 md:gap-3 bg-blue-600 shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all"
             >
-              <FiNavigation className="w-4 h-4 text-blue-200" />
+              <FiNavigation className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-200" />
               Navigate
             </motion.button>
           </div>
         </div>
 
         {/* Schedule Intel */}
-        <div className="bg-white rounded-3xl p-6 mb-6 border border-gray-100 shadow-sm">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center shrink-0 border border-amber-100">
-              <FiClock className="w-6 h-6 text-amber-500" />
+        <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 mb-4 md:mb-6 border border-gray-100 shadow-sm">
+          <div className="flex items-center gap-4 md:gap-5">
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-amber-50 flex items-center justify-center shrink-0 border border-amber-100">
+              <FiClock className="w-5 h-5 md:w-6 md:h-6 text-amber-500" />
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1.5">Temporal Slot</p>
-              <p className="text-base font-bold text-gray-800 tracking-tight">{booking?.timeSlot?.date || 'Date not set'}</p>
-              <p className="text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-1">{booking?.timeSlot?.time || 'Time not set'}</p>
+              <p className="text-[9px] md:text-[10px] font-medium capitalize tracking-widest text-gray-400 mb-1 md:mb-1.5">Temporal Slot</p>
+              <p className="text-sm md:text-base font-normal text-gray-800 tracking-tight">{booking?.timeSlot?.date || 'Date not set'}</p>
+              <p className="text-[9px] md:text-[10px] font-normal text-amber-600 capitalize tracking-widest mt-0.5 md:mt-1">{booking?.timeSlot?.time || 'Time not set'}</p>
             </div>
           </div>
         </div>
 
         {/* Core Financial Invoice Module */}
-        <div className="bg-white rounded-[32px] overflow-hidden border border-gray-100 mb-8 shadow-sm">
-          <div className="bg-blue-600 px-8 py-10 text-white text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px]" />
-            <p className="text-[10px] font-black uppercase tracking-widest text-blue-100 mb-3">Contractual Settlement</p>
-            <h2 className="text-4xl font-black tracking-tighter">₹{finalTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-            <div className="mt-4 flex items-center justify-center gap-2">
-              <div className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${booking.paymentStatus === 'SUCCESS' || booking.paymentStatus === 'paid' ? 'bg-white/20 text-white' : 'bg-amber-400 text-black'}`}>
+        <div className="bg-white rounded-2xl md:rounded-[32px] overflow-hidden border border-gray-100 mb-4 md:mb-6 shadow-sm">
+          <div className="bg-blue-600 px-4 py-4 md:px-8 md:py-8 text-white text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-[30px]" />
+            <p className="text-[9px] md:text-[10px] font-medium capitalize tracking-widest text-blue-100 mb-1.5 md:mb-2">Contractual Settlement</p>
+            <h2 className="text-xl md:text-3xl font-medium tracking-tighter">₹{finalTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+            <div className="mt-2 md:mt-3 flex items-center justify-center gap-2">
+              <div className={`px-2 py-0.5 rounded-full text-[8px] md:text-[9px] font-medium capitalize tracking-widest ${booking.paymentStatus === 'SUCCESS' || booking.paymentStatus === 'paid' ? 'bg-white/20 text-white' : 'bg-amber-400 text-black'}`}>
                 {booking.paymentMethod?.replace('_', ' ') || 'UNPAID'} • {booking.paymentStatus || 'PENDING'}
               </div>
             </div>
             {isPlanBenefit && (
-              <div className="inline-flex mt-4 bg-teal-500/20 text-teal-100 border border-teal-500/30 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
+              <div className="inline-flex mt-2.5 bg-teal-500/20 text-teal-100 border border-teal-500/30 px-2.5 py-0.5 rounded-full text-[8px] font-medium capitalize tracking-widest">
                 Internal Membership Applied
               </div>
             )}
           </div>
-          <div className="p-8 space-y-8">
+          <div className="p-4 md:p-6 space-y-5 md:space-y-6">
             {/* Core Provision Analytics */}
             <div>
-              <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-3 mb-6">
-                <span className="w-8 h-8 rounded-xl bg-gray-50 text-blue-600 flex items-center justify-center border border-gray-100"><FiActivity className="w-4 h-4" /></span>
+              <h4 className="text-[10px] font-medium text-gray-400 capitalize tracking-widest flex items-center gap-2.5 mb-4">
+                <span className="w-7 h-7 rounded-lg bg-gray-50 text-blue-600 flex items-center justify-center border border-gray-100"><FiActivity className="w-3.5 h-3.5" /></span>
                 Core Provision Analytics
               </h4>
-              <div className="space-y-4 pl-1">
+              <div className="space-y-2 md:space-y-3.5 pl-1">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-gray-500 uppercase tracking-tight text-xs">Service Provision Base</span>
+                  <span className="font-normal text-gray-500 capitalize tracking-tight text-[11px] md:text-xs">Service Provision Base</span>
                   {isPlanBenefit ? (
                     <div className="flex flex-col items-end">
-                      <span className="font-bold text-gray-900 text-sm">₹0.00</span>
-                      <span className="text-blue-600 font-black text-[8px] bg-blue-50 px-2 py-0.5 rounded border border-blue-100 uppercase tracking-widest mt-1">FREE</span>
+                      <span className="font-normal text-gray-900 text-xs md:text-sm">₹0.00</span>
+                      <span className="text-blue-600 font-medium text-[8px] bg-blue-50 px-2 py-0.5 rounded border border-blue-100 capitalize tracking-widest mt-1">FREE</span>
                     </div>
                   ) : (
-                    <span className="font-bold text-gray-900 text-sm">₹{originalBase.toFixed(2)}</span>
+                    <span className="font-normal text-gray-900 text-xs md:text-sm">₹{originalBase.toFixed(2)}</span>
                   )}
                 </div>
 
                 {services.map((s, i) => (
                   <div key={i} className="flex justify-between items-center">
-                    <span className="font-bold text-gray-500 uppercase tracking-tight text-xs">{s.name} × {s.quantity}</span>
-                    <span className="font-bold text-gray-900 text-sm">₹{((parseFloat(s.price) || 0) * (parseFloat(s.quantity) || 1)).toFixed(2)}</span>
+                    <span className="font-normal text-gray-500 capitalize tracking-tight text-[11px] md:text-xs">{s.name} × {s.quantity}</span>
+                    <span className="font-normal text-gray-900 text-xs md:text-sm">₹{((parseFloat(s.price) || 0) * (parseFloat(s.quantity) || 1)).toFixed(2)}</span>
                   </div>
                 ))}
 
-                <div className="flex justify-between text-[10px] text-gray-400 font-black uppercase tracking-widest pt-4 border-t border-dashed border-gray-100">
+                <div className="flex justify-between text-[10px] text-gray-400 font-medium capitalize tracking-widest pt-2.5 md:pt-3.5 border-t border-dashed border-gray-100">
                   <span>Operational Tax (18%)</span>
                   <span className="text-gray-900">₹{(originalGST + extraServiceGST).toFixed(2)}</span>
                 </div>
@@ -807,25 +807,25 @@ export default function BookingDetails() {
 
             {/* Asset Logistics */}
             {(parts.length > 0 || customItems.length > 0) && (
-              <div className="pt-8 border-t border-gray-100">
-                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-3 mb-6">
-                  <span className="w-8 h-8 rounded-xl bg-gray-50 text-amber-500 flex items-center justify-center border border-gray-100"><FiPackage className="w-4 h-4" /></span>
+              <div className="pt-5 md:pt-6 border-t border-gray-100">
+                <h4 className="text-[10px] font-medium text-gray-400 capitalize tracking-widest flex items-center gap-2.5 mb-4">
+                  <span className="w-7 h-7 rounded-lg bg-gray-50 text-amber-500 flex items-center justify-center border border-gray-100"><FiPackage className="w-3.5 h-3.5" /></span>
                   Component Logistics
                 </h4>
-                <div className="space-y-4 pl-1">
+                <div className="space-y-2 md:space-y-3.5 pl-1">
                   {parts.map((p, i) => (
                     <div key={`p-${i}`} className="flex justify-between items-center">
-                      <span className="font-bold text-gray-500 uppercase tracking-tight text-xs">{p.name} × {p.quantity}</span>
-                      <span className="font-bold text-gray-900 text-sm">₹{(p.price * p.quantity).toFixed(2)}</span>
+                      <span className="font-normal text-gray-500 capitalize tracking-tight text-[11px] md:text-xs">{p.name} × {p.quantity}</span>
+                      <span className="font-normal text-gray-900 text-xs md:text-sm">₹{(p.price * p.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                   {customItems.map((c, i) => (
                     <div key={`c-${i}`} className="flex justify-between items-center">
-                      <span className="font-bold text-gray-500 uppercase tracking-tight text-xs">{c.name} × {c.quantity}</span>
-                      <span className="font-bold text-gray-900 text-sm">₹{(c.price * c.quantity).toFixed(2)}</span>
+                      <span className="font-normal text-gray-500 capitalize tracking-tight text-[11px] md:text-xs">{c.name} × {c.quantity}</span>
+                      <span className="font-normal text-gray-900 text-xs md:text-sm">₹{(c.price * c.quantity).toFixed(2)}</span>
                     </div>
                   ))}
-                  <div className="flex justify-between text-[10px] text-gray-400 font-black uppercase tracking-widest pt-4 border-t border-dashed border-gray-100">
+                  <div className="flex justify-between text-[10px] text-gray-400 font-medium capitalize tracking-widest pt-2.5 md:pt-3.5 border-t border-dashed border-gray-100">
                     <span>Asset Tax (18%)</span>
                     <span className="text-gray-900">₹{partsGST.toFixed(2)}</span>
                   </div>
@@ -836,37 +836,37 @@ export default function BookingDetails() {
 
           {/* Master Net Earnings Analytics */}
           {(booking.status === 'completed' || booking.status === 'work_done' || booking.cashCollected) ? (
-            <div className="bg-blue-50 px-8 py-8 border-t border-gray-100">
-              <div className="space-y-3 mb-6">
+            <div className="bg-blue-50 p-4 md:p-6 border-t border-gray-100">
+              <div className="space-y-1.5 md:space-y-2.5 mb-3 md:mb-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Core Provision Split ({bill?.payoutConfig?.serviceSplitPercentage || 70}%)</span>
-                  <span className="font-bold text-blue-900 text-sm">₹{(bill?.vendorServiceEarning || (booking.vendorEarnings || 0)).toFixed(2)}</span>
+                  <span className="text-[9px] md:text-[10px] font-medium text-blue-400 capitalize tracking-widest">Core Provision Split ({bill?.payoutConfig?.serviceSplitPercentage || 70}%)</span>
+                  <span className="font-normal text-blue-900 text-[11px] md:text-xs">₹{(bill?.vendorServiceEarning || (booking.vendorEarnings || 0)).toFixed(2)}</span>
                 </div>
                 {(parts.length > 0 || customItems.length > 0 || bill?.vendorPartsEarning > 0) && (
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Asset Logistics Split ({bill?.payoutConfig?.partsSplitPercentage || 10}%)</span>
-                    <span className="font-bold text-blue-900 text-sm">₹{(bill?.vendorPartsEarning || 0).toFixed(2)}</span>
+                    <span className="text-[9px] md:text-[10px] font-medium text-blue-400 capitalize tracking-widest">Asset Logistics Split ({bill?.payoutConfig?.partsSplitPercentage || 10}%)</span>
+                    <span className="font-normal text-blue-900 text-[11px] md:text-xs">₹{(bill?.vendorPartsEarning || 0).toFixed(2)}</span>
                   </div>
                 )}
               </div>
-              <div className="flex justify-between items-end pt-6 border-t border-blue-100">
+              <div className="flex justify-between items-end pt-3 md:pt-4 border-t border-blue-100">
                 <div className="flex flex-col">
-                  <span className="text-gray-900 font-black text-[10px] uppercase tracking-widest">
+                  <span className="text-gray-900 font-medium text-[9px] md:text-[10px] capitalize tracking-widest">
                     Net Operational Intel
                   </span>
-                  <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest mt-1">
+                  <span className="text-[8px] md:text-[9px] font-medium text-blue-600 capitalize tracking-widest mt-0.5 md:mt-1">
                     {(booking?.paymentStatus === 'SUCCESS' || booking?.paymentStatus === 'paid' || booking?.cashCollected) ? 'Settled Value' : 'Projected Value'}
                   </span>
                 </div>
-                <span className="text-blue-600 font-black text-3xl tracking-tighter">
+                <span className="text-blue-600 font-medium text-xl md:text-3xl tracking-tighter">
                   ₹{(bill?.vendorTotalEarning || booking.vendorEarnings || 0).toFixed(2)}
                 </span>
               </div>
             </div>
           ) : (
-            <div className="bg-gray-50 px-8 py-6 border-t border-gray-100 text-center">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center justify-center gap-3">
-                <FiAlertCircle className="w-4 h-4 opacity-40" />
+            <div className="bg-gray-50 px-4 py-4 md:px-8 md:py-6 border-t border-gray-100 text-center">
+              <p className="text-[9px] md:text-[10px] font-medium text-gray-400 capitalize tracking-widest flex items-center justify-center gap-2 md:gap-3">
+                <FiAlertCircle className="w-3.5 h-3.5 md:w-4 md:h-4 opacity-40" />
                 Earnings data locked until completion
               </p>
             </div>
@@ -874,47 +874,47 @@ export default function BookingDetails() {
         </div>
 
         {/* Deployment Status & Action Hub */}
-        <div className="space-y-6 pb-20">
+        <div className="space-y-4 md:space-y-6 pb-20">
           {/* Worker Context Card */}
           {booking.assignedTo && booking.assignedTo?.name !== 'You (Self)' && (
-            <div className="bg-white rounded-3xl p-6 border border-gray-100 mb-6 shadow-sm">
-              <div className="flex justify-between items-center mb-6 pb-6 border-b border-gray-100">
-                <div className="flex items-center gap-5">
-                  <div className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center">
-                    <FiUser className="w-8 h-8 text-gray-300" />
+            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 border border-gray-100 mb-4 md:mb-6 shadow-sm">
+              <div className="flex justify-between items-center mb-4 pb-4 md:mb-6 md:pb-6 border-b border-gray-100">
+                <div className="flex items-center gap-4 md:gap-5">
+                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center">
+                    <FiUser className="w-6 h-6 md:w-8 md:h-8 text-gray-300" />
                   </div>
                   <div>
-                    <h3 className="font-black text-gray-900 text-lg tracking-tight uppercase">{booking?.assignedTo?.name || 'Assigned Agent'}</h3>
-                    <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Operational Field Agent</p>
+                    <h3 className="font-medium text-gray-900 text-base md:text-lg tracking-tight capitalize">{booking?.assignedTo?.name || 'Assigned Agent'}</h3>
+                    <p className="text-[9px] md:text-[10px] font-normal text-blue-600 capitalize tracking-widest mt-0.5 md:mt-1">Operational Field Agent</p>
                   </div>
                 </div>
                 {booking?.assignedTo?.phone && (
                   <motion.a 
                     whileTap={{ scale: 0.9 }}
                     href={`tel:${booking.assignedTo.phone}`} 
-                    className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all"
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all"
                   >
-                    <FiPhone className="w-5 h-5 text-white" />
+                    <FiPhone className="w-4.5 h-4.5 md:w-5 md:h-5 text-white" />
                   </motion.a>
                 )}
               </div>
 
               {/* Status Visualization */}
               {!booking.workerResponse || booking.workerResponse === 'PENDING' ? (
-                <div className="flex items-center gap-5 text-amber-600 bg-amber-50 p-6 rounded-2xl border border-amber-100">
-                  <div className="w-12 h-12 rounded-xl bg-white border border-amber-100 flex items-center justify-center shrink-0">
-                    <FiClock className="w-6 h-6 animate-pulse text-amber-500" />
+                <div className="flex items-center gap-4 md:gap-5 text-amber-600 bg-amber-50 p-4 md:p-6 rounded-xl md:rounded-2xl border border-amber-100">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white border border-amber-100 flex items-center justify-center shrink-0">
+                    <FiClock className="w-5 h-5 md:w-6 md:h-6 animate-pulse text-amber-500" />
                   </div>
                   <div>
-                    <p className="font-black text-base text-gray-900 tracking-tight">Signal Pending</p>
-                    <p className="text-[10px] text-amber-600 font-bold uppercase tracking-widest mt-1">Awaiting Agent Acknowledgement</p>
+                    <p className="font-medium text-sm md:text-base text-gray-900 tracking-tight">Signal Pending</p>
+                    <p className="text-[9px] md:text-[10px] text-amber-600 font-normal capitalize tracking-widest mt-0.5 md:mt-1">Awaiting Agent Acknowledgement</p>
                   </div>
                 </div>
               ) : booking.workerResponse === 'ACCEPTED' ? (
-                <div className="space-y-8">
+                <div className="space-y-6 md:space-y-8">
                   {/* Deployment Pipeline Visual */}
                   <div className="relative px-2">
-                    <div className="absolute left-8 right-8 top-[18px] h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="absolute left-8 right-8 top-[14px] md:top-[18px] h-1.5 md:h-2 bg-gray-100 rounded-full overflow-hidden">
                       <motion.div 
                         initial={{ width: 0 }}
                         animate={{ 
@@ -933,35 +933,35 @@ export default function BookingDetails() {
                         { icon: FiTool, label: 'Ops', active: ['visited', 'in_progress', 'work_done', 'completed'].includes(booking.status) },
                         { icon: FiCheckCircle, label: 'Done', active: ['work_done', 'completed'].includes(booking.status) }
                       ].map((step, idx) => (
-                        <div key={idx} className="flex flex-col items-center gap-3">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-700 shadow-lg ring-6 ring-white ${step.active ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-400 border border-gray-200'}`}>
-                            <step.icon className="w-5 h-5" />
+                        <div key={idx} className="flex flex-col items-center gap-2 md:gap-3">
+                          <div className={`w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center transition-all duration-700 shadow-lg ring-4 md:ring-6 ring-white ${step.active ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-400 border border-gray-200'}`}>
+                            <step.icon className="w-4 h-4 md:w-5 md:h-5" />
                           </div>
-                          <span className={`text-[8px] font-black uppercase tracking-widest transition-colors ${step.active ? 'text-blue-600' : 'text-gray-400'}`}>{step.label}</span>
+                          <span className={`text-[7px] md:text-[8px] font-medium capitalize tracking-widest transition-colors ${step.active ? 'text-blue-600' : 'text-gray-400'}`}>{step.label}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Primary Status Readout */}
-                  <div className="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-5">
-                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center bg-white border border-gray-200 ${
+                  <div className="bg-gray-50 rounded-xl md:rounded-2xl p-4 md:p-5 border border-gray-100 flex items-center gap-4 md:gap-5">
+                    <div className={`w-11 h-11 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center bg-white border border-gray-200 ${
                       booking.status === 'journey_started' ? 'text-blue-600' :
                       booking.status === 'in_progress' ? 'text-amber-600' :
                       ['work_done', 'completed'].includes(booking.status) ? 'text-green-600' :
                       'text-gray-400'
                     }`}>
-                      <FiActivity className="w-7 h-7 opacity-80" />
+                      <FiActivity className="w-5.5 h-5.5 md:w-7 md:h-7 opacity-80" />
                     </div>
                     <div>
-                      <p className="font-black text-gray-900 text-lg tracking-tight mb-1 uppercase">
+                      <p className="font-medium text-gray-900 text-base md:text-lg tracking-tight mb-0.5 md:mb-1 capitalize">
                         {booking.status === 'journey_started' ? 'In Transit' :
                          booking.status === 'visited' ? 'On Site' :
                          booking.status === 'in_progress' ? 'Ops Active' :
                          ['work_done', 'completed'].includes(booking.status) ? 'Ops Complete' :
                          'Agent Ready'}
                       </p>
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                      <p className="text-[9px] md:text-[10px] font-medium text-gray-400 capitalize tracking-widest">
                         {booking.status === 'journey_started' ? 'Live Geospatial Tracking Active' :
                          booking.status === 'visited' ? 'Awaiting Access Verification' :
                          booking.status === 'in_progress' ? 'Service Deployment in Progress' :
@@ -972,16 +972,16 @@ export default function BookingDetails() {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center gap-5 text-rose-600 bg-rose-50 p-6 rounded-2xl border border-rose-100">
-                  <FiXCircle className="w-8 h-8 opacity-60" />
+                <div className="flex items-center gap-4 md:gap-5 text-rose-600 bg-rose-50 p-4 md:p-6 rounded-xl md:rounded-2xl border border-rose-100">
+                  <FiXCircle className="w-6.5 h-6.5 md:w-8 md:h-8 opacity-60" />
                   <div className="flex-1">
-                    <p className="font-black text-base text-gray-900 tracking-tight uppercase">Signal Rejected</p>
-                    <p className="text-[10px] text-rose-600 font-bold uppercase tracking-widest mt-1">Agent Declined Deployment</p>
+                    <p className="font-medium text-sm md:text-base text-gray-900 tracking-tight capitalize">Signal Rejected</p>
+                    <p className="text-[9px] md:text-[10px] text-rose-600 font-normal capitalize tracking-widest mt-0.5 md:mt-1">Agent Declined Deployment</p>
                   </div>
                   <motion.button 
                     whileTap={{ scale: 0.95 }}
                     onClick={handleAssignWorker} 
-                    className="px-5 py-2.5 bg-white border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-700 hover:bg-gray-50 transition-all shadow-sm"
+                    className="px-3.5 py-2 bg-white border border-gray-200 rounded-lg text-[9px] md:text-[10px] font-medium capitalize tracking-widest text-gray-700 hover:bg-gray-50 transition-all shadow-sm"
                   >
                     Recalibrate
                   </motion.button>
@@ -992,51 +992,51 @@ export default function BookingDetails() {
 
           {/* Service Deployment Protocol (Simplified Flow) */}
           {booking.offeringType !== 'PRODUCT' && !['completed', 'cancelled', 'rejected'].includes(booking.status) && (
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 mb-6 shadow-sm">
-              <div className="text-center mb-8">
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border shadow-md ${
+            <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-gray-100 mb-4 md:mb-6 shadow-sm">
+              <div className="text-center mb-5 md:mb-8">
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 border shadow-md ${
                   ['requested', 'searching'].includes(booking.status) ? 'bg-blue-50 border-blue-100' : 'bg-emerald-50 border-emerald-100'
                 }`}>
                   {['requested', 'searching'].includes(booking.status) ? (
-                    <FiNavigation className="w-8 h-8 text-blue-600" />
+                    <FiNavigation className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
                   ) : (
-                    <FiTool className="w-8 h-8 text-emerald-600" />
+                    <FiTool className="w-6 h-6 md:w-8 md:h-8 text-emerald-600" />
                   )}
                 </div>
-                <h3 className="text-xl font-black text-gray-900 tracking-tight uppercase">
+                <h3 className="text-lg md:text-xl font-medium text-gray-900 tracking-tight capitalize">
                   {['requested', 'searching'].includes(booking.status) ? 'New Request' : 'Active Operation'}
                 </h3>
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2">
+                <p className="text-[9px] md:text-[10px] font-medium text-gray-400 capitalize tracking-widest mt-1.5 md:mt-2">
                   {['requested', 'searching'].includes(booking.status) ? 'Awaiting Your Acceptance' : 'Perform work and mark as completed'}
                 </p>
               </div>
 
-              <div className="flex flex-col items-center gap-3">
+              <div className="flex flex-col items-center gap-3 w-full">
                 {['requested', 'searching'].includes(booking.status) ? (
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleStatusChange('confirmed')}
-                    className="w-full max-w-sm py-5 rounded-2xl bg-emerald-600 text-white font-black text-[10px] uppercase tracking-widest shadow-lg shadow-emerald-500/20 hover:bg-emerald-700 transition-all flex items-center justify-center gap-3"
+                    className="w-full max-w-sm py-3.5 md:py-5 rounded-xl md:rounded-2xl bg-emerald-600 text-white font-medium text-[9px] md:text-[10px] capitalize tracking-widest shadow-lg shadow-emerald-500/20 hover:bg-emerald-700 transition-all flex items-center justify-center gap-2 md:gap-3"
                   >
-                    <FiCheck className="w-5 h-5" />
+                    <FiCheck className="w-4 h-4 md:w-5 md:h-5" />
                     Accept Booking Request
                   </motion.button>
                 ) : !['work_done', 'completed'].includes(booking.status) ? (
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsWorkDoneModalOpen(true)}
-                    className="w-full max-w-sm py-5 rounded-2xl bg-blue-600 text-white font-black text-[10px] uppercase tracking-widest shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-3"
+                    className="w-full max-w-sm py-3.5 md:py-5 rounded-xl md:rounded-2xl bg-blue-600 text-white font-medium text-[9px] md:text-[10px] capitalize tracking-widest shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 md:gap-3"
                   >
-                    <FiCheckCircle className="w-5 h-5" />
+                    <FiCheckCircle className="w-4 h-4 md:w-5 md:h-5" />
                     Work Done
                   </motion.button>
                 ) : booking.status === 'work_done' ? (
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={handleCollectCashClick}
-                    className="w-full max-w-sm py-5 rounded-2xl bg-amber-600 text-white font-black text-[10px] uppercase tracking-widest shadow-lg shadow-amber-500/20 hover:bg-amber-700 transition-all flex items-center justify-center gap-3"
+                    className="w-full max-w-sm py-3.5 md:py-5 rounded-xl md:rounded-2xl bg-amber-600 text-white font-medium text-[9px] md:text-[10px] capitalize tracking-widest shadow-lg shadow-amber-500/20 hover:bg-amber-700 transition-all flex items-center justify-center gap-2 md:gap-3"
                   >
-                    <FiDollarSign className="w-5 h-5" />
+                    <FiDollarSign className="w-4 h-4 md:w-5 md:h-5" />
                     Finalize Billing
                   </motion.button>
                 ) : null}
@@ -1046,24 +1046,24 @@ export default function BookingDetails() {
 
           {/* Product Fulfillment Hub */}
           {booking.offeringType === 'PRODUCT' && (
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 mb-6 shadow-sm">
-              <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-100 shadow-md">
-                  <FiPackage className="w-8 h-8 text-blue-600" />
+            <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-gray-100 mb-4 md:mb-6 shadow-sm">
+              <div className="text-center mb-5 md:mb-8">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-50 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 border border-blue-100 shadow-md">
+                  <FiPackage className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-black text-gray-900 tracking-tight uppercase">Fulfillment Hub</h3>
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2">Current Status: {booking.status.replace('_', ' ')}</p>
+                <h3 className="text-lg md:text-xl font-medium text-gray-900 tracking-tight capitalize">Fulfillment Hub</h3>
+                <p className="text-[9px] md:text-[10px] font-medium text-gray-400 capitalize tracking-widest mt-1.5 md:mt-2">Current Status: {booking.status.replace('_', ' ')}</p>
               </div>
 
-              <div className="flex flex-col items-center gap-3">
+              <div className="flex flex-col items-center gap-3 w-full">
                 {getAvailableStatuses(booking.status, booking).map((nextStatus) => (
                   <motion.button
                     key={nextStatus}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleStatusChange(nextStatus)}
-                    className="w-full max-w-sm py-5 rounded-2xl bg-blue-600 text-white font-black text-[10px] uppercase tracking-widest shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-3"
+                    className="w-full max-w-sm py-3.5 md:py-5 rounded-xl md:rounded-2xl bg-blue-600 text-white font-medium text-[9px] md:text-[10px] capitalize tracking-widest shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 md:gap-3"
                   >
-                    <FiActivity className="w-5 h-5" />
+                    <FiActivity className="w-4 h-4 md:w-5 md:h-5" />
                     {(nextStatus === 'confirmed' || nextStatus === 'accepted') && 'Accept & Confirm Order'}
                     {nextStatus === 'packed' && 'Pack Product'}
                     {nextStatus === 'shipped' && 'Ship Order'}
@@ -1073,9 +1073,9 @@ export default function BookingDetails() {
                 ))}
                 
                 {booking.status === 'delivered' && (
-                  <div className="flex items-center gap-3 text-emerald-600 bg-emerald-50 px-6 py-3 rounded-xl border border-emerald-100">
-                    <FiCheckCircle className="w-4 h-4" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Order Delivered Successfully</span>
+                  <div className="flex items-center gap-2.5 md:gap-3 text-emerald-600 bg-emerald-50 px-4 py-2.5 md:px-6 md:py-3 rounded-lg md:rounded-xl border border-emerald-100">
+                    <FiCheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    <span className="text-[9px] md:text-[10px] font-medium capitalize tracking-widest">Order Delivered Successfully</span>
                   </div>
                 )}
               </div>
@@ -1088,9 +1088,9 @@ export default function BookingDetails() {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={handleCancelJob}
-                className="w-full py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest text-rose-600 bg-rose-50 border border-rose-100 hover:bg-rose-600 hover:text-white transition-all flex items-center justify-center gap-4 mt-2"
+                className="w-full py-3.5 md:py-5 rounded-xl md:rounded-2xl font-medium text-[9px] md:text-[10px] capitalize tracking-widest text-rose-600 bg-rose-50 border border-rose-100 hover:bg-rose-600 hover:text-white transition-all flex items-center justify-center gap-3 md:gap-4 mt-2"
               >
-                <FiXCircle className="w-5 h-5" />
+                <FiXCircle className="w-4 h-4 md:w-5 md:h-5" />
                 Cancel Payment
               </motion.button>
             </div>

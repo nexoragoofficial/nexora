@@ -61,13 +61,13 @@ const VendorBottomNav = () => {
                 
                 {/* Bookings Badge */}
                 {Number(item.badge) > 0 && (
-                  <span className="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
+                  <span className="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-medium px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
                     {item.badge > 99 ? '99+' : item.badge}
                   </span>
                 )}
               </div>
               
-              <span className={`text-[10px] mt-1 font-bold ${
+              <span className={`text-[10px] mt-1 font-normal ${
                 isActive ? 'text-[#0D9488]' : 'text-gray-500'
               }`}>
                 {item.label}

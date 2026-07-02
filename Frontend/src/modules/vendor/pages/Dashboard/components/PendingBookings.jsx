@@ -69,10 +69,10 @@ const PendingBookings = memo(({ bookings, setPendingBookings, setActiveAlertBook
   return (
     <div>
       <div className="flex items-center justify-between mb-6 px-4">
-        <h2 className="text-xs font-black text-gray-500 uppercase tracking-[0.4em]">Pending Intelligence Alerts</h2>
+        <h2 className="text-xs font-medium text-gray-500 capitalize tracking-[0.4em]">Pending Intelligence Alerts</h2>
         <button
           onClick={() => navigate('/vendor/booking-alerts')}
-          className="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] hover:text-blue-500 transition-colors"
+          className="text-[10px] font-medium text-blue-600 capitalize tracking-[0.2em] hover:text-blue-500 transition-colors"
         >
           Access All Signals
         </button>

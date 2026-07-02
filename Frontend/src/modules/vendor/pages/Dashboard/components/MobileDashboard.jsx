@@ -27,10 +27,10 @@ const MobileDashboard = memo(({
         {/* Compact Inline Welcome Banner */}
         <div className="px-1.5 pb-4 flex items-center justify-between">
           <div>
-            <h2 className="text-base font-black text-gray-900 leading-none">
+            <h2 className="text-base font-medium text-gray-900 leading-none">
               Hello, Partner!
             </h2>
-            <p className="text-[9px] font-bold text-gray-500 mt-1.5 flex items-center gap-1.5">
+            <p className="text-[9px] font-normal text-gray-500 mt-1.5 flex items-center gap-1.5">
               <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
               {isOnline ? 'Active & Online' : 'Currently Offline'}
             </p>
@@ -44,15 +44,15 @@ const MobileDashboard = memo(({
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                  <p className="text-[8px] font-black text-blue-500 uppercase tracking-[0.3em]">Efficiency Rating</p>
+                  <p className="text-[8px] font-medium text-blue-500 capitalize tracking-[0.3em]">Efficiency Rating</p>
                 </div>
-                <h3 className="text-gray-950 text-lg font-black leading-tight mb-3 tracking-tighter uppercase">
+                <h3 className="text-gray-950 text-lg font-medium leading-tight mb-3 tracking-tighter capitalize">
                   Operational <br />Performance
                 </h3>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={() => navigate('/vendor/jobs')}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-xl text-[8px] font-black uppercase tracking-widest shadow hover:shadow-blue-500/25 transition-all"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-xl text-[8px] font-medium capitalize tracking-widest shadow hover:shadow-blue-500/25 transition-all"
                 >
                   Analyze Deployment
                 </motion.button>
@@ -83,8 +83,8 @@ const MobileDashboard = memo(({
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-gray-950 text-xl font-black tracking-tighter">{stats?.performanceScore || 0}%</span>
-                  <span className="text-[6px] font-black text-gray-400 uppercase tracking-[0.2em] mt-0.5">Score</span>
+                  <span className="text-gray-950 text-xl font-medium tracking-tighter">{stats?.performanceScore || 0}%</span>
+                  <span className="text-[6px] font-medium text-gray-400 capitalize tracking-[0.2em] mt-0.5">Score</span>
                 </div>
               </div>
             </div>
@@ -113,14 +113,14 @@ const MobileDashboard = memo(({
                   <div className={`w-8 h-8 rounded-xl ${stat.bg} flex items-center justify-center ${stat.color} border`}>
                     <stat.icon className="w-4 h-4" />
                   </div>
-                  <div className="flex items-center gap-0.5 text-[8px] font-black text-emerald-600 uppercase tracking-wider">
+                  <div className="flex items-center gap-0.5 text-[8px] font-medium text-emerald-600 capitalize tracking-wider">
                     <span>↗</span>
                     <span>{stat.change}</span>
                   </div>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[8px] font-bold uppercase tracking-wider">{stat.label}</p>
-                  <p className="text-lg font-black text-gray-900 mt-1 tracking-tight truncate leading-tight">
+                  <p className="text-gray-400 text-[8px] font-normal capitalize tracking-wider">{stat.label}</p>
+                  <p className="text-lg font-medium text-gray-900 mt-1 tracking-tight truncate leading-tight">
                     {stat.value}
                   </p>
                 </div>
@@ -131,8 +131,8 @@ const MobileDashboard = memo(({
           <div className="pb-24">
             <div className="flex items-center justify-between mb-4 px-1">
               <div>
-                <h2 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Service Bookings</h2>
-                <p className="text-[9px] font-black text-blue-500 uppercase tracking-widest mt-1">Active Bookings</p>
+                <h2 className="text-[10px] font-medium text-gray-500 capitalize tracking-[0.3em]">Service Bookings</h2>
+                <p className="text-[9px] font-medium text-blue-500 capitalize tracking-widest mt-1">Active Bookings</p>
               </div>
               {recentJobs.length > 0 && (
                 <motion.button
@@ -160,22 +160,22 @@ const MobileDashboard = memo(({
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
-                          <h4 className="text-sm font-black text-gray-900 truncate tracking-tight uppercase">
+                          <h4 className="text-sm font-medium text-gray-900 truncate tracking-tight capitalize">
                             {job.customerName || 'Authorized User'}
                           </h4>
-                          <span className="text-[9px] font-black text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-lg border border-blue-100 tracking-wider">
+                          <span className="text-[9px] font-medium text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-lg border border-blue-100 tracking-wider">
                             ₹{job.price}
                           </span>
                         </div>
-                        <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-3">
+                        <p className="text-[8px] font-medium text-gray-400 capitalize tracking-widest mb-3">
                           {job.serviceType || 'Deployment'}
                         </p>
                         <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-gray-50">
-                          <div className="flex items-center gap-1.5 text-[8px] font-black text-gray-500 uppercase tracking-tight">
+                          <div className="flex items-center gap-1.5 text-[8px] font-medium text-gray-500 capitalize tracking-tight">
                             <FiMapPin className="w-3 h-3 text-blue-500" />
                             <span className="truncate max-w-[100px]">{job.location}</span>
                           </div>
-                          <div className={`ml-auto px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-[0.15em] text-white shadow`}
+                          <div className={`ml-auto px-3 py-1 rounded-lg text-[7px] font-medium capitalize tracking-[0.15em] text-white shadow`}
                             style={{ backgroundColor: getStatusColor(job.status) }}>
                             {getStatusLabel(job.status)}
                           </div>
@@ -190,8 +190,8 @@ const MobileDashboard = memo(({
                 <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-100">
                   <span className="text-3xl opacity-50">📭</span>
                 </div>
-                <h3 className="text-sm font-black text-gray-900 mb-2 uppercase tracking-tighter">Operational Calm</h3>
-                <p className="text-[8px] font-black text-gray-400 uppercase tracking-[0.25em]">System standby for new deployments</p>
+                <h3 className="text-sm font-medium text-gray-900 mb-2 capitalize tracking-tighter">Operational Calm</h3>
+                <p className="text-[8px] font-medium text-gray-400 capitalize tracking-[0.25em]">System standby for new deployments</p>
               </div>
             )}
           </div>

@@ -182,8 +182,8 @@ const CashCollectionModal = ({
         {/* Header */}
         <div className="px-10 py-8 border-b border-gray-50 flex justify-between items-center bg-white flex-shrink-0">
           <div>
-            <h3 className="text-2xl font-black text-gray-900 tracking-tight">{step === 'summary' ? 'Collect Cash' : 'Verify OTP'}</h3>
-            <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mt-1">
+            <h3 className="text-2xl font-medium text-gray-900 tracking-tight">{step === 'summary' ? 'Collect Cash' : 'Verify OTP'}</h3>
+            <p className="text-[10px] font-medium text-blue-600 capitalize tracking-widest mt-1">
               {step === 'summary' ? 'Review Bill & Send OTP' : 'Enter Customer Code'}
             </p>
           </div>
@@ -205,31 +205,31 @@ const CashCollectionModal = ({
                     <FiCheck className="w-16 h-16 text-emerald-600" />
                   </div>
                   <div className="flex justify-between items-center mb-2 relative z-10">
-                    <span className="text-xs font-black text-emerald-800 uppercase tracking-widest">Base Service Cost</span>
+                    <span className="text-xs font-medium text-emerald-800 capitalize tracking-widest">Base Service Cost</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-emerald-600/40 line-through font-black">₹{(booking?.finalAmount || parseFloat(booking?.price) || 0).toLocaleString()}</span>
-                      <span className="text-[10px] font-black text-emerald-600 bg-white px-3 py-1.5 rounded-xl border border-emerald-100 shadow-sm">FREE ✓</span>
+                      <span className="text-xs text-emerald-600/40 line-through font-medium">₹{(booking?.finalAmount || parseFloat(booking?.price) || 0).toLocaleString()}</span>
+                      <span className="text-[10px] font-medium text-emerald-600 bg-white px-3 py-1.5 rounded-xl border border-emerald-100 shadow-sm">FREE ✓</span>
                     </div>
                   </div>
-                  <p className="text-[10px] font-black text-emerald-700/60 uppercase tracking-widest">Covered by customer's membership plan</p>
+                  <p className="text-[10px] font-medium text-emerald-700/60 capitalize tracking-widest">Covered by customer's membership plan</p>
                 </div>
               ) : (
                 <div className="bg-blue-50 rounded-[2.5rem] p-8 mb-8 border border-blue-100 shadow-inner">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-xs font-black text-blue-800 uppercase tracking-widest">Booking Amount</span>
-                    <span className="text-2xl font-black text-blue-900 tracking-tighter">₹{baseAmount.toLocaleString()}</span>
+                    <span className="text-xs font-medium text-blue-800 capitalize tracking-widest">Booking Amount</span>
+                    <span className="text-2xl font-medium text-blue-900 tracking-tighter">₹{baseAmount.toLocaleString()}</span>
                   </div>
-                  <p className="text-[10px] font-black text-blue-600/60 uppercase tracking-widest">Original service booking amount</p>
+                  <p className="text-[10px] font-medium text-blue-600/60 capitalize tracking-widest">Original service booking amount</p>
                 </div>
               )}
 
               {/* Extra Items Section */}
               <div className="space-y-6 mb-8">
                 <div className="flex justify-between items-center">
-                  <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Extra Services / Items</h4>
+                  <h4 className="text-[10px] font-medium text-gray-400 capitalize tracking-[0.2em]">Extra Services / Items</h4>
                   <button
                     onClick={handleAddItem}
-                    className="flex items-center gap-2 text-[10px] font-black text-blue-600 bg-blue-50 px-4 py-2 rounded-xl hover:bg-blue-100 transition-all border border-blue-100"
+                    className="flex items-center gap-2 text-[10px] font-medium text-blue-600 bg-blue-50 px-4 py-2 rounded-xl hover:bg-blue-100 transition-all border border-blue-100"
                   >
                     <FiPlus className="w-3 h-3" />
                     ADD EXTRA
@@ -238,7 +238,7 @@ const CashCollectionModal = ({
 
                 {extraItems.length === 0 ? (
                   <div className="text-center py-12 border-2 border-dashed border-gray-100 rounded-[2.5rem] bg-gray-50/30">
-                    <p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">No extra charges identified</p>
+                    <p className="text-[10px] font-medium text-gray-300 capitalize tracking-widest">No extra charges identified</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -248,17 +248,17 @@ const CashCollectionModal = ({
                           <input
                             type="text"
                             placeholder="Service name"
-                            className="w-full px-5 py-3 text-sm font-black bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-200"
+                            className="w-full px-5 py-3 text-sm font-medium bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-200"
                             value={item.title}
                             onChange={(e) => handleUpdateItem(index, 'title', e.target.value)}
                           />
                           <div className="flex gap-3">
                             <div className="relative flex-1">
-                              <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-300 font-black text-sm">₹</span>
+                              <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-300 font-medium text-sm">₹</span>
                               <input
                                 type="number"
                                 placeholder="Price"
-                                className="w-full pl-10 pr-5 py-3 text-sm font-black bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 placeholder:text-gray-200"
+                                className="w-full pl-10 pr-5 py-3 text-sm font-medium bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 placeholder:text-gray-200"
                                 value={item.price}
                                 onChange={(e) => handleUpdateItem(index, 'price', e.target.value)}
                               />
@@ -267,7 +267,7 @@ const CashCollectionModal = ({
                               <input
                                 type="number"
                                 placeholder="Qty"
-                                className="w-full px-5 py-3 text-sm font-black bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 placeholder:text-gray-200"
+                                className="w-full px-5 py-3 text-sm font-medium bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 placeholder:text-gray-200"
                                 value={item.qty}
                                 onChange={(e) => handleUpdateItem(index, 'qty', e.target.value)}
                               />
@@ -291,9 +291,9 @@ const CashCollectionModal = ({
               <div className="w-20 h-20 bg-blue-50 rounded-[2rem] flex items-center justify-center mx-auto mb-8 text-blue-600 border border-blue-100 shadow-inner">
                 <FiClock className="w-10 h-10 animate-pulse" />
               </div>
-              <h4 className="text-xl font-black text-gray-900 tracking-tight mb-3">Confirmation Code</h4>
+              <h4 className="text-xl font-medium text-gray-900 tracking-tight mb-3">Confirmation Code</h4>
               <p className="text-[11px] font-medium text-gray-400 mb-10 px-4 leading-relaxed">
-                Ask the customer for the 4-digit code sent to their phone to verify the payment of <span className="font-black text-gray-900">₹{finalTotal.toLocaleString()}</span>.
+                Ask the customer for the 4-digit code sent to their phone to verify the payment of <span className="font-medium text-gray-900">₹{finalTotal.toLocaleString()}</span>.
               </p>
 
               <div className="flex gap-4 justify-center mb-10">
@@ -306,7 +306,7 @@ const CashCollectionModal = ({
                     value={otp[i]}
                     onChange={(e) => handleOtpChange(i, e.target.value)}
                     onFocus={handleInputFocus}
-                    className="w-14 h-16 border border-gray-100 rounded-2xl text-center text-3xl font-black text-gray-900 focus:border-blue-500 focus:outline-none bg-gray-50 transition-all shadow-inner"
+                    className="w-14 h-16 border border-gray-100 rounded-2xl text-center text-3xl font-medium text-gray-900 focus:border-blue-500 focus:outline-none bg-gray-50 transition-all shadow-inner"
                     maxLength={1}
                   />
                 ))}
@@ -314,7 +314,7 @@ const CashCollectionModal = ({
 
               <button
                 onClick={() => setStep('summary')}
-                className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:text-blue-700 transition-colors"
+                className="text-[10px] font-medium text-blue-600 capitalize tracking-widest hover:text-blue-700 transition-colors"
               >
                 Back to Edit Bill
               </button>
@@ -326,15 +326,15 @@ const CashCollectionModal = ({
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-50 rounded-full blur-[60px] opacity-50" />
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Final Yield Protocol</span>
+                <span className="text-[10px] font-medium text-gray-400 capitalize tracking-[0.2em]">Final Yield Protocol</span>
                 <FiDollarSign className="text-blue-600 w-5 h-5" />
               </div>
               <div className="flex justify-between items-end">
                 <div>
-                  <p className="text-4xl font-black tracking-tighter">₹{finalTotal.toLocaleString()}</p>
+                  <p className="text-4xl font-medium tracking-tighter">₹{finalTotal.toLocaleString()}</p>
                 </div>
                 <div className="text-right">
-                  <div className="px-4 py-2 bg-emerald-50 text-emerald-600 text-[10px] font-black rounded-2xl border border-emerald-100 uppercase tracking-widest">
+                  <div className="px-4 py-2 bg-emerald-50 text-emerald-600 text-[10px] font-medium rounded-2xl border border-emerald-100 capitalize tracking-widest">
                     CASH COLLECTION
                   </div>
                 </div>
@@ -349,7 +349,7 @@ const CashCollectionModal = ({
             <button
               onClick={handleSendOTP}
               disabled={submitting || loading}
-              className="w-full py-6 rounded-3xl font-black text-white text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 shadow-xl shadow-blue-500/20"
+              className="w-full py-6 rounded-3xl font-medium text-white text-xs capitalize tracking-[0.2em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 shadow-xl shadow-blue-500/20"
               style={{
                 background: booking?.paymentMethod === 'plan_benefit' && extraItems.length === 0
                   ? 'linear-gradient(135deg, #10B981, #059669)'
@@ -367,13 +367,13 @@ const CashCollectionModal = ({
             <button
               onClick={handleVerify}
               disabled={submitting || loading}
-              className="w-full py-6 rounded-3xl font-black text-white text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 shadow-xl shadow-emerald-500/20 bg-gradient-to-r from-emerald-600 to-emerald-700"
+              className="w-full py-6 rounded-3xl font-medium text-white text-xs capitalize tracking-[0.2em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 shadow-xl shadow-emerald-500/20 bg-gradient-to-r from-emerald-600 to-emerald-700"
             >
               {submitting ? 'Validating...' : 'Verify & Synchronize'}
               <FiCheck className="w-6 h-6" />
             </button>
           )}
-          <p className="text-[10px] font-medium text-gray-400 text-center mt-6 uppercase tracking-widest">
+          <p className="text-[10px] font-medium text-gray-400 text-center mt-6 capitalize tracking-widest">
             {step === 'summary'
               ? (booking?.paymentMethod === 'plan_benefit' && extraItems.length === 0
                 ? 'No extra charges. Direct finalization enabled.'

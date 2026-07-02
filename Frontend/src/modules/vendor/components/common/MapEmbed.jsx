@@ -28,7 +28,7 @@ const MapEmbed = ({ lat, lng, address, height = '200px' }) => {
           className="w-full h-full flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors"
         >
           <div className="text-center p-4">
-            <p className="text-gray-600 font-semibold mb-2">View on Google Maps</p>
+            <p className="text-gray-600 font-medium mb-2">View on Google Maps</p>
             <p className="text-sm text-gray-500">{address}</p>
           </div>
         </a>

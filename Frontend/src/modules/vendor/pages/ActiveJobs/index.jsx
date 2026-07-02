@@ -135,7 +135,7 @@ const ActiveJobs = memo(() => {
       {/* Header - Admin Style - Hidden on Mobile */}
       <div className="hidden md:flex bg-white p-5 rounded-2xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
-          <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
+          <h2 className="text-2xl font-medium text-gray-900 tracking-tight leading-none">
             Service Bookings
           </h2>
           <p className="text-gray-500 font-medium mt-2">
@@ -172,7 +172,7 @@ const ActiveJobs = memo(() => {
             key={tab.id}
             onClick={() => setFilter(tab.id)}
             className={`
-              flex items-center gap-2 px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 whitespace-nowrap
+              flex items-center gap-2 px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-normal transition-all duration-300 whitespace-nowrap
               ${filter === tab.id
                 ? "bg-[#2874F0] text-white shadow-lg shadow-blue-200 translate-y-[-1px]"
                 : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
@@ -196,7 +196,7 @@ const ActiveJobs = memo(() => {
           <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <FiBriefcase className="w-10 h-10 text-gray-300" />
           </div>
-          <h3 className="text-xl font-bold text-gray-800 mb-2">No Bookings Found</h3>
+          <h3 className="text-xl font-normal text-gray-800 mb-2">No Bookings Found</h3>
           <p className="text-sm text-gray-500 font-medium max-w-xs mx-auto">
             {searchQuery ? 'Your search query didn\'t match any records.' : 'You don\'t have any active bookings in this category.'}
           </p>
@@ -222,8 +222,8 @@ const ActiveJobs = memo(() => {
                       <FiBriefcase className="w-4.5 h-4.5" />
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-black text-gray-800 tracking-tight leading-none text-right">₹{job.price}</p>
-                      <span className={`text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md mt-1 inline-block ${
+                      <p className="text-sm font-medium text-gray-800 tracking-tight leading-none text-right">₹{job.price}</p>
+                      <span className={`text-[8px] font-medium capitalize tracking-wider px-1.5 py-0.5 rounded-md mt-1 inline-block ${
                         isPending ? 'bg-orange-50 text-orange-600 border border-orange-100' : 
                         isCompleted ? 'bg-green-50 text-green-600 border border-green-100' : 
                         'bg-blue-50 text-blue-600 border border-blue-100'
@@ -233,14 +233,14 @@ const ActiveJobs = memo(() => {
                     </div>
                   </div>
 
-                  <h3 className="text-xs font-bold text-gray-900 uppercase truncate mb-1 group-hover:text-blue-600 transition-colors tracking-tight">
+                  <h3 className="text-xs font-normal text-gray-900 capitalize truncate mb-1 group-hover:text-blue-600 transition-colors tracking-tight">
                     {job.serviceType}
                   </h3>
                   
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-1.5 text-gray-500">
                       <FiUser className="w-3 h-3 shrink-0 text-gray-400" />
-                      <span className="text-[10px] font-semibold">{job.user.name}</span>
+                      <span className="text-[10px] font-medium">{job.user.name}</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-gray-500">
                       <FiMapPin className="w-3 h-3 shrink-0 text-gray-400" />
@@ -248,7 +248,7 @@ const ActiveJobs = memo(() => {
                     </div>
                     <div className="flex items-center gap-1.5 text-gray-500">
                       <FiClock className="w-3 h-3 shrink-0 text-gray-400" />
-                      <span className="text-[10px] font-black text-gray-600 uppercase">{job.timeSlot.date} • {job.timeSlot.time}</span>
+                      <span className="text-[10px] font-medium text-gray-600 capitalize">{job.timeSlot.date} • {job.timeSlot.time}</span>
                     </div>
                   </div>
                 </div>
@@ -258,13 +258,13 @@ const ActiveJobs = memo(() => {
                     <div className="flex gap-2">
                       <button
                         onClick={(e) => { e.stopPropagation(); handleAcceptJob(job.id); }}
-                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-lg shadow transition-all active:scale-95"
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-normal py-2 rounded-lg shadow transition-all active:scale-95"
                       >
                         Accept
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleRejectJob(job.id); }}
-                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold py-2 rounded-lg transition-all active:scale-95"
+                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-normal py-2 rounded-lg transition-all active:scale-95"
                       >
                         Reject
                       </button>
@@ -273,7 +273,7 @@ const ActiveJobs = memo(() => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-wider">
+                        <p className="text-[9px] font-medium text-gray-400 capitalize tracking-wider">
                           {job.assignedTo ? `Assigned: ${job.assignedTo.name}` : 'Ready for Assignment'}
                         </p>
                       </div>

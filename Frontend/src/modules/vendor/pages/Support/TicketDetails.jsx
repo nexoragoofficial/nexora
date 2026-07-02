@@ -63,7 +63,7 @@ const TicketDetails = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Syncing Transmission...</span>
+        <span className="text-[10px] font-medium text-gray-400 capitalize tracking-widest">Syncing Transmission...</span>
       </div>
     );
   }
@@ -83,11 +83,11 @@ const TicketDetails = () => {
             <FiClock className="w-5 h-5 rotate-180" />
           </button>
           <div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight leading-none uppercase">Ticket #{ticket.ticketNumber}</h1>
-            <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-1">Operational Support Channel</p>
+            <h1 className="text-xl font-medium text-gray-900 tracking-tight leading-none capitalize">Ticket #{ticket.ticketNumber}</h1>
+            <p className="text-[9px] font-normal text-gray-400 capitalize tracking-widest mt-1">Operational Support Channel</p>
           </div>
         </div>
-        <span className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] border ${
+        <span className={`px-4 py-1.5 rounded-xl text-[9px] font-medium capitalize tracking-[0.2em] border ${
           isClosed 
           ? 'bg-gray-100 text-gray-500 border-gray-200' 
           : 'bg-blue-50 text-blue-600 border-blue-100'
@@ -99,8 +99,8 @@ const TicketDetails = () => {
       {/* Ticket Info Banner */}
       <div className="bg-white/80 backdrop-blur-md px-6 lg:px-10 py-4 border-b border-gray-100 z-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-          <h2 className="font-bold text-gray-800 text-sm uppercase tracking-tight">{ticket.subject}</h2>
-          <span className="text-[10px] text-blue-600 font-black uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-lg border border-blue-100 w-fit">
+          <h2 className="font-normal text-gray-800 text-sm capitalize tracking-tight">{ticket.subject}</h2>
+          <span className="text-[10px] text-blue-600 font-medium capitalize tracking-widest bg-blue-50 px-3 py-1 rounded-lg border border-blue-100 w-fit">
             Category: {ticket.category}
           </span>
         </div>
@@ -119,11 +119,11 @@ const TicketDetails = () => {
                 {!isVendor && (
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                    <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Support Representative</p>
+                    <p className="text-[10px] font-medium text-blue-600 capitalize tracking-widest">Support Representative</p>
                   </div>
                 )}
                 <p className="text-sm font-medium whitespace-pre-wrap leading-relaxed">{msg.message}</p>
-                <div className={`text-[9px] font-black mt-4 uppercase tracking-widest ${isVendor ? 'text-blue-100 text-right' : 'text-gray-400'}`}>
+                <div className={`text-[9px] font-medium mt-4 capitalize tracking-widest ${isVendor ? 'text-blue-100 text-right' : 'text-gray-400'}`}>
                   {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' })}
                 </div>
               </div>
@@ -164,7 +164,7 @@ const TicketDetails = () => {
         </div>
       ) : (
         <div className="fixed bottom-0 left-20 lg:left-[278px] right-0 bg-white/80 backdrop-blur-md border-t border-gray-100 p-8 text-center z-50">
-          <div className="flex items-center justify-center text-gray-400 text-[10px] font-black uppercase tracking-[0.3em]">
+          <div className="flex items-center justify-center text-gray-400 text-[10px] font-medium capitalize tracking-[0.3em]">
             <FiCheckCircle className="mr-3 w-5 h-5 text-emerald-500" />
             Support Case Closed: Marked as {ticket.status}.
           </div>

@@ -75,7 +75,7 @@ const AboutPlugPro = () => {
           >
             <FiArrowLeft className="w-5 h-5 text-black" />
           </button>
-          <span className="text-sm font-black uppercase tracking-[0.3em] text-black">About PlugPro</span>
+          <span className="text-sm font-medium capitalize tracking-[0.3em] text-black">About PlugPro</span>
         </div>
       </header>
 
@@ -89,10 +89,10 @@ const AboutPlugPro = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl font-black text-black mb-4 tracking-tighter">
+          <h1 className="text-4xl font-medium text-black mb-4 tracking-tighter">
             PlugPro <span className="text-gray-200">Network</span>
           </h1>
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 max-w-xs mx-auto leading-loose">
+          <p className="text-[10px] font-medium capitalize tracking-[0.2em] text-gray-400 max-w-xs mx-auto leading-loose">
             Redefining professional service delivery through technology and trust.
           </p>
         </motion.div>
@@ -101,10 +101,10 @@ const AboutPlugPro = () => {
         <motion.div variants={itemVariants} className="flex justify-between bg-black rounded-[40px] p-8 shadow-2xl shadow-gray-200">
           {stats.map((stat, idx) => (
             <div key={idx} className="flex-1 text-center px-2">
-              <div className="text-xl font-black text-white tracking-tighter">
+              <div className="text-xl font-medium text-white tracking-tighter">
                 {stat.number}
               </div>
-              <div className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mt-1">
+              <div className="text-[8px] font-medium capitalize tracking-[0.2em] text-white/40 mt-1">
                 {stat.label}
               </div>
             </div>
@@ -117,8 +117,8 @@ const AboutPlugPro = () => {
             <div className="absolute top-0 right-0 p-6 text-black opacity-[0.03]">
               <FiGlobe className="w-32 h-32" />
             </div>
-            <h3 className="text-xs font-black text-black uppercase tracking-[0.3em] mb-4">Our Vision</h3>
-            <p className="text-[11px] font-bold text-gray-500 leading-relaxed relative z-10 tracking-tighter">
+            <h3 className="text-xs font-medium text-black capitalize tracking-[0.3em] mb-4">Our Vision</h3>
+            <p className="text-[11px] font-normal text-gray-500 leading-relaxed relative z-10 tracking-tighter">
               PlugPro is architecting a new standard for home and personal services. We bridge the gap between skilled experts and discerning users through a seamless, secure, and transparent marketplace. Our focus is quality at scale.
             </p>
           </div>
@@ -126,7 +126,7 @@ const AboutPlugPro = () => {
 
         {/* Why Choose Us Grid */}
         <motion.div variants={itemVariants}>
-          <h3 className="text-xs font-black text-black uppercase tracking-[0.3em] mb-6 px-1 text-center">Core Pillars</h3>
+          <h3 className="text-xs font-medium text-black capitalize tracking-[0.3em] mb-6 px-1 text-center">Core Pillars</h3>
           <div className="grid grid-cols-2 gap-4">
             {features.map((feature, index) => (
               <div
@@ -136,8 +136,8 @@ const AboutPlugPro = () => {
                 <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center mb-4 group-hover:bg-black group-hover:text-white transition-all border border-gray-100">
                   <feature.icon className="w-5 h-5" />
                 </div>
-                <h4 className="text-[10px] font-black text-black uppercase tracking-widest mb-2">{feature.title}</h4>
-                <p className="text-[9px] font-bold text-gray-400 leading-relaxed tracking-tighter">{feature.description}</p>
+                <h4 className="text-[10px] font-medium text-black capitalize tracking-widest mb-2">{feature.title}</h4>
+                <p className="text-[9px] font-normal text-gray-400 leading-relaxed tracking-tighter">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -145,11 +145,11 @@ const AboutPlugPro = () => {
 
         {/* Footer Info */}
         <motion.div variants={itemVariants} className="text-center pt-8 border-t border-gray-100">
-          <p className="text-[9px] font-black text-gray-300 uppercase tracking-[0.2em] mb-1">Ecosystem Managed By</p>
-          <span className="text-sm font-black text-black uppercase tracking-[0.4em]">PlugPro Elite</span>
+          <p className="text-[9px] font-medium text-gray-300 capitalize tracking-[0.2em] mb-1">Ecosystem Managed By</p>
+          <span className="text-sm font-medium text-black capitalize tracking-[0.4em]">PlugPro Elite</span>
           <div className="flex items-center justify-center gap-2 mt-6">
             <div className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
-            <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Version 8.0.0 Global</p>
+            <p className="text-[9px] font-medium text-gray-400 capitalize tracking-widest">Version 8.0.0 Global</p>
           </div>
         </motion.div>
       </main>

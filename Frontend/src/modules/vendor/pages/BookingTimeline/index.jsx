@@ -447,7 +447,7 @@ const BookingTimeline = () => {
                     <div className="flex-1 pt-1">
                       <div className="flex items-center justify-between mb-1">
                         <h3
-                          className={`font-semibold ${isCompleted || isCurrent ? 'text-gray-800' : 'text-gray-400'
+                          className={`font-medium ${isCompleted || isCurrent ? 'text-gray-800' : 'text-gray-400'
                             }`}
                         >
                           {stage.title}
@@ -462,7 +462,7 @@ const BookingTimeline = () => {
                       {stage.action && !isSkipped && (
                         <button
                           onClick={stage.action}
-                          className="px-4 py-2 rounded-lg font-semibold text-white text-sm transition-all active:scale-95"
+                          className="px-4 py-2 rounded-lg font-medium text-white text-sm transition-all active:scale-95"
                           style={{
                             background: themeColors.button,
                             boxShadow: `0 2px 8px ${themeColors.button}40`,
@@ -484,7 +484,7 @@ const BookingTimeline = () => {
 
                       {/* Online Payment Status Badge for Stage 7 */}
                       {stage.id === 7 && (booking?.paymentStatus === 'SUCCESS' || booking?.paymentStatus === 'paid') && !isCompleted && (
-                        <div className="mt-2 flex items-center gap-1.5 text-green-600 font-bold text-xs bg-green-50 px-3 py-1.5 rounded-lg border border-green-100">
+                        <div className="mt-2 flex items-center gap-1.5 text-green-600 font-normal text-xs bg-green-50 px-3 py-1.5 rounded-lg border border-green-100">
                           <FiCheckCircle className="w-4 h-4" />
                           ONLINE PAYMENT RECEIVED
                         </div>
@@ -512,7 +512,7 @@ const BookingTimeline = () => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="bg-white w-full max-w-sm rounded-2xl p-6">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-bold">Verify Self Visit</h3>
+              <h3 className="font-normal">Verify Self Visit</h3>
               <button onClick={() => setIsVisitModalOpen(false)}><FiX /></button>
             </div>
             <p className="text-sm text-gray-500 mb-4">Enter user OTP to verify arrival.</p>

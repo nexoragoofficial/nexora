@@ -102,7 +102,7 @@ const BottomNav = memo(() => {
                     />
                   </motion.div>
 
-                  <span className={`text-[9px] font-bold uppercase tracking-wider ${isActive ? 'text-blue-700' : 'text-gray-400'}`}>
+                  <span className={`text-[9px] font-normal capitalize tracking-wider ${isActive ? 'text-blue-700' : 'text-gray-400'}`}>
                     {item.label}
                   </span>
 
@@ -110,7 +110,7 @@ const BottomNav = memo(() => {
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1.5 min-w-[16px] h-[16px] px-1 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center border-2 border-white shadow-sm"
+                      className="absolute -top-1 -right-1.5 min-w-[16px] h-[16px] px-1 bg-red-500 text-white text-[9px] font-normal rounded-full flex items-center justify-center border-2 border-white shadow-sm"
                     >
                       {item.badge > 9 ? '9+' : item.badge}
                     </motion.span>

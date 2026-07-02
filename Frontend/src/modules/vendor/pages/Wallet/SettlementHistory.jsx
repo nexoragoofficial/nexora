@@ -87,7 +87,7 @@ const SettlementHistory = () => {
           >
             <FiClock className="w-5 h-5 rotate-180" />
           </button>
-          <h1 className="text-xl font-black text-gray-900 tracking-tight uppercase">Archive Ledger</h1>
+          <h1 className="text-xl font-medium text-gray-900 tracking-tight capitalize">Archive Ledger</h1>
         </div>
         <div className="w-12 h-12 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center">
           <FiDollarSign className="w-6 h-6 text-blue-600" />
@@ -106,7 +106,7 @@ const SettlementHistory = () => {
             <button
               key={option.id}
               onClick={() => setFilter(option.id)}
-              className={`px-8 py-4 rounded-full font-black text-[10px] uppercase tracking-widest whitespace-nowrap transition-all duration-500 border ${filter === option.id
+              className={`px-8 py-4 rounded-full font-medium text-[10px] capitalize tracking-widest whitespace-nowrap transition-all duration-500 border ${filter === option.id
                 ? 'bg-blue-600 text-white border-blue-500 shadow-xl shadow-blue-600/20 scale-105'
                 : 'bg-white text-gray-500 border-gray-100 hover:bg-gray-50 shadow-sm'
                 }`}
@@ -122,8 +122,8 @@ const SettlementHistory = () => {
             <div className="w-24 h-24 bg-gray-50 rounded-[32px] flex items-center justify-center mx-auto mb-10 border border-gray-100">
               <span className="text-4xl opacity-40">📜</span>
             </div>
-            <h3 className="text-lg font-black text-gray-900 mb-3 uppercase tracking-tighter">History is Empty</h3>
-            <p className="text-[9px] font-black text-gray-400 uppercase tracking-[0.3em]">
+            <h3 className="text-lg font-medium text-gray-900 mb-3 capitalize tracking-tighter">History is Empty</h3>
+            <p className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.3em]">
               No settlement records found for this period
             </p>
           </div>
@@ -146,24 +146,24 @@ const SettlementHistory = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-baseline gap-2">
-                          <span className="text-sm font-black text-gray-400">₹</span>
-                          <p className="text-2xl font-black text-gray-900 tracking-tighter">
+                          <span className="text-sm font-medium text-gray-400">₹</span>
+                          <p className="text-2xl font-medium text-gray-900 tracking-tighter">
                             {settlement.amount.toLocaleString()}
                           </p>
                         </div>
-                        <span className={`text-[9px] font-black px-4 py-1.5 rounded-xl uppercase tracking-widest border ${statusColors.bg} ${statusColors.text} ${statusColors.border}`}>
+                        <span className={`text-[9px] font-medium px-4 py-1.5 rounded-xl capitalize tracking-widest border ${statusColors.bg} ${statusColors.text} ${statusColors.border}`}>
                           {settlement.status}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-3 mb-5">
-                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                        <p className="text-[10px] font-medium text-gray-400 capitalize tracking-widest">
                           {settlement.paymentMethod === 'upi' ? 'UPI PROTOCOL' : 'WIRE PROTOCOL'}
                         </p>
                         {settlement.paymentReference && (
                           <>
                             <span className="w-1 h-1 rounded-full bg-gray-200" />
-                            <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
+                            <p className="text-[10px] font-medium text-blue-600 capitalize tracking-widest">
                               {settlement.paymentReference}
                             </p>
                           </>
@@ -171,7 +171,7 @@ const SettlementHistory = () => {
                       </div>
 
                       <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-100">
-                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">
+                        <p className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.2em]">
                           {formatDate(settlement.createdAt)}
                         </p>
                         <FiChevronRight className="w-5 h-5 text-gray-300 group-hover:text-blue-600 group-hover:translate-x-2 transition-all duration-500" />
@@ -179,7 +179,7 @@ const SettlementHistory = () => {
 
                       {settlement.status === 'rejected' && settlement.rejectionReason && (
                         <div className="mt-6 p-5 bg-rose-50 rounded-2xl border border-rose-100">
-                          <p className="text-[10px] font-black text-rose-600 uppercase tracking-widest leading-relaxed">
+                          <p className="text-[10px] font-medium text-rose-600 capitalize tracking-widest leading-relaxed">
                             <span className="opacity-50">Notice:</span> {settlement.rejectionReason}
                           </p>
                         </div>
@@ -187,7 +187,7 @@ const SettlementHistory = () => {
 
                       {settlement.adminNotes && (
                         <div className="mt-6 p-5 bg-gray-50 rounded-2xl border border-gray-100">
-                          <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest leading-relaxed">
+                          <p className="text-[10px] font-medium text-gray-500 capitalize tracking-widest leading-relaxed">
                             <span className="opacity-50">Audit Note:</span> {settlement.adminNotes}
                           </p>
                         </div>

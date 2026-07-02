@@ -60,12 +60,12 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
             </div>
           </div>
           <div>
-            <h2 className="text-xl font-black text-gray-900 tracking-tight leading-none">
+            <h2 className="text-xl font-medium text-gray-900 tracking-tight leading-none">
               Hello, {String(vendorProfile?.name || 'Vendor').split(' ')[0]}!
             </h2>
             <p className="text-gray-500 text-[10px] font-medium mt-1.5 flex items-center gap-2">
-              <span className="text-[#0D9488] font-bold uppercase tracking-tight">{vendorProfile?.businessName || 'Business'}</span>
-              <span className="bg-blue-50 text-blue-600 px-2 py-0.5 rounded-lg text-[9px] font-black border border-blue-100">LEVEL L{stats?.level || 3}</span>
+              <span className="text-[#0D9488] font-normal capitalize tracking-tight">{vendorProfile?.businessName || 'Business'}</span>
+              <span className="bg-blue-50 text-blue-600 px-2 py-0.5 rounded-lg text-[9px] font-medium border border-blue-100">LEVEL L{stats?.level || 3}</span>
               <span className="text-gray-300">•</span> 
               <span className={`flex items-center gap-1.5 ${isOnline ? 'text-emerald-600' : 'text-rose-600'}`}>
                 <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
@@ -77,8 +77,8 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
         
         <div className="flex items-center gap-3 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
            <div className="text-right">
-             <p className="text-[8px] font-black text-gray-400 uppercase tracking-[0.15em] mb-0.5">Availability</p>
-             <p className={`text-[9px] font-black uppercase tracking-widest ${isOnline ? 'text-emerald-600' : 'text-rose-600'}`}>
+             <p className="text-[8px] font-medium text-gray-400 capitalize tracking-[0.15em] mb-0.5">Availability</p>
+             <p className={`text-[9px] font-medium capitalize tracking-widest ${isOnline ? 'text-emerald-600' : 'text-rose-600'}`}>
                 {isOnline ? 'Active' : 'Hidden'}
              </p>
            </div>
@@ -105,15 +105,15 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
               <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center ${stat.color} group-hover:scale-110 transition-transform`}>
                 <stat.icon className="w-5 h-5" />
               </div>
-              <div className={`flex items-center gap-1 text-[10px] font-black uppercase tracking-widest ${stat.isUp ? 'text-green-600' : 'text-rose-600'}`}>
+              <div className={`flex items-center gap-1 text-[10px] font-medium capitalize tracking-widest ${stat.isUp ? 'text-green-600' : 'text-rose-600'}`}>
                 {stat.isUp ? <FiArrowUpRight /> : <FiArrowDownRight />}
                 {stat.change}
               </div>
             </div>
             
             <div className="relative z-10">
-              <p className="text-gray-400 text-[9px] font-black uppercase tracking-widest">{stat.label}</p>
-              <h3 className="text-2xl font-black text-gray-900 mt-0.5 tracking-tighter">{stat.value}</h3>
+              <p className="text-gray-400 text-[9px] font-medium capitalize tracking-widest">{stat.label}</p>
+              <h3 className="text-2xl font-medium text-gray-900 mt-0.5 tracking-tighter">{stat.value}</h3>
             </div>
 
             {!stat.isToggle && (
@@ -134,13 +134,13 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
         <div className="lg:col-span-8 bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h3 className="text-xl font-bold text-gray-800 tracking-tight">Revenue Overview</h3>
+              <h3 className="text-xl font-normal text-gray-800 tracking-tight">Revenue Overview</h3>
               <p className="text-sm text-gray-500 font-medium">Performance analytics for {period.toLowerCase()}</p>
             </div>
             <select 
               value={period}
               onChange={handlePeriodChange}
-              className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-widest text-gray-700 focus:outline-none cursor-pointer hover:bg-gray-100 transition-colors"
+              className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-xs font-normal capitalize tracking-widest text-gray-700 focus:outline-none cursor-pointer hover:bg-gray-100 transition-colors"
             >
               <option>This Week</option>
               <option>This Month</option>
@@ -169,7 +169,7 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
         </div>
 
         <div className="lg:col-span-4 bg-white border border-gray-100 rounded-2xl p-6 shadow-sm flex flex-col">
-          <h3 className="text-xl font-bold text-gray-800 tracking-tight mb-8">Order Status</h3>
+          <h3 className="text-xl font-normal text-gray-800 tracking-tight mb-8">Order Status</h3>
           <div className="flex-1 flex flex-col items-center justify-center">
             <div className="h-[240px] w-full relative">
               <ResponsiveContainer width="100%" height="100%">
@@ -192,8 +192,8 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
                 </PieChart>
               </ResponsiveContainer>
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <span className="text-4xl font-black text-gray-800 tracking-tighter">{stats?.totalBookings || 0}</span>
-                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Total Jobs</span>
+                <span className="text-4xl font-medium text-gray-800 tracking-tighter">{stats?.totalBookings || 0}</span>
+                <span className="text-[10px] text-gray-500 font-normal capitalize tracking-widest">Total Jobs</span>
               </div>
             </div>
 
@@ -202,9 +202,9 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
                 <div key={idx} className="flex items-center justify-between group">
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 rounded-full" style={{backgroundColor: item.color}} />
-                    <span className="text-sm font-semibold text-gray-600">{item.name}</span>
+                    <span className="text-sm font-medium text-gray-600">{item.name}</span>
                   </div>
-                  <span className="text-sm font-bold text-gray-800">{item.value}</span>
+                  <span className="text-sm font-normal text-gray-800">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -215,8 +215,8 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
       {/* Recent Activity List */}
       <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
         <div className="flex items-center justify-between mb-8">
-          <h3 className="text-xl font-bold text-gray-800 tracking-tight">Recent Activity</h3>
-          <button className="text-blue-600 text-sm font-bold hover:underline" onClick={() => navigate('/vendor/jobs')}>View All History</button>
+          <h3 className="text-xl font-normal text-gray-800 tracking-tight">Recent Activity</h3>
+          <button className="text-blue-600 text-sm font-normal hover:underline" onClick={() => navigate('/vendor/jobs')}>View All History</button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -227,22 +227,22 @@ const VendorFullDashboard = ({ stats, recentJobs, vendorProfile, isOnline, handl
                   <FiPackage className="w-5 h-5" />
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-bold text-gray-800">₹{order.price}</p>
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-100">
+                  <p className="text-lg font-normal text-gray-800">₹{order.price}</p>
+                  <span className="text-[9px] font-normal capitalize tracking-widest text-blue-600 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-100">
                     {order.status}
                   </span>
                 </div>
               </div>
-              <h4 className="text-sm font-bold text-gray-800 uppercase truncate">{order.serviceType}</h4>
+              <h4 className="text-sm font-normal text-gray-800 capitalize truncate">{order.serviceType}</h4>
               <p className="text-xs text-gray-500 font-medium mt-1">{order.customerName}</p>
               <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-200/50">
                 <FiCalendar className="text-gray-400 w-3 h-3" />
-                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">{order.timeSlot.date}</span>
+                <span className="text-[10px] text-gray-500 font-normal capitalize tracking-wider">{order.timeSlot.date}</span>
               </div>
             </div>
           )) : (
             <div className="col-span-full text-center py-16 bg-gray-50 rounded-2xl border border-gray-100">
-              <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">No recent activity</p>
+              <p className="text-gray-400 text-xs font-normal capitalize tracking-widest">No recent activity</p>
             </div>
           )}
         </div>

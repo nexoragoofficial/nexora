@@ -150,7 +150,7 @@ const MyProducts = () => {
       {/* Header - White Style - Hidden on Mobile */}
       <div className="hidden md:flex bg-white p-6 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
-          <h2 className="text-3xl font-black text-gray-900 tracking-tight leading-none uppercase">
+          <h2 className="text-3xl font-medium text-gray-900 tracking-tight leading-none capitalize">
             Product Inventory
           </h2>
           <p className="text-gray-500 font-medium mt-2">
@@ -160,7 +160,7 @@ const MyProducts = () => {
         <div className="flex items-center gap-3">
            <button 
              onClick={() => navigate('/vendor/add-custom-content?type=PRODUCT')}
-             className="flex items-center gap-2 px-6 py-3 bg-gray-50 text-gray-400 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-gray-100 transition-all active:scale-95 border border-gray-100"
+             className="flex items-center gap-2 px-6 py-3 bg-gray-50 text-gray-400 rounded-xl text-xs font-normal capitalize tracking-wider hover:bg-gray-100 transition-all active:scale-95 border border-gray-100"
            >
              <FiPlus className="w-4 h-4" />
              New Category
@@ -172,7 +172,7 @@ const MyProducts = () => {
       <div className="flex md:hidden px-1 pb-1">
         <button 
           onClick={() => navigate('/vendor/add-custom-content?type=PRODUCT')}
-          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#2874F0] text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#2874F0] text-white rounded-xl text-xs font-normal capitalize tracking-wider shadow-md active:scale-95 transition-all"
         >
           <FiPlus className="w-4 h-4" />
           New Category
@@ -184,13 +184,13 @@ const MyProducts = () => {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 gap-4">
             <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Syncing Inventory...</p>
+            <p className="text-[10px] font-medium text-gray-400 capitalize tracking-widest">Syncing Inventory...</p>
           </div>
         ) : categories.length === 0 ? (
           <div className="bg-white rounded-2xl p-12 text-center border border-dashed border-gray-200">
              <FiBox className="w-12 h-12 text-gray-200 mx-auto mb-4 animate-bounce" />
-             <h3 className="text-sm font-bold text-gray-800 uppercase">Empty Catalog</h3>
-             <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Create a category to start adding products</p>
+             <h3 className="text-sm font-normal text-gray-800 capitalize">Empty Catalog</h3>
+             <p className="text-xs text-gray-400 mt-1 capitalize tracking-wider font-medium">Create a category to start adding products</p>
           </div>
         ) : (
           categories.map(cat => (
@@ -213,20 +213,20 @@ const MyProducts = () => {
                             type="text"
                             value={editTitle}
                             onChange={(e) => setEditTitle(e.target.value)}
-                            className="px-2.5 py-1 bg-white border border-blue-500/30 rounded-lg text-xs font-bold text-gray-800 focus:outline-none"
+                            className="px-2.5 py-1 bg-white border border-blue-500/30 rounded-lg text-xs font-normal text-gray-800 focus:outline-none"
                             autoFocus
                             onKeyDown={(e) => e.key === 'Enter' && handleUpdateCategory(cat.id)}
                           />
                           <button 
                             onClick={() => handleUpdateCategory(cat.id)}
-                            className="text-[9px] font-black text-blue-600 uppercase"
+                            className="text-[9px] font-medium text-blue-600 capitalize"
                           >
                             Save
                           </button>
                         </div>
                       ) : (
                         <div className="flex items-center gap-1.5">
-                          <h3 className="text-sm font-bold text-gray-900 uppercase tracking-tight">{cat.title}</h3>
+                          <h3 className="text-sm font-normal text-gray-900 capitalize tracking-tight">{cat.title}</h3>
                           {cat.vendorId && (
                             <>
                               <button 
@@ -249,7 +249,7 @@ const MyProducts = () => {
                           )}
                         </div>
                       )}
-                      <p className="text-[8px] font-bold text-blue-500 uppercase tracking-widest mt-0.5">
+                      <p className="text-[8px] font-normal text-blue-500 capitalize tracking-widest mt-0.5">
                         {groupedProducts[cat.id]?.length || 0} Products Active
                       </p>
                     </div>
@@ -265,19 +265,19 @@ const MyProducts = () => {
                       placeholder="Item Name (e.g. Maggie)"
                       value={quickAdd.categoryId === cat._id ? quickAdd.title : ''}
                       onChange={(e) => setQuickAdd({ ...quickAdd, title: e.target.value, categoryId: cat._id })}
-                      className="px-3 py-1.5 bg-gray-50 border border-transparent rounded-lg text-[10px] font-bold text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none min-w-[130px] transition-all"
+                      className="px-3 py-1.5 bg-gray-50 border border-transparent rounded-lg text-[10px] font-normal text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none min-w-[130px] transition-all"
                     />
                     <input 
                       type="number"
                       placeholder="Price"
                       value={quickAdd.categoryId === cat._id ? quickAdd.basePrice : ''}
                       onChange={(e) => setQuickAdd({ ...quickAdd, basePrice: e.target.value, categoryId: cat._id })}
-                      className="w-16 px-3 py-1.5 bg-gray-50 border border-transparent rounded-lg text-[10px] font-bold text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none transition-all"
+                      className="w-16 px-3 py-1.5 bg-gray-50 border border-transparent rounded-lg text-[10px] font-normal text-gray-700 focus:bg-white focus:border-blue-500/30 outline-none transition-all"
                     />
                     <button 
                       type="submit"
                       disabled={isAdding && quickAdd.categoryId === cat._id}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow active:scale-95 disabled:opacity-50"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-[9px] font-medium capitalize tracking-widest hover:bg-blue-700 transition-all shadow active:scale-95 disabled:opacity-50"
                     >
                       {isAdding && quickAdd.categoryId === cat._id ? '...' : <><FiPlus className="w-3 h-3" /> Quick Add</>}
                     </button>
@@ -290,9 +290,9 @@ const MyProducts = () => {
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-gray-50">
-                      <th className="px-4 py-3 text-[9px] font-black text-gray-400 uppercase tracking-wider">Product Specification</th>
-                      <th className="px-4 py-3 text-[9px] font-black text-gray-400 uppercase tracking-wider">Market Value</th>
-                      <th className="px-4 py-3 text-[9px] font-black text-gray-400 uppercase tracking-wider text-right">Operations</th>
+                      <th className="px-4 py-3 text-[9px] font-medium text-gray-400 capitalize tracking-wider">Product Specification</th>
+                      <th className="px-4 py-3 text-[9px] font-medium text-gray-400 capitalize tracking-wider">Market Value</th>
+                      <th className="px-4 py-3 text-[9px] font-medium text-gray-400 capitalize tracking-wider text-right">Operations</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-50 px-1">
@@ -300,8 +300,8 @@ const MyProducts = () => {
                       <tr>
                         <td colSpan="3" className="px-4 py-8 text-center">
                           <div className="flex flex-col items-center gap-1.5">
-                            <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest">No items found in this category</p>
-                            <p className="text-[8px] font-bold text-gray-400 uppercase">Use the form above to add items instantly</p>
+                            <p className="text-[9px] font-medium text-gray-300 capitalize tracking-widest">No items found in this category</p>
+                            <p className="text-[8px] font-normal text-gray-400 capitalize">Use the form above to add items instantly</p>
                           </div>
                         </td>
                       </tr>
@@ -314,19 +314,19 @@ const MyProducts = () => {
                                 <img src={item.iconUrl || 'https://via.placeholder.com/150'} className="w-full h-full object-cover" alt="" />
                               </div>
                               <div className="min-w-0">
-                                <p className="text-xs font-bold text-gray-800 uppercase truncate tracking-tight">{item.title}</p>
-                                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-wider mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">ID: {item.id.slice(-6).toUpperCase()}</p>
+                                <p className="text-xs font-normal text-gray-800 capitalize truncate tracking-tight">{item.title}</p>
+                                <p className="text-[8px] font-normal text-gray-400 capitalize tracking-wider mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">ID: {item.id.slice(-6).toUpperCase()}</p>
                               </div>
                             </div>
                           </td>
                           <td className="px-4 py-3">
-                            <span className="text-xs font-black text-emerald-600">₹{item.basePrice.toLocaleString()}</span>
+                            <span className="text-xs font-medium text-emerald-600">₹{item.basePrice.toLocaleString()}</span>
                           </td>
                           <td className="px-4 py-3 text-right">
                             <div className="flex items-center justify-end gap-2">
                                <button 
                                  onClick={() => navigate(`/vendor/product/edit/${item.id}`)}
-                                 className="px-2.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all border border-blue-100 shadow-sm active:scale-95"
+                                 className="px-2.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-medium capitalize tracking-widest hover:bg-blue-600 hover:text-white transition-all border border-blue-100 shadow-sm active:scale-95"
                                >
                                  Manage
                                </button>
@@ -369,7 +369,7 @@ const MyProducts = () => {
               <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <FiTrash2 className="w-8 h-8 text-rose-500" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Delete Product?</h3>
+              <h3 className="text-lg font-normal text-gray-900 mb-2">Delete Product?</h3>
               <p className="text-sm text-gray-500 mb-8">
                 Are you sure you want to remove this product? This action cannot be undone.
               </p>
@@ -377,14 +377,14 @@ const MyProducts = () => {
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowConfirm(null)}
-                  className="flex-1 py-3 rounded-xl bg-gray-100 text-sm font-bold text-gray-600 hover:bg-gray-200 transition-all"
+                  className="flex-1 py-3 rounded-xl bg-gray-100 text-sm font-normal text-gray-600 hover:bg-gray-200 transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handleRemoveProduct(showConfirm)}
                   disabled={isRemoving}
-                  className="flex-1 py-3 rounded-xl bg-rose-600 text-sm font-bold text-white shadow-lg shadow-rose-200 hover:bg-rose-700 transition-all"
+                  className="flex-1 py-3 rounded-xl bg-rose-600 text-sm font-normal text-white shadow-lg shadow-rose-200 hover:bg-rose-700 transition-all"
                 >
                   {isRemoving ? 'Deleting...' : 'Delete'}
                 </button>

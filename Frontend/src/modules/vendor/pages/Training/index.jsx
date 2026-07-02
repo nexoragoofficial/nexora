@@ -67,9 +67,9 @@ const VendorTraining = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="bg-white p-8 rounded-2xl shadow-sm text-center max-w-md">
           <FiAlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-gray-900 mb-2">No Training Assigned</h3>
+          <h3 className="text-xl font-normal text-gray-900 mb-2">No Training Assigned</h3>
           <p className="text-gray-500 mb-6">Please contact support or try logging in again if you've already completed training.</p>
-          <button onClick={() => navigate('/vendor/login')} className="w-full py-3 rounded-xl text-white font-bold" style={{ backgroundColor: brandColor }}>Back to Login</button>
+          <button onClick={() => navigate('/vendor/login')} className="w-full py-3 rounded-xl text-white font-normal" style={{ backgroundColor: brandColor }}>Back to Login</button>
         </div>
       </div>
     );
@@ -159,14 +159,14 @@ const VendorTraining = () => {
         <div className="w-20 h-20 bg-black rounded-[28px] flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-gray-200">
           <Logo className="h-10 w-auto invert" />
         </div>
-        <h2 className="text-sm font-black text-black uppercase tracking-[0.4em] mb-2">{trainingData.title || 'Partner Training'}</h2>
-        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Onboarding Protocol</p>
+        <h2 className="text-sm font-medium text-black capitalize tracking-[0.4em] mb-2">{trainingData.title || 'Partner Training'}</h2>
+        <p className="text-[10px] font-medium text-gray-400 capitalize tracking-widest">Onboarding Protocol</p>
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-3xl">
         <div className="bg-white py-10 px-5 shadow-sm sm:rounded-[40px] sm:px-12 border border-gray-100">
           
-          <div className="flex items-center justify-center mb-12 border-b border-gray-50 pb-8 text-[9px] font-black uppercase tracking-[0.2em]">
+          <div className="flex items-center justify-center mb-12 border-b border-gray-50 pb-8 text-[9px] font-medium capitalize tracking-[0.2em]">
              <div className={`flex items-center transition-colors ${step === 'video' ? 'text-black' : 'text-gray-300'}`}>
                 <FiPlayCircle className="mr-2 w-4 h-4" /> 01. Video Briefing
              </div>
@@ -192,13 +192,13 @@ const VendorTraining = () => {
               
               <div className="bg-gray-50 text-black p-6 rounded-[28px] border border-gray-100 flex flex-col items-center justify-center gap-2">
                  <FiClock className={`w-5 h-5 ${!isVideoWatched ? 'animate-pulse' : ''}`} />
-                 <span className="text-[10px] font-black uppercase tracking-[0.2em]">{isVideoWatched ? "Briefing Complete" : `Unlocking Assessment: ${timeLeft}s`}</span>
+                 <span className="text-[10px] font-medium capitalize tracking-[0.2em]">{isVideoWatched ? "Briefing Complete" : `Unlocking Assessment: ${timeLeft}s`}</span>
               </div>
 
               <button
                 onClick={handleProceedToTest}
                 disabled={!isVideoWatched}
-                className="w-full py-6 px-6 rounded-[32px] text-white font-black uppercase tracking-[0.3em] transition-all disabled:opacity-20 shadow-2xl shadow-gray-200 active:scale-[0.98] text-xs bg-black"
+                className="w-full py-6 px-6 rounded-[32px] text-white font-medium capitalize tracking-[0.3em] transition-all disabled:opacity-20 shadow-2xl shadow-gray-200 active:scale-[0.98] text-xs bg-black"
               >
                 {isVideoWatched ? 'Begin Assessment' : `Awaiting Completion`}
               </button>
@@ -209,7 +209,7 @@ const VendorTraining = () => {
             <div className="space-y-8 animate-fade-in">
               {trainingData.questions.map((q, index) => (
                 <div key={index} className="bg-gray-50 p-8 rounded-[32px] border border-gray-100 shadow-sm">
-                  <h4 className="text-[11px] font-black text-gray-900 uppercase tracking-widest mb-6 leading-relaxed">
+                  <h4 className="text-[11px] font-medium text-gray-900 capitalize tracking-widest mb-6 leading-relaxed">
                     <span className="text-gray-300 mr-2">{String(index + 1).padStart(2, '0')}.</span> 
                     {q.question}
                   </h4>
@@ -217,7 +217,7 @@ const VendorTraining = () => {
                     {q.options.map((opt, optIdx) => (
                       <label key={optIdx} className={`flex items-center p-5 rounded-2xl border cursor-pointer transition-all ${answers[index] === optIdx ? 'border-black bg-white shadow-xl shadow-gray-100' : 'border-gray-100 hover:border-gray-300 bg-white'}`}>
                         <input type="radio" name={`q-${index}`} className="w-4 h-4 border-2 border-gray-200 checked:bg-black checked:border-black transition-all accent-black" checked={answers[index] === optIdx} onChange={() => handleOptionSelect(index, optIdx)}/>
-                        <span className="ml-4 text-[10px] font-black uppercase tracking-widest text-gray-700">{opt}</span>
+                        <span className="ml-4 text-[10px] font-medium capitalize tracking-widest text-gray-700">{opt}</span>
                       </label>
                     ))}
                   </div>
@@ -225,7 +225,7 @@ const VendorTraining = () => {
               ))}
               <button 
                 onClick={handleSubmitTest} 
-                className="w-full py-6 rounded-[32px] text-white font-black uppercase tracking-[0.3em] shadow-2xl shadow-gray-200 bg-black active:scale-95 transition-all text-xs"
+                className="w-full py-6 rounded-[32px] text-white font-medium capitalize tracking-[0.3em] shadow-2xl shadow-gray-200 bg-black active:scale-95 transition-all text-xs"
               >
                 Finalize Submission
               </button>
@@ -238,12 +238,12 @@ const VendorTraining = () => {
                 {score >= (trainingData.minimumScore || 3) ? <FiCheckCircle size={40} /> : <FiAlertCircle size={40} />}
               </div>
               <div>
-                <h3 className="text-sm font-black text-gray-900 uppercase tracking-[0.3em] mb-2">{score >= (trainingData.minimumScore || 3) ? 'Credential Verified' : 'Assessment Failed'}</h3>
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Accuracy Level: {score} / {trainingData.questions.length}</p>
+                <h3 className="text-sm font-medium text-gray-900 capitalize tracking-[0.3em] mb-2">{score >= (trainingData.minimumScore || 3) ? 'Credential Verified' : 'Assessment Failed'}</h3>
+                <p className="text-[10px] font-medium text-gray-400 capitalize tracking-widest">Accuracy Level: {score} / {trainingData.questions.length}</p>
               </div>
               <button 
                 onClick={handleFinish} 
-                className="w-full py-6 rounded-[32px] text-white font-black uppercase tracking-[0.3em] shadow-2xl shadow-gray-200 bg-black active:scale-95 transition-all text-xs"
+                className="w-full py-6 rounded-[32px] text-white font-medium capitalize tracking-[0.3em] shadow-2xl shadow-gray-200 bg-black active:scale-95 transition-all text-xs"
               >
                 {score >= (trainingData.minimumScore || 3) ? 'Access Portal' : 'Re-Attempt Briefing'}
               </button>

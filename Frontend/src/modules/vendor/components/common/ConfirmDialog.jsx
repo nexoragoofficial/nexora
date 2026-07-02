@@ -89,7 +89,7 @@ const ConfirmDialog = ({
 
             {/* Content */}
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">{title}</h3>
+              <h3 className="text-2xl font-normal text-gray-900 mb-3">{title}</h3>
               <p className="text-sm text-gray-500 leading-relaxed font-medium">
                 {message}
               </p>
@@ -99,7 +99,7 @@ const ConfirmDialog = ({
             <div className="flex flex-col gap-3">
               <button
                 onClick={handleConfirm}
-                className="w-full py-4 rounded-2xl font-bold text-white shadow-lg transition-all active:scale-[0.98]"
+                className="w-full py-4 rounded-2xl font-normal text-white shadow-lg transition-all active:scale-[0.98]"
                 style={{
                   background: type === 'danger' ? 'linear-gradient(135deg, #EF4444, #DC2626)' : `linear-gradient(135deg, ${themeColors.button}, ${themeColors.button}dd)`,
                   boxShadow: `0 10px 20px ${type === 'danger' ? '#EF444430' : themeColors.button + '30'}`
@@ -110,7 +110,7 @@ const ConfirmDialog = ({
 
               <button
                 onClick={onClose}
-                className="w-full py-4 rounded-2xl font-bold text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-all active:scale-[0.98]"
+                className="w-full py-4 rounded-2xl font-normal text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-all active:scale-[0.98]"
               >
                 {cancelLabel}
               </button>

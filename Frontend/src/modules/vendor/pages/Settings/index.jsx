@@ -100,7 +100,7 @@ const Settings = () => {
       {/* Header - White Style - Hidden on Mobile */}
       <div className="hidden md:flex bg-white p-6 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
-          <h2 className="text-3xl font-black text-gray-900 tracking-tight leading-none">
+          <h2 className="text-3xl font-medium text-gray-900 tracking-tight leading-none">
             System Configuration
           </h2>
           <p className="text-gray-500 font-medium mt-2">
@@ -115,7 +115,7 @@ const Settings = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Notification Settings */}
         <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-          <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Alerts & Signals</h3>
+          <h3 className="text-[10px] font-normal text-gray-400 capitalize tracking-widest mb-4">Alerts & Signals</h3>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -124,8 +124,8 @@ const Settings = () => {
                   <FiBell className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Push Notifications</p>
-                  <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Real-time deployment alerts</p>
+                  <p className="font-normal text-gray-800 tracking-tight capitalize text-xs">Push Notifications</p>
+                  <p className="text-[8px] font-normal text-gray-400 capitalize tracking-widest mt-0.5">Real-time deployment alerts</p>
                 </div>
               </div>
               <button
@@ -145,8 +145,8 @@ const Settings = () => {
                   <FiVolume2 className="w-5 h-5 text-indigo-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Auditory Feedback</p>
-                  <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Operational sound signals</p>
+                  <p className="font-normal text-gray-800 tracking-tight capitalize text-xs">Auditory Feedback</p>
+                  <p className="text-[8px] font-normal text-gray-400 capitalize tracking-widest mt-0.5">Operational sound signals</p>
                 </div>
               </div>
               <button
@@ -173,8 +173,8 @@ const Settings = () => {
                 <FiMapPin className="w-5 h-5 text-gray-400 group-hover:text-blue-600" />
               </div>
               <div className="text-left">
-                <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Operational Base</p>
-                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Manage business location</p>
+                <p className="font-normal text-gray-800 tracking-tight capitalize text-xs">Operational Base</p>
+                <p className="text-[8px] font-normal text-gray-400 capitalize tracking-widest mt-0.5">Manage business location</p>
               </div>
             </div>
             <FiChevronRight className="w-4 h-4 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
@@ -189,8 +189,8 @@ const Settings = () => {
                 <FiInfo className="w-5 h-5 text-gray-400 group-hover:text-indigo-600" />
               </div>
               <div className="text-left">
-                <p className="font-bold text-gray-800 tracking-tight uppercase text-xs">Deployment Support</p>
-                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Direct uplink to helpdesk</p>
+                <p className="font-normal text-gray-800 tracking-tight capitalize text-xs">Deployment Support</p>
+                <p className="text-[8px] font-normal text-gray-400 capitalize tracking-widest mt-0.5">Direct uplink to helpdesk</p>
               </div>
             </div>
             <FiChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
@@ -203,7 +203,7 @@ const Settings = () => {
           <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center">
             <FiGlobe className="w-5 h-5 text-purple-600" />
           </div>
-          <h3 className="font-bold text-gray-800 tracking-tight uppercase text-sm">Protocol Language</h3>
+          <h3 className="font-normal text-gray-800 tracking-tight capitalize text-sm">Protocol Language</h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -214,7 +214,7 @@ const Settings = () => {
             <button
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
-              className={`py-5 px-8 rounded-2xl text-center font-bold text-[10px] uppercase tracking-widest transition-all duration-300 ${
+              className={`py-5 px-8 rounded-2xl text-center font-normal text-[10px] capitalize tracking-widest transition-all duration-300 ${
                 settings.language === lang.code
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
                   : 'bg-gray-50 text-gray-500 border border-gray-100 hover:bg-gray-100'
@@ -231,15 +231,15 @@ const Settings = () => {
           <FiInfo className="w-5 h-5 text-gray-400" />
         </div>
         <div>
-          <h3 className="font-bold text-[10px] text-gray-400 uppercase tracking-widest">System Architecture</h3>
-          <p className="text-[9px] font-bold text-gray-600 uppercase tracking-widest mt-1">v2.4.0-PREMIUM · ENCRYPTED BUILD 2026</p>
+          <h3 className="font-normal text-[10px] text-gray-400 capitalize tracking-widest">System Architecture</h3>
+          <p className="text-[9px] font-normal text-gray-600 capitalize tracking-widest mt-1">v2.4.0-PREMIUM · ENCRYPTED BUILD 2026</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <button
           onClick={handleLogout}
-          className="py-5 rounded-3xl bg-white border border-gray-200 text-gray-600 font-bold text-[11px] uppercase tracking-widest hover:bg-gray-50 transition-all active:scale-95 flex items-center justify-center gap-4 shadow-sm group"
+          className="py-5 rounded-3xl bg-white border border-gray-200 text-gray-600 font-normal text-[11px] capitalize tracking-widest hover:bg-gray-50 transition-all active:scale-95 flex items-center justify-center gap-4 shadow-sm group"
         >
           <FiLogOut className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:-translate-x-1 transition-all" />
           Logout Secure Session
@@ -247,7 +247,7 @@ const Settings = () => {
 
         <button
           onClick={handleDeleteAccount}
-          className="py-5 rounded-3xl bg-rose-50 border border-rose-100 text-rose-600 font-bold text-[11px] uppercase tracking-widest hover:bg-rose-100 transition-all active:scale-95 flex items-center justify-center gap-4 shadow-sm group"
+          className="py-5 rounded-3xl bg-rose-50 border border-rose-100 text-rose-600 font-normal text-[11px] capitalize tracking-widest hover:bg-rose-100 transition-all active:scale-95 flex items-center justify-center gap-4 shadow-sm group"
         >
           <FiTrash2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
           De-authorize Identity

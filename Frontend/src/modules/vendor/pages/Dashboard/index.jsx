@@ -164,6 +164,15 @@ const Dashboard = memo(() => {
 
     if (apiStats.isOnline !== undefined) {
       setIsOnline(apiStats.isOnline);
+      const data = localStorage.getItem('vendorData');
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (parsed.isOnline !== apiStats.isOnline) {
+          parsed.isOnline = apiStats.isOnline;
+          localStorage.setItem('vendorData', JSON.stringify(parsed));
+          window.dispatchEvent(new CustomEvent('vendorStatusChanged', { detail: { isOnline: apiStats.isOnline } }));
+        }
+      }
     }
 
     const recentJobsData = otherBookings.slice(0, 3).map(booking => ({
@@ -284,8 +293,18 @@ const Dashboard = memo(() => {
       const response = await vendorDashboardService.updateStatus(newStatus);
       if (response.success) {
         setIsOnline(newStatus);
+        
+        // Update localStorage
+        const data = localStorage.getItem('vendorData');
+        if (data) {
+          const parsed = JSON.parse(data);
+          parsed.isOnline = newStatus;
+          localStorage.setItem('vendorData', JSON.stringify(parsed));
+        }
+
         toast.success(`You are now ${newStatus ? 'Online' : 'Offline'}`);
         setStats(prev => ({ ...prev, isOnline: newStatus }));
+        window.dispatchEvent(new CustomEvent('vendorStatusChanged', { detail: { isOnline: newStatus } }));
       }
     } catch (error) {
       console.error('Failed to toggle status:', error);

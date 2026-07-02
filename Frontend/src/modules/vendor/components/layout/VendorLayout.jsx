@@ -18,6 +18,8 @@ const VendorLayout = ({ children }) => {
                      location.pathname === '/vendor/signup' || 
                      location.pathname === '/vendor/training';
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   if (isAuthRoute) {
     return children;
   }
@@ -85,8 +87,6 @@ const VendorLayout = ({ children }) => {
 
   const hasPermission = checkPermission();
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
     <div className="h-screen bg-gray-50 flex text-gray-900 overflow-hidden">
       <VendorSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
@@ -118,14 +118,14 @@ const VendorLayout = ({ children }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H10m4-8l-2-2m0 0L10 7m2-2v2m6 4H6a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2v-6a2 2 0 00-2-2z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-black text-gray-900 mb-2 tracking-tight">Restricted Access</h3>
+                <h3 className="text-2xl font-medium text-gray-900 mb-2 tracking-tight">Restricted Access</h3>
                 <p className="text-gray-500 max-w-md mx-auto text-sm leading-relaxed mb-8">
-                  You do not have permission to access the <span className="font-bold text-gray-800">{currentTitle}</span> module. 
+                  You do not have permission to access the <span className="font-normal text-gray-800">{currentTitle}</span> module. 
                   Please contact the administrator to request access.
                 </p>
                 <button 
                   onClick={() => window.location.href = '/vendor/dashboard'}
-                  className="px-8 py-3 bg-[#0D9488] text-white rounded-xl font-bold hover:shadow-lg transition-all text-sm"
+                  className="px-8 py-3 bg-[#0D9488] text-white rounded-xl font-normal hover:shadow-lg transition-all text-sm"
                 >
                   Return to Dashboard
                 </button>

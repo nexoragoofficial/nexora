@@ -49,7 +49,7 @@ const MyRatings = () => {
     return (
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-1 w-8">
-          <span className="text-xs font-bold text-gray-600">{star}</span>
+          <span className="text-xs font-normal text-gray-600">{star}</span>
           <FiStar className="w-3 h-3 text-black fill-black" />
         </div>
         <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -68,7 +68,7 @@ const MyRatings = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <FiLoader className="w-12 h-12 text-blue-600 animate-spin mx-auto mb-6" />
-          <p className="text-gray-400 font-bold text-[10px] uppercase tracking-[0.3em]">Analyzing Feedback Ecosystem...</p>
+          <p className="text-gray-400 font-normal text-[10px] capitalize tracking-[0.3em]">Analyzing Feedback Ecosystem...</p>
         </div>
       </div>
     );
@@ -79,7 +79,7 @@ const MyRatings = () => {
       {/* Header - White Style - Hidden on Mobile */}
       <div className="hidden md:flex bg-white p-5 rounded-2xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
-          <h2 className="text-2xl font-black text-gray-900 tracking-tight leading-none">
+          <h2 className="text-2xl font-medium text-gray-900 tracking-tight leading-none">
             Reputation Hub
           </h2>
           <p className="text-gray-500 text-[11px] font-medium mt-2">
@@ -98,7 +98,7 @@ const MyRatings = () => {
           
           <div className="flex flex-col md:grid md:grid-cols-5 gap-4 relative z-10">
             <div className="md:col-span-2 flex flex-col items-center justify-center md:border-r border-gray-100 py-1">
-              <h2 className="text-3xl font-black text-gray-900 mb-1 tracking-tighter">
+              <h2 className="text-3xl font-medium text-gray-900 mb-1 tracking-tighter">
                 {stats.averageRating?.toFixed(1) || '0.0'}
               </h2>
               <div className="flex gap-1 mb-1.5">
@@ -109,7 +109,7 @@ const MyRatings = () => {
                   />
                 ))}
               </div>
-              <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">
+              <p className="text-[8px] font-normal text-gray-400 capitalize tracking-widest">
                 {stats.totalReviews} Operational Audits
               </p>
             </div>
@@ -127,7 +127,7 @@ const MyRatings = () => {
       {/* Reviews List */}
       <div className="space-y-4">
         <div className="flex items-center justify-between px-1">
-          <h3 className="text-xs font-bold text-gray-800 uppercase tracking-widest">Customer Feedback</h3>
+          <h3 className="text-xs font-normal text-gray-800 capitalize tracking-widest">Customer Feedback</h3>
           <button className="w-8 h-8 bg-white rounded-lg border border-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 transition-colors shadow-sm">
             <FiFilter className="w-3.5 h-3.5" />
           </button>
@@ -147,7 +147,7 @@ const MyRatings = () => {
                       )}
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-800 text-xs tracking-tight uppercase">{rating.userId?.name || 'Authorized Client'}</h4>
+                      <h4 className="font-normal text-gray-800 text-xs tracking-tight capitalize">{rating.userId?.name || 'Authorized Client'}</h4>
                       <div className="flex items-center gap-1.5 mt-0.5">
                         <div className="flex gap-0.5">
                           {[1, 2, 3, 4, 5].map((s) => (
@@ -157,12 +157,12 @@ const MyRatings = () => {
                             />
                           ))}
                         </div>
-                        <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{formatDate(rating.reviewedAt)}</span>
+                        <span className="text-[8px] font-normal text-gray-400 capitalize tracking-widest">{formatDate(rating.reviewedAt)}</span>
                       </div>
                     </div>
                   </div>
                   <div className="bg-blue-50 px-2 py-1 rounded-md border border-blue-100">
-                    <span className="text-[8px] font-bold text-blue-600 uppercase tracking-widest">{rating.serviceId?.title || rating.serviceName}</span>
+                    <span className="text-[8px] font-normal text-blue-600 capitalize tracking-widest">{rating.serviceId?.title || rating.serviceName}</span>
                   </div>
                 </div>
 
@@ -183,10 +183,10 @@ const MyRatings = () => {
                 {rating.workerId && (
                   <div className="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">Protocol Executed By:</span>
-                      <span className="text-[10px] font-bold text-gray-800 uppercase tracking-tight">{rating.workerId.name}</span>
+                      <span className="text-[8px] font-normal text-gray-400 capitalize tracking-widest">Protocol Executed By:</span>
+                      <span className="text-[10px] font-normal text-gray-800 capitalize tracking-tight">{rating.workerId.name}</span>
                     </div>
-                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Order ID: #{rating.bookingNumber}</span>
+                    <span className="text-[9px] font-normal text-gray-400 capitalize tracking-widest">Order ID: #{rating.bookingNumber}</span>
                   </div>
                 )}
               </div>
@@ -197,7 +197,7 @@ const MyRatings = () => {
             <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-100">
               <FiMessageSquare className="w-8 h-8 text-gray-300" />
             </div>
-            <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">No Operational Logs Found</p>
+            <p className="text-gray-400 font-normal capitalize tracking-widest text-[10px]">No Operational Logs Found</p>
           </div>
         )}
 
@@ -205,7 +205,7 @@ const MyRatings = () => {
         {pagination.total > ratings.length && (
           <button
             onClick={() => fetchRatings(pagination.page + 1)}
-            className="w-full py-5 bg-white rounded-[24px] border border-gray-100 text-blue-600 text-[10px] font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-3 hover:bg-gray-50 transition-all active:scale-95 shadow-sm"
+            className="w-full py-5 bg-white rounded-[24px] border border-gray-100 text-blue-600 text-[10px] font-normal capitalize tracking-[0.3em] flex items-center justify-center gap-3 hover:bg-gray-50 transition-all active:scale-95 shadow-sm"
           >
             {isLoading ? <FiLoader className="animate-spin" /> : 'Synchronize More Logs'}
           </button>

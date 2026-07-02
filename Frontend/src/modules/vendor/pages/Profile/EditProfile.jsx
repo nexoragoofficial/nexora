@@ -466,13 +466,13 @@ const EditProfile = () => {
                 />
               </motion.div>
             </div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mt-5 opacity-60">Identity Visualization</p>
+            <p className="text-[10px] font-medium text-gray-400 capitalize tracking-[0.2em] mt-5 opacity-60">Identity Visualization</p>
           </div>
 
           <div className="space-y-6">
             {/* Name Input */}
             <div className="group">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-2 px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-2 px-1">
                 Full Name <span className="text-rose-500">*</span>
               </label>
               <div className="relative">
@@ -489,12 +489,12 @@ const EditProfile = () => {
                   } font-[1000] text-gray-900 text-sm tracking-tight`}
                 />
               </div>
-              {errors.name && <p className="text-rose-500 text-[9px] font-black uppercase tracking-widest mt-2 px-1">{errors.name}</p>}
+              {errors.name && <p className="text-rose-500 text-[9px] font-medium capitalize tracking-widest mt-2 px-1">{errors.name}</p>}
             </div>
 
             {/* Business Name Input */}
             <div className="group">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-2 px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-2 px-1">
                 Business Entity
               </label>
               <div className="relative">
@@ -513,7 +513,7 @@ const EditProfile = () => {
 
             {/* Phone Input */}
             <div className="group">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-2 px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-2 px-1">
                 Encryption Link (Mobile) <span className="text-rose-500">*</span>
               </label>
               <div className="relative">
@@ -530,12 +530,12 @@ const EditProfile = () => {
                   } font-[1000] text-gray-900 text-sm tracking-tight`}
                 />
               </div>
-              {errors.phone && <p className="text-rose-500 text-[9px] font-black uppercase tracking-widest mt-2 px-1">{errors.phone}</p>}
+              {errors.phone && <p className="text-rose-500 text-[9px] font-medium capitalize tracking-widest mt-2 px-1">{errors.phone}</p>}
             </div>
 
             {/* Email Input */}
             <div className="group">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-2 px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-2 px-1">
                 Network Access (Email)
               </label>
               <div className="relative">
@@ -554,7 +554,7 @@ const EditProfile = () => {
 
             {/* Address Master Section */}
             <div className="space-y-4">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] px-1">
                 Geospatial Base <span className="text-rose-500">*</span>
               </label>
 
@@ -570,26 +570,26 @@ const EditProfile = () => {
                         `${formData.address?.addressLine1 || ''} ${formData.address?.city || ''}` || 'Coordinates Not Set'
                       }
                     </p>
-                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-1 opacity-60">Verified Service Base</p>
+                    <p className="text-[9px] font-medium text-gray-400 capitalize tracking-widest mt-1 opacity-60">Verified Service Base</p>
                   </div>
                 </div>
 
                 <motion.button
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setIsAddressModalOpen(true)}
-                  className="w-full py-4 bg-teal-600 text-white rounded-[24px] font-[1000] text-[10px] uppercase tracking-widest shadow-xl shadow-teal-900/10 flex items-center justify-center gap-3"
+                  className="w-full py-4 bg-teal-600 text-white rounded-[24px] font-[1000] text-[10px] capitalize tracking-widest shadow-xl shadow-teal-900/10 flex items-center justify-center gap-3"
                 >
                   <FiMapPin className="w-4 h-4" />
                   Recalibrate Location
                 </motion.button>
               </div>
 
-              {errors.address && <p className="text-rose-500 text-[9px] font-black uppercase tracking-widest px-1">{errors.address}</p>}
+              {errors.address && <p className="text-rose-500 text-[9px] font-medium capitalize tracking-widest px-1">{errors.address}</p>}
             </div>
 
             {/* Category Ecosystem (Multi-Select) */}
             <div className="group relative">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-2 px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-2 px-1">
                 Service Specializations <span className="text-rose-500">*</span>
               </label>
               <button
@@ -600,12 +600,12 @@ const EditProfile = () => {
                 <div className="flex flex-wrap gap-2 overflow-hidden">
                   {formData.serviceCategories.length > 0 ? (
                     formData.serviceCategories.map((cat, idx) => (
-                      <span key={idx} className="text-[10px] font-[1000] bg-teal-600 text-white px-3 py-1.5 rounded-xl uppercase tracking-widest">
+                      <span key={idx} className="text-[10px] font-[1000] bg-teal-600 text-white px-3 py-1.5 rounded-xl capitalize tracking-widest">
                         {cat}
                       </span>
                     ))
                   ) : (
-                    <span className="text-[11px] font-[1000] text-gray-400 uppercase tracking-widest opacity-60">Provision Capabilities</span>
+                    <span className="text-[11px] font-[1000] text-gray-400 capitalize tracking-widest opacity-60">Provision Capabilities</span>
                   )}
                 </div>
                 <FiChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-500 ${isCategoryOpen ? 'rotate-180' : ''}`} />
@@ -630,7 +630,7 @@ const EditProfile = () => {
                             isSelected ? 'bg-teal-600 text-white shadow-lg shadow-teal-900/10' : 'hover:bg-gray-50 text-gray-700'
                           }`}
                         >
-                          <span className="text-xs font-[1000] uppercase tracking-widest">{cat.title}</span>
+                          <span className="text-xs font-[1000] capitalize tracking-widest">{cat.title}</span>
                           <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
                             isSelected ? 'bg-white border-white text-teal-600' : 'border-gray-200 group-hover/cat:border-teal-500'
                           }`}>
@@ -642,12 +642,12 @@ const EditProfile = () => {
                   </motion.div>
                 </>
               )}
-              {errors.serviceCategories && <p className="text-rose-500 text-[9px] font-black uppercase tracking-widest mt-2 px-1">{errors.serviceCategories}</p>}
+              {errors.serviceCategories && <p className="text-rose-500 text-[9px] font-medium capitalize tracking-widest mt-2 px-1">{errors.serviceCategories}</p>}
             </div>
 
             {/* Range Controller */}
             <div className="group">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] mb-2 px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] mb-2 px-1">
                 Operational Radius (Km) <span className="text-rose-500">*</span>
               </label>
               <div className="relative">
@@ -662,14 +662,14 @@ const EditProfile = () => {
                   className="w-full pl-16 pr-4 py-4 bg-white/70 backdrop-blur-md rounded-3xl border border-white/60 focus:border-teal-500/30 transition-all focus:outline-none focus:ring-4 focus:ring-teal-500/5 font-[1000] text-gray-900 text-sm tracking-tight"
                 />
               </div>
-              <p className="text-[8px] font-black text-gray-300 uppercase tracking-[0.15em] mt-3 px-1 leading-relaxed">
+              <p className="text-[8px] font-medium text-gray-300 capitalize tracking-[0.15em] mt-3 px-1 leading-relaxed">
                 Maximum deployment distance from your primary service hub
               </p>
             </div>
 
             {/* Document Hub - Aadhar */}
             <div className="space-y-4">
-              <label className="block text-[10px] font-[1000] text-gray-400 uppercase tracking-[0.2em] px-1">
+              <label className="block text-[10px] font-[1000] text-gray-400 capitalize tracking-[0.2em] px-1">
                 Identity Authentication <span className="text-rose-500">*</span>
               </label>
 
@@ -699,7 +699,7 @@ const EditProfile = () => {
                           <FiUpload className="w-8 h-8 text-white" />
                         </div>
                       </div>
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-xl text-[10px] font-[1000] uppercase tracking-widest shadow-lg shadow-teal-900/10">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-xl text-[10px] font-[1000] capitalize tracking-widest shadow-lg shadow-teal-900/10">
                         <FiCheck className="w-4 h-4" />
                         Authenticated
                       </div>
@@ -709,13 +709,13 @@ const EditProfile = () => {
                       <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-4 border border-black/[0.02]">
                         <FiUpload className="w-6 h-6 text-gray-400" />
                       </div>
-                      <span className="text-[11px] font-[1000] text-gray-900 uppercase tracking-widest block mb-1">Upload Identity Proof</span>
-                      <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest opacity-60">Aadhar Front View (Max 5MB)</span>
+                      <span className="text-[11px] font-[1000] text-gray-900 capitalize tracking-widest block mb-1">Upload Identity Proof</span>
+                      <span className="text-[9px] font-medium text-gray-400 capitalize tracking-widest opacity-60">Aadhar Front View (Max 5MB)</span>
                     </>
                   )}
                 </div>
               </div>
-              {errors.aadharDocument && <p className="text-rose-500 text-[9px] font-black uppercase tracking-widest px-1">{errors.aadharDocument}</p>}
+              {errors.aadharDocument && <p className="text-rose-500 text-[9px] font-medium capitalize tracking-widest px-1">{errors.aadharDocument}</p>}
             </div>
 
           </div>
@@ -725,14 +725,14 @@ const EditProfile = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate(-1)}
-              className="flex-1 py-5 rounded-[32px] font-[1000] text-[10px] uppercase tracking-[0.2em] text-gray-500 bg-white border border-white/60 shadow-lg shadow-black/5"
+              className="flex-1 py-5 rounded-[32px] font-[1000] text-[10px] capitalize tracking-[0.2em] text-gray-500 bg-white border border-white/60 shadow-lg shadow-black/5"
             >
               Cancel
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={handleSubmit}
-              className="flex-[1.5] py-5 rounded-[32px] font-[1000] text-[10px] uppercase tracking-[0.2em] text-white bg-teal-600 shadow-2xl shadow-teal-900/20 flex items-center justify-center gap-3 disabled:opacity-50"
+              className="flex-[1.5] py-5 rounded-[32px] font-[1000] text-[10px] capitalize tracking-[0.2em] text-white bg-teal-600 shadow-2xl shadow-teal-900/20 flex items-center justify-center gap-3 disabled:opacity-50"
               disabled={uploading}
             >
               {uploading ? (

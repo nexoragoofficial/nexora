@@ -169,10 +169,10 @@ const VisitVerificationModal = ({ isOpen, onClose, bookingId, onSuccess }) => {
             {/* Header */}
             <div className="flex justify-between items-center mb-8">
               <div>
-                <h3 className="text-2xl font-black text-gray-900 tracking-tight leading-tight">
+                <h3 className="text-2xl font-medium text-gray-900 tracking-tight leading-tight">
                   Verify Arrival
                 </h3>
-                <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mt-1">
+                <p className="text-[10px] font-medium text-blue-600 capitalize tracking-widest mt-1">
                   Operational Check-in
                 </p>
               </div>
@@ -187,8 +187,8 @@ const VisitVerificationModal = ({ isOpen, onClose, bookingId, onSuccess }) => {
 
             {/* Description */}
             <div className="mb-10">
-              <p className="text-[11px] font-medium text-gray-400 uppercase tracking-widest leading-relaxed">
-                Please enter the <span className="text-gray-900 font-black">4-digit code</span> provided by the customer to confirm your arrival.
+              <p className="text-[11px] font-medium text-gray-400 capitalize tracking-widest leading-relaxed">
+                Please enter the <span className="text-gray-900 font-medium">4-digit code</span> provided by the customer to confirm your arrival.
               </p>
             </div>
 
@@ -204,7 +204,7 @@ const VisitVerificationModal = ({ isOpen, onClose, bookingId, onSuccess }) => {
                   value={digit}
                   autoFocus={idx === 0}
                   disabled={loading}
-                  className={`w-14 h-16 text-center text-3xl font-black rounded-2xl transition-all outline-none border-2 shadow-inner
+                  className={`w-14 h-16 text-center text-3xl font-medium rounded-2xl transition-all outline-none border-2 shadow-inner
                     ${digit
                       ? 'border-blue-500 bg-blue-50 text-blue-900 shadow-none'
                       : 'border-gray-50 bg-gray-50 text-gray-900 focus:border-blue-300 focus:bg-white'
@@ -219,7 +219,7 @@ const VisitVerificationModal = ({ isOpen, onClose, bookingId, onSuccess }) => {
             <button
               onClick={handleVerify}
               disabled={loading}
-              className="w-full py-6 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-blue-500/20 transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-4"
+              className="w-full py-6 bg-blue-600 text-white rounded-[2rem] font-medium text-xs capitalize tracking-[0.2em] shadow-xl shadow-blue-500/20 transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-4"
             >
               {loading ? (
                 <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />

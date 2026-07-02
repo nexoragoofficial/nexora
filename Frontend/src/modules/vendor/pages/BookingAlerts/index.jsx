@@ -233,11 +233,11 @@ const BookingAlerts = () => {
             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <FiCheckCircle className="w-10 h-10 text-gray-400" />
             </div>
-            <h3 className="text-lg font-bold text-gray-800 mb-2">No Pending Alerts</h3>
+            <h3 className="text-lg font-normal text-gray-800 mb-2">No Pending Alerts</h3>
             <p className="text-gray-500">You're all caught up! No new booking requests at the moment.</p>
             <button
               onClick={() => navigate('/vendor/dashboard')}
-              className="mt-6 text-primary font-semibold hover:underline"
+              className="mt-6 text-primary font-medium hover:underline"
             >
               Back to Dashboard
             </button>

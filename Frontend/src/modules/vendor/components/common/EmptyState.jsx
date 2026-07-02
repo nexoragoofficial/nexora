@@ -29,12 +29,12 @@ const EmptyState = ({
       >
         <IconComponent className="w-10 h-10" style={{ color: displayColor }} />
       </div>
-      <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+      <h3 className="text-lg font-normal text-gray-900 mb-2">{title}</h3>
       <p className="text-sm text-gray-600 mb-6 max-w-sm">{message}</p>
       {actionLabel && onAction && (
         <button
           onClick={onAction}
-          className="px-6 py-3 rounded-xl font-semibold text-white transition-all active:scale-95"
+          className="px-6 py-3 rounded-xl font-medium text-white transition-all active:scale-95"
           style={{
             background: themeColors.button,
             boxShadow: `0 4px 12px ${themeColors.button}40`,

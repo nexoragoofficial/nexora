@@ -85,8 +85,8 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
             {/* Header */}
             <div className="px-8 pt-8 pb-4 flex justify-between items-start">
               <div>
-                <h3 className="text-2xl font-black text-gray-900 leading-tight">Worker Payout</h3>
-                <p className="text-xs text-green-600 font-bold uppercase tracking-wider mt-1">Record Payment</p>
+                <h3 className="text-2xl font-medium text-gray-900 leading-tight">Worker Payout</h3>
+                <p className="text-xs text-green-600 font-normal capitalize tracking-wider mt-1">Record Payment</p>
               </div>
               <button
                 onClick={onClose}
@@ -103,35 +103,35 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
                   <FiDollarSign className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Paying To</p>
-                  <p className="text-base font-bold text-gray-800">{workerName || 'Assigned Worker'}</p>
+                  <p className="text-[10px] font-normal text-gray-400 capitalize tracking-widest">Paying To</p>
+                  <p className="text-base font-normal text-gray-800">{workerName || 'Assigned Worker'}</p>
                 </div>
               </div>
 
               {/* Amount Input */}
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Payout Amount</label>
+                <label className="block text-xs font-normal text-gray-400 capitalize tracking-widest mb-2 ml-1">Payout Amount</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-bold text-gray-400">₹</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-normal text-gray-400">₹</span>
                   <input
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="0.00"
                     required
-                    className="w-full pl-10 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-bold text-xl"
+                    className="w-full pl-10 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-normal text-xl"
                   />
                 </div>
               </div>
 
               {/* Payment Method Selector */}
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 ml-1">Payment Mode</label>
+                <label className="block text-xs font-normal text-gray-400 capitalize tracking-widest mb-3 ml-1">Payment Mode</label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('hand_to_hand')}
-                    className={`py-3 rounded-xl text-xs font-bold border-2 transition-all ${paymentMethod === 'hand_to_hand'
+                    className={`py-3 rounded-xl text-xs font-normal border-2 transition-all ${paymentMethod === 'hand_to_hand'
                       ? 'bg-green-50 border-green-500 text-green-700'
                       : 'bg-white border-gray-100 text-gray-500 hover:border-gray-200'
                       }`}
@@ -141,7 +141,7 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('online')}
-                    className={`py-3 rounded-xl text-xs font-bold border-2 transition-all ${paymentMethod === 'online'
+                    className={`py-3 rounded-xl text-xs font-normal border-2 transition-all ${paymentMethod === 'online'
                       ? 'bg-blue-50 border-blue-500 text-blue-700'
                       : 'bg-white border-gray-100 text-gray-500 hover:border-gray-200'
                       }`}
@@ -153,7 +153,7 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
 
               {/* Transaction ID */}
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">
+                <label className="block text-xs font-normal text-gray-400 capitalize tracking-widest mb-2 ml-1">
                   {paymentMethod === 'hand_to_hand' ? 'Reference (Optional)' : 'Transaction ID'}
                 </label>
                 <div className="relative">
@@ -170,7 +170,7 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
 
               {/* Screenshot Upload */}
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Payment Screenshot</label>
+                <label className="block text-xs font-normal text-gray-400 capitalize tracking-widest mb-2 ml-1">Payment Screenshot</label>
                 {screenshot ? (
                   <div className="relative aspect-video rounded-2xl overflow-hidden border border-gray-200 group">
                     <img src={screenshot} alt="Payment Proof" className="w-full h-full object-cover" />
@@ -188,7 +188,7 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
                   <label className="w-full h-24 rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-1 cursor-pointer hover:bg-gray-100 hover:border-green-500/50 transition-all group">
                     <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                     <FiCamera className={`w-6 h-6 ${isUploading ? 'animate-bounce text-green-500' : 'text-gray-400 group-hover:text-green-500'}`} />
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:text-green-600">
+                    <span className="text-[10px] font-normal text-gray-400 capitalize tracking-widest group-hover:text-green-600">
                       {isUploading ? 'Uploading...' : 'Click to Upload'}
                     </span>
                   </label>
@@ -197,7 +197,7 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
 
               {/* Notes */}
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Payment Details / Notes</label>
+                <label className="block text-xs font-normal text-gray-400 capitalize tracking-widest mb-2 ml-1">Payment Details / Notes</label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
@@ -212,14 +212,14 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
                 <button
                   type="button"
                   onClick={onClose}
-                  className="py-4 rounded-xl border border-gray-200 font-bold text-gray-600 hover:bg-gray-50 transition-colors active:scale-95"
+                  className="py-4 rounded-xl border border-gray-200 font-normal text-gray-600 hover:bg-gray-50 transition-colors active:scale-95"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading || isUploading}
-                  className="py-4 rounded-xl font-bold text-white shadow-lg active:scale-95 transition-all disabled:opacity-50"
+                  className="py-4 rounded-xl font-normal text-white shadow-lg active:scale-95 transition-all disabled:opacity-50"
                   style={{
                     background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
                     boxShadow: '0 8px 16px -4px rgba(16, 185, 129, 0.4)'

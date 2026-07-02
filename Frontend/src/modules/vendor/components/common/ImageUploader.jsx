@@ -108,7 +108,7 @@ const ImageUploader = ({
             <button
               type="button"
               onClick={handleNativeCamera}
-              className="w-full py-4 bg-gray-900 text-white rounded-xl flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-gray-200 transition-all font-bold"
+              className="w-full py-4 bg-gray-900 text-white rounded-xl flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-gray-200 transition-all font-normal"
             >
               <FiCamera className="w-5 h-5" />
               Capture from Camera
@@ -124,7 +124,7 @@ const ImageUploader = ({
             }}
           >
             <FiUpload className="w-6 h-6" style={{ color: themeColors.button }} />
-            <span className="text-sm font-semibold" style={{ color: themeColors.button }}>
+            <span className="text-sm font-medium" style={{ color: themeColors.button }}>
               {flutterBridge.isFlutter ? 'Pick from Gallery' : `Upload Images (${images.length}/${maxImages})`}
             </span>
             <span className="text-xs text-gray-500">Max {maxSizeMB}MB per image</span>

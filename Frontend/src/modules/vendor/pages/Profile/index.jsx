@@ -128,11 +128,11 @@ const Profile = () => {
           <div className="w-20 h-20 bg-rose-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-rose-100 shadow-sm">
             <FiAlertTriangle className="w-10 h-10 text-rose-500" />
           </div>
-          <h2 className="text-xl font-black text-gray-900 mb-4 uppercase tracking-widest">Protocol Sync Failure</h2>
-          <p className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-10 leading-relaxed">{error}</p>
+          <h2 className="text-xl font-medium text-gray-900 mb-4 capitalize tracking-widest">Protocol Sync Failure</h2>
+          <p className="text-gray-500 text-xs font-normal capitalize tracking-wider mb-10 leading-relaxed">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="w-full py-5 bg-blue-600 rounded-2xl text-white text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
+            className="w-full py-5 bg-blue-600 rounded-2xl text-white text-[10px] font-medium capitalize tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
           >
             Restart Uplink
           </button>
@@ -150,7 +150,7 @@ const Profile = () => {
       {/* Header - White Style - Hidden on Mobile */}
       <div className="hidden md:flex bg-white p-6 rounded-3xl shadow-sm flex-row items-center justify-between text-gray-900 border border-gray-100 gap-6">
         <div>
-          <h2 className="text-3xl font-black text-gray-900 tracking-tight leading-none">
+          <h2 className="text-3xl font-medium text-gray-900 tracking-tight leading-none">
             Identity Hub
           </h2>
           <p className="text-gray-500 font-medium mt-2">
@@ -196,19 +196,19 @@ const Profile = () => {
           </div>
 
           <div className="flex-1 min-w-0">
-            <h2 className="text-lg font-black text-gray-950 truncate tracking-tight leading-none">{profile.name}</h2>
-            <p className="text-[8px] font-bold text-blue-600/70 uppercase tracking-widest mt-1">
+            <h2 className="text-lg font-medium text-gray-950 truncate tracking-tight leading-none">{profile.name}</h2>
+            <p className="text-[8px] font-normal text-blue-600/70 capitalize tracking-widest mt-1">
               {profile.businessName || 'Verified Elite Partner'}
             </p>
             
             <div className="flex items-center gap-2 mt-2">
               <div className="px-2 py-0.5 bg-white/70 rounded-md border border-blue-100 flex items-center gap-1">
                 <FiStar className="w-3 h-3 text-amber-500 fill-amber-500" />
-                <span className="text-[8px] font-black text-gray-800 tracking-wide">{profile.rating.toFixed(1)} Rating</span>
+                <span className="text-[8px] font-medium text-gray-800 tracking-wide">{profile.rating.toFixed(1)} Rating</span>
               </div>
               <div className="px-2 py-0.5 bg-white/70 rounded-md border border-blue-100 flex items-center gap-1">
                 <FiBriefcase className="w-3 h-3 text-blue-500" />
-                <span className="text-[8px] font-black text-gray-800 tracking-wide">{profile.totalJobs} Deployments</span>
+                <span className="text-[8px] font-medium text-gray-800 tracking-wide">{profile.totalJobs} Deployments</span>
               </div>
             </div>
           </div>
@@ -231,7 +231,7 @@ const Profile = () => {
             <div className="w-11 h-11 rounded-xl bg-gray-50 flex items-center justify-center mb-2 group-hover:bg-blue-50 transition-all border border-gray-100 shrink-0">
               <item.icon className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
             </div>
-            <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest group-hover:text-gray-900 transition-colors">{item.label}</span>
+            <span className="text-[8px] font-normal text-gray-500 capitalize tracking-widest group-hover:text-gray-900 transition-colors">{item.label}</span>
           </motion.button>
         ))}
       </div>
@@ -239,7 +239,7 @@ const Profile = () => {
       {/* Management Ecosystem */}
       <div className="space-y-3">
         <div className="flex items-center justify-between px-1 mb-2">
-          <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Partner Ecosystem</h3>
+          <h3 className="text-[10px] font-normal text-gray-400 capitalize tracking-widest">Partner Ecosystem</h3>
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
         </div>
         
@@ -261,14 +261,14 @@ const Profile = () => {
                   item.highlight ? 'bg-blue-600 border-blue-600' : 'bg-gray-50 border-gray-100'
                 }`}>
                   {item.customIcon ? (
-                    <span className={`text-base font-black ${item.highlight ? 'text-white' : 'text-gray-400'}`}>{item.customIcon}</span>
+                    <span className={`text-base font-medium ${item.highlight ? 'text-white' : 'text-gray-400'}`}>{item.customIcon}</span>
                   ) : (
                     <IconComponent className={`w-5 h-5 ${item.highlight ? 'text-white' : 'text-gray-400'}`} />
                   )}
                 </div>
                 <div className="text-left">
-                  <span className={`text-sm font-bold tracking-tight block uppercase ${item.highlight ? 'text-blue-950' : 'text-gray-800'}`}>{item.label}</span>
-                  <span className={`text-[8px] font-bold uppercase tracking-widest ${item.highlight ? 'text-blue-600/70' : 'text-gray-400'}`}>
+                  <span className={`text-sm font-normal tracking-tight block capitalize ${item.highlight ? 'text-blue-950' : 'text-gray-800'}`}>{item.label}</span>
+                  <span className={`text-[8px] font-normal capitalize tracking-widest ${item.highlight ? 'text-blue-600/70' : 'text-gray-400'}`}>
                     Access Module
                   </span>
                 </div>
@@ -297,15 +297,15 @@ const Profile = () => {
               navigate('/vendor/login');
             }
           }}
-          className="w-full py-6 rounded-[32px] bg-rose-50 border border-rose-100 text-rose-600 text-xs font-black uppercase tracking-widest flex items-center justify-center gap-4 active:scale-95 transition-all hover:bg-rose-600 hover:text-white group shadow-sm"
+          className="w-full py-6 rounded-[32px] bg-rose-50 border border-rose-100 text-rose-600 text-xs font-medium capitalize tracking-widest flex items-center justify-center gap-4 active:scale-95 transition-all hover:bg-rose-600 hover:text-white group shadow-sm"
         >
           <FiLogOut className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
           Terminate Session
         </motion.button>
         
         <div className="mt-8 flex flex-col items-center gap-2 opacity-30">
-          <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest text-center">Powered by Nexora Operational Intelligence</p>
-          <p className="text-[7px] font-bold text-gray-400 uppercase tracking-widest text-center">Build v2.4.0-Premium</p>
+          <p className="text-[8px] font-normal text-gray-400 capitalize tracking-widest text-center">Powered by Nexora Operational Intelligence</p>
+          <p className="text-[7px] font-normal text-gray-400 capitalize tracking-widest text-center">Build v2.4.0-Premium</p>
         </div>
       </div>
     </div>

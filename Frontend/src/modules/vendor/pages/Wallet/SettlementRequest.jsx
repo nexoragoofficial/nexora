@@ -223,7 +223,7 @@ const SettlementRequest = () => {
           >
             <FiArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-xl font-black text-gray-900 tracking-tight uppercase">Audit Logs</h1>
+          <h1 className="text-xl font-medium text-gray-900 tracking-tight capitalize">Audit Logs</h1>
         </div>
         <div className="w-12 h-12 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center">
           <FiSend className="w-6 h-6 text-blue-600" />
@@ -240,10 +240,10 @@ const SettlementRequest = () => {
 
               <div className="relative z-10 flex items-center justify-between">
                 <div>
-                  <p className="text-[9px] font-black text-rose-100 uppercase tracking-[0.4em] mb-1.5 opacity-80">Operational Liability</p>
+                  <p className="text-[9px] font-medium text-rose-100 capitalize tracking-[0.4em] mb-1.5 opacity-80">Operational Liability</p>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-xl font-black text-rose-200">₹</span>
-                    <p className="text-4xl font-black text-white tracking-tighter leading-none">
+                    <span className="text-xl font-medium text-rose-200">₹</span>
+                    <p className="text-4xl font-medium text-white tracking-tighter leading-none">
                       {wallet.amountDue?.toLocaleString() || 0}
                     </p>
                   </div>
@@ -255,7 +255,7 @@ const SettlementRequest = () => {
 
               <div className="relative z-10 mt-6 pt-5 border-t border-white/10 flex items-center gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-rose-300 animate-pulse" />
-                <p className="text-[8px] font-black text-rose-100 uppercase tracking-[0.3em] opacity-80">Critical Settlement Required</p>
+                <p className="text-[8px] font-medium text-rose-100 capitalize tracking-[0.3em] opacity-80">Critical Settlement Required</p>
               </div>
             </div>
 
@@ -263,25 +263,25 @@ const SettlementRequest = () => {
             <div className="bg-white rounded-3xl p-8 border border-gray-100 space-y-8 shadow-sm">
               {/* Amount */}
               <div className="space-y-3">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] ml-2">
+                <label className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.4em] ml-2">
                   Transfer Magnitude
                 </label>
                 <div className="relative">
-                  <span className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-300 font-black text-lg">₹</span>
+                  <span className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-300 font-medium text-lg">₹</span>
                   <input
                     type="number"
                     value={formData.amount}
                     onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
-                    className="w-full pl-10 pr-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl text-xl font-black text-gray-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-all placeholder:text-gray-200"
+                    className="w-full pl-10 pr-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl text-xl font-medium text-gray-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-all placeholder:text-gray-200"
                     placeholder="0.00"
                     max={wallet.amountDue}
                   />
                 </div>
                 <div className="flex justify-between items-center px-2">
-                  <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest leading-relaxed">System Limit: ₹{wallet.amountDue?.toLocaleString()}</p>
+                  <p className="text-[8px] font-medium text-gray-400 capitalize tracking-widest leading-relaxed">System Limit: ₹{wallet.amountDue?.toLocaleString()}</p>
                   <button
                     onClick={() => setFormData(prev => ({ ...prev, amount: wallet.amountDue.toString() }))}
-                    className="text-[8px] font-black text-blue-600 uppercase tracking-widest hover:text-blue-500 transition-colors"
+                    className="text-[8px] font-medium text-blue-600 capitalize tracking-widest hover:text-blue-500 transition-colors"
                   >
                     Clear Liability
                   </button>
@@ -290,7 +290,7 @@ const SettlementRequest = () => {
 
               {/* Transfer Mode */}
               <div className="space-y-4">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] ml-2">
+                <label className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.4em] ml-2">
                   Protocol Selection
                 </label>
                 <div className="grid grid-cols-2 gap-4">
@@ -309,7 +309,7 @@ const SettlementRequest = () => {
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500 ${formData.paymentMethod === method.id ? 'bg-blue-600 text-white' : 'bg-white text-gray-400 border border-gray-100'}`}>
                         <method.icon className="w-5 h-5" />
                       </div>
-                      <span className={`text-[9px] font-black uppercase tracking-[0.2em] ${formData.paymentMethod === method.id ? 'text-blue-600' : 'text-gray-400'}`}>
+                      <span className={`text-[9px] font-medium capitalize tracking-[0.2em] ${formData.paymentMethod === method.id ? 'text-blue-600' : 'text-gray-400'}`}>
                         {method.label}
                       </span>
                     </button>
@@ -324,21 +324,21 @@ const SettlementRequest = () => {
             <div className="bg-white rounded-3xl p-8 border border-gray-100 space-y-8 shadow-sm">
               {/* Reference */}
               <div className="space-y-3">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] ml-2">
+                <label className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.4em] ml-2">
                   Verification Code (TXN ID)
                 </label>
                 <input
                   type="text"
                   value={formData.paymentReference}
                   onChange={(e) => setFormData(prev => ({ ...prev, paymentReference: e.target.value }))}
-                  className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white text-xs font-black text-gray-900 uppercase tracking-widest transition-all placeholder:text-gray-200"
+                  className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white text-xs font-medium text-gray-900 capitalize tracking-widest transition-all placeholder:text-gray-200"
                   placeholder="ENTER VECTOR REFERENCE..."
                 />
               </div>
 
               {/* Proof */}
               <div className="space-y-3">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] ml-2">
+                <label className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.4em] ml-2">
                   Visual Confirmation
                 </label>
                 {proofPreview ? (
@@ -364,7 +364,7 @@ const SettlementRequest = () => {
                       <button
                         type="button"
                         onClick={handleNativeCamera}
-                        className="w-full py-4 bg-gray-50 border border-gray-100 text-gray-700 rounded-2xl flex items-center justify-center gap-3 hover:bg-gray-100 transition-all font-black text-[10px] uppercase tracking-[0.3em] shadow-sm"
+                        className="w-full py-4 bg-gray-50 border border-gray-100 text-gray-700 rounded-2xl flex items-center justify-center gap-3 hover:bg-gray-100 transition-all font-medium text-[10px] capitalize tracking-[0.3em] shadow-sm"
                       >
                         <FiCamera className="w-5 h-5 text-blue-600" />
                         INTEL CAPTURE
@@ -375,10 +375,10 @@ const SettlementRequest = () => {
                       <div className="w-12 h-12 rounded-xl bg-white border border-gray-100 flex items-center justify-center mb-3 text-blue-600 shadow-sm">
                         <FiUpload className="w-5 h-5" />
                       </div>
-                      <span className="text-[9px] font-black text-gray-900 uppercase tracking-[0.2em]">
+                      <span className="text-[9px] font-medium text-gray-900 capitalize tracking-[0.2em]">
                         {flutterBridge.isFlutter ? 'AUTHORIZE LIBRARY' : 'ATTACH EVIDENCE'}
                       </span>
-                      <span className="text-[7px] text-gray-400 mt-1 uppercase tracking-[0.4em] font-black">PNG / JPG / HEIC</span>
+                      <span className="text-[7px] text-gray-400 mt-1 capitalize tracking-[0.4em] font-medium">PNG / JPG / HEIC</span>
                       <input
                         type="file"
                         accept="image/*"
@@ -392,13 +392,13 @@ const SettlementRequest = () => {
 
               {/* Notes */}
               <div className="space-y-3">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] ml-2">
+                <label className="text-[9px] font-medium text-gray-400 capitalize tracking-[0.4em] ml-2">
                   Operational Commentary
                 </label>
                 <textarea
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                  className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white text-xs font-black text-gray-900 uppercase tracking-widest transition-all placeholder:text-gray-200 resize-none"
+                  className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white text-xs font-medium text-gray-900 capitalize tracking-widest transition-all placeholder:text-gray-200 resize-none"
                   rows={3}
                   placeholder="OPTIONAL LOG ENTRIES..."
                 />
@@ -409,7 +409,7 @@ const SettlementRequest = () => {
             <button
               onClick={handleSubmit}
               disabled={submitting || !formData.amount || !formData.paymentReference || !formData.paymentProof}
-              className="w-full py-6 rounded-3xl font-black text-white text-[11px] uppercase tracking-[0.5em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 bg-blue-600 shadow-xl shadow-blue-900/40 group relative overflow-hidden"
+              className="w-full py-6 rounded-3xl font-medium text-white text-[11px] capitalize tracking-[0.5em] flex items-center justify-center gap-4 transition-all active:scale-95 disabled:opacity-50 bg-blue-600 shadow-xl shadow-blue-900/40 group relative overflow-hidden"
             >
               {submitting ? (
                 <div className="w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin" />
@@ -426,7 +426,7 @@ const SettlementRequest = () => {
         {/* Audit Disclaimer */}
         <div className="mt-12 mb-16 flex flex-col items-center gap-3 px-10">
           <FiCheck className="w-4 h-4 text-gray-300" />
-          <p className="text-center text-[8px] text-gray-400 font-black uppercase tracking-[0.3em] leading-loose opacity-80">
+          <p className="text-center text-[8px] text-gray-400 font-medium capitalize tracking-[0.3em] leading-loose opacity-80">
             Audit logs are processed via secure financial nodes.<br />
             Verification protocols finalize within 24 operational hours.
           </p>
